@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { corsHeaders, jsonError, rateLimit } from "@/lib/security";
+import { corsHeaders, jsonError } from "@/lib/security";
+import { rateLimitHourly } from "@/lib/rateLimit";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
 
-  if (!isAllowed) {
-    return new NextResponse(null, { status: 403 });
-  }
+  if (!isAllowed) return new NextResponse(null, { status: 403 });
   return new NextResponse(null, { status: 204, headers });
 }
 
@@ -15,14 +14,12 @@ export async function POST(req: Request) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
 
-  if (!isAllowed) {
-    return new NextResponse("Forbidden", { status: 403 });
-  }
+  if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
 
   const xff = req.headers.get("x-forwarded-for") || "";
   const ip = xff.split(",")[0]?.trim() || "unknown";
 
-  const rl = rateLimit(ip);
+  const rl = await rateLimitHourly(ip);
   if (!rl.allowed) {
     return NextResponse.json(
       { error: "Rate limit exceeded" },
@@ -30,7 +27,10 @@ export async function POST(req: Request) {
         status: 429,
         headers: {
           ...headers,
-          "Retry-After": String(rl.retryAfterSeconds),
+          "Retry-After": String(rl.resetSeconds),
+          "X-RateLimit-Limit": String(rl.limit),
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": String(rl.resetSeconds),
         },
       }
     );
@@ -42,11 +42,9 @@ export async function POST(req: Request) {
   if (!description || typeof description !== "string") {
     return jsonError("Missing 'description' (string)", 400, origin);
   }
-
   if (description.length < 20) {
     return jsonError("Description too short (min 20 chars)", 400, origin);
   }
-
   if (description.length > 4000) {
     return jsonError("Description too long (max 4000 chars)", 400, origin);
   }
@@ -54,7 +52,7 @@ export async function POST(req: Request) {
   return NextResponse.json(
     {
       miniBrief: {
-        resume: "OK — API sécurisée (CORS + rate limit) en place",
+        resume: "OK — CORS + Upstash rate limit en place",
         objectifs: [],
         livrables: [],
         planning_estime: "",
@@ -62,6 +60,14 @@ export async function POST(req: Request) {
       similarCases: [],
       pitchAgence: "",
     },
-    { status: 200, headers }
+    {
+      status: 200,
+      headers: {
+        ...headers,
+        "X-RateLimit-Limit": String(rl.limit),
+        "X-RateLimit-Remaining": String(rl.remaining),
+        "X-RateLimit-Reset": String(rl.resetSeconds),
+      },
+    }
   );
 }

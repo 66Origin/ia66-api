@@ -1,18 +1,10 @@
 import { NextResponse } from "next/server";
-import { getGeminiClient, getFileSearchStoreName } from "@/lib/gemini";
+import { getGeminiClient } from "@/lib/gemini";
 
 export const runtime = "nodejs";
 
-export async function POST(req: Request) {
-  const body = await req.json();
-  const description = body?.description;
-
-  if (!description) {
-    return NextResponse.json({ error: "Missing description" }, { status: 400 });
-  }
-
+export async function POST() {
   const ai = getGeminiClient();
-  const storeName = getFileSearchStoreName();
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",

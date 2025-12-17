@@ -13,6 +13,27 @@ function trim(text: string, max = 2200) {
   return t.length > max ? t.slice(0, max) + "…" : t;
 }
 
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  retries = 2,
+  delayMs = 700
+): Promise<T> {
+  try {
+    return await fn();
+  } catch (e: any) {
+    const msg = String(e);
+    const retryable =
+      msg.includes("503") ||
+      msg.includes("UNAVAILABLE") ||
+      msg.includes("overloaded");
+
+    if (!retryable || retries <= 0) throw e;
+
+    await new Promise((r) => setTimeout(r, delayMs));
+    return withRetry(fn, retries - 1, delayMs * 1.6);
+  }
+}
+
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
@@ -142,14 +163,23 @@ FORMAT JSON:
 }
 `.trim();
 
-    let genResp;
+    let genResp: any;
     try {
-      genResp = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: jsonPrompt,
-        // ❌ PAS de tools ici
-        // ❌ PAS de responseMimeType
-      });
+      try {
+        genResp = await withRetry(() =>
+          ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: jsonPrompt,
+          })
+        );
+      } catch {
+        genResp = await withRetry(() =>
+          ai.models.generateContent({
+            model: "gemini-2.5-flash-lite",
+            contents: jsonPrompt,
+          })
+        );
+      }
     } catch (e) {
       return NextResponse.json(
         { error: "Gemini JSON generation failed", details: String(e) },
@@ -157,6 +187,12 @@ FORMAT JSON:
       );
     }
 
+    if (!genResp) {
+      return NextResponse.json(
+        { error: "Gemini JSON generation returned empty response" },
+        { status: 502, headers: { ...headers, ...rateHeaders } }
+      );
+    }
     const rawText = genResp.text;
     if (!rawText) {
       return NextResponse.json(

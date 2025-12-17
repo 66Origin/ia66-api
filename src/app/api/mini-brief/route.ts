@@ -7,7 +7,8 @@ import { outputSchema } from "@/lib/schema";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-// util: tronquer pour garder l’appel 2 rapide
+/* -------------------------------- utils -------------------------------- */
+
 function trim(text: string, max = 2200) {
   const t = (text || "").trim();
   return t.length > max ? t.slice(0, max) + "…" : t;
@@ -34,6 +35,23 @@ async function withRetry<T>(
   }
 }
 
+function extractJsonFromText(text: string): string {
+  // ```json ... ``` ou ``` ... ```
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  if (fenced?.[1]) return fenced[1].trim();
+
+  // fallback : premier objet JSON
+  const start = text.indexOf("{");
+  const end = text.lastIndexOf("}");
+  if (start !== -1 && end !== -1 && end > start) {
+    return text.slice(start, end + 1);
+  }
+
+  return text.trim();
+}
+
+/* -------------------------------- handlers -------------------------------- */
+
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
@@ -47,15 +65,17 @@ export async function POST(req: Request) {
   if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
 
   try {
-    // ---- Rate limit
+    /* ------------------------------ rate limit ------------------------------ */
     const xff = req.headers.get("x-forwarded-for") || "";
     const ip = xff.split(",")[0]?.trim() || "unknown";
     const rl = await rateLimitHourly(ip);
+
     const rateHeaders = {
       "X-RateLimit-Limit": String(rl.limit),
       "X-RateLimit-Remaining": String(rl.remaining),
       "X-RateLimit-Reset": String(rl.resetSeconds),
     };
+
     if (!rl.allowed) {
       return NextResponse.json(
         { error: "Rate limit exceeded" },
@@ -70,32 +90,37 @@ export async function POST(req: Request) {
       );
     }
 
-    // ---- Input
+    /* -------------------------------- input -------------------------------- */
     const body = await req.json().catch(() => null);
     const description = body?.description;
     const tags: string[] = Array.isArray(body?.tags) ? body.tags : [];
+
     if (!description || typeof description !== "string") {
       return jsonError("Missing 'description' (string)", 400, origin);
     }
-    if (description.length < 20)
+    if (description.length < 20) {
       return jsonError("Description too short (min 20 chars)", 400, origin);
-    if (description.length > 4000)
+    }
+    if (description.length > 4000) {
       return jsonError("Description too long (max 4000 chars)", 400, origin);
+    }
 
     const ai = getGeminiClient();
-    const storeName = getFileSearchStoreName(); // ex: fileSearchStores/xxxx
+    const storeName = getFileSearchStoreName();
 
-    // =========================
-    // CALL 1 — FILE SEARCH
-    // =========================
+    /* ============================ CALL 1 : FILE SEARCH ============================ */
+
     const searchPrompt = `
 Tu es "IA 66".
-Objectif: retrouver dans notre base de cas clients les passages pertinents.
+Objectif : retrouver dans notre base de cas clients les passages pertinents.
 - N’invente rien.
 - Réponds en TEXTE court avec des extraits utiles.
-Brief:
+
+Brief :
 ${description}
-Tags: ${tags.join(", ")}
+
+Tags :
+${tags.join(", ")}
 `.trim();
 
     let searchResp;
@@ -117,28 +142,28 @@ Tags: ${tags.join(", ")}
     const searchText = searchResp.text || "";
     const grounding = searchResp.candidates?.[0]?.groundingMetadata;
 
-    // =========================
-    // CALL 2 — JSON STRICT (sans tools)
-    // =========================
+    /* ============================ CALL 2 : JSON STRICT ============================ */
+
     const jsonPrompt = `
 Tu es "IA 66", l’assistant commercial et stratégique d’une agence de design.
 
-RÈGLES:
-- Réponds UNIQUEMENT en JSON valide (pas de texte autour).
-- Respecte EXACTEMENT la structure demandée.
-- Si aucun cas pertinent n’est fourni: "similarCases": [].
+RÈGLES IMPÉRATIVES :
+- Réponds UNIQUEMENT avec l’objet JSON brut.
+- INTERDIT d’utiliser du markdown ou des \`\`\`.
+- Respecte EXACTEMENT la structure.
+- Si aucun cas pertinent : "similarCases": [].
 - Le miniBrief DOIT être rempli.
 
-CONTEXTE (extraits issus de la base):
+CONTEXTE (extraits de la base) :
 ${trim(searchText)}
 
-BRIEF:
+BRIEF :
 ${description}
 
-TAGS:
+TAGS :
 ${tags.join(", ")}
 
-FORMAT JSON:
+FORMAT JSON :
 {
   "miniBrief": {
     "resume": "string",
@@ -163,36 +188,23 @@ FORMAT JSON:
 }
 `.trim();
 
-    let genResp: any;
+    let genResp;
     try {
-      try {
-        genResp = await withRetry(() =>
-          ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: jsonPrompt,
-          })
-        );
-      } catch {
-        genResp = await withRetry(() =>
-          ai.models.generateContent({
-            model: "gemini-2.5-flash-lite",
-            contents: jsonPrompt,
-          })
-        );
-      }
-    } catch (e) {
-      return NextResponse.json(
-        { error: "Gemini JSON generation failed", details: String(e) },
-        { status: 502, headers: { ...headers, ...rateHeaders } }
+      genResp = await withRetry(() =>
+        ai.models.generateContent({
+          model: "gemini-2.5-flash",
+          contents: jsonPrompt,
+        })
+      );
+    } catch {
+      genResp = await withRetry(() =>
+        ai.models.generateContent({
+          model: "gemini-2.5-flash-lite",
+          contents: jsonPrompt,
+        })
       );
     }
 
-    if (!genResp) {
-      return NextResponse.json(
-        { error: "Gemini JSON generation returned empty response" },
-        { status: 502, headers: { ...headers, ...rateHeaders } }
-      );
-    }
     const rawText = genResp.text;
     if (!rawText) {
       return NextResponse.json(
@@ -201,9 +213,11 @@ FORMAT JSON:
       );
     }
 
+    /* --------------------------- parse + validate --------------------------- */
     let json: unknown;
     try {
-      json = JSON.parse(rawText);
+      const jsonText = extractJsonFromText(rawText);
+      json = JSON.parse(jsonText);
     } catch (e) {
       return NextResponse.json(
         { error: "Invalid JSON from model", details: String(e), rawText },
@@ -222,6 +236,8 @@ FORMAT JSON:
         { status: 502, headers: { ...headers, ...rateHeaders } }
       );
     }
+
+    /* -------------------------------- response -------------------------------- */
 
     return NextResponse.json(
       { ...validated.data, grounding },

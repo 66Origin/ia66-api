@@ -16,22 +16,7 @@ export async function POST(req: Request) {
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: `
-Utilise UNIQUEMENT les documents du File Search.
-Réponds en TEXTE SIMPLE.
-
-Brief:
-${description}
-    `,
-    config: {
-      tools: [
-        {
-          fileSearch: {
-            fileSearchStoreNames: [storeName],
-          },
-        },
-      ],
-    },
+    contents: "Dis juste bonjour.",
   });
 
   return NextResponse.json({

@@ -80,7 +80,7 @@ Tags: ${tags.join(", ")}
     let searchResp;
     try {
       searchResp = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
+        model: "gemini-2.5-flash-lite",
         contents: searchPrompt,
         config: {
           tools: [{ fileSearch: { fileSearchStoreNames: [storeName] } }],

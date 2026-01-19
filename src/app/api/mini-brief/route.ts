@@ -1,28 +1,8 @@
 import { NextResponse } from "next/server";
 import { corsHeaders, jsonError } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/rateLimit";
-import { getGeminiClient, getFileSearchStoreName } from "@/lib/gemini";
+import { getFileSearchStoreName, getGeminiClient } from "@/lib/gemini";
 import { outputSchema } from "@/lib/schema";
-
-// Contexte minimal (règles non négociables)
-const SYSTEM_CONTEXT = `
-Tu es "IA 66", l’assistant commercial et stratégique de l'agence 66 Origin.
-Ta mission :
-1) Structurer le brief du prospect en mini-brief clair.
-2) Proposer des projets similaires (issus du File Search) et expliquer pourquoi ils correspondent.
-3) Expliquer ce que l’agence peut apporter.
-4) Poser 3 à 6 questions de cadrage.
-
-Règles strictes :
-- Ne jamais inventer ou halluciner des informations.
-- Toujours répondre en français.
-- Respecter le format de réponse défini.
-`.trim();
-
-type Message = {
-  role: "user" | "model";
-  parts: { text: string }[];
-};
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -56,7 +36,6 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   const description = body?.description;
   const tags: string[] = Array.isArray(body?.tags) ? body.tags : [];
-  const history: Message[] = Array.isArray(body?.history) ? body.history : [];
 
   if (!description || typeof description !== "string") {
     return jsonError("Missing 'description' (string)", 400, origin);
@@ -69,31 +48,25 @@ export async function POST(req: Request) {
   const ai = getGeminiClient();
   const storeName = getFileSearchStoreName();
 
-  console.log("Description:", description);
-  console.log("Tags:", tags);
-  console.log("History messages:", history.length);
+  const prompt = `
+Tu es "IA 66", l’assistant commercial et stratégique d’une agence de design.
+Ta mission :
+1) Structurer le brief du prospect en mini-brief clair.
+2) Proposer des projets similaires (issus du File Search) et expliquer pourquoi ils matchent.
+3) Expliquer ce que l’agence peut apporter.
+4) Poser 3 à 6 questions de cadrage.
 
-  const contents: Message[] = [
-    { role: "user", parts: [{ text: SYSTEM_CONTEXT }] },
-    ...history,
-    {
-      role: "user",
-      parts: [
-        {
-          text: `
-          Brief prospect:
-          ${description}
+Brief prospect:
+${description}
 
-          Tags (si présents): ${tags.join(", ")}
-          `.trim(),
-        },
-      ],
-    },
-  ];
+Tags (si présents): ${tags.join(", ")}
+`;
+
+  //const cached = await ai.caches.create()
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: contents,
+    contents: prompt,
     config: {
       tools: [
         {

@@ -61,9 +61,6 @@ ${description}
 
 Tags (si présents): ${tags.join(", ")}
 `;
-
-  //const cached = await ai.caches.create()
-
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: prompt,
@@ -104,4 +101,62 @@ Tags (si présents): ${tags.join(", ")}
       "X-RateLimit-Reset": String(rl.resetSeconds),
     },
   });
+}
+
+// Lister tous les File Search Stores
+export async function GET(req: Request) {
+  const origin = req.headers.get("origin");
+  const { headers, isAllowed } = corsHeaders(origin);
+  if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
+
+  const xff = req.headers.get("x-forwarded-for") || "";
+  const ip = xff.split(",")[0]?.trim() || "unknown";
+
+  const rl = await rateLimitHourly(ip);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Rate limit exceeded" },
+      {
+        status: 429,
+        headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
+      }
+    );
+  }
+
+  try {
+    const ai = getGeminiClient();
+
+    const stores: Array<{
+      name?: string;
+      displayName?: string;
+      createTime?: string;
+    }> = [];
+
+    const iterable = await ai.fileSearchStores.list();
+    for await (const store of iterable) {
+      stores.push({
+        name: store?.name,
+        displayName: store?.displayName,
+        createTime: store?.createTime,
+      });
+    }
+
+    return NextResponse.json(
+      { stores },
+      {
+        status: 200,
+        headers: {
+          ...headers,
+          "X-RateLimit-Limit": String(rl.limit),
+          "X-RateLimit-Remaining": String(rl.remaining),
+          "X-RateLimit-Reset": String(rl.resetSeconds),
+        },
+      }
+    );
+  } catch (e) {
+    return NextResponse.json(
+      { error: "Failed to list file search stores", details: String(e) },
+      { status: 502, headers }
+    );
+  }
 }

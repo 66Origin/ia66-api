@@ -184,14 +184,6 @@ export async function DELETE(req: Request) {
 
   try {
     const ai = getGeminiClient();
-    const storeName = getFileSearchStoreName();
-
-    const body = await req.json().catch(() => null);
-    const fileId = body?.fileId;
-
-    if (!fileId || typeof fileId !== "string") {
-      return jsonError("Missing 'fileId' (string)", 400, origin);
-    }
 
     const stores: Array<{
       name?: string;

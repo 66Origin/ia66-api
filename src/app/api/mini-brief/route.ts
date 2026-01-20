@@ -160,3 +160,80 @@ export async function GET(req: Request) {
     );
   }
 }
+
+// Suppression de tous les File Search Stores
+
+export async function DELETE(req: Request) {
+  const origin = req.headers.get("origin");
+  const { headers, isAllowed } = corsHeaders(origin);
+  if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
+
+  const xff = req.headers.get("x-forwarded-for") || "";
+  const ip = xff.split(",")[0]?.trim() || "unknown";
+
+  const rl = await rateLimitHourly(ip);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Rate limit exceeded" },
+      {
+        status: 429,
+        headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
+      }
+    );
+  }
+
+  try {
+    const ai = getGeminiClient();
+    const storeName = getFileSearchStoreName();
+
+    const body = await req.json().catch(() => null);
+    const fileId = body?.fileId;
+
+    if (!fileId || typeof fileId !== "string") {
+      return jsonError("Missing 'fileId' (string)", 400, origin);
+    }
+
+    const stores: Array<{
+      name?: string;
+      displayName?: string;
+      createTime?: string;
+    }> = [];
+
+    const iterable = await ai.fileSearchStores.list();
+    for await (const store of iterable) {
+      stores.push({
+        name: store?.name,
+        displayName: store?.displayName,
+        createTime: store?.createTime,
+      });
+    }
+
+    for (const store of stores) {
+      if (store.name) {
+        await ai.fileSearchStores.delete({
+          name: store.name,
+          config: {
+            force: true,
+          },
+        });
+      }
+    }
+    return NextResponse.json(
+      { message: `File search stores deleted` },
+      {
+        status: 200,
+        headers: {
+          ...headers,
+          "X-RateLimit-Limit": String(rl.limit),
+          "X-RateLimit-Remaining": String(rl.remaining),
+          "X-RateLimit-Reset": String(rl.resetSeconds),
+        },
+      }
+    );
+  } catch (e) {
+    return NextResponse.json(
+      { error: "Failed to delete file search stores", details: String(e) },
+      { status: 502, headers }
+    );
+  }
+}

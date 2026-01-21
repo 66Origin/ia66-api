@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { corsHeaders, jsonError } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/rateLimit";
 import { getFileSearchStoreName, getGeminiClient } from "@/lib/gemini";
-import { outputSchema } from "@/lib/schema";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -92,7 +91,6 @@ Tags (si présents): ${tags.join(", ")}
     );
   }
 
-  // ✅ On renvoie la réponse telle quelle
   return NextResponse.json(
     { text },
     {
@@ -107,7 +105,7 @@ Tags (si présents): ${tags.join(", ")}
   );
 }
 
-// Lister tous les File Search Stores
+/*// Lister tous les File Search Stores
 export async function GET(req: Request) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
@@ -289,66 +287,4 @@ export async function DELETE_DOCUMENT(
       { status: 502, headers }
     );
   }
-}
-
-// Lister les documents d’un File Search Store
-export async function GET_DOCUMENTS(req: Request) {
-  const origin = req.headers.get("origin");
-  const { headers, isAllowed } = corsHeaders(origin);
-  if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
-
-  const xff = req.headers.get("x-forwarded-for") || "";
-  const ip = xff.split(",")[0]?.trim() || "unknown";
-
-  const rl = await rateLimitHourly(ip);
-  if (!rl.allowed) {
-    return NextResponse.json(
-      { error: "Rate limit exceeded" },
-      {
-        status: 429,
-        headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
-      }
-    );
-  }
-
-  try {
-    const ai = getGeminiClient();
-    const storeName = getFileSearchStoreName();
-
-    const documents: Array<{
-      name?: string;
-      displayName?: string;
-      createTime?: string;
-    }> = [];
-
-    const iterable = await ai.fileSearchStores.documents.list({
-      parent: `fileSearchStores/${storeName}`,
-    });
-
-    for await (const document of iterable) {
-      documents.push({
-        name: document?.name,
-        displayName: document?.displayName,
-        createTime: document?.createTime,
-      });
-    }
-
-    return NextResponse.json(
-      { documents },
-      {
-        status: 200,
-        headers: {
-          ...headers,
-          "X-RateLimit-Limit": String(rl.limit),
-          "X-RateLimit-Remaining": String(rl.remaining),
-          "X-RateLimit-Reset": String(rl.resetSeconds),
-        },
-      }
-    );
-  } catch (e) {
-    return NextResponse.json(
-      { error: "Failed to list documents", details: String(e) },
-      { status: 502, headers }
-    );
-  }
-}
+}*/

@@ -165,9 +165,8 @@ export async function GET(req: Request) {
   }
 }
 
-// Suppression de tous les File Search Stores
-
-export async function DELETE(req: Request) {
+// Supprimer tous les File Search Stores
+export async function DELETE_STORES(req: Request) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
@@ -229,6 +228,126 @@ export async function DELETE(req: Request) {
   } catch (e) {
     return NextResponse.json(
       { error: "Failed to delete file search stores", details: String(e) },
+      { status: 502, headers }
+    );
+  }
+}
+
+// Supprimer un document File Search Store par son nom
+export async function DELETE_DOCUMENT(
+  req: Request,
+  { params }: { params: { name: string } }
+) {
+  const origin = req.headers.get("origin");
+  const { headers, isAllowed } = corsHeaders(origin);
+  if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
+
+  const xff = req.headers.get("x-forwarded-for") || "";
+  const ip = xff.split(",")[0]?.trim() || "unknown";
+
+  const rl = await rateLimitHourly(ip);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Rate limit exceeded" },
+      {
+        status: 429,
+        headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
+      }
+    );
+  }
+
+  const documentName = params.name;
+  if (!documentName) {
+    return jsonError("Missing 'name' parameter", 400, origin);
+  }
+
+  const storeName = getFileSearchStoreName();
+  const name = `fileSearchStores/${storeName}/documents/${documentName}`;
+
+  try {
+    const ai = getGeminiClient();
+
+    await ai.fileSearchStores.documents.delete({
+      name,
+    });
+
+    return NextResponse.json(
+      { message: `Document ${documentName} deleted` },
+      {
+        status: 200,
+        headers: {
+          ...headers,
+          "X-RateLimit-Limit": String(rl.limit),
+          "X-RateLimit-Remaining": String(rl.remaining),
+          "X-RateLimit-Reset": String(rl.resetSeconds),
+        },
+      }
+    );
+  } catch (e) {
+    return NextResponse.json(
+      { error: "Failed to delete document", details: String(e) },
+      { status: 502, headers }
+    );
+  }
+}
+
+// Lister les documents d’un File Search Store
+export async function GET_DOCUMENTS(req: Request) {
+  const origin = req.headers.get("origin");
+  const { headers, isAllowed } = corsHeaders(origin);
+  if (!isAllowed) return new NextResponse("Forbidden", { status: 403 });
+
+  const xff = req.headers.get("x-forwarded-for") || "";
+  const ip = xff.split(",")[0]?.trim() || "unknown";
+
+  const rl = await rateLimitHourly(ip);
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Rate limit exceeded" },
+      {
+        status: 429,
+        headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
+      }
+    );
+  }
+
+  try {
+    const ai = getGeminiClient();
+    const storeName = getFileSearchStoreName();
+
+    const documents: Array<{
+      name?: string;
+      displayName?: string;
+      createTime?: string;
+    }> = [];
+
+    const iterable = await ai.fileSearchStores.documents.list({
+      parent: `fileSearchStores/${storeName}`,
+    });
+
+    for await (const document of iterable) {
+      documents.push({
+        name: document?.name,
+        displayName: document?.displayName,
+        createTime: document?.createTime,
+      });
+    }
+
+    return NextResponse.json(
+      { documents },
+      {
+        status: 200,
+        headers: {
+          ...headers,
+          "X-RateLimit-Limit": String(rl.limit),
+          "X-RateLimit-Remaining": String(rl.remaining),
+          "X-RateLimit-Reset": String(rl.resetSeconds),
+        },
+      }
+    );
+  } catch (e) {
+    return NextResponse.json(
+      { error: "Failed to list documents", details: String(e) },
       { status: 502, headers }
     );
   }

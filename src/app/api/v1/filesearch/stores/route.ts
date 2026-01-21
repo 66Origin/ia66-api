@@ -1,11 +1,11 @@
 // app/api/v1/filesearch/stores/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/rateLimit";
 import { getGeminiClient } from "@/lib/gemini";
 import { requireAdmin } from "@/lib/admin";
 
-export async function OPTIONS(req: Request) {
+export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed) return new NextResponse(null, { status: 403, headers });
@@ -13,7 +13,7 @@ export async function OPTIONS(req: Request) {
 }
 
 // GET /api/v1/filesearch/stores
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed)
@@ -79,18 +79,19 @@ export async function GET(req: Request) {
 }
 
 // DELETE /api/v1/filesearch/stores
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed)
     return new NextResponse("Forbidden", { status: 403, headers });
 
   const admin = requireAdmin(req);
-  if (!admin.ok)
+  if (!admin.ok) {
     return NextResponse.json(
       { error: admin.error },
       { status: admin.status, headers }
     );
+  }
 
   const xff = req.headers.get("x-forwarded-for") || "";
   const ip = xff.split(",")[0]?.trim() || "unknown";

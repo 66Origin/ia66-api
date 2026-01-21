@@ -1,17 +1,17 @@
 // app/api/v1/chat/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders, jsonError } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/rateLimit";
 import { getFileSearchStoreName, getGeminiClient } from "@/lib/gemini";
 
-export async function OPTIONS(req: Request) {
+export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed) return new NextResponse(null, { status: 403, headers });
   return new NextResponse(null, { status: 204, headers });
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed)

@@ -1,22 +1,22 @@
-// app/api/v1/filesearch/stores/[store]/documents/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/rateLimit";
 import { getGeminiClient } from "@/lib/gemini";
 import { requireAdmin, normalizeStoreParent } from "@/lib/admin";
 
-export async function OPTIONS(req: Request) {
+export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed) return new NextResponse(null, { status: 403, headers });
   return new NextResponse(null, { status: 204, headers });
 }
 
-// GET /api/v1/filesearch/stores/:store/documents
 export async function GET(
-  req: Request,
-  { params }: { params: { store: string } }
+  req: NextRequest,
+  context: { params: Promise<{ store: string }> }
 ) {
+  const { store } = await context.params;
+
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
   if (!isAllowed)
@@ -43,19 +43,17 @@ export async function GET(
     );
   }
 
-  const storeParam = params.store;
-  const parent = normalizeStoreParent(storeParam);
+  const parent = normalizeStoreParent(store);
 
   try {
     const ai = getGeminiClient();
-
     const documents: Array<{
       name?: string;
       displayName?: string;
       createTime?: string;
     }> = [];
-    const iterable = await ai.fileSearchStores.documents.list({ parent });
 
+    const iterable = await ai.fileSearchStores.documents.list({ parent });
     for await (const doc of iterable) {
       documents.push({
         name: doc?.name,

@@ -54,53 +54,57 @@ Ta mission :
 1) Structurer le brief du prospect en mini-brief clair.
 2) Proposer des projets similaires (issus du File Search) et expliquer pourquoi ils matchent.
 3) Expliquer ce que l’agence peut apporter.
-4) Poser 3 à 6 questions de cadrage.
+4) Poser 1 à 3 questions de cadrage.
 
 Brief prospect:
 ${description}
 
 Tags (si présents): ${tags.join(", ")}
 `;
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-    config: {
-      tools: [
-        {
-          fileSearch: {
-            fileSearchStoreNames: [storeName],
-          },
-        },
-      ],
-    },
-  });
 
-  function requireText(text: string | undefined): string {
-    if (!text) throw new Error("Gemini response has no text output");
-    return text;
-  }
-
-  const rawText = requireText(response.text);
-
-  let parsed;
+  let response;
   try {
-    parsed = outputSchema.parse(JSON.parse(rawText));
+    response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: {
+        tools: [
+          {
+            fileSearch: {
+              fileSearchStoreNames: [storeName],
+            },
+          },
+        ],
+      },
+    });
   } catch (e) {
     return NextResponse.json(
-      { error: "Invalid model output", details: String(e) },
+      { error: "Gemini call failed", details: String(e) },
       { status: 502, headers }
     );
   }
 
-  return NextResponse.json(parsed, {
-    status: 200,
-    headers: {
-      ...headers,
-      "X-RateLimit-Limit": String(rl.limit),
-      "X-RateLimit-Remaining": String(rl.remaining),
-      "X-RateLimit-Reset": String(rl.resetSeconds),
-    },
-  });
+  const text = response.text;
+  if (!text) {
+    return NextResponse.json(
+      { error: "Gemini response has no text output" },
+      { status: 502, headers }
+    );
+  }
+
+  // ✅ On renvoie la réponse telle quelle
+  return NextResponse.json(
+    { text },
+    {
+      status: 200,
+      headers: {
+        ...headers,
+        "X-RateLimit-Limit": String(rl.limit),
+        "X-RateLimit-Remaining": String(rl.remaining),
+        "X-RateLimit-Reset": String(rl.resetSeconds),
+      },
+    }
+  );
 }
 
 // Lister tous les File Search Stores

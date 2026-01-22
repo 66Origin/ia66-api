@@ -1,7 +1,7 @@
 // app/api/v1/filesearch/stores/[store]/documents/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders } from "@/lib/security";
-import { rateLimitHourly } from "@/lib/rateLimit";
+import { rateLimitHourly } from "@/lib/ratelimit/hourly";
 import { getGeminiClient } from "@/lib/gemini";
 import { requireAdmin, normalizeStoreParent } from "@/lib/admin";
 

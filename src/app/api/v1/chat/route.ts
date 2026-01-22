@@ -33,7 +33,25 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json().catch(() => null);
   const description = body?.description;
-  const tags: string[] = Array.isArray(body?.tags) ? body.tags : [];
+  const rawTags = body?.tags;
+
+  if (rawTags !== undefined && !Array.isArray(rawTags)) {
+    return jsonError(
+      "Invalid 'tags' (must be an array of strings)",
+      400,
+      origin
+    );
+  }
+
+  if (Array.isArray(rawTags) && rawTags.some((t) => typeof t !== "string")) {
+    return jsonError(
+      "Invalid 'tags' (must be an array of strings)",
+      400,
+      origin
+    );
+  }
+
+  const tags: string[] = Array.isArray(rawTags) ? (rawTags as string[]) : [];
 
   if (!description || typeof description !== "string") {
     return jsonError("Missing 'description' (string)", 400, origin);

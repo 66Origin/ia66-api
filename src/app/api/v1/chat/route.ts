@@ -1,8 +1,5 @@
-// app/api/v1/chat/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders, jsonError } from "@/lib/security";
-import { rateLimitHourly } from "@/lib/ratelimit/hourly";
-import { runBot } from "@/lib/bot/run";
 
 export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin");
@@ -17,22 +14,11 @@ export async function POST(req: NextRequest) {
   if (!isAllowed)
     return new NextResponse("Forbidden", { status: 403, headers });
 
-  const xff = req.headers.get("x-forwarded-for") || "";
-  const ip = xff.split(",")[0]?.trim() || "unknown";
-
-  const rl = await rateLimitHourly(ip);
-  if (!rl.allowed) {
-    return NextResponse.json(
-      { error: "Rate limit exceeded" },
-      {
-        status: 429,
-        headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
-      }
-    );
+  const body = await req.json().catch(() => null);
+  if (!body || typeof body !== "object") {
+    return jsonError("Invalid JSON body", 400, origin);
   }
 
-  const body = await req.json().catch(() => null);
-  const description = body?.description;
   const rawTags = body?.tags;
 
   if (rawTags !== undefined && !Array.isArray(rawTags)) {
@@ -51,37 +37,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const tags: string[] = Array.isArray(rawTags) ? (rawTags as string[]) : [];
+  const tags = Array.isArray(rawTags) ? rawTags : [];
 
-  if (!description || typeof description !== "string") {
-    return jsonError("Missing 'description' (string)", 400, origin);
-  }
-  if (description.length < 20) {
-    return jsonError("Description too short (min 20 chars)", 400, origin);
-  }
-  if (description.length > 4000) {
-    return jsonError("Description too long (max 4000 chars)", 400, origin);
-  }
-
-  try {
-    const { text } = await runBot({ description, tags });
-
-    return NextResponse.json(
-      { text },
-      {
-        status: 200,
-        headers: {
-          ...headers,
-          "X-RateLimit-Limit": String(rl.limit),
-          "X-RateLimit-Remaining": String(rl.remaining),
-          "X-RateLimit-Reset": String(rl.resetSeconds),
-        },
-      }
-    );
-  } catch (e) {
-    return NextResponse.json(
-      { error: "Bot execution failed", details: String(e) },
-      { status: 502, headers }
-    );
-  }
+  return NextResponse.json(
+    {
+      ok: true,
+      tags,
+      tagsType: typeof rawTags,
+    },
+    { status: 200, headers }
+  );
 }

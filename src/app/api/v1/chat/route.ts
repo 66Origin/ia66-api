@@ -1,7 +1,7 @@
 // app/api/v1/chat/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders, jsonError } from "@/lib/security";
-import { rateLimitHourly } from "@/lib/rateLimit";
+import { rateLimitHourly } from "@/lib/ratelimit/hourly";
 import { getFileSearchStoreName, getGeminiClient } from "@/lib/gemini";
 
 export async function OPTIONS(req: NextRequest) {

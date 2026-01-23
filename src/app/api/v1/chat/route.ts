@@ -32,9 +32,20 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const body = await req.json().catch(() => null);
-  const description = body?.description;
-  const rawTags = body?.tags;
+  let body: unknown;
+
+  try {
+    body = await req.json();
+  } catch {
+    return jsonError("Invalid JSON body", 400, origin);
+  }
+
+  if (!body || typeof body !== "object") {
+    return jsonError("Invalid JSON body", 400, origin);
+  }
+
+  const description = (body as any).description;
+  const rawTags = (body as any).tags;
 
   if (rawTags !== undefined && !Array.isArray(rawTags)) {
     return jsonError(

@@ -15,7 +15,12 @@ export async function POST(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
 
-  if (!isAllowed)
+  return NextResponse.json(
+    { debug: "chat-route-2026-01-23-1118" },
+    { status: 418, headers }
+  );
+
+  /*if (!isAllowed)
     return new NextResponse("Forbidden", { status: 403, headers });
 
   const xff = req.headers.get("x-forwarded-for") || "";
@@ -95,5 +100,5 @@ export async function POST(req: NextRequest) {
       { error: "Bot execution failed", details: String(e) },
       { status: 502, headers }
     );
-  }
+  }*/
 }

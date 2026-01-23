@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders, jsonError } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/ratelimit/hourly";
 import { runBot } from "@/lib/bot/run";
+import { chatInputSchema } from "@/lib/schema";
 
 export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin");
@@ -32,48 +33,21 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: unknown;
+  let rawBody: unknown;
 
   try {
-    body = await req.json();
+    rawBody = await req.json();
   } catch {
     return jsonError("Invalid JSON body", 400, origin);
   }
+  const parsedResult = chatInputSchema.safeParse(rawBody);
 
-  if (!body || typeof body !== "object") {
-    return jsonError("Invalid JSON body", 400, origin);
+  if (!parsedResult.success) {
+    const first = parsedResult.error.issues[0];
+    return jsonError(first?.message || "Invalid request body", 400, origin);
   }
 
-  const description = (body as any).description;
-  const rawTags = (body as any).tags;
-
-  if (rawTags !== undefined && !Array.isArray(rawTags)) {
-    return jsonError(
-      "Invalid 'tags' (must be an array of strings)",
-      400,
-      origin
-    );
-  }
-
-  if (Array.isArray(rawTags) && rawTags.some((t) => typeof t !== "string")) {
-    return jsonError(
-      "Invalid 'tags' (must be an array of strings)",
-      400,
-      origin
-    );
-  }
-
-  const tags: string[] = Array.isArray(rawTags) ? (rawTags as string[]) : [];
-
-  if (!description || typeof description !== "string") {
-    return jsonError("Missing 'description' (string)", 400, origin);
-  }
-  if (description.length < 20) {
-    return jsonError("Description too short (min 20 chars)", 400, origin);
-  }
-  if (description.length > 4000) {
-    return jsonError("Description too long (max 4000 chars)", 400, origin);
-  }
+  const { description, tags } = parsedResult.data;
 
   try {
     const { text } = await runBot({ description, tags });

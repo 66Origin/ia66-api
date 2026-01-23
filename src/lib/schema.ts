@@ -26,3 +26,20 @@ export const outputSchema = z.object({
 });
 
 export type MiniBriefOutput = z.infer<typeof outputSchema>;
+
+/** Input payload for POST /api/v1/chat */
+export const chatInputSchema = z
+  .object({
+    description: z
+      .string()
+      .min(20, "Description too short (min 20 chars)")
+      .max(2000, "Description too long (max 2000 chars)"),
+    tags: z
+      .array(z.string().trim().min(1).max(32))
+      .max(4, "Too many tags (max 4)")
+      .optional()
+      .default([]),
+  })
+  .strict();
+
+export type ChatInput = z.infer<typeof chatInputSchema>;

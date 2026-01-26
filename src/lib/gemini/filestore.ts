@@ -119,7 +119,7 @@ export async function deleteFileSearchDocument(store: string, doc: string) {
   const storeParent = normalizeStoreParent(store);
   const name = normalizeDocumentName(storeParent, doc);
 
-  await ai.fileSearchStores.documents.delete({ name });
+  await ai.fileSearchStores.documents.delete({ name, config: { force: true } });
 
   return { deletedDocument: name };
 }
@@ -136,7 +136,10 @@ export async function deleteAllDocumentsFromStore(store: string) {
 
   for await (const doc of iterable) {
     if (!doc?.name) continue;
-    await ai.fileSearchStores.documents.delete({ name: doc.name });
+    await ai.fileSearchStores.documents.delete({
+      name: doc.name,
+      config: { force: true },
+    });
     deleted++;
   }
 

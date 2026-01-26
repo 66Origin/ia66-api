@@ -2,8 +2,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { corsHeaders, jsonError } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/ratelimit/hourly";
-import { runBot } from "@/lib/bot/run";
-import { chatInputSchema } from "@/lib/schema";
+import { getFileSearchStoreName, getGeminiClient } from "@/lib/gemini";
+import { chatRequestSchema } from "@/lib/schema";
+import { buildChatPrompt } from "@/lib/bot/prompt";
 
 export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin");
@@ -15,7 +16,6 @@ export async function OPTIONS(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);
-
   if (!isAllowed)
     return new NextResponse("Forbidden", { status: 403, headers });
 
@@ -33,41 +33,79 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let rawBody: unknown;
-
+  let raw: unknown;
   try {
-    rawBody = await req.json();
+    raw = await req.json();
   } catch {
     return jsonError("Invalid JSON body", 400, origin);
   }
-  const parsedResult = chatInputSchema.safeParse(rawBody);
 
-  if (!parsedResult.success) {
-    const first = parsedResult.error.issues[0];
-    return jsonError(first?.message || "Invalid request body", 400, origin);
+  const parsed = chatRequestSchema.safeParse(raw);
+  if (!parsed.success) {
+    return NextResponse.json(
+      {
+        error: "Invalid payload",
+        issues: parsed.error.issues.map((i) => ({
+          path: i.path.join("."),
+          message: i.message,
+        })),
+      },
+      { status: 400, headers }
+    );
   }
 
-  const { description, tags } = parsedResult.data;
+  const { message, entrypoint, pageContext } = parsed.data;
 
+  const prompt =
+    typeof buildChatPrompt === "function"
+      ? buildChatPrompt({ message, entrypoint, pageContext })
+      : `
+Tu es "IA 66", assistant de 66 Origin.
+Réponds en français. Ne jamais inventer.
+Contexte page: ${JSON.stringify(pageContext ?? { pageType: "other" })}
+Entrypoint: ${entrypoint ?? "other"}
+
+Message utilisateur:
+${message}
+`.trim();
+
+  const ai = getGeminiClient();
+  const storeName = getFileSearchStoreName();
+
+  let response;
   try {
-    const { text } = await runBot({ description, tags });
-
-    return NextResponse.json(
-      { text },
-      {
-        status: 200,
-        headers: {
-          ...headers,
-          "X-RateLimit-Limit": String(rl.limit),
-          "X-RateLimit-Remaining": String(rl.remaining),
-          "X-RateLimit-Reset": String(rl.resetSeconds),
-        },
-      }
-    );
+    response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: {
+        tools: [{ fileSearch: { fileSearchStoreNames: [storeName] } }],
+      },
+    });
   } catch (e) {
     return NextResponse.json(
-      { error: "Bot execution failed", details: String(e) },
+      { error: "Gemini call failed", details: String(e) },
       { status: 502, headers }
     );
   }
+
+  const text = response.text;
+  if (!text) {
+    return NextResponse.json(
+      { error: "Gemini response has no text output" },
+      { status: 502, headers }
+    );
+  }
+
+  return NextResponse.json(
+    { text },
+    {
+      status: 200,
+      headers: {
+        ...headers,
+        "X-RateLimit-Limit": String(rl.limit),
+        "X-RateLimit-Remaining": String(rl.remaining),
+        "X-RateLimit-Reset": String(rl.resetSeconds),
+      },
+    }
+  );
 }

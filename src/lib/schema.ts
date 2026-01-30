@@ -49,9 +49,18 @@ export const chatHistoryItemSchema = z.object({
 
 export const chatConversationSchema = z
   .object({
-    turn: z.number().int().min(1).max(10).optional(), // 1-based
-    maxTurns: z.number().int().min(1).max(5).optional(), // ex: 5
-    history: z.array(chatHistoryItemSchema).max(10).optional(),
+    turn: z.number().int().min(1).max(5).optional(),
+    maxTurns: z.number().int().min(1).max(5).optional(),
+    history: z.array(chatHistoryItemSchema).max(5).optional(),
+  })
+  .superRefine((val, ctx) => {
+    if (val.turn && val.maxTurns && val.turn > val.maxTurns) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["turn"],
+        message: "turn cannot be greater than maxTurns",
+      });
+    }
   })
   .optional();
 

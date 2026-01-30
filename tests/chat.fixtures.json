@@ -1,0 +1,334 @@
+[
+  {
+    "name": "prospect_projet - tour 1 - brief complet",
+    "payload": {
+      "message": "Nous sommes une PME retail. On veut refondre la plateforme de marque et le site pour générer des leads B2B. Budget 30-40k, délai 2 mois.",
+      "entrypoint": "project",
+      "pageContext": {
+        "pageType": "services",
+        "pageTitle": "Maison 66",
+        "pageIntentHint": "L’utilisateur consulte les services de l’agence."
+      },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": [
+        "Bonjour",
+        "excellent",
+        "très clair",
+        "super",
+        "Chez 66 Origin"
+      ],
+      "maxQuestions": 1,
+      "maxAcquisBullets": 3
+    }
+  },
+  {
+    "name": "prospect_projet - tour 2 - choix A/B acté",
+    "payload": {
+      "message": "On priorise une refonte du site rapide orientée génération de leads B2B.",
+      "entrypoint": "project",
+      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
+      "conversation": {
+        "turn": 2,
+        "maxTurns": 5,
+        "history": [
+          {
+            "role": "user",
+            "text": "PME retail. Refonte plateforme de marque + site pour leads B2B. Budget 30-40k, délai 2 mois."
+          }
+        ]
+      }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": ["quel type de projet", "Bonjour"],
+      "maxQuestions": 1,
+      "maxAcquisBullets": 3
+    }
+  },
+  {
+    "name": "closing - tour 5 - aucune question",
+    "payload": {
+      "message": "OK pour un atelier de cadrage.",
+      "entrypoint": "project",
+      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
+      "conversation": {
+        "turn": 5,
+        "maxTurns": 5,
+        "history": [
+          {
+            "role": "user",
+            "text": "Nous sommes une PME retail. Refonte plateforme de marque et site pour générer des leads B2B."
+          },
+          { "role": "user", "text": "Budget 30-40k, délai 2 mois." },
+          {
+            "role": "user",
+            "text": "Objectif : clarifier positionnement et discours."
+          }
+        ]
+      }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": ["QUESTION:"],
+      "maxQuestions": 0,
+      "maxAcquisBullets": 3
+    }
+  },
+  {
+    "name": "closing - tour 5 - project - sans atelier - pas de QUESTION",
+    "payload": {
+      "message": "OK.",
+      "entrypoint": "project",
+      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
+      "conversation": {
+        "turn": 5,
+        "maxTurns": 5,
+        "history": [
+          { "role": "user", "text": "PME retail. Objectif leads B2B." },
+          {
+            "role": "user",
+            "text": "Refonte site. Budget 30-40k. Délai 2 mois."
+          }
+        ]
+      }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": ["QUESTION:"],
+      "maxQuestions": 0,
+      "maxAcquisBullets": 3
+    }
+  },
+  {
+    "name": "curieux_agence - méthode - pas de qualification projet",
+    "payload": {
+      "message": "C'est quoi votre méthode de travail chez 66 Origin ?",
+      "entrypoint": "agency",
+      "pageContext": { "pageType": "method", "pageTitle": "Méthode" },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": [
+        "Budget",
+        "délai",
+        "Quel est votre budget",
+        "quel type de projet"
+      ],
+      "maxQuestions": 1,
+      "maxAcquisBullets": 3
+    }
+  },
+  {
+    "name": "curieux_agence - services - question de direction optionnelle",
+    "payload": {
+      "message": "Vous faites quoi exactement ?",
+      "entrypoint": "services",
+      "pageContext": { "pageType": "services", "pageTitle": "Services" },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": ["Quel est votre budget", "quel type de projet"],
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
+    }
+  },
+  {
+    "name": "lecture_case - quipo - question résultats - si absent => limite docs",
+    "payload": {
+      "message": "Quels résultats chiffrés avez-vous obtenus sur ce projet ?",
+      "entrypoint": "case",
+      "pageContext": {
+        "pageType": "case",
+        "pageSlug": "quipo",
+        "pageTitle": "Quipo"
+      },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustMatchAny": [
+        "je ne le vois pas",
+        "je ne vois pas",
+        "ne (détaillent|mentionnent) pas de résultats chiffrés",
+        "pas de résultats chiffrés",
+        "résultats chiffrés.*ne (sont|sont pas).*mentionnés",
+        "documents.*ne.*(contiennent|détaillent).*résultats chiffrés"
+      ],
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
+    }
+  },
+  {
+    "name": "lecture_case - ilb - doc absent - limite docs + pas d'invention",
+    "payload": {
+      "message": "Peux-tu me résumer ce case et les livrables ?",
+      "entrypoint": "case",
+      "pageContext": {
+        "pageType": "case",
+        "pageSlug": "ilb",
+        "pageTitle": "Institut Louis Bachelier"
+      },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustMatchAny": [
+        "je ne le vois pas",
+        "je ne vois pas",
+        "je ne trouve pas",
+        "je ne trouve pas.*(documents|informations)",
+        "documents actuels.*ne contiennent pas",
+        "pas d'informations"
+      ],
+      "mustNotMatchAny": [
+        "\\bilb\\b.*(résultat|kpi|livrable|refonte|branding|site)",
+        "(résultats chiffrés|kpi|\\b\\d+%\\b)",
+        "(\\b\\d{4}\\b)",
+        "(cannes|eurobest|awwwards)"
+      ],
+      "mustMentionDocLimit": true,
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
+    }
+  },
+  {
+    "name": "candidat - infos recrutement absentes => limite docs + action",
+    "payload": {
+      "message": "Vous recrutez des designers ? Comment postuler ?",
+      "entrypoint": "careers",
+      "pageContext": { "pageType": "careers", "pageTitle": "Careers" },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustMatchAny": [
+        "je ne le vois pas",
+        "documents actuels",
+        "ne contiennent pas"
+      ],
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
+    }
+  },
+  {
+    "name": "candidat - question rôle - pas de qualification projet",
+    "payload": {
+      "message": "Je veux rejoindre l'équipe, vous cherchez plutôt dev ou design ?",
+      "entrypoint": "careers",
+      "pageContext": { "pageType": "careers", "pageTitle": "Careers" },
+      "conversation": { "turn": 2, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": ["Quel est votre budget", "quel type de projet"],
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
+    }
+  },
+  {
+    "name": "news - résumé article - si absent => limite docs",
+    "payload": {
+      "message": "Tu peux résumer l'article et donner les points clés ?",
+      "entrypoint": "news",
+      "pageContext": {
+        "pageType": "news_article",
+        "pageSlug": "studio-news",
+        "pageTitle": "Actualité"
+      },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustMatchAny": [
+        "je ne le vois pas",
+        "documents actuels",
+        "ne contiennent pas"
+      ],
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
+    }
+  },
+
+  {
+    "name": "news - article absent - limite docs sans résumé inventé",
+    "payload": {
+      "message": "Résume l'article 'studio-news' en 5 points.",
+      "entrypoint": "news",
+      "pageContext": {
+        "pageType": "news_article",
+        "pageSlug": "studio-news",
+        "pageTitle": "Actualité"
+      },
+      "conversation": { "turn": 2, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustMentionDocLimit": true,
+      "mustNotMatchAny": ["\\b1\\.|\\b2\\.|\\b3\\.|\\b4\\.|\\b5\\."],
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3
+    }
+  },
+  {
+    "name": "autre - question hors périmètre - réponse + redirection douce",
+    "payload": {
+      "message": "Vous pouvez me recommander un outil CRM pour PME ?",
+      "entrypoint": "other",
+      "pageContext": { "pageType": "other", "pageTitle": "—" },
+      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "maxQuestions": 1,
+      "maxQuestionsBeforeQuestionBlock": 0,
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
+    }
+  },
+  {
+    "name": "closing - tour 5 - curieux_agence - pas de QUESTION",
+    "payload": {
+      "message": "OK, comment on continue ?",
+      "entrypoint": "agency",
+      "pageContext": { "pageType": "services", "pageTitle": "Services" },
+      "conversation": {
+        "turn": 5,
+        "maxTurns": 5,
+        "history": [
+          {
+            "role": "user",
+            "text": "Je veux comprendre votre méthode et vos services."
+          },
+          {
+            "role": "user",
+            "text": "Je cherche surtout à savoir si vous faites branding + site."
+          }
+        ]
+      }
+    },
+    "assert": {
+      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustNotContain": ["QUESTION:"],
+      "maxQuestions": 0,
+      "maxAcquisBullets": 3
+    }
+  }
+]

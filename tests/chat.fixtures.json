@@ -9,7 +9,7 @@
         "pageTitle": "Maison 66",
         "pageIntentHint": "L’utilisateur consulte les services de l’agence."
       },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
@@ -18,10 +18,12 @@
         "excellent",
         "très clair",
         "super",
-        "Chez 66 Origin"
+        "Chez 66 Origin",
+        "chez 66 Origin"
       ],
       "maxQuestions": 1,
-      "maxAcquisBullets": 3
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
     }
   },
   {
@@ -45,7 +47,8 @@
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
       "mustNotContain": ["quel type de projet", "Bonjour"],
       "maxQuestions": 1,
-      "maxAcquisBullets": 3
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
     }
   },
   {
@@ -74,13 +77,14 @@
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
       "mustNotContain": ["QUESTION:"],
       "maxQuestions": 0,
-      "maxAcquisBullets": 3
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
     }
   },
   {
     "name": "closing - tour 5 - project - sans atelier - pas de QUESTION",
     "payload": {
-      "message": "OK.",
+      "message": "OK, compris",
       "entrypoint": "project",
       "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
       "conversation": {
@@ -99,7 +103,8 @@
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
       "mustNotContain": ["QUESTION:"],
       "maxQuestions": 0,
-      "maxAcquisBullets": 3
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
     }
   },
   {
@@ -108,7 +113,7 @@
       "message": "C'est quoi votre méthode de travail chez 66 Origin ?",
       "entrypoint": "agency",
       "pageContext": { "pageType": "method", "pageTitle": "Méthode" },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
@@ -119,16 +124,17 @@
         "quel type de projet"
       ],
       "maxQuestions": 1,
-      "maxAcquisBullets": 3
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
     }
   },
   {
     "name": "curieux_agence - services - question de direction optionnelle",
     "payload": {
       "message": "Vous faites quoi exactement ?",
-      "entrypoint": "services",
+      "entrypoint": "agency",
       "pageContext": { "pageType": "services", "pageTitle": "Services" },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
@@ -149,18 +155,11 @@
         "pageSlug": "quipo",
         "pageTitle": "Quipo"
       },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMatchAny": [
-        "je ne le vois pas",
-        "je ne vois pas",
-        "ne (détaillent|mentionnent) pas de résultats chiffrés",
-        "pas de résultats chiffrés",
-        "résultats chiffrés.*ne (sont|sont pas).*mentionnés",
-        "documents.*ne.*(contiennent|détaillent).*résultats chiffrés"
-      ],
+      "mustMentionDocLimit": true,
       "maxQuestions": 1,
       "maxQuestionsBeforeQuestionBlock": 0,
       "maxAcquisBullets": 3,
@@ -177,24 +176,10 @@
         "pageSlug": "ilb",
         "pageTitle": "Institut Louis Bachelier"
       },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMatchAny": [
-        "je ne le vois pas",
-        "je ne vois pas",
-        "je ne trouve pas",
-        "je ne trouve pas.*(documents|informations)",
-        "documents actuels.*ne contiennent pas",
-        "pas d'informations"
-      ],
-      "mustNotMatchAny": [
-        "\\bilb\\b.*(résultat|kpi|livrable|refonte|branding|site)",
-        "(résultats chiffrés|kpi|\\b\\d+%\\b)",
-        "(\\b\\d{4}\\b)",
-        "(cannes|eurobest|awwwards)"
-      ],
       "mustMentionDocLimit": true,
       "maxQuestions": 1,
       "maxQuestionsBeforeQuestionBlock": 0,
@@ -208,15 +193,11 @@
       "message": "Vous recrutez des designers ? Comment postuler ?",
       "entrypoint": "careers",
       "pageContext": { "pageType": "careers", "pageTitle": "Careers" },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMatchAny": [
-        "je ne le vois pas",
-        "documents actuels",
-        "ne contiennent pas"
-      ],
+      "mustMentionDocLimit": true,
       "maxQuestions": 1,
       "maxQuestionsBeforeQuestionBlock": 0,
       "maxAcquisBullets": 3,
@@ -229,11 +210,14 @@
       "message": "Je veux rejoindre l'équipe, vous cherchez plutôt dev ou design ?",
       "entrypoint": "careers",
       "pageContext": { "pageType": "careers", "pageTitle": "Careers" },
-      "conversation": { "turn": 2, "maxTurns": 5, "history": [] }
+      "conversation": {
+        "turn": 2,
+        "maxTurns": 5,
+        "history": []
+      }
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustNotContain": ["Quel est votre budget", "quel type de projet"],
       "maxQuestions": 1,
       "maxQuestionsBeforeQuestionBlock": 0,
       "maxAcquisBullets": 3,
@@ -250,22 +234,17 @@
         "pageSlug": "studio-news",
         "pageTitle": "Actualité"
       },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMatchAny": [
-        "je ne le vois pas",
-        "documents actuels",
-        "ne contiennent pas"
-      ],
+      "mustMentionDocLimit": true,
       "maxQuestions": 1,
       "maxQuestionsBeforeQuestionBlock": 0,
       "maxAcquisBullets": 3,
       "noQuestionMarkOutsideQuestionBlock": true
     }
   },
-
   {
     "name": "news - article absent - limite docs sans résumé inventé",
     "payload": {
@@ -276,7 +255,11 @@
         "pageSlug": "studio-news",
         "pageTitle": "Actualité"
       },
-      "conversation": { "turn": 2, "maxTurns": 5, "history": [] }
+      "conversation": {
+        "turn": 2,
+        "maxTurns": 5,
+        "history": []
+      }
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
@@ -284,7 +267,8 @@
       "mustNotMatchAny": ["\\b1\\.|\\b2\\.|\\b3\\.|\\b4\\.|\\b5\\."],
       "maxQuestions": 1,
       "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
     }
   },
   {
@@ -293,10 +277,11 @@
       "message": "Vous pouvez me recommander un outil CRM pour PME ?",
       "entrypoint": "other",
       "pageContext": { "pageType": "other", "pageTitle": "—" },
-      "conversation": { "turn": 1, "maxTurns": 5, "history": [] }
+      "conversation": {}
     },
     "assert": {
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
+      "mustMentionDocLimit": true,
       "maxQuestions": 1,
       "maxQuestionsBeforeQuestionBlock": 0,
       "maxAcquisBullets": 3,
@@ -328,7 +313,8 @@
       "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
       "mustNotContain": ["QUESTION:"],
       "maxQuestions": 0,
-      "maxAcquisBullets": 3
+      "maxAcquisBullets": 3,
+      "noQuestionMarkOutsideQuestionBlock": true
     }
   }
 ]

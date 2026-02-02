@@ -33,23 +33,32 @@ TÂCHE:
  * v2 — chat contextualisé (page + profil + tours).
  * Prévu pour évoluer vers multi-turn (history).
  */
-export type ChatUserProfileHint =
-  | "prospect_project"
-  | "prospect_info"
-  | "curious"
-  | "candidate"
-  | "partner"
-  | "press"
-  | "other";
+type PageContext = {
+  pageType?:
+    | "home"
+    | "services"
+    | "method"
+    | "works"
+    | "case"
+    | "team"
+    | "news"
+    | "news_article"
+    | "careers"
+    | "contact"
+    | "other";
+  pageSlug?: string;
+  pageTitle?: string;
+  pageIntentHint?: string;
+};
 
-export type ChatHistoryItem = {
-  role: "user" | "assistant";
-  text: string;
+type Conversation = {
+  turn?: number;
+  maxTurns?: number;
+  history?: Array<{ role: "user" | "assistant"; text: string }>;
 };
 
 export type BuildChatPromptInput = {
   message: string;
-
   entrypoint?:
     | "project"
     | "agency"
@@ -59,43 +68,32 @@ export type BuildChatPromptInput = {
     | "careers"
     | "news"
     | "other";
-
-  userProfileHint?: ChatUserProfileHint;
-
-  conversation?: {
-    turn?: number; // 1-based (1,2,3...)
-    maxTurns?: number; // ex: 5
-    history?: ChatHistoryItem[];
-  };
-
-  pageContext?: {
-    pageType?:
-      | "home"
-      | "services"
-      | "method"
-      | "works"
-      | "case"
-      | "team"
-      | "news"
-      | "news_article"
-      | "careers"
-      | "contact"
-      | "other";
-    pageSlug?: string;
-    pageTitle?: string;
-    pageIntentHint?: string; // 1 phrase max
-  };
+  pageContext?: PageContext;
+  conversation?: Conversation;
+  userProfileHint?:
+    | "prospect_project"
+    | "prospect_info"
+    | "curious"
+    | "candidate"
+    | "partner"
+    | "press"
+    | "other";
 };
 
-function formatHistory(history?: ChatHistoryItem[]) {
-  if (!history?.length) return "—";
+function clip(s: string, max = 280): string {
+  const t = (s ?? "").trim();
+  if (t.length <= max) return t;
+  return t.slice(0, max - 1).trimEnd() + "…";
+}
+
+function formatHistory(
+  history?: Array<{ role: "user" | "assistant"; text: string }>,
+) {
+  if (!history?.length) return "- (vide)";
   return history
-    .slice(-10)
-    .map((h) => {
-      if (h.role === "user") return `UTILISATEUR (faits): ${h.text}`;
-      return `ASSISTANT (proposition, non factuel): ${h.text}`;
-    })
-    .join("\n\n---\n\n");
+    .slice(-5)
+    .map((h) => `- ${h.role}: ${clip(h.text, 280)}`)
+    .join("\n");
 }
 
 export function buildChatPrompt(input: BuildChatPromptInput): string {
@@ -110,100 +108,78 @@ ${SYSTEM_CONTEXT}
 
 CONTEXTE_PAGE:
 - pageType: ${pageContext?.pageType ?? "other"}
-- pageSlug: ${pageContext?.pageSlug ?? "—"}
-- pageTitle: ${pageContext?.pageTitle ?? "—"}
-- pageIntentHint: ${pageContext?.pageIntentHint ?? "—"}
+- pageSlug: ${pageContext?.pageSlug ? clip(pageContext.pageSlug, 80) : "—"}
+- pageTitle: ${pageContext?.pageTitle ? clip(pageContext.pageTitle, 120) : "—"}
+- pageIntentHint: ${
+    pageContext?.pageIntentHint ? clip(pageContext.pageIntentHint, 160) : "—"
+  }
 
 ENTRYPOINT:
 ${entrypoint ?? "other"}
 
-USER_PROFILE_HINT (indicatif, peut être vide):
+USER_PROFILE_HINT (indicatif):
 ${userProfileHint ?? "—"}
 
 CONVERSATION:
 - turn: ${turn}
 - maxTurns: ${maxTurns}
-- history (peut contenir des infos déjà validées):
+- history:
 ${formatHistory(conversation?.history)}
 
-RÈGLE DE MÉMOIRE (OBLIGATOIRE)
-- Considère toute info donnée dans l’historique comme acquise.
-- N’en redemande aucune.
-- Si une info manque, pose 1 question unique et ciblée.
-- Sinon, propose une suite (2 options max) sans question.
+RÈGLES PRIORITAIRES (OBLIGATOIRES)
+- Toute info présente dans l’historique est acquise : ne la redemande jamais.
+- Fais progresser la conversation à chaque réponse.
+- 0 ou 1 question maximum.
+- Si turn >= maxTurns :
+  - Interdiction d’écrire "QUESTION:"
+  - Interdiction d’utiliser le caractère "?"
+  - Termine après "SUITE:" (une action unique et concrète)
 
-ACQUIS_ATTENDUS (à produire dans la réponse)
-
-ACQUIS (STRICT)
-- Commence toujours par "ACQUIS:".
-- ACQUIS doit contenir exactement 2 ou 3 puces (jamais 1, jamais 4+).
-- Chaque puce doit fusionner les infos pour rester concis :
-  - Regrouper budget + délai dans la même puce.
-  - Regrouper “priorité” dans la même puce que le projet (pas une puce dédiée).
-- ACQUIS est basé sur l’historique + le message (toute info de l’historique est acquise).
-- Si l’historique contient type de projet / objectif / budget-délai, ACQUIS doit les reprendre explicitement (ne pas se limiter à “atelier confirmé”).
-
-ORIENTATION / SUITE / QUESTION
-- Puis "ORIENTATION:" (2–6 lignes) et "SUITE:" (1–2 options max).
-- Finir éventuellement par "QUESTION:" avec UNE question unique (priorisation/diagnostic) uniquement si nécessaire.
-
-IMPORTANT (FORMAT EXACT)
-Utilise exactement ces en-têtes (majuscules + deux-points) et dans cet ordre :
+FORMAT STRICT DE SORTIE (OBLIGATOIRE)
+- Réponds UNIQUEMENT avec ces sections, dans cet ordre exact :
 ACQUIS:
 ORIENTATION:
 SUITE:
-QUESTION: (uniquement si tu poses une question)
-
-RÈGLE TURN LIMIT
-Si turn >= maxTurns : ne pas inclure le bloc "QUESTION:".
-
-CONTRAINTES OPÉRATIONNELLES
-- Français.
-- Aucune supposition non justifiée.
-- 0 ou 1 question max (jamais plus).
-- Si le projet est déjà qualifié, ne pose pas de question générale.
-- Pour lecture_case : si tu ne retrouves pas explicitement le détail dans les documents, ne le mentionne pas.
-
-RÈGLE NEWS_ARTICLE (STRICT)
-Si pageType = "news_article" :
-- Si le contenu de l’article n’est pas explicitement trouvé dans les documents (RAG), tu dois le dire clairement (limite docs) et NE PAS produire de “résumé”, même “à partir d’infos générales”.
-- Interdiction de répondre avec une liste de X points si tu n’as pas le texte de l’article.
-- Interdiction d’écrire des listes numérotées (1., 2., 3., …) dans ORIENTATION.
-- Dans ce cas, SUITE doit proposer 1–2 alternatives maximum (ex: “coller le texte” / “donner le lien exact” / “résumer un autre contenu disponible”), sans inventer.
-
-
-RÈGLE PRIORITAIRE (TURN LIMIT)
-Si turn >= maxTurns :
-- Tu produis un closing pragmatique SANS AUCUNE QUESTION (même A/B).
-- Tu ne demandes aucune information supplémentaire.
-- Tu proposes UNE action unique et concrète (ex: proposer un créneau / demander d’envoyer un brief par email / lien formulaire).
-- Tu fais au mieux avec les infos disponibles ; si une info manque, tu le signales sans question.
-
-TURN_LIMIT_OUTPUT (PRIORITÉ ABSOLUE)
-Si turn >= maxTurns :
-- Tu dois inclure AU MOINS 2 éléments factuels issus de l’historique dans "ACQUIS:" (si l’historique en contient).
-- Tu termines impérativement après "SUITE:".
-- Interdiction d’écrire le bloc "QUESTION:".
-- Interdiction d’utiliser le caractère "?".
-- "SUITE:" doit contenir UNE action unique concrète (ex: proposer d’envoyer 2 créneaux + participants + format via formulaire/contact).
-
-RÈGLE QUESTION (STRICT)
+QUESTION: (uniquement si nécessaire)
+- Aucun texte avant "ACQUIS:".
+- Aucun texte après le dernier bloc.
+- Pas de salutation ("Bonjour", "Hello", etc.).
 - Le caractère "?" ne doit apparaître que dans le bloc "QUESTION:" (si présent).
-- Dans ACQUIS/ORIENTATION/SUITE : aucune phrase interrogative, aucun "?".
+- Dans ACQUIS / ORIENTATION / SUITE : aucune phrase interrogative, aucun "?".
+
+CONTENU ATTENDU PAR SECTION
+ACQUIS:
+- 1 à 3 puces max.
+- Basé sur l’historique + le message.
+- Si des éléments de cadrage sont connus (objectif, cible, budget, délai, périmètre), les reprendre ici.
+
+ORIENTATION:
+- 2 à 6 lignes.
+- Adapter l’angle à ENTRYPOINT + CONTEXTE_PAGE + USER_PROFILE_HINT.
+- Ne fais aucune supposition non justifiée.
+- Si une info manque et qu’elle est nécessaire, garde-la pour QUESTION (une seule).
+
+SUITE:
+- 1 à 2 options max, formulées comme des actions concrètes.
+- Si turn >= maxTurns : UNE seule action unique.
+
+QUESTION: (optionnel)
+- Une seule question, ciblée (priorisation / diagnostic).
+- Ne jamais demander "quel type de projet" si le projet est déjà qualifié dans l’historique.
+
+CONTRAINTE DE SOURCES (PRIORITAIRE)
+- Si tu affirmes un fait sur 66 Origin, Quipo ou un document, ce fait doit être présent dans les documents via File Search.
+- Si l’information nécessaire n’est pas dans les documents (ou si le document attendu n’existe pas) :
+  - ORIENTATION doit commencer par la phrase exacte :
+    "Je ne le vois pas dans les documents actuels."
+  - Ne jamais écrire cette phrase en dehors du bloc ORIENTATION.
+  - ACQUIS / SUITE restent obligatoires.
+- Si tu dois refuser / limiter à cause des documents, tu dois quand même commencer par "ACQUIS:" (jamais par une phrase isolée).
 
 MESSAGE_UTILISATEUR:
-${message}
-
-RAPPEL FINAL (PRIORITÉ ABSOLUE)
-Si turn >= maxTurns :
-- Interdiction d'écrire "QUESTION:".
-- Interdiction d'utiliser le caractère "?".
-- Termine après "SUITE:".
-
-RAPPEL FINAL (TOUR LIMITE)
-Si turn >= maxTurns : ACQUIS + ORIENTATION + SUITE uniquement. Pas de "QUESTION:" et pas de "?".
+${clip(message, 2000)}
 
 SORTIE:
-Texte unique (pas de JSON). Style neutre et concis. Longueur indicative 70–160 mots (adapter à la nécessité).
+Texte unique (pas de JSON). Ne pas inclure de code.
 `.trim();
 }

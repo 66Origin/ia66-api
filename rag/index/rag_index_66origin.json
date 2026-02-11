@@ -1,0 +1,2730 @@
+{
+  "corpus": {
+    "corpus_name": "66_origin_rag_corpus",
+    "language": "fr",
+    "doc_count": 8,
+    "generated_at": "2026-02-09",
+    "chunking_strategy": {
+      "principle": "Chunk par section (##) puis par paragraphes pour viser ~260 mots par chunk (max ~420).",
+      "why": "Réduit les réponses floues, accélère la recherche, et évite des chunks trop longs.",
+      "recommended_overlap_words": 40
+    },
+    "retrieval_hints": {
+      "primary_fields": [
+        "title",
+        "summary",
+        "keywords",
+        "sections.heading",
+        "entities_hint"
+      ],
+      "boost_rules": [
+        {
+          "if_query_contains": [
+            "logo",
+            "cerbere",
+            "gardien",
+            "66"
+          ],
+          "boost_docs": [
+            "08",
+            "01"
+          ]
+        },
+        {
+          "if_query_contains": [
+            "clients",
+            "references",
+            "prix",
+            "cannes"
+          ],
+          "boost_docs": [
+            "05",
+            "07"
+          ]
+        },
+        {
+          "if_query_contains": [
+            "144",
+            "methode",
+            "process",
+            "diagnostic"
+          ],
+          "boost_docs": [
+            "03",
+            "07"
+          ]
+        },
+        {
+          "if_query_contains": [
+            "equipe",
+            "talents",
+            "recrutement"
+          ],
+          "boost_docs": [
+            "04",
+            "07"
+          ]
+        }
+      ]
+    }
+  },
+  "documents": [
+    {
+      "doc_id": "01",
+      "file": "01_identite_positionnement.md",
+      "path": "/mnt/data/01_identite_positionnement.md",
+      "title": "Identité et positionnement de 66 Origin",
+      "sha1": "2d72616dfdad37d241af20d0096ee9917dcd5e48",
+      "char_count": 3101,
+      "word_count": 478,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Définition"
+        },
+        {
+          "level": 2,
+          "heading": "Pitch court"
+        },
+        {
+          "level": 2,
+          "heading": "Proposition de valeur unique"
+        },
+        {
+          "level": 3,
+          "heading": "Ce qui distingue 66 Origin"
+        },
+        {
+          "level": 2,
+          "heading": "Historique"
+        },
+        {
+          "level": 2,
+          "heading": "Localisation"
+        },
+        {
+          "level": 2,
+          "heading": "Principes fondamentaux"
+        },
+        {
+          "level": 3,
+          "heading": "Culture du concret"
+        },
+        {
+          "level": 3,
+          "heading": "Approche sans silos"
+        },
+        {
+          "level": 3,
+          "heading": "Position sur l'IA"
+        },
+        {
+          "level": 3,
+          "heading": "Exigence éthique"
+        },
+        {
+          "level": 2,
+          "heading": "Quand intervenir 66 Origin"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "01-01",
+          "heading": "Préambule",
+          "approx_words": 6,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-01-01",
+              "approx_words": 6,
+              "start": "# Identité et positionnement de 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "01-02",
+          "heading": "Définition",
+          "approx_words": 42,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-02-01",
+              "approx_words": 42,
+              "start": "## Définition",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "01-03",
+          "heading": "Pitch court",
+          "approx_words": 26,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-03-01",
+              "approx_words": 26,
+              "start": "## Pitch court",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "01-04",
+          "heading": "Proposition de valeur unique",
+          "approx_words": 120,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-04-01",
+              "approx_words": 120,
+              "start": "## Proposition de valeur unique",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "01-05",
+          "heading": "Historique",
+          "approx_words": 44,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-05-01",
+              "approx_words": 44,
+              "start": "## Historique",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "01-06",
+          "heading": "Localisation",
+          "approx_words": 34,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-06-01",
+              "approx_words": 34,
+              "start": "## Localisation",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "01-07",
+          "heading": "Principes fondamentaux",
+          "approx_words": 163,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-07-01",
+              "approx_words": 163,
+              "start": "## Principes fondamentaux",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "01-08",
+          "heading": "Quand intervenir 66 Origin",
+          "approx_words": 43,
+          "suggested_chunks": [
+            {
+              "chunk_id": "01-08-01",
+              "approx_words": 43,
+              "start": "## Quand intervenir 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "L'entreprise",
+        "Pas",
+        "Le",
+        "La",
+        "Les",
+        "Se",
+        "**Pas seulement des recommandations** : l'entreprise va jusqu'à l'exécution",
+        "**Pas seulement des concepts** : l'entreprise déploie réellement",
+        "Siège : Paris, dans le quartier du Marais (10 rue Simon Le Franc)",
+        "Présence internationale : Bruxelles et New York",
+        "L'innovation n'a de valeur que si elle est exécutée",
+        "Le design n'a de sens que s'il est utile",
+        "La technologie n'est pertinente que si elle est comprise et adoptée",
+        "Se repositionner",
+        "Se transformer",
+        "Lancer une nouvelle offre",
+        "Intégrer l'IA sans prendre de risques inutiles",
+        "Lorsque les décisions deviennent complexes, risquées ou trop lentes à prendre",
+        "C'est",
+        "Maison",
+        "Pitch",
+        "Proposition",
+        "Contrairement",
+        "Ce",
+        "Une Maison",
+        "Du",
+        "Historique",
+        "Localisation",
+        "Simon Le Franc",
+        "Bruxelles",
+        "New York",
+        "Principes",
+        "Culture",
+        "L'innovation",
+        "Approche",
+        "Ils",
+        "Position",
+        "IA\nL'intelligence",
+        "Elle",
+        "Exigence"
+      ],
+      "keywords": [
+        "comprise",
+        "solutions",
+        "s'arretent",
+        "executee",
+        "s'il",
+        "utile",
+        "technologie",
+        "d'innovation",
+        "studio",
+        "concretes",
+        "jusqu'a",
+        "l'execution",
+        "pertinente",
+        "adoptee",
+        "lorsque",
+        "prendre",
+        "n'a",
+        "origin",
+        "design",
+        "transformer",
+        "creation",
+        "creatifs"
+      ],
+      "summary": "## Définition\n\n66 Origin est un studio d'innovation, de design et d'IA qui transforme des problématiques complexes en solutions concrètes. C'est une Maison d'innovation (et non une agence classique) capable de concevoir, prototyper, tester et déployer des solutions innovantes. ## Pitch court\n\n66 Origin conçoit et produit des stratégies, expériences et innovations en combinant design, technologie et IA pour transformer des idées complexes en solutions concrètes."
+    },
+    {
+      "doc_id": "02",
+      "file": "02_offre_piliers.md",
+      "path": "/mnt/data/02_offre_piliers.md",
+      "title": "Offre et piliers stratégiques de 66 Origin",
+      "sha1": "a1554e5b4b5199aca1e6c3a9268b5c29f750c721",
+      "char_count": 4102,
+      "word_count": 540,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Structure de l'offre : 3 piliers complémentaires"
+        },
+        {
+          "level": 3,
+          "heading": "Pilier 1 : Stratégies augmentées"
+        },
+        {
+          "level": 3,
+          "heading": "Pilier 2 : Expériences immersives"
+        },
+        {
+          "level": 3,
+          "heading": "Pilier 3 : Innovations intelligentes"
+        },
+        {
+          "level": 2,
+          "heading": "Logique d'assemblage"
+        },
+        {
+          "level": 2,
+          "heading": "Capacité globale"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "02-01",
+          "heading": "Préambule",
+          "approx_words": 7,
+          "suggested_chunks": [
+            {
+              "chunk_id": "02-01-01",
+              "approx_words": 7,
+              "start": "# Offre et piliers stratégiques de 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "02-02",
+          "heading": "Structure de l'offre : 3 piliers complémentaires",
+          "approx_words": 448,
+          "suggested_chunks": [
+            {
+              "chunk_id": "02-02-01",
+              "approx_words": 265,
+              "start": "## Structure de l'offre : 3 piliers complémentaires",
+              "note": "chunk_by_paragraphs_within_section"
+            },
+            {
+              "chunk_id": "02-02-02",
+              "approx_words": 183,
+              "start": "**Principe clé** : L'expérience n'est jamais un vernis créatif. C'est le point de rencontre entre la stratégie et la réa",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "02-03",
+          "heading": "Logique d'assemblage",
+          "approx_words": 40,
+          "suggested_chunks": [
+            {
+              "chunk_id": "02-03-01",
+              "approx_words": 40,
+              "start": "## Logique d'assemblage",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "02-04",
+          "heading": "Capacité globale",
+          "approx_words": 45,
+          "suggested_chunks": [
+            {
+              "chunk_id": "02-04-01",
+              "approx_words": 45,
+              "start": "## Capacité globale",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "Design",
+        "Pilier",
+        "Objectif",
+        "Quand",
+        "Lorsque",
+        "Ce",
+        "Principe",
+        "Du",
+        "Illustration",
+        "Industrialisation",
+        "Plateformes",
+        "Innovation",
+        "L'objectif",
+        "AR",
+        "VR",
+        "Retail",
+        "Chaque",
+        "IoT",
+        "Des",
+        "Co-création de visions stratégiques activables",
+        "Plateformes de marque solides et durables",
+        "Architecture de marque",
+        "Approches data-driven pour aider les dirigeants à repenser leur modèle",
+        "Conseil en stratégie",
+        "Vision stratégique",
+        "Plateformes de marque",
+        "Branding et positionnement",
+        "Design thinking",
+        "Design fiction",
+        "Innovation stratégique",
+        "Formation et acculturation (innovation, design, IA)",
+        "Analyse des usages et comportements",
+        "Accompagnement à la transformation",
+        "Expériences et produits augmentés par l'IA",
+        "Interactions utiles, fluides et mémorables",
+        "UX (expérience utilisateur)",
+        "UI (interfaces)",
+        "Design global et direction artistique",
+        "Design graphique",
+        "Packaging et édition"
+      ],
+      "keywords": [
+        "mobilisees",
+        "pilier",
+        "objectif",
+        "durables",
+        "utiles",
+        "solutions",
+        "piliers",
+        "lorsque",
+        "cle",
+        "comprise",
+        "produire",
+        "marque",
+        "activables",
+        "l'objectif",
+        "desirables",
+        "memorables",
+        "mobiles",
+        "e-commerce",
+        "plateformes",
+        "experiences",
+        "strategique",
+        "immersives"
+      ],
+      "summary": "## Structure de l'offre : 3 piliers complémentaires\n\nL'offre de 66 Origin couvre l'intégralité du cycle de l'innovation : penser → concevoir → produire. ### Pilier 1 : Stratégies augmentées\n\n**Objectif** : Penser juste. Anticiper."
+    },
+    {
+      "doc_id": "03",
+      "file": "03_methode_approche.md",
+      "path": "/mnt/data/03_methode_approche.md",
+      "title": "Méthode et approche de 66 Origin",
+      "sha1": "100efde31430eec7f6bb9111ced11bb1c3ed6c05",
+      "char_count": 4561,
+      "word_count": 649,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Principe directeur"
+        },
+        {
+          "level": 2,
+          "heading": "Approche collaborative et pragmatique"
+        },
+        {
+          "level": 3,
+          "heading": "Rôle de 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "Principe de collaboration"
+        },
+        {
+          "level": 2,
+          "heading": "Le brief en 144 caractères"
+        },
+        {
+          "level": 3,
+          "heading": "Pourquoi 144 caractères ?"
+        },
+        {
+          "level": 3,
+          "heading": "Ce que permet ce brief"
+        },
+        {
+          "level": 2,
+          "heading": "Étapes du processus"
+        },
+        {
+          "level": 2,
+          "heading": "Méthode propriétaire"
+        },
+        {
+          "level": 3,
+          "heading": "Différenciation méthodologique"
+        },
+        {
+          "level": 2,
+          "heading": "Position sur l'intelligence artificielle"
+        },
+        {
+          "level": 3,
+          "heading": "Principe général"
+        },
+        {
+          "level": 3,
+          "heading": "Diagnostic IA : un point d'entrée dédié"
+        },
+        {
+          "level": 4,
+          "heading": "Caractéristiques du Diagnostic IA"
+        },
+        {
+          "level": 4,
+          "heading": "Objectifs du Diagnostic"
+        },
+        {
+          "level": 4,
+          "heading": "Processus du Diagnostic"
+        },
+        {
+          "level": 4,
+          "heading": "Livrables du Diagnostic"
+        },
+        {
+          "level": 4,
+          "heading": "Issue du Diagnostic"
+        },
+        {
+          "level": 4,
+          "heading": "Public cible du Diagnostic IA"
+        },
+        {
+          "level": 2,
+          "heading": "Pourquoi cette approche fonctionne"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "03-01",
+          "heading": "Préambule",
+          "approx_words": 6,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-01-01",
+              "approx_words": 6,
+              "start": "# Méthode et approche de 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "03-02",
+          "heading": "Principe directeur",
+          "approx_words": 25,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-02-01",
+              "approx_words": 25,
+              "start": "## Principe directeur",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "03-03",
+          "heading": "Approche collaborative et pragmatique",
+          "approx_words": 83,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-03-01",
+              "approx_words": 83,
+              "start": "## Approche collaborative et pragmatique",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "03-04",
+          "heading": "Le brief en 144 caractères",
+          "approx_words": 82,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-04-01",
+              "approx_words": 82,
+              "start": "## Le brief en 144 caractères",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "03-05",
+          "heading": "Étapes du processus",
+          "approx_words": 67,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-05-01",
+              "approx_words": 67,
+              "start": "## Étapes du processus",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "03-06",
+          "heading": "Méthode propriétaire",
+          "approx_words": 55,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-06-01",
+              "approx_words": 55,
+              "start": "## Méthode propriétaire",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "03-07",
+          "heading": "Position sur l'intelligence artificielle",
+          "approx_words": 303,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-07-01",
+              "approx_words": 281,
+              "start": "## Position sur l'intelligence artificielle",
+              "note": "chunk_by_paragraphs_within_section"
+            },
+            {
+              "chunk_id": "03-07-02",
+              "approx_words": 22,
+              "start": "#### Public cible du Diagnostic IA",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "03-08",
+          "heading": "Pourquoi cette approche fonctionne",
+          "approx_words": 28,
+          "suggested_chunks": [
+            {
+              "chunk_id": "03-08-01",
+              "approx_words": 28,
+              "start": "## Pourquoi cette approche fonctionne",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "Principe",
+        "Diagnostic",
+        "Pourquoi",
+        "Diagnostic IA",
+        "Un",
+        "Clarifier",
+        "Le",
+        "Chaque",
+        "Ce",
+        "Pas",
+        "Avancer",
+        "Directions",
+        "Apporter un regard extérieur structurant",
+        "Clarifier les enjeux",
+        "Accélérer les arbitrages",
+        "Sécuriser le passage de l'idée à la réalité",
+        "La contrainte oblige à aller à l'essentiel",
+        "Un projet flou est un projet à risque",
+        "L'alignement se joue dès le départ",
+        "Poser un cadre partagé",
+        "Aligner les parties prenantes",
+        "Éviter les angles morts",
+        "Décider plus vite et plus justement",
+        "Financièrement accessible",
+        "Sans engagement long",
+        "Pensé comme une aide à la décision, pas comme un projet déguisé",
+        "Comprendre les activités, processus et métiers",
+        "Cartographier les données (qualité, accessibilité, gouvernance)",
+        "Évaluer la maturité IA (outils, culture, compétences)",
+        "Identification des cas d'usage IA prioritaires à forte valeur",
+        "Distinction entre quick wins et chantiers structurants",
+        "Benchmark des bonnes pratiques d'organisations comparables",
+        "Vision IA réaliste et alignée avec les objectifs",
+        "Feuille de route avec priorités claires et trajectoire progressive",
+        "Recommandations stratégiques, fonctionnelles et techniques",
+        "Avancer avec 66 Origin",
+        "Avancer avec ses équipes",
+        "Décider de ne pas engager de chantier pour le moment",
+        "Dirigeants et COMEX",
+        "Directions de la communication"
+      ],
+      "keywords": [
+        "diagnostic",
+        "metiers",
+        "directions",
+        "methode",
+        "decision",
+        "caracteres",
+        "processus",
+        "mode",
+        "collaborative",
+        "main",
+        "l'enjeu",
+        "risque",
+        "eviter",
+        "etapes",
+        "veulent",
+        "realiste",
+        "communication",
+        "client",
+        "permet",
+        "decider",
+        "operationnelle",
+        "approche"
+      ],
+      "summary": "## Principe directeur\n\nUn projet réussi commence par une compréhension partagée, se construit ensemble et va jusqu'à l'exécution. **Clarifier, construire ensemble, déployer avec impact.**\n\n## Approche collaborative et pragmatique\n\n66 Origin travaille main dans la main avec les directions générales, métiers, communication, innovation et IT. Chaque projet est conçu comme un travail collectif, dans lequel les équipes clients restent pleinement actrices des décisions."
+    },
+    {
+      "doc_id": "04",
+      "file": "04_equipe_ecosysteme.md",
+      "path": "/mnt/data/04_equipe_ecosysteme.md",
+      "title": "Équipe et écosystème de talents de 66 Origin",
+      "sha1": "1d5efe24896fb0f49732a34d8468d47d8bc2af5e",
+      "char_count": 5606,
+      "word_count": 789,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Modèle organisationnel unique"
+        },
+        {
+          "level": 2,
+          "heading": "Raison d'être de ce modèle"
+        },
+        {
+          "level": 2,
+          "heading": "Palette de compétences"
+        },
+        {
+          "level": 3,
+          "heading": "Création & Design"
+        },
+        {
+          "level": 3,
+          "heading": "Stratégie, Contenus & Influence"
+        },
+        {
+          "level": 3,
+          "heading": "Technologie & Développement"
+        },
+        {
+          "level": 3,
+          "heading": "Innovation, Industrie & Hardware"
+        },
+        {
+          "level": 3,
+          "heading": "Produit, Organisation & Delivery"
+        },
+        {
+          "level": 2,
+          "heading": "Logique d'assemblage sur mesure"
+        },
+        {
+          "level": 3,
+          "heading": "Principe de constitution des équipes"
+        },
+        {
+          "level": 3,
+          "heading": "Ce qui est évité"
+        },
+        {
+          "level": 3,
+          "heading": "Profils sélectionnés"
+        },
+        {
+          "level": 2,
+          "heading": "Avantages de ce modèle"
+        },
+        {
+          "level": 2,
+          "heading": "Champs d'application"
+        },
+        {
+          "level": 2,
+          "heading": "Culture commune"
+        },
+        {
+          "level": 2,
+          "heading": "Principes de collaboration interne"
+        },
+        {
+          "level": 3,
+          "heading": "Équipes petites, seniors et soudées"
+        },
+        {
+          "level": 3,
+          "heading": "Fluidité avant les process"
+        },
+        {
+          "level": 3,
+          "heading": "Travail en présentiel"
+        },
+        {
+          "level": 3,
+          "heading": "Le Marais comme terrain de jeu culturel"
+        },
+        {
+          "level": 3,
+          "heading": "Un lieu qui vit"
+        },
+        {
+          "level": 2,
+          "heading": "Philosophie de recrutement"
+        },
+        {
+          "level": 3,
+          "heading": "L'humain avant la compétence"
+        },
+        {
+          "level": 3,
+          "heading": "Le \"feeling\" comme critère"
+        },
+        {
+          "level": 3,
+          "heading": "Critère de sélection"
+        },
+        {
+          "level": 3,
+          "heading": "Règle d'or"
+        },
+        {
+          "level": 2,
+          "heading": "En résumé"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "04-01",
+          "heading": "Préambule",
+          "approx_words": 8,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-01-01",
+              "approx_words": 8,
+              "start": "# Équipe et écosystème de talents de 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-02",
+          "heading": "Modèle organisationnel unique",
+          "approx_words": 41,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-02-01",
+              "approx_words": 41,
+              "start": "## Modèle organisationnel unique",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-03",
+          "heading": "Raison d'être de ce modèle",
+          "approx_words": 30,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-03-01",
+              "approx_words": 30,
+              "start": "## Raison d'être de ce modèle",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-04",
+          "heading": "Palette de compétences",
+          "approx_words": 120,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-04-01",
+              "approx_words": 120,
+              "start": "## Palette de compétences",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-05",
+          "heading": "Logique d'assemblage sur mesure",
+          "approx_words": 71,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-05-01",
+              "approx_words": 71,
+              "start": "## Logique d'assemblage sur mesure",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-06",
+          "heading": "Avantages de ce modèle",
+          "approx_words": 44,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-06-01",
+              "approx_words": 44,
+              "start": "## Avantages de ce modèle",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-07",
+          "heading": "Champs d'application",
+          "approx_words": 40,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-07-01",
+              "approx_words": 40,
+              "start": "## Champs d'application",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-08",
+          "heading": "Culture commune",
+          "approx_words": 51,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-08-01",
+              "approx_words": 51,
+              "start": "## Culture commune",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-09",
+          "heading": "Principes de collaboration interne",
+          "approx_words": 196,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-09-01",
+              "approx_words": 196,
+              "start": "## Principes de collaboration interne",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-10",
+          "heading": "Philosophie de recrutement",
+          "approx_words": 134,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-10-01",
+              "approx_words": 134,
+              "start": "## Philosophie de recrutement",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "04-11",
+          "heading": "En résumé",
+          "approx_words": 54,
+          "suggested_chunks": [
+            {
+              "chunk_id": "04-11-01",
+              "approx_words": 54,
+              "start": "## En résumé",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "Des",
+        "Les",
+        "Producteurs",
+        "Ce",
+        "Profils",
+        "La",
+        "Illustrateurs",
+        "Stylistes",
+        "Journalistes",
+        "Experts Flutter",
+        "Experts Kubernetes",
+        "Prototypistes",
+        "Experts IoT",
+        "L'entreprise",
+        "Designers",
+        "Principe",
+        "C'est",
+        "Cette",
+        "Pas",
+        "Le",
+        "Quand",
+        "Un",
+        "L'humain",
+        "Chez",
+        "Designers (produit, UX, UI, graphique)",
+        "Directeurs de création",
+        "Motion designers",
+        "Game designers",
+        "Artistes visuels",
+        "Sound designers",
+        "Stratèges marketing",
+        "Brand strategists",
+        "Community managers",
+        "Content managers",
+        "Rédacteurs",
+        "Producteurs éditoriaux",
+        "Développeurs front-end",
+        "Développeurs back-end",
+        "Développeurs IA",
+        "Développeurs embarqués"
+      ],
+      "keywords": [
+        "equipe",
+        "designers",
+        "developpeurs",
+        "experts",
+        "competence",
+        "managers",
+        "producteurs",
+        "specialistes",
+        "modele",
+        "profils",
+        "talents",
+        "l'humain",
+        "hardware",
+        "ensemble",
+        "travail",
+        "travailler",
+        "ingenieurs",
+        "constitution",
+        "d'une",
+        "vitesse",
+        "process",
+        "cote"
+      ],
+      "summary": "## Modèle organisationnel unique\n\n66 Origin ne fonctionne pas comme une agence classique avec une équipe fermée. L'entreprise opère comme une maison d'innovation orchestrant un **écosystème de plus de 250 talents**, activés selon la nature réelle des problématiques à résoudre. ## Raison d'être de ce modèle\n\nLes enjeux d'aujourd'hui — innovation, IA, produit, expérience, hardware, software, culture, marque — ne peuvent plus être traités par un seul type de profil."
+    },
+    {
+      "doc_id": "05",
+      "file": "05_references_clients.md",
+      "path": "/mnt/data/05_references_clients.md",
+      "title": "Références clients et projets de 66 Origin",
+      "sha1": "17cd4c032c79dbacc2afef6e6467801868b16d1d",
+      "char_count": 3593,
+      "word_count": 473,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Diversité des clients"
+        },
+        {
+          "level": 2,
+          "heading": "Liste des clients par secteur"
+        },
+        {
+          "level": 3,
+          "heading": "Banques, Finance & Assurance"
+        },
+        {
+          "level": 3,
+          "heading": "Énergie, Industrie & Infrastructures"
+        },
+        {
+          "level": 3,
+          "heading": "Institutions Publiques & Impact Sociétal"
+        },
+        {
+          "level": 3,
+          "heading": "Marques, Retail & Luxe"
+        },
+        {
+          "level": 3,
+          "heading": "Médias, Data & Communication"
+        },
+        {
+          "level": 3,
+          "heading": "Startups, Plateformes & Innovation"
+        },
+        {
+          "level": 3,
+          "heading": "Conseil, Services"
+        },
+        {
+          "level": 2,
+          "heading": "Ce que cette diversité révèle"
+        },
+        {
+          "level": 2,
+          "heading": "Champs d'intervention géographique"
+        },
+        {
+          "level": 2,
+          "heading": "Projets reconnus"
+        },
+        {
+          "level": 3,
+          "heading": "Delivery Safe (KFC)"
+        },
+        {
+          "level": 3,
+          "heading": "Quipo"
+        },
+        {
+          "level": 3,
+          "heading": "Taiji"
+        },
+        {
+          "level": 3,
+          "heading": "Autres domaines d'intervention mentionnés"
+        },
+        {
+          "level": 2,
+          "heading": "Reconnaissance et récompenses"
+        },
+        {
+          "level": 3,
+          "heading": "Récompenses 2024"
+        },
+        {
+          "level": 3,
+          "heading": "Domaines de reconnaissance"
+        },
+        {
+          "level": 2,
+          "heading": "Critères de sélection des projets"
+        },
+        {
+          "level": 2,
+          "heading": "Capacités sectorielles"
+        },
+        {
+          "level": 3,
+          "heading": "Environnements réglementés"
+        },
+        {
+          "level": 3,
+          "heading": "Taille des organisations"
+        },
+        {
+          "level": 2,
+          "heading": "Exemples de cas d'usage concrets"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "05-01",
+          "heading": "Préambule",
+          "approx_words": 7,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-01-01",
+              "approx_words": 7,
+              "start": "# Références clients et projets de 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-02",
+          "heading": "Diversité des clients",
+          "approx_words": 25,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-02-01",
+              "approx_words": 25,
+              "start": "## Diversité des clients",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-03",
+          "heading": "Liste des clients par secteur",
+          "approx_words": 79,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-03-01",
+              "approx_words": 79,
+              "start": "## Liste des clients par secteur",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-04",
+          "heading": "Ce que cette diversité révèle",
+          "approx_words": 66,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-04-01",
+              "approx_words": 66,
+              "start": "## Ce que cette diversité révèle",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-05",
+          "heading": "Champs d'intervention géographique",
+          "approx_words": 37,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-05-01",
+              "approx_words": 37,
+              "start": "## Champs d'intervention géographique",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-06",
+          "heading": "Projets reconnus",
+          "approx_words": 62,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-06-01",
+              "approx_words": 62,
+              "start": "## Projets reconnus",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-07",
+          "heading": "Reconnaissance et récompenses",
+          "approx_words": 36,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-07-01",
+              "approx_words": 36,
+              "start": "## Reconnaissance et récompenses",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-08",
+          "heading": "Critères de sélection des projets",
+          "approx_words": 46,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-08-01",
+              "approx_words": 46,
+              "start": "## Critères de sélection des projets",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-09",
+          "heading": "Capacités sectorielles",
+          "approx_words": 67,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-09-01",
+              "approx_words": 67,
+              "start": "## Capacités sectorielles",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "05-10",
+          "heading": "Exemples de cas d'usage concrets",
+          "approx_words": 48,
+          "suggested_chunks": [
+            {
+              "chunk_id": "05-10-01",
+              "approx_words": 48,
+              "start": "## Exemples de cas d'usage concrets",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "Des",
+        "Maximum",
+        "KFC",
+        "Quipo",
+        "Plateformes",
+        "BNP Personal Finance",
+        "BNP Paribas",
+        "Cardif",
+        "BforBank",
+        "Engie",
+        "RTE",
+        "Ocean Peak",
+        "EPO",
+        "Useo",
+        "La Poste",
+        "Croix-Rouge",
+        "Chanel",
+        "Dior Parfum",
+        "Silver Square",
+        "Havas",
+        "Kantar Media",
+        "Ousia",
+        "Graam",
+        "Weezem",
+        "Spart",
+        "Mem Star",
+        "Sixty-Six Mobility",
+        "Edge",
+        "LDS",
+        "BeWizz",
+        "Des marques premium et grand public",
+        "France",
+        "Belgique",
+        "Europe",
+        "Eurobest",
+        "Awwwards",
+        "CSSWinner",
+        "CSSNectar",
+        "Technologique",
+        "Finance"
+      ],
+      "keywords": [
+        "internationaux",
+        "diversite",
+        "publiques",
+        "premium",
+        "domaines",
+        "recompenses",
+        "institutions",
+        "startups",
+        "projets",
+        "groupes",
+        "secteur",
+        "finance",
+        "sante",
+        "environnements",
+        "reglementes",
+        "mobilite",
+        "marques",
+        "medias",
+        "liste",
+        "maximum",
+        "societal",
+        "reconnaissance"
+      ],
+      "summary": "## Diversité des clients\n\n66 Origin travaille avec une grande diversité d'acteurs : grands groupes internationaux, institutions publiques, marques premium, médias, scale-ups et startups innovantes. ## Liste des clients par secteur\n\n### Banques, Finance & Assurance\n- BNP Personal Finance\n- BNP Paribas\n- Cardif\n- BforBank\n- Institut Louis Bachelier (ILB)\n\n### Énergie, Industrie & Infrastructures\n- Engie\n- RTE\n- Ocean Peak\n- EPO\n- Useo\n- Maximum\n\n### Institutions Publiques & Imp"
+    },
+    {
+      "doc_id": "06",
+      "file": "06_freins_transformation.md",
+      "path": "/mnt/data/06_freins_transformation.md",
+      "title": "Les 5 freins à la transformation des entreprises",
+      "sha1": "212c254eb60d50d22b9b2cddab0951890c2e328d",
+      "char_count": 4243,
+      "word_count": 597,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Vision de 66 Origin sur la transformation"
+        },
+        {
+          "level": 2,
+          "heading": "Frein 1 : Culture d'entreprise trop enracinée"
+        },
+        {
+          "level": 3,
+          "heading": "Le problème"
+        },
+        {
+          "level": 3,
+          "heading": "Exemples"
+        },
+        {
+          "level": 3,
+          "heading": "Conclusion"
+        },
+        {
+          "level": 2,
+          "heading": "Frein 2 : Difficulté à faire évoluer les savoir-faire des collaborateurs"
+        },
+        {
+          "level": 3,
+          "heading": "Le problème"
+        },
+        {
+          "level": 3,
+          "heading": "Nature du blocage"
+        },
+        {
+          "level": 3,
+          "heading": "Conclusion"
+        },
+        {
+          "level": 2,
+          "heading": "Frein 3 : Logique de profitabilité trop court-termiste"
+        },
+        {
+          "level": 3,
+          "heading": "Le problème"
+        },
+        {
+          "level": 3,
+          "heading": "Conclusion"
+        },
+        {
+          "level": 2,
+          "heading": "Frein 4 : Contraintes IT et dette technologique"
+        },
+        {
+          "level": 3,
+          "heading": "Caractéristiques des systèmes IT des grandes organisations"
+        },
+        {
+          "level": 3,
+          "heading": "Conséquences"
+        },
+        {
+          "level": 3,
+          "heading": "Absorption des équipes IT"
+        },
+        {
+          "level": 3,
+          "heading": "Conclusion"
+        },
+        {
+          "level": 2,
+          "heading": "Frein 5 : Vision client trop autocentrée et non orientée utilisateur"
+        },
+        {
+          "level": 3,
+          "heading": "Le problème"
+        },
+        {
+          "level": 3,
+          "heading": "Conséquences"
+        },
+        {
+          "level": 3,
+          "heading": "Conclusion"
+        },
+        {
+          "level": 2,
+          "heading": "Synthèse"
+        },
+        {
+          "level": 2,
+          "heading": "Réponse de 66 Origin à ces freins"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "06-01",
+          "heading": "Préambule",
+          "approx_words": 8,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-01-01",
+              "approx_words": 8,
+              "start": "# Les 5 freins à la transformation des entreprises",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-02",
+          "heading": "Vision de 66 Origin sur la transformation",
+          "approx_words": 42,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-02-01",
+              "approx_words": 42,
+              "start": "## Vision de 66 Origin sur la transformation",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-03",
+          "heading": "Frein 1 : Culture d'entreprise trop enracinée",
+          "approx_words": 113,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-03-01",
+              "approx_words": 113,
+              "start": "## Frein 1 : Culture d'entreprise trop enracinée",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-04",
+          "heading": "Frein 2 : Difficulté à faire évoluer les savoir-faire des collaborateurs",
+          "approx_words": 81,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-04-01",
+              "approx_words": 81,
+              "start": "## Frein 2 : Difficulté à faire évoluer les savoir-faire des collaborateurs",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-05",
+          "heading": "Frein 3 : Logique de profitabilité trop court-termiste",
+          "approx_words": 71,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-05-01",
+              "approx_words": 71,
+              "start": "## Frein 3 : Logique de profitabilité trop court-termiste",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-06",
+          "heading": "Frein 4 : Contraintes IT et dette technologique",
+          "approx_words": 89,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-06-01",
+              "approx_words": 89,
+              "start": "## Frein 4 : Contraintes IT et dette technologique",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-07",
+          "heading": "Frein 5 : Vision client trop autocentrée et non orientée utilisateur",
+          "approx_words": 88,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-07-01",
+              "approx_words": 88,
+              "start": "## Frein 5 : Vision client trop autocentrée et non orientée utilisateur",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-08",
+          "heading": "Synthèse",
+          "approx_words": 55,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-08-01",
+              "approx_words": 55,
+              "start": "## Synthèse",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "06-09",
+          "heading": "Réponse de 66 Origin à ces freins",
+          "approx_words": 50,
+          "suggested_chunks": [
+            {
+              "chunk_id": "06-09-01",
+              "approx_words": 50,
+              "start": "## Réponse de 66 Origin à ces freins",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "Les",
+        "Frein",
+        "La",
+        "Le",
+        "IT",
+        "Vision",
+        "Une",
+        "Anciens",
+        "Lourds",
+        "Complexes",
+        "Lente",
+        "Cette",
+        "Interconnectés de manière rigide",
+        "Coûteuse",
+        "Risquée",
+        "La maintenance",
+        "La sécurité",
+        "Les roadmaps longues",
+        "Les contraintes réglementaires",
+        "Prolonger artificiellement des offres obsolètes",
+        "Répondre à des usages qui n'existent plus",
+        "Ignorer les évolutions profondes du marché",
+        "Accompagnement humain et culturel des transformations",
+        "Vision centrée utilisateur systématique",
+        "Approche pragmatique tenant compte des contraintes IT",
+        "Construction progressive et itérative",
+        "Alignement des parties prenantes dès le départ",
+        "Chez",
+        "Culture",
+        "Lorsqu'une",
+        "Exemples",
+        "Kodak",
+        "Mais",
+        "ADN",
+        "Renault",
+        "Pour",
+        "Conclusion\nLa",
+        "Changer",
+        "Nature",
+        "Ce"
+      ],
+      "keywords": [
+        "frein",
+        "freins",
+        "d'entreprise",
+        "conclusion",
+        "difficulte",
+        "collaborateurs",
+        "profitabilite",
+        "dette",
+        "souvent",
+        "reellement",
+        "probleme",
+        "utilisateur",
+        "entreprises",
+        "annees",
+        "structurels",
+        "profondement",
+        "savoir-faire",
+        "evoluer",
+        "parfois",
+        "maniere",
+        "beaucoup",
+        "d'entreprises"
+      ],
+      "summary": "## Vision de 66 Origin sur la transformation\n\nChez 66 Origin, l'observation depuis des années montre que la difficulté à se transformer ne vient pas d'un manque d'idées ou de technologies, mais de **freins structurels profondément ancrés** dans les organisations. ## Frein 1 : Culture d'entreprise trop enracinée\n\n### Le problème\nLa culture d'entreprise est souvent le premier frein à la transformation. Lorsqu'une organisation s'est construite autour d'un savoir-faire historique"
+    },
+    {
+      "doc_id": "07",
+      "file": "07_faq_pratique.md",
+      "path": "/mnt/data/07_faq_pratique.md",
+      "title": "FAQ et informations pratiques sur 66 Origin",
+      "sha1": "24375b92fc1c248e1e69255be5b00fd09d5601f9",
+      "char_count": 7137,
+      "word_count": 1053,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Contact et localisation"
+        },
+        {
+          "level": 3,
+          "heading": "Adresse physique"
+        },
+        {
+          "level": 3,
+          "heading": "Description du lieu"
+        },
+        {
+          "level": 3,
+          "heading": "Contact"
+        },
+        {
+          "level": 3,
+          "heading": "Présence internationale"
+        },
+        {
+          "level": 3,
+          "heading": "Gouvernance & Associés"
+        },
+        {
+          "level": 2,
+          "heading": "Questions fréquentes sur l'identité"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin est-elle une agence ou un cabinet de conseil ?"
+        },
+        {
+          "level": 3,
+          "heading": "Depuis quand existe 66 Origin ?"
+        },
+        {
+          "level": 3,
+          "heading": "Quelle est la différence avec une agence traditionnelle ?"
+        },
+        {
+          "level": 2,
+          "heading": "Questions sur l'offre"
+        },
+        {
+          "level": 3,
+          "heading": "Que propose concrètement 66 Origin ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin travaille-t-elle uniquement sur le digital ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin travaille-t-elle avec l'IA ?"
+        },
+        {
+          "level": 2,
+          "heading": "Questions sur la méthode"
+        },
+        {
+          "level": 3,
+          "heading": "Quelle est la méthode de travail ?"
+        },
+        {
+          "level": 3,
+          "heading": "Pourquoi commencer par un brief très court ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin utilise-t-elle le design thinking classique ?"
+        },
+        {
+          "level": 2,
+          "heading": "Questions sur les clients et références"
+        },
+        {
+          "level": 3,
+          "heading": "Avec quels types de clients travaille 66 Origin ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin a-t-elle reçu des prix ?"
+        },
+        {
+          "level": 3,
+          "heading": "Pour quels projets 66 Origin est-elle reconnue ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin intervient-elle sur des secteurs réglementés ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin travaille-t-elle uniquement avec de grands groupes ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin peut-elle intervenir à l'international ?"
+        },
+        {
+          "level": 2,
+          "heading": "Questions sur la collaboration"
+        },
+        {
+          "level": 3,
+          "heading": "Comment travailler avec 66 Origin ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin fait-elle des appels d'offres classiques ?"
+        },
+        {
+          "level": 3,
+          "heading": "Comment sont constituées les équipes ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin travaille-t-elle avec des freelances ou des partenaires ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin recrute-t-elle des juniors ?"
+        },
+        {
+          "level": 3,
+          "heading": "Comment 66 Origin garantit-elle la cohérence entre profils différents ?"
+        },
+        {
+          "level": 2,
+          "heading": "Questions sur l'équipe et les compétences"
+        },
+        {
+          "level": 3,
+          "heading": "Quelle est la valeur ajoutée d'un écosystème de 250 talents ?"
+        },
+        {
+          "level": 3,
+          "heading": "66 Origin peut-elle intervenir sur des projets mêlant IA, design et hardware ?"
+        },
+        {
+          "level": 3,
+          "heading": "Pourquoi ce modèle est-il adapté à l'innovation ?"
+        },
+        {
+          "level": 2,
+          "heading": "Limitations de l'IA 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "L'IA peut-elle donner des prix ou des devis ?"
+        },
+        {
+          "level": 3,
+          "heading": "L'IA peut-elle promettre des résultats chiffrés ?"
+        },
+        {
+          "level": 3,
+          "heading": "Quel est le rôle principal de l'IA 66 Origin ?"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "07-01",
+          "heading": "Préambule",
+          "approx_words": 7,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-01-01",
+              "approx_words": 7,
+              "start": "# FAQ et informations pratiques sur 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-02",
+          "heading": "Contact et localisation",
+          "approx_words": 98,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-02-01",
+              "approx_words": 98,
+              "start": "## Contact et localisation",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-03",
+          "heading": "Questions fréquentes sur l'identité",
+          "approx_words": 122,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-03-01",
+              "approx_words": 122,
+              "start": "## Questions fréquentes sur l'identité",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-04",
+          "heading": "Questions sur l'offre",
+          "approx_words": 111,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-04-01",
+              "approx_words": 111,
+              "start": "## Questions sur l'offre",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-05",
+          "heading": "Questions sur la méthode",
+          "approx_words": 96,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-05-01",
+              "approx_words": 96,
+              "start": "## Questions sur la méthode",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-06",
+          "heading": "Questions sur les clients et références",
+          "approx_words": 191,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-06-01",
+              "approx_words": 191,
+              "start": "## Questions sur les clients et références",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-07",
+          "heading": "Questions sur la collaboration",
+          "approx_words": 209,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-07-01",
+              "approx_words": 209,
+              "start": "## Questions sur la collaboration",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-08",
+          "heading": "Questions sur l'équipe et les compétences",
+          "approx_words": 145,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-08-01",
+              "approx_words": 145,
+              "start": "## Questions sur l'équipe et les compétences",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "07-09",
+          "heading": "Limitations de l'IA 66 Origin",
+          "approx_words": 74,
+          "suggested_chunks": [
+            {
+              "chunk_id": "07-09-01",
+              "approx_words": 74,
+              "start": "## Limitations de l'IA 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "Questions",
+        "Une",
+        "Un",
+        "Directeur",
+        "Quelle",
+        "Comment",
+        "Des",
+        "De",
+        "Bruxelles",
+        "New York",
+        "Contact",
+        "Maison",
+        "Ne",
+        "Non",
+        "Pourquoi",
+        "Parce",
+        "Le",
+        "KFC",
+        "Oui",
+        "L'IA",
+        "Email : o@66origin.com",
+        "WhatsApp : 06 37 79 59 87",
+        "Paris (siège)",
+        "Philippe Mihelic, Président",
+        "Jérôme Touchebœuf, Directeur général",
+        "Charles Malinverni, Directeur général adjoint",
+        "Aurélien Valluet, Directeur général adjoint",
+        "Ne vend pas des équipes standardisées",
+        "Ne force pas les projets à entrer dans une offre préformatée",
+        "Privilégie la précision plutôt que le volume",
+        "Assemble les talents autour du problème, et non l'inverse",
+        "**Delivery Safe (KFC)** : sécurité des livreurs",
+        "**Quipo** : expérience retail digitale",
+        "**Taiji** : mobilité connectée mains libres",
+        "Une direction stratégique et créative claire",
+        "Une méthodologie commune",
+        "Une forte culture du concret",
+        "Des objectifs précis dès le départ",
+        "De couvrir un spectre très étendu de compétences",
+        "De croiser des disciplines rarement réunies"
+      ],
+      "keywords": [
+        "oui",
+        "travaille-t-elle",
+        "peut-elle",
+        "projets",
+        "questions",
+        "methode",
+        "origin",
+        "directeur",
+        "general",
+        "talents",
+        "uniquement",
+        "tres",
+        "grands",
+        "groupes",
+        "prix",
+        "ecosysteme",
+        "contact",
+        "adjoint",
+        "est-elle",
+        "l'equipe",
+        "problematique",
+        "privilegie"
+      ],
+      "summary": "## Contact et localisation\n\n### Adresse physique\n10 rue Simon Le Franc, Paris\nQuartier du Marais\n\n### Description du lieu\n66 Origin est installée dans un concept store confidentiel, pensé pour découvrir l'univers de l'entreprise. Un lieu où l'on peut boire un café, essayer des t-shirts made by 66 Origin, jeter un œil aux projets et repartir avec des idées. ### Contact\n- Email : o@66origin.com\n- WhatsApp : 06 37 79 59 87\n\n### Présence internationale\n- Paris (siège)\n- Bruxelles"
+    },
+    {
+      "doc_id": "08",
+      "file": "08_branding_storytelling.md",
+      "path": "/mnt/data/08_branding_storytelling.md",
+      "title": "Branding et storytelling de 66 Origin",
+      "sha1": "acad1bfb271e62f48e302e4c01489440e4e34c14",
+      "char_count": 13536,
+      "word_count": 2131,
+      "headings": [
+        {
+          "level": 2,
+          "heading": "Mythologie fondatrice"
+        },
+        {
+          "level": 3,
+          "heading": "Prologue — Ce que l'Histoire ne raconte pas"
+        },
+        {
+          "level": 3,
+          "heading": "La narration historique de 66 Origin"
+        },
+        {
+          "level": 2,
+          "heading": "Les chapitres de l'histoire"
+        },
+        {
+          "level": 3,
+          "heading": "I — Le temps des pierres levées"
+        },
+        {
+          "level": 3,
+          "heading": "II — La règle du double monde"
+        },
+        {
+          "level": 3,
+          "heading": "III — L'homme qui voulait voler"
+        },
+        {
+          "level": 3,
+          "heading": "IV — La chute maîtrisée"
+        },
+        {
+          "level": 3,
+          "heading": "V — Capturer la lumière, dompter le réel"
+        },
+        {
+          "level": 3,
+          "heading": "VI — Le pas impossible"
+        },
+        {
+          "level": 3,
+          "heading": "VII — Le réseau et le vertige"
+        },
+        {
+          "level": 3,
+          "heading": "VIII — L'intelligence qui écoute"
+        },
+        {
+          "level": 3,
+          "heading": "IX — 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "X — La signature que certains reconnaissent"
+        },
+        {
+          "level": 2,
+          "heading": "Signification du nom : 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "Le 66 comme signal d'assistance"
+        },
+        {
+          "level": 4,
+          "heading": "Pour 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "Le 66 comme passage et mouvement"
+        },
+        {
+          "level": 4,
+          "heading": "Lecture 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "Le 66 comme miroir"
+        },
+        {
+          "level": 4,
+          "heading": "Rôle de 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "Origin — le point zéro assumé"
+        },
+        {
+          "level": 4,
+          "heading": "Positionnement clair"
+        },
+        {
+          "level": 3,
+          "heading": "Origin comme renaissance opérationnelle"
+        },
+        {
+          "level": 4,
+          "heading": "Ce que fait 66 Origin"
+        },
+        {
+          "level": 2,
+          "heading": "Synthèse du nom"
+        },
+        {
+          "level": 3,
+          "heading": "Ce que 66 Origin n'est pas"
+        },
+        {
+          "level": 3,
+          "heading": "Ce que 66 Origin est"
+        },
+        {
+          "level": 2,
+          "heading": "Le logo : Le Gardien (Cerbère)"
+        },
+        {
+          "level": 3,
+          "heading": "Le Gardien de 66 Origin"
+        },
+        {
+          "level": 3,
+          "heading": "Le chien — le compagnon de l'humanité"
+        },
+        {
+          "level": 3,
+          "heading": "Cerbère — trois têtes, une seule intention"
+        },
+        {
+          "level": 3,
+          "heading": "Gardien des seuils"
+        },
+        {
+          "level": 3,
+          "heading": "Bienveillance et puissance"
+        },
+        {
+          "level": 3,
+          "heading": "L'inspiration asiatique — la sagesse du silence"
+        },
+        {
+          "level": 3,
+          "heading": "Le rouge — la vigilance"
+        },
+        {
+          "level": 3,
+          "heading": "Ce que le logo dit, sans le dire"
+        },
+        {
+          "level": 2,
+          "heading": "Synthèse de l'identité visuelle"
+        },
+        {
+          "level": 3,
+          "heading": "Le logo est Cerbère, gardien des seuils"
+        },
+        {
+          "level": 3,
+          "heading": "Phrase mythique activable"
+        },
+        {
+          "level": 2,
+          "heading": "Posture narrative de la marque"
+        },
+        {
+          "level": 3,
+          "heading": "Une marque qui ne se vante pas"
+        },
+        {
+          "level": 3,
+          "heading": "Une marque exigeante mais bienveillante"
+        },
+        {
+          "level": 3,
+          "heading": "Une marque mystérieuse mais accessible"
+        },
+        {
+          "level": 3,
+          "heading": "Une marque orientée impact"
+        },
+        {
+          "level": 2,
+          "heading": "Ton de voix et langue"
+        },
+        {
+          "level": 3,
+          "heading": "Principes généraux"
+        },
+        {
+          "level": 3,
+          "heading": "Ce que 66 Origin dit"
+        },
+        {
+          "level": 3,
+          "heading": "Ce que 66 Origin ne dit jamais"
+        },
+        {
+          "level": 3,
+          "heading": "Vocabulaire caractéristique"
+        },
+        {
+          "level": 2,
+          "heading": "Applications pratiques du storytelling"
+        },
+        {
+          "level": 3,
+          "heading": "Dans les présentations clients"
+        },
+        {
+          "level": 3,
+          "heading": "Dans la communication externe"
+        },
+        {
+          "level": 3,
+          "heading": "Dans le recrutement"
+        },
+        {
+          "level": 3,
+          "heading": "Dans les relations avec les partenaires"
+        },
+        {
+          "level": 2,
+          "heading": "Conclusion"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "08-01",
+          "heading": "Préambule",
+          "approx_words": 6,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-01-01",
+              "approx_words": 6,
+              "start": "# Branding et storytelling de 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-02",
+          "heading": "Mythologie fondatrice",
+          "approx_words": 136,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-02-01",
+              "approx_words": 136,
+              "start": "## Mythologie fondatrice",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-03",
+          "heading": "Les chapitres de l'histoire",
+          "approx_words": 597,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-03-01",
+              "approx_words": 263,
+              "start": "## Les chapitres de l'histoire",
+              "note": "chunk_by_paragraphs_within_section"
+            },
+            {
+              "chunk_id": "08-03-02",
+              "approx_words": 271,
+              "start": "Quand la lumière a commencé à être fixée, ils ont compris que le monde allait changer de nature.",
+              "note": "chunk_by_paragraphs_within_section"
+            },
+            {
+              "chunk_id": "08-03-03",
+              "approx_words": 63,
+              "start": "Origin n'est pas un passé. C'est un moment précis : celui où l'on décide de repartir autrement.",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-04",
+          "heading": "Signification du nom : 66 Origin",
+          "approx_words": 282,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-04-01",
+              "approx_words": 265,
+              "start": "## Signification du nom : 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            },
+            {
+              "chunk_id": "08-04-02",
+              "approx_words": 17,
+              "start": "#### Ce que fait 66 Origin",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-05",
+          "heading": "Synthèse du nom",
+          "approx_words": 132,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-05-01",
+              "approx_words": 132,
+              "start": "## Synthèse du nom",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-06",
+          "heading": "Le logo : Le Gardien (Cerbère)",
+          "approx_words": 491,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-06-01",
+              "approx_words": 272,
+              "start": "## Le logo : Le Gardien (Cerbère)",
+              "note": "chunk_by_paragraphs_within_section"
+            },
+            {
+              "chunk_id": "08-06-02",
+              "approx_words": 219,
+              "start": "**Rien ne passe sans intention claire. Rien n'avance sans exigence.**",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-07",
+          "heading": "Synthèse de l'identité visuelle",
+          "approx_words": 59,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-07-01",
+              "approx_words": 59,
+              "start": "## Synthèse de l'identité visuelle",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-08",
+          "heading": "Posture narrative de la marque",
+          "approx_words": 128,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-08-01",
+              "approx_words": 128,
+              "start": "## Posture narrative de la marque",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-09",
+          "heading": "Ton de voix et langue",
+          "approx_words": 112,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-09-01",
+              "approx_words": 112,
+              "start": "## Ton de voix et langue",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-10",
+          "heading": "Applications pratiques du storytelling",
+          "approx_words": 134,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-10-01",
+              "approx_words": 134,
+              "start": "## Applications pratiques du storytelling",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        },
+        {
+          "section_id": "08-11",
+          "heading": "Conclusion",
+          "approx_words": 54,
+          "suggested_chunks": [
+            {
+              "chunk_id": "08-11-01",
+              "approx_words": 54,
+              "start": "## Conclusion",
+              "note": "chunk_by_paragraphs_within_section"
+            }
+          ]
+        }
+      ],
+      "raw": null,
+      "entities_hint": [
+        "Le",
+        "Il",
+        "Elle",
+        "La",
+        "Ce",
+        "Une",
+        "Le Gardien",
+        "Dans",
+        "Les",
+        "Ils",
+        "C'est",
+        "Ici",
+        "On",
+        "Gardien",
+        "Des",
+        "Quand",
+        "Mais",
+        "Avant",
+        "Chaque",
+        "Bienveillance",
+        "Transformation",
+        "Toute",
+        "Un",
+        "Principe",
+        "Puis",
+        "En",
+        "De",
+        "Ne",
+        "Origine",
+        "Passage",
+        "Seuil",
+        "Trajectoire",
+        "Bascule",
+        "Concret",
+        "Exigence",
+        "Accompagnement",
+        "Depuis",
+        "Bien",
+        "Toujours",
+        "Deux"
+      ],
+      "keywords": [
+        "gardien",
+        "bienveillance",
+        "cerbere",
+        "dit",
+        "storytelling",
+        "mythologie",
+        "bascule",
+        "logo",
+        "proteger",
+        "chien",
+        "toujours",
+        "marque",
+        "trois",
+        "monde",
+        "passage",
+        "jamais",
+        "fondatrice",
+        "l'histoire",
+        "double",
+        "l'homme",
+        "certains",
+        "parlent"
+      ],
+      "summary": "## Mythologie fondatrice\n\n### Prologue — Ce que l'Histoire ne raconte pas\n\nL'Histoire officielle parle d'inventions. Elle ne parle jamais de l'instant juste avant. Elle nomme des hommes."
+    }
+  ],
+  "intent_routes": [
+    {
+      "intent": "identite_positionnement",
+      "description": "Définition, pitch, proposition de valeur, différences vs agence/conseil, où et quand intervient 66 Origin.",
+      "docs": [
+        "01",
+        "07"
+      ],
+      "example_queries": [
+        "C'est quoi 66 Origin exactement ?",
+        "Pitch en 2 phrases",
+        "Pourquoi une Maison et pas une agence ?",
+        "Quand faire appel à 66 Origin ?"
+      ],
+      "keywords": [
+        "positionnement",
+        "maison d'innovation",
+        "concret",
+        "execution"
+      ]
+    },
+    {
+      "intent": "offre_piliers",
+      "description": "Les 3 piliers (stratégies augmentées, expériences immersives, innovations intelligentes) et ce que ça couvre.",
+      "docs": [
+        "02",
+        "07"
+      ],
+      "example_queries": [
+        "Quels sont les 3 piliers ?",
+        "Est-ce que vous faites du retail / event / AR VR ?",
+        "Vous faites de l'IA et des plateformes ?"
+      ],
+      "keywords": [
+        "piliers",
+        "strategie",
+        "experience",
+        "innovation",
+        "ia",
+        "iot"
+      ]
+    },
+    {
+      "intent": "methode_process",
+      "description": "Méthode, brief 144 caractères, étapes (immersion→analyse→vision→prototype→déploiement), diagnostic IA.",
+      "docs": [
+        "03",
+        "07"
+      ],
+      "example_queries": [
+        "C'est quoi la méthode 66 Origin ?",
+        "Pourquoi 144 caractères ?",
+        "En combien de temps un prototype ?",
+        "C'est quoi le diagnostic IA ?"
+      ],
+      "keywords": [
+        "methode",
+        "144",
+        "prototype",
+        "diagnostic ia",
+        "feuille de route"
+      ]
+    },
+    {
+      "intent": "equipe_ecosysteme",
+      "description": "Organisation, écosystème de talents (250+), logique d'assemblage, culture et recrutement.",
+      "docs": [
+        "04",
+        "07"
+      ],
+      "example_queries": [
+        "Combien de personnes ?",
+        "Vous travaillez avec des freelances ?",
+        "Comment vous constituez les équipes ?",
+        "Vous recrutez des juniors ?"
+      ],
+      "keywords": [
+        "ecosysteme",
+        "talents",
+        "seniors",
+        "sur-mesure",
+        "collaboration"
+      ]
+    },
+    {
+      "intent": "clients_projets_recompenses",
+      "description": "Clients, secteurs, projets phares (Delivery Safe, Quipo, Taiji), et récompenses 2024.",
+      "docs": [
+        "05",
+        "07"
+      ],
+      "example_queries": [
+        "Quels sont vos clients ?",
+        "Sur quels secteurs vous intervenez ?",
+        "Quels projets emblématiques ?",
+        "Vous avez gagné quels prix ?"
+      ],
+      "keywords": [
+        "clients",
+        "references",
+        "projets",
+        "recompenses",
+        "cannes lions"
+      ]
+    },
+    {
+      "intent": "branding_storytelling_logo_nom",
+      "description": "Mythologie, sens du nom 66 Origin, logo (Gardien/Cerbère), ton de voix.",
+      "docs": [
+        "08",
+        "01",
+        "07"
+      ],
+      "example_queries": [
+        "Pourquoi 66 ?",
+        "Explique le logo, les 3 têtes",
+        "Quelle est la mythologie ?",
+        "Quel ton de voix pour la marque ?"
+      ],
+      "keywords": [
+        "gardien",
+        "cerbere",
+        "origin",
+        "bascule",
+        "mythologie",
+        "ton de voix"
+      ]
+    },
+    {
+      "intent": "freins_transformation",
+      "description": "Les 5 freins à la transformation des entreprises selon 66 Origin.",
+      "docs": [
+        "06"
+      ],
+      "example_queries": [
+        "Pourquoi les entreprises ont du mal à se transformer ?",
+        "Donne les 5 freins",
+        "Exemples Kodak / Renault"
+      ],
+      "keywords": [
+        "culture",
+        "savoir-faire",
+        "profitabilite",
+        "dette technologique",
+        "centrage utilisateur"
+      ]
+    },
+    {
+      "intent": "faq_contact_pratique",
+      "description": "Adresse, contacts, présence internationale, limites de l'IA 66 Origin.",
+      "docs": [
+        "07"
+      ],
+      "example_queries": [
+        "Où vous trouver ?",
+        "Comment vous contacter ?",
+        "L'IA peut-elle donner des devis ?",
+        "Vous intervenez à l'international ?"
+      ],
+      "keywords": [
+        "contact",
+        "adresse",
+        "whatsapp",
+        "limites ia",
+        "international"
+      ]
+    }
+  ],
+  "entity_index": {
+    "L'entreprise": [
+      "01",
+      "04"
+    ],
+    "Maison": [
+      "01",
+      "07"
+    ],
+    "Bruxelles": [
+      "01",
+      "07"
+    ],
+    "New York": [
+      "01",
+      "07"
+    ],
+    "Culture": [
+      "01",
+      "06"
+    ],
+    "Exigence": [
+      "01",
+      "08"
+    ],
+    "Plateformes": [
+      "02",
+      "05"
+    ],
+    "Cette": [
+      "04",
+      "06"
+    ],
+    "Chez": [
+      "04",
+      "06"
+    ],
+    "KFC": [
+      "05",
+      "07"
+    ],
+    "BNP Paribas": [
+      "05"
+    ],
+    "BforBank": [
+      "05"
+    ],
+    "Engie": [
+      "05"
+    ],
+    "RTE": [
+      "05"
+    ],
+    "La Poste": [
+      "05"
+    ],
+    "Chanel": [
+      "05"
+    ],
+    "Kantar Media": [
+      "05"
+    ]
+  }
+}

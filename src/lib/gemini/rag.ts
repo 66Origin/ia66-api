@@ -17,7 +17,7 @@ function normalizeStoreName(name: string) {
  * Retourne le texte brut.
  */
 export async function runRagChat(
-  input: RagChatInput
+  input: RagChatInput,
 ): Promise<{ text: string }> {
   const ai = getGeminiClient();
 
@@ -28,13 +28,7 @@ export async function runRagChat(
     model,
     contents: input.prompt,
     config: {
-      tools: [
-        {
-          fileSearch: {
-            fileSearchStoreNames: storeNames,
-          },
-        },
-      ],
+      tools: [{ fileSearch: { fileSearchStoreNames: [...storeNames] } }],
     },
   });
 

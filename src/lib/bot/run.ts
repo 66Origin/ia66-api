@@ -1,17 +1,23 @@
+// src/lib/run.ts
 import { getFileSearchStoreName, runRagChat } from "@/lib/gemini";
-import { buildBotPrompt } from "./prompt";
+import { buildChatPrompt } from "@/lib/bot/prompt";
+import type { ChatRequest } from "@/lib/schema";
 
-export type RunBotInput = {
-  description: string;
-  tags: string[];
+export type RunChatInput = Pick<
+  ChatRequest,
+  "message" | "entrypoint" | "pageContext" | "conversation"
+> & {
   model?: string;
 };
 
-export async function runBot(input: RunBotInput): Promise<{ text: string }> {
+export async function runChat(input: RunChatInput): Promise<{ text: string }> {
   const storeName = getFileSearchStoreName();
-  const prompt = buildBotPrompt({
-    description: input.description,
-    tags: input.tags,
+
+  const prompt = buildChatPrompt({
+    message: input.message,
+    entrypoint: input.entrypoint,
+    pageContext: input.pageContext,
+    conversation: input.conversation,
   });
 
   return runRagChat({

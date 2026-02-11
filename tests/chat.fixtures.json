@@ -2,7 +2,7 @@
   {
     "name": "prospect_projet - tour 1 - brief complet",
     "payload": {
-      "message": "Nous sommes une PME retail. On veut refondre la plateforme de marque et le site pour générer des leads B2B. Budget 30-40k, délai 2 mois.",
+      "message": "Nous sommes une PME retail. Refonte plateforme de marque + site pour générer des leads B2B. Budget 30-40k, délai 2 mois.",
       "entrypoint": "project",
       "pageContext": {
         "pageType": "services",
@@ -12,22 +12,19 @@
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
       "mustNotContain": [
         "Bonjour",
+        "super",
         "excellent",
         "très clair",
-        "super",
-        "Chez 66 Origin",
-        "chez 66 Origin"
+        "Chez 66 Origin"
       ],
-      "maxQuestions": 1,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "prospect_projet - tour 2 - choix A/B acté",
+    "name": "prospect_projet - tour 2 - priorisation site (A/B acté)",
     "payload": {
       "message": "On priorise une refonte du site rapide orientée génération de leads B2B.",
       "entrypoint": "project",
@@ -44,111 +41,176 @@
       }
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
       "mustNotContain": ["quel type de projet", "Bonjour"],
-      "maxQuestions": 1,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "closing - tour 5 - aucune question",
+    "name": "prospect_projet - tour 3 - scope landing + 3 pages + tracking",
     "payload": {
-      "message": "OK pour un atelier de cadrage.",
+      "message": "On a déjà une identité visuelle, un site existant, et des contenus partiels. On veut d’abord une landing + 3 pages clés + formulaire, et tracking.",
       "entrypoint": "project",
-      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
+      "pageContext": { "pageType": "works", "pageTitle": "Works" },
       "conversation": {
-        "turn": 5,
+        "turn": 3,
         "maxTurns": 5,
         "history": [
           {
             "role": "user",
-            "text": "Nous sommes une PME retail. Refonte plateforme de marque et site pour générer des leads B2B."
+            "text": "PME retail. Objectif : générer des leads B2B. Budget 30-40k. Délai 2 mois."
           },
-          { "role": "user", "text": "Budget 30-40k, délai 2 mois." },
           {
-            "role": "user",
-            "text": "Objectif : clarifier positionnement et discours."
+            "role": "assistant",
+            "text": "Priorisation actée : site orienté conversion en premier."
           }
         ]
       }
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustNotContain": ["QUESTION:"],
-      "maxQuestions": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": ["quel type de projet", "Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "closing - tour 5 - project - sans atelier - pas de QUESTION",
+    "name": "prospect_projet - tour 4 - KPI + cible",
     "payload": {
-      "message": "OK, compris",
+      "message": "KPI = demande de démo + prise de RDV, cible = dirigeants de PME retail.",
+      "entrypoint": "project",
+      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
+      "conversation": {
+        "turn": 4,
+        "maxTurns": 5,
+        "history": [
+          {
+            "role": "user",
+            "text": "PME retail. Budget 30-40k. Délai 2 mois."
+          },
+          {
+            "role": "user",
+            "text": "Scope : landing + 3 pages clés + formulaire + tracking."
+          }
+        ]
+      }
+    },
+    "assert": {
+      "mustNotContain": ["Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
+    }
+  },
+  {
+    "name": "closing - tour 5 - projet - aucune question",
+    "payload": {
+      "message": "D’accord, validons un atelier de cadrage.",
       "entrypoint": "project",
       "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
       "conversation": {
         "turn": 5,
         "maxTurns": 5,
         "history": [
-          { "role": "user", "text": "PME retail. Objectif leads B2B." },
           {
             "role": "user",
-            "text": "Refonte site. Budget 30-40k. Délai 2 mois."
+            "text": "PME retail. Objectif leads B2B. Cible : dirigeants."
+          },
+          { "role": "user", "text": "Budget 30-40k. Délai 2 mois." },
+          {
+            "role": "user",
+            "text": "Scope : landing + 3 pages + formulaire + tracking."
           }
         ]
       }
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustNotContain": ["QUESTION:"],
-      "maxQuestions": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": ["QUESTION:", "?"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "curieux_agence - méthode - pas de qualification projet",
+    "name": "closing - tour 5 - projet - réponse courte (min 10 chars)",
     "payload": {
-      "message": "C'est quoi votre méthode de travail chez 66 Origin ?",
+      "message": "D’accord, merci.",
+      "entrypoint": "project",
+      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
+      "conversation": {
+        "turn": 5,
+        "maxTurns": 5,
+        "history": [
+          {
+            "role": "user",
+            "text": "PME retail. Objectif leads B2B. Délai 2 mois."
+          },
+          {
+            "role": "user",
+            "text": "Budget 30-40k. Scope : refonte site orientée conversion."
+          }
+        ]
+      }
+    },
+    "assert": {
+      "mustNotContain": ["QUESTION:", "?"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
+    }
+  },
+  {
+    "name": "curieux_agence - méthode (pas de qualification projet)",
+    "payload": {
+      "message": "Quelle est la méthode de travail de 66 Origin ?",
       "entrypoint": "agency",
       "pageContext": { "pageType": "method", "pageTitle": "Méthode" },
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
       "mustNotContain": [
         "Budget",
         "délai",
         "Quel est votre budget",
-        "quel type de projet"
+        "quel type de projet",
+        "Bonjour"
       ],
-      "maxQuestions": 1,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "curieux_agence - services - question de direction optionnelle",
+    "name": "curieux_agence - services (question de direction optionnelle)",
     "payload": {
       "message": "Vous faites quoi exactement ?",
       "entrypoint": "agency",
-      "pageContext": { "pageType": "services", "pageTitle": "Services" },
+      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustNotContain": ["Quel est votre budget", "quel type de projet"],
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": [
+        "Quel est votre budget",
+        "quel type de projet",
+        "Bonjour"
+      ],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "lecture_case - quipo - question résultats - si absent => limite docs",
+    "name": "demande exemple - works (1 projet max attendu)",
     "payload": {
-      "message": "Quels résultats chiffrés avez-vous obtenus sur ce projet ?",
+      "message": "Un exemple concret de projet dans le retail, s’il y en a un.",
+      "entrypoint": "works",
+      "pageContext": { "pageType": "works", "pageTitle": "Works" },
+      "conversation": {}
+    },
+    "assert": {
+      "mustNotContain": ["Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
+    }
+  },
+  {
+    "name": "lecture_case - quipo - résumé livrables",
+    "payload": {
+      "message": "Peux-tu résumer ce projet et lister les livrables principaux ?",
       "entrypoint": "case",
       "pageContext": {
         "pageType": "case",
@@ -158,16 +220,13 @@
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMentionDocLimit": true,
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": ["Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "lecture_case - ilb - doc absent - limite docs + pas d'invention",
+    "name": "lecture_case - ilb - doc absent (pas d’invention)",
     "payload": {
       "message": "Peux-tu me résumer ce case et les livrables ?",
       "entrypoint": "case",
@@ -179,16 +238,14 @@
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMentionDocLimit": true,
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": ["Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true,
+      "mustMentionNoContent": true
     }
   },
   {
-    "name": "candidat - infos recrutement absentes => limite docs + action",
+    "name": "candidat - recrutement (infos potentiellement absentes)",
     "payload": {
       "message": "Vous recrutez des designers ? Comment postuler ?",
       "entrypoint": "careers",
@@ -196,38 +253,15 @@
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMentionDocLimit": true,
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": ["Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   },
   {
-    "name": "candidat - question rôle - pas de qualification projet",
+    "name": "news - article absent (limite docs)",
     "payload": {
-      "message": "Je veux rejoindre l'équipe, vous cherchez plutôt dev ou design ?",
-      "entrypoint": "careers",
-      "pageContext": { "pageType": "careers", "pageTitle": "Careers" },
-      "conversation": {
-        "turn": 2,
-        "maxTurns": 5,
-        "history": []
-      }
-    },
-    "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
-    }
-  },
-  {
-    "name": "news - résumé article - si absent => limite docs",
-    "payload": {
-      "message": "Tu peux résumer l'article et donner les points clés ?",
+      "message": "Tu peux résumer l’article et donner les points clés ?",
       "entrypoint": "news",
       "pageContext": {
         "pageType": "news_article",
@@ -237,42 +271,14 @@
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMentionDocLimit": true,
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": ["Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true,
+      "mustMentionNoContent": true
     }
   },
   {
-    "name": "news - article absent - limite docs sans résumé inventé",
-    "payload": {
-      "message": "Résume l'article 'studio-news' en 5 points.",
-      "entrypoint": "news",
-      "pageContext": {
-        "pageType": "news_article",
-        "pageSlug": "studio-news",
-        "pageTitle": "Actualité"
-      },
-      "conversation": {
-        "turn": 2,
-        "maxTurns": 5,
-        "history": []
-      }
-    },
-    "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMentionDocLimit": true,
-      "mustNotMatchAny": ["\\b1\\.|\\b2\\.|\\b3\\.|\\b4\\.|\\b5\\."],
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
-    }
-  },
-  {
-    "name": "autre - question hors périmètre - réponse + redirection douce",
+    "name": "autre - hors périmètre (redirection sobre)",
     "payload": {
       "message": "Vous pouvez me recommander un outil CRM pour PME ?",
       "entrypoint": "other",
@@ -280,41 +286,9 @@
       "conversation": {}
     },
     "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustMentionDocLimit": true,
-      "maxQuestions": 1,
-      "maxQuestionsBeforeQuestionBlock": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
-    }
-  },
-  {
-    "name": "closing - tour 5 - curieux_agence - pas de QUESTION",
-    "payload": {
-      "message": "OK, comment on continue ?",
-      "entrypoint": "agency",
-      "pageContext": { "pageType": "services", "pageTitle": "Services" },
-      "conversation": {
-        "turn": 5,
-        "maxTurns": 5,
-        "history": [
-          {
-            "role": "user",
-            "text": "Je veux comprendre votre méthode et vos services."
-          },
-          {
-            "role": "user",
-            "text": "Je cherche surtout à savoir si vous faites branding + site."
-          }
-        ]
-      }
-    },
-    "assert": {
-      "mustMatch": ["^ACQUIS\\s*:", "\\bORIENTATION\\s*:", "\\bSUITE\\s*:"],
-      "mustNotContain": ["QUESTION:"],
-      "maxQuestions": 0,
-      "maxAcquisBullets": 3,
-      "noQuestionMarkOutsideQuestionBlock": true
+      "mustNotContain": ["Bonjour"],
+      "maxLines": 12,
+      "noFirstPersonSingular": true
     }
   }
 ]

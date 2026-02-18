@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "setup:rag": "tsx scripts/setup-file-search-store.ts",
+    "setup:store": "tsx scripts/filesearch/setup-store.ts",
+    "upload:docs": "tsx scripts/filesearch/upload-docs.ts",
     "test:chat": "tsx scripts/test-chat.js"
   },
   "dependencies": {

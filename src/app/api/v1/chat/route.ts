@@ -1,17 +1,12 @@
 // src/app/api/v1/chat/route.ts
 import { NextResponse } from "next/server";
-import { corsHeaders, jsonError } from "@/lib/security";
+import { corsHeaders } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/ratelimit/hourly";
-import { getGeminiClient, getFileSearchStoreName } from "@/lib/gemini";
+import { getFileSearchStoreName } from "@/lib/gemini";
 import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
-
-export async function OPTIONS(req: Request) {
-  const origin = req.headers.get("origin");
-  const { headers, isAllowed } = corsHeaders(origin);
-  if (!isAllowed) return new NextResponse(null, { status: 403 });
-  return new NextResponse(null, { status: 204, headers });
-}
+import { runRagChat } from "@/lib/gemini/rag";
+import { buildRagRoutingHint } from "@/lib/rag/prompt-router";
 
 export async function POST(req: Request) {
   const origin = req.headers.get("origin");
@@ -59,25 +54,19 @@ export async function POST(req: Request) {
     conversation,
   });
 
-  const ai = getGeminiClient();
   const storeName = getFileSearchStoreName();
 
+  const routingHint = buildRagRoutingHint({ message, pageContext });
+  const finalPrompt = routingHint ? `${routingHint}\n\n${prompt}` : prompt;
+
   try {
-    const resp = await ai.models.generateContent({
+    const { text } = await runRagChat({
       model: "gemini-2.5-flash",
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      config: {
-        tools: [{ fileSearch: { fileSearchStoreNames: [storeName] } }],
-      },
+      prompt: finalPrompt,
+      fileSearchStoreNames: [storeName],
     });
 
-    const text =
-      resp?.candidates?.[0]?.content?.parts
-        ?.map((p: any) => (typeof p?.text === "string" ? p.text : ""))
-        .join("")
-        .trim() || "";
-
-    if (!text) {
+    if (!text.trim()) {
       return NextResponse.json(
         {
           text: "Cette information n’est pas disponible dans les contenus actuels.",

@@ -1,3 +1,4 @@
+// src/lib/gemini/rag.ts
 import { getGeminiClient } from "./client";
 
 export type RagChatInput = {
@@ -26,16 +27,18 @@ export async function runRagChat(
 
   const response = await ai.models.generateContent({
     model,
-    contents: input.prompt,
+    contents: [{ role: "user", parts: [{ text: input.prompt }] }],
     config: {
       tools: [{ fileSearch: { fileSearchStoreNames: [...storeNames] } }],
     },
   });
 
-  const text = response.text;
-  if (!text) {
-    throw new Error("Gemini response has no text output");
-  }
+  const text =
+    response?.candidates?.[0]?.content?.parts
+      ?.map((p: any) => (typeof p?.text === "string" ? p.text : ""))
+      .join("")
+      .trim() || "";
 
+  if (!text) throw new Error("Gemini response has no text output");
   return { text };
 }

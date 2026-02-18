@@ -19,51 +19,20 @@
       ],
       "boost_rules": [
         {
-          "if_query_contains": [
-            "logo",
-            "cerbere",
-            "gardien",
-            "66"
-          ],
-          "boost_docs": [
-            "08",
-            "01"
-          ]
+          "if_query_contains": ["logo", "cerbere", "gardien", "66"],
+          "boost_docs": ["08", "01"]
         },
         {
-          "if_query_contains": [
-            "clients",
-            "references",
-            "prix",
-            "cannes"
-          ],
-          "boost_docs": [
-            "05",
-            "07"
-          ]
+          "if_query_contains": ["clients", "references", "prix", "cannes"],
+          "boost_docs": ["05", "07"]
         },
         {
-          "if_query_contains": [
-            "144",
-            "methode",
-            "process",
-            "diagnostic"
-          ],
-          "boost_docs": [
-            "03",
-            "07"
-          ]
+          "if_query_contains": ["144", "methode", "process", "diagnostic"],
+          "boost_docs": ["03", "07"]
         },
         {
-          "if_query_contains": [
-            "equipe",
-            "talents",
-            "recrutement"
-          ],
-          "boost_docs": [
-            "04",
-            "07"
-          ]
+          "if_query_contains": ["equipe", "talents", "recrutement"],
+          "boost_docs": ["04", "07"]
         }
       ]
     }
@@ -72,6 +41,7 @@
     {
       "doc_id": "01",
       "file": "01_identite_positionnement.md",
+      "displayName": "contenus/01_identite_positionnement.md",
       "path": "/mnt/data/01_identite_positionnement.md",
       "title": "Identité et positionnement de 66 Origin",
       "sha1": "2d72616dfdad37d241af20d0096ee9917dcd5e48",
@@ -305,6 +275,7 @@
     {
       "doc_id": "02",
       "file": "02_offre_piliers.md",
+      "displayName": "contenus/02_offre_piliers.md",
       "path": "/mnt/data/02_offre_piliers.md",
       "title": "Offre et piliers stratégiques de 66 Origin",
       "sha1": "a1554e5b4b5199aca1e6c3a9268b5c29f750c721",
@@ -468,6 +439,7 @@
     {
       "doc_id": "03",
       "file": "03_methode_approche.md",
+      "displayName": "contenus/03_methode_approche.md",
       "path": "/mnt/data/03_methode_approche.md",
       "title": "Méthode et approche de 66 Origin",
       "sha1": "100efde31430eec7f6bb9111ced11bb1c3ed6c05",
@@ -739,6 +711,7 @@
     {
       "doc_id": "04",
       "file": "04_equipe_ecosysteme.md",
+      "displayName": "contenus/04_equipe_ecosysteme.md",
       "path": "/mnt/data/04_equipe_ecosysteme.md",
       "title": "Équipe et écosystème de talents de 66 Origin",
       "sha1": "1d5efe24896fb0f49732a34d8468d47d8bc2af5e",
@@ -1071,6 +1044,7 @@
     {
       "doc_id": "05",
       "file": "05_references_clients.md",
+      "displayName": "contenus/05_references_clients.md",
       "path": "/mnt/data/05_references_clients.md",
       "title": "Références clients et projets de 66 Origin",
       "sha1": "17cd4c032c79dbacc2afef6e6467801868b16d1d",
@@ -1378,6 +1352,7 @@
     {
       "doc_id": "06",
       "file": "06_freins_transformation.md",
+      "displayName": "contenus/06_freins_transformation.md",
       "path": "/mnt/data/06_freins_transformation.md",
       "title": "Les 5 freins à la transformation des entreprises",
       "sha1": "212c254eb60d50d22b9b2cddab0951890c2e328d",
@@ -1668,6 +1643,7 @@
     {
       "doc_id": "07",
       "file": "07_faq_pratique.md",
+      "displayName": "contenus/07_faq_pratique.md",
       "path": "/mnt/data/07_faq_pratique.md",
       "title": "FAQ et informations pratiques sur 66 Origin",
       "sha1": "24375b92fc1c248e1e69255be5b00fd09d5601f9",
@@ -2026,6 +2002,7 @@
     {
       "doc_id": "08",
       "file": "08_branding_storytelling.md",
+      "displayName": "contenus/08_branding_storytelling.md",
       "path": "/mnt/data/08_branding_storytelling.md",
       "title": "Branding et storytelling de 66 Origin",
       "sha1": "acad1bfb271e62f48e302e4c01489440e4e34c14",
@@ -2500,10 +2477,7 @@
     {
       "intent": "identite_positionnement",
       "description": "Définition, pitch, proposition de valeur, différences vs agence/conseil, où et quand intervient 66 Origin.",
-      "docs": [
-        "01",
-        "07"
-      ],
+      "docs": ["01", "07"],
       "example_queries": [
         "C'est quoi 66 Origin exactement ?",
         "Pitch en 2 phrases",
@@ -2520,10 +2494,7 @@
     {
       "intent": "offre_piliers",
       "description": "Les 3 piliers (stratégies augmentées, expériences immersives, innovations intelligentes) et ce que ça couvre.",
-      "docs": [
-        "02",
-        "07"
-      ],
+      "docs": ["02", "07"],
       "example_queries": [
         "Quels sont les 3 piliers ?",
         "Est-ce que vous faites du retail / event / AR VR ?",
@@ -2541,10 +2512,7 @@
     {
       "intent": "methode_process",
       "description": "Méthode, brief 144 caractères, étapes (immersion→analyse→vision→prototype→déploiement), diagnostic IA.",
-      "docs": [
-        "03",
-        "07"
-      ],
+      "docs": ["03", "07"],
       "example_queries": [
         "C'est quoi la méthode 66 Origin ?",
         "Pourquoi 144 caractères ?",
@@ -2562,10 +2530,7 @@
     {
       "intent": "equipe_ecosysteme",
       "description": "Organisation, écosystème de talents (250+), logique d'assemblage, culture et recrutement.",
-      "docs": [
-        "04",
-        "07"
-      ],
+      "docs": ["04", "07"],
       "example_queries": [
         "Combien de personnes ?",
         "Vous travaillez avec des freelances ?",
@@ -2583,10 +2548,7 @@
     {
       "intent": "clients_projets_recompenses",
       "description": "Clients, secteurs, projets phares (Delivery Safe, Quipo, Taiji), et récompenses 2024.",
-      "docs": [
-        "05",
-        "07"
-      ],
+      "docs": ["05", "07"],
       "example_queries": [
         "Quels sont vos clients ?",
         "Sur quels secteurs vous intervenez ?",
@@ -2604,11 +2566,7 @@
     {
       "intent": "branding_storytelling_logo_nom",
       "description": "Mythologie, sens du nom 66 Origin, logo (Gardien/Cerbère), ton de voix.",
-      "docs": [
-        "08",
-        "01",
-        "07"
-      ],
+      "docs": ["08", "01", "07"],
       "example_queries": [
         "Pourquoi 66 ?",
         "Explique le logo, les 3 têtes",
@@ -2627,9 +2585,7 @@
     {
       "intent": "freins_transformation",
       "description": "Les 5 freins à la transformation des entreprises selon 66 Origin.",
-      "docs": [
-        "06"
-      ],
+      "docs": ["06"],
       "example_queries": [
         "Pourquoi les entreprises ont du mal à se transformer ?",
         "Donne les 5 freins",
@@ -2646,9 +2602,7 @@
     {
       "intent": "faq_contact_pratique",
       "description": "Adresse, contacts, présence internationale, limites de l'IA 66 Origin.",
-      "docs": [
-        "07"
-      ],
+      "docs": ["07"],
       "example_queries": [
         "Où vous trouver ?",
         "Comment vous contacter ?",
@@ -2665,66 +2619,22 @@
     }
   ],
   "entity_index": {
-    "L'entreprise": [
-      "01",
-      "04"
-    ],
-    "Maison": [
-      "01",
-      "07"
-    ],
-    "Bruxelles": [
-      "01",
-      "07"
-    ],
-    "New York": [
-      "01",
-      "07"
-    ],
-    "Culture": [
-      "01",
-      "06"
-    ],
-    "Exigence": [
-      "01",
-      "08"
-    ],
-    "Plateformes": [
-      "02",
-      "05"
-    ],
-    "Cette": [
-      "04",
-      "06"
-    ],
-    "Chez": [
-      "04",
-      "06"
-    ],
-    "KFC": [
-      "05",
-      "07"
-    ],
-    "BNP Paribas": [
-      "05"
-    ],
-    "BforBank": [
-      "05"
-    ],
-    "Engie": [
-      "05"
-    ],
-    "RTE": [
-      "05"
-    ],
-    "La Poste": [
-      "05"
-    ],
-    "Chanel": [
-      "05"
-    ],
-    "Kantar Media": [
-      "05"
-    ]
+    "L'entreprise": ["01", "04"],
+    "Maison": ["01", "07"],
+    "Bruxelles": ["01", "07"],
+    "New York": ["01", "07"],
+    "Culture": ["01", "06"],
+    "Exigence": ["01", "08"],
+    "Plateformes": ["02", "05"],
+    "Cette": ["04", "06"],
+    "Chez": ["04", "06"],
+    "KFC": ["05", "07"],
+    "BNP Paribas": ["05"],
+    "BforBank": ["05"],
+    "Engie": ["05"],
+    "RTE": ["05"],
+    "La Poste": ["05"],
+    "Chanel": ["05"],
+    "Kantar Media": ["05"]
   }
 }

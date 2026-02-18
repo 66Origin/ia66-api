@@ -4,7 +4,6 @@ import { SYSTEM_CONTEXT } from "./system";
 type PageContext = {
   pageType?:
     | "home"
-    | "project"
     | "services"
     | "method"
     | "works"
@@ -21,40 +20,24 @@ type PageContext = {
 };
 
 type Conversation = {
-  turn?: number;
-  maxTurns?: number;
   history?: Array<{ role: "user" | "assistant"; text: string }>;
-  /**
-   * Pilote le flow HOME (1→5).
-   * 1: positionnement
-   * 2: preuve projet
-   * 3: après projet
-   * 4: approfondissement
-   * 5: échange humain (si pertinent)
-   */
-  flowStep?: 1 | 2 | 3 | 4 | 5;
-  hasShownProject?: boolean;
-  lastProjectSlug?: string;
 };
 
 export type BuildChatPromptInput = {
   message: string;
   entrypoint?:
     | "home"
+    | "services"
     | "project"
     | "agency"
-    | "case"
-    | "team"
-    | "services"
-    | "works"
-    | "news"
     | "careers"
+    | "news"
     | "other";
   pageContext?: PageContext;
   conversation?: Conversation;
 };
 
-function clip(s: string, max = 280): string {
+function clip(s: string, max = 800): string {
   const t = (s ?? "").trim();
   if (t.length <= max) return t;
   return t.slice(0, max - 1).trimEnd() + "…";
@@ -65,21 +48,13 @@ function formatHistory(
 ) {
   if (!history?.length) return "- (vide)";
   return history
-    .slice(-6)
+    .slice(-10)
     .map((h) => `- ${h.role}: ${clip(h.text, 280)}`)
     .join("\n");
 }
 
 export function buildChatPrompt(input: BuildChatPromptInput): string {
   const { message, entrypoint, pageContext, conversation } = input;
-
-  const turn = conversation?.turn ?? 1;
-  const maxTurns = conversation?.maxTurns ?? 5;
-
-  // Par défaut, on considère le flow HOME.
-  const flowStep = conversation?.flowStep ?? 1;
-  const hasShownProject = conversation?.hasShownProject ?? false;
-  const lastProjectSlug = conversation?.lastProjectSlug ?? "—";
 
   return `
 ${SYSTEM_CONTEXT}
@@ -93,44 +68,21 @@ CONTEXTE_PAGE
 ENTRYPOINT
 - ${entrypoint ?? "other"}
 
-CONVERSATION
-- turn: ${turn}
-- maxTurns: ${maxTurns}
-- flowStep: ${flowStep}
-- hasShownProject: ${hasShownProject ? "true" : "false"}
-- lastProjectSlug: ${lastProjectSlug}
-- history:
+HISTORIQUE (contexte de conversation)
 ${formatHistory(conversation?.history)}
 
 TÂCHE
-Répondre à l’utilisateur en respectant strictement "IA SITE 66".
+Répondre au message utilisateur.
+Priorité des règles :
+1) Si les documents RAG contiennent des règles de ton/comportement pour l’IA de 66 Origin (guidelines/personality), les appliquer en priorité.
+2) Sinon, appliquer SYSTEM_CONTEXT.
 
-RÈGLES DE SORTIE (STRICT)
-- 2 à 8 lignes maximum.
-- Réponse structurée (retours à la ligne).
-- Jamais à la première personne du singulier.
-- Aucun superlatif, aucun marketing creux.
-- Ne jamais promettre de ROI chiffré.
-- Si une info nécessaire n’est pas dans les contenus disponibles : écrire exactement
-  "Cette information n’est pas disponible dans les contenus actuels."
-- Ne jamais inventer de projet. Un seul projet maximum si un projet est demandé/pertinent.
-- Ne pas proposer de contact trop tôt : uniquement si l’utilisateur évoque son contexte
-  ou demande un accompagnement concret, et idéalement après une preuve (projet).
-
-GUIDE FLOW (HOME)
-- Si flowStep=1 (ou conversation très initiale) et question générale :
-  expliquer le positionnement de 66 Origin (sans projet, sans contact).
-- Si l’utilisateur demande un exemple / cas concret / projet similaire / mentionne un thème :
-  passer en "preuve" : proposer UN projet pertinent (4 à 8 lignes) + lien clair.
-- Si un projet vient d’être présenté (hasShownProject=true) :
-  ne pas enchaîner avec un autre projet ; proposer d’approfondir méthode ou contexte.
-- Approfondissement : expliquer méthode/posture, neutre et concret.
-- Échange humain : uniquement si pertinent (contexte utilisateur / demande explicite).
 
 MESSAGE UTILISATEUR
 ${clip(message, 2000)}
 
 SORTIE
-Texte brut uniquement.
+- Texte brut uniquement (pas de JSON, pas de code).
+- Réponse courte par défaut. Détail uniquement si l’utilisateur le demande explicitement.
 `.trim();
 }

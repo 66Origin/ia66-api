@@ -6,7 +6,6 @@ import { getFileSearchStoreName } from "@/lib/gemini";
 import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
 import { runRagChat } from "@/lib/gemini/rag";
-import { buildRagRoutingHint } from "@/lib/rag/prompt-router";
 
 export async function POST(req: Request) {
   const origin = req.headers.get("origin");
@@ -22,10 +21,7 @@ export async function POST(req: Request) {
       { error: "Rate limit exceeded" },
       {
         status: 429,
-        headers: {
-          ...headers,
-          "Retry-After": String(rl.resetSeconds),
-        },
+        headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
       },
     );
   }
@@ -56,13 +52,10 @@ export async function POST(req: Request) {
 
   const storeName = getFileSearchStoreName();
 
-  const routingHint = buildRagRoutingHint({ message, pageContext });
-  const finalPrompt = routingHint ? `${routingHint}\n\n${prompt}` : prompt;
-
   try {
     const { text } = await runRagChat({
       model: "gemini-2.5-flash",
-      prompt: finalPrompt,
+      prompt,
       fileSearchStoreNames: [storeName],
     });
 

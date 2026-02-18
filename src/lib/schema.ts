@@ -6,7 +6,6 @@ export const pageContextSchema = z
     pageType: z
       .enum([
         "home",
-        "project",
         "services",
         "method",
         "works",
@@ -32,59 +31,18 @@ export const chatHistoryItemSchema = z.object({
 
 export const chatConversationSchema = z
   .object({
-    turn: z.number().int().min(1).max(12).optional().default(1),
-    maxTurns: z.number().int().min(1).max(12).optional().default(5),
     history: z.array(chatHistoryItemSchema).max(20).optional().default([]),
-
-    // Flow "IA SITE 66"
-    flowStep: z
-      .union([
-        z.literal(1),
-        z.literal(2),
-        z.literal(3),
-        z.literal(4),
-        z.literal(5),
-      ])
-      .optional()
-      .default(1),
-    hasShownProject: z.boolean().optional().default(false),
-    lastProjectSlug: z.string().trim().min(1).max(80).optional(),
   })
-  .superRefine((val, ctx) => {
-    if (val.turn > val.maxTurns) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["turn"],
-        message: "turn cannot be greater than maxTurns",
-      });
-    }
-  });
+  .optional()
+  .default({ history: [] });
 
 export const chatRequestSchema = z.object({
   message: z.string().trim().min(1).max(2000),
   entrypoint: z
-    .enum([
-      "home",
-      "project",
-      "agency",
-      "case",
-      "team",
-      "services",
-      "works",
-      "careers",
-      "news",
-      "other",
-    ])
+    .enum(["home", "services", "project", "agency", "careers", "news", "other"])
     .optional(),
   pageContext: pageContextSchema.optional(),
-
-  conversation: chatConversationSchema.default({
-    turn: 1,
-    maxTurns: 5,
-    history: [],
-    flowStep: 1,
-    hasShownProject: false,
-  }),
+  conversation: chatConversationSchema,
 });
 
 export type ChatRequest = z.infer<typeof chatRequestSchema>;

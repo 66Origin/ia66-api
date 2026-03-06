@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { corsHeaders } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/ratelimit/hourly";
-import { getFileSearchStoreName } from "@/lib/gemini";
+import { getGeminiClient, getFileSearchStoreName } from "@/lib/gemini";
 import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
 import { runRagChat } from "@/lib/gemini/rag";
@@ -49,7 +49,6 @@ export async function POST(req: Request) {
     pageContext,
     conversation,
   });
-
   const storeName = getFileSearchStoreName();
 
   try {
@@ -58,16 +57,17 @@ export async function POST(req: Request) {
       prompt,
       fileSearchStoreNames: [storeName],
     });
-
     if (!text.trim()) {
       return NextResponse.json(
         {
-          text: "Cette information n’est pas disponible dans les contenus actuels.",
+          text: [
+            "Cette information n’est pas disponible dans les contenus actuels.",
+            "On peut repartir d’un angle innovation : expérience, design, ou transformation.",
+          ].join("\n"),
         },
         { headers },
       );
     }
-
     return NextResponse.json({ text }, { headers });
   } catch (e: any) {
     return NextResponse.json(

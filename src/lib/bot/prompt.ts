@@ -1,4 +1,4 @@
-// src/lib/prompt.ts
+// src/lib/bot/prompt.ts
 import { SYSTEM_CONTEXT } from "./system";
 
 type PageContext = {
@@ -27,9 +27,10 @@ export type BuildChatPromptInput = {
   message: string;
   entrypoint?:
     | "home"
-    | "services"
-    | "project"
     | "agency"
+    | "case"
+    | "team"
+    | "services"
     | "careers"
     | "news"
     | "other";
@@ -37,7 +38,7 @@ export type BuildChatPromptInput = {
   conversation?: Conversation;
 };
 
-function clip(s: string, max = 800): string {
+function clip(s: string, max = 500): string {
   const t = (s ?? "").trim();
   if (t.length <= max) return t;
   return t.slice(0, max - 1).trimEnd() + "…";
@@ -48,7 +49,7 @@ function formatHistory(
 ) {
   if (!history?.length) return "- (vide)";
   return history
-    .slice(-10)
+    .slice(-8)
     .map((h) => `- ${h.role}: ${clip(h.text, 280)}`)
     .join("\n");
 }
@@ -68,21 +69,21 @@ CONTEXTE_PAGE
 ENTRYPOINT
 - ${entrypoint ?? "other"}
 
-HISTORIQUE (contexte de conversation)
+HISTORIQUE (faits “projet” déjà donnés par l’utilisateur)
 ${formatHistory(conversation?.history)}
 
-TÂCHE
-Répondre au message utilisateur.
-Priorité des règles :
-1) Si les documents RAG contiennent des règles de ton/comportement pour l’IA de 66 Origin (guidelines/personality), les appliquer en priorité.
-2) Sinon, appliquer SYSTEM_CONTEXT.
-
+CONSIGNE
+- Produire une réponse naturelle et utile, en appliquant SYSTEM_CONTEXT.
+- S’appuyer sur les contenus RAG pour tout fait sur 66 Origin et pour citer un projet.
+- Par défaut : 3–10 lignes, une idée forte, retours à la ligne.
+- Si l’utilisateur demande explicitement “détaille / explique / approfondis” : autoriser plus long.
+- Si besoin d’un projet : 1 seul maximum + lien /works/<slug>.
+- Ne jamais utiliser la première personne du singulier (“je”, “moi”, “mon” interdits).
 
 MESSAGE UTILISATEUR
 ${clip(message, 2000)}
 
 SORTIE
-- Texte brut uniquement (pas de JSON, pas de code).
-- Réponse courte par défaut. Détail uniquement si l’utilisateur le demande explicitement.
+Texte brut uniquement.
 `.trim();
 }

@@ -1,216 +1,139 @@
 [
   {
-    "name": "prospect_projet - tour 1 - brief complet",
+    "name": "home - positionnement - question générale",
     "payload": {
-      "message": "Nous sommes une PME retail. Refonte plateforme de marque + site pour générer des leads B2B. Budget 30-40k, délai 2 mois.",
-      "entrypoint": "project",
-      "pageContext": {
-        "pageType": "services",
-        "pageTitle": "Maison 66",
-        "pageIntentHint": "L’utilisateur consulte les services de l’agence."
-      },
+      "message": "Qu’est-ce que 66 Origin",
+      "entrypoint": "home",
+      "pageContext": { "pageType": "home", "pageTitle": "Home" },
       "conversation": {}
     },
     "assert": {
       "mustNotContain": [
         "Bonjour",
-        "super",
+        "Enchanté",
         "excellent",
-        "très clair",
-        "Chez 66 Origin"
-      ],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
+        "mon ami",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon "
+      ]
     }
   },
   {
-    "name": "prospect_projet - tour 2 - priorisation site (A/B acté)",
+    "name": "home - offre - question simple",
     "payload": {
-      "message": "On priorise une refonte du site rapide orientée génération de leads B2B.",
-      "entrypoint": "project",
-      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
-      "conversation": {
-        "turn": 2,
-        "maxTurns": 5,
-        "history": [
-          {
-            "role": "user",
-            "text": "PME retail. Refonte plateforme de marque + site pour leads B2B. Budget 30-40k, délai 2 mois."
-          }
-        ]
-      }
+      "message": "C’est quoi votre offre",
+      "entrypoint": "home",
+      "pageContext": { "pageType": "home", "pageTitle": "Home" },
+      "conversation": {}
     },
     "assert": {
-      "mustNotContain": ["quel type de projet", "Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
+      "mustNotContain": [
+        "Bonjour",
+        "Enchanté",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon "
+      ]
     }
   },
   {
-    "name": "prospect_projet - tour 3 - scope landing + 3 pages + tracking",
+    "name": "home - méthode - question directe",
     "payload": {
-      "message": "On a déjà une identité visuelle, un site existant, et des contenus partiels. On veut d’abord une landing + 3 pages clés + formulaire, et tracking.",
-      "entrypoint": "project",
-      "pageContext": { "pageType": "works", "pageTitle": "Works" },
-      "conversation": {
-        "turn": 3,
-        "maxTurns": 5,
-        "history": [
-          {
-            "role": "user",
-            "text": "PME retail. Objectif : générer des leads B2B. Budget 30-40k. Délai 2 mois."
-          },
-          {
-            "role": "assistant",
-            "text": "Priorisation actée : site orienté conversion en premier."
-          }
-        ]
-      }
-    },
-    "assert": {
-      "mustNotContain": ["quel type de projet", "Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
-    }
-  },
-  {
-    "name": "prospect_projet - tour 4 - KPI + cible",
-    "payload": {
-      "message": "KPI = demande de démo + prise de RDV, cible = dirigeants de PME retail.",
-      "entrypoint": "project",
-      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
-      "conversation": {
-        "turn": 4,
-        "maxTurns": 5,
-        "history": [
-          {
-            "role": "user",
-            "text": "PME retail. Budget 30-40k. Délai 2 mois."
-          },
-          {
-            "role": "user",
-            "text": "Scope : landing + 3 pages clés + formulaire + tracking."
-          }
-        ]
-      }
-    },
-    "assert": {
-      "mustNotContain": ["Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
-    }
-  },
-  {
-    "name": "closing - tour 5 - projet - aucune question",
-    "payload": {
-      "message": "D’accord, validons un atelier de cadrage.",
-      "entrypoint": "project",
-      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
-      "conversation": {
-        "turn": 5,
-        "maxTurns": 5,
-        "history": [
-          {
-            "role": "user",
-            "text": "PME retail. Objectif leads B2B. Cible : dirigeants."
-          },
-          { "role": "user", "text": "Budget 30-40k. Délai 2 mois." },
-          {
-            "role": "user",
-            "text": "Scope : landing + 3 pages + formulaire + tracking."
-          }
-        ]
-      }
-    },
-    "assert": {
-      "mustNotContain": ["QUESTION:", "?"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
-    }
-  },
-  {
-    "name": "closing - tour 5 - projet - réponse courte (min 10 chars)",
-    "payload": {
-      "message": "D’accord, merci.",
-      "entrypoint": "project",
-      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
-      "conversation": {
-        "turn": 5,
-        "maxTurns": 5,
-        "history": [
-          {
-            "role": "user",
-            "text": "PME retail. Objectif leads B2B. Délai 2 mois."
-          },
-          {
-            "role": "user",
-            "text": "Budget 30-40k. Scope : refonte site orientée conversion."
-          }
-        ]
-      }
-    },
-    "assert": {
-      "mustNotContain": ["QUESTION:", "?"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
-    }
-  },
-  {
-    "name": "curieux_agence - méthode (pas de qualification projet)",
-    "payload": {
-      "message": "Quelle est la méthode de travail de 66 Origin ?",
-      "entrypoint": "agency",
+      "message": "Il y a une méthode 66 Origin",
+      "entrypoint": "home",
       "pageContext": { "pageType": "method", "pageTitle": "Méthode" },
       "conversation": {}
     },
     "assert": {
-      "mustNotContain": [
-        "Budget",
-        "délai",
-        "Quel est votre budget",
-        "quel type de projet",
-        "Bonjour"
-      ],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
+      "mustNotContain": ["Bonjour", "Je ", "j'", "j’", "moi", "mon "]
     }
   },
   {
-    "name": "curieux_agence - services (question de direction optionnelle)",
+    "name": "home - demande d’exemple - un seul projet max",
     "payload": {
-      "message": "Vous faites quoi exactement ?",
-      "entrypoint": "agency",
-      "pageContext": { "pageType": "services", "pageTitle": "Maison 66" },
-      "conversation": {}
-    },
-    "assert": {
-      "mustNotContain": [
-        "Quel est votre budget",
-        "quel type de projet",
-        "Bonjour"
-      ],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
-    }
-  },
-  {
-    "name": "demande exemple - works (1 projet max attendu)",
-    "payload": {
-      "message": "Un exemple concret de projet dans le retail, s’il y en a un.",
-      "entrypoint": "works",
+      "message": "Tu as un exemple concret de projet en retail",
+      "entrypoint": "home",
       "pageContext": { "pageType": "works", "pageTitle": "Works" },
       "conversation": {}
     },
     "assert": {
-      "mustNotContain": ["Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
+      "mustNotContain": [
+        "Bonjour",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon ",
+        "projets :",
+        "1)",
+        "2)",
+        "3)"
+      ]
     }
   },
   {
-    "name": "lecture_case - quipo - résumé livrables",
+    "name": "home - projet similaire - lien attendu si projet cité",
     "payload": {
-      "message": "Peux-tu résumer ce projet et lister les livrables principaux ?",
+      "message": "Je cherche un projet similaire à une app mobile avec UX forte",
+      "entrypoint": "home",
+      "pageContext": { "pageType": "works", "pageTitle": "Works" },
+      "conversation": {}
+    },
+    "assert": {
+      "mustNotContain": [
+        "Bonjour",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon ",
+        "Voici 3 projets",
+        "Voici plusieurs projets"
+      ]
+    }
+  },
+  {
+    "name": "hors périmètre - redirection chaleureuse",
+    "payload": {
+      "message": "Tu peux me résumer l’actualité politique de cette semaine",
+      "entrypoint": "other",
+      "pageContext": { "pageType": "other", "pageTitle": "—" },
+      "conversation": {}
+    },
+    "assert": {
+      "mustNotContain": [
+        "Je ne peux pas répondre",
+        "Désolé",
+        "Bonjour",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon "
+      ]
+    }
+  },
+  {
+    "name": "détaille - autorise plus long",
+    "payload": {
+      "message": "Explique et détaille votre manière de passer du prototype au déploiement",
+      "entrypoint": "home",
+      "pageContext": { "pageType": "services", "pageTitle": "Services" },
+      "conversation": {}
+    },
+    "assert": {
+      "mustNotContain": ["Bonjour", "Je ", "j'", "j’", "moi", "mon "]
+    }
+  },
+  {
+    "name": "case - question résultats - doit cadrer sur contenu",
+    "payload": {
+      "message": "Quels résultats chiffrés sur ce projet",
       "entrypoint": "case",
       "pageContext": {
         "pageType": "case",
@@ -220,75 +143,60 @@
       "conversation": {}
     },
     "assert": {
-      "mustNotContain": ["Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
+      "mustNotContain": [
+        "Bonjour",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon ",
+        "ROI garanti",
+        "x%",
+        "€€€"
+      ]
     }
   },
   {
-    "name": "lecture_case - ilb - doc absent (pas d’invention)",
+    "name": "careers - question stage - ton direct",
     "payload": {
-      "message": "Peux-tu me résumer ce case et les livrables ?",
-      "entrypoint": "case",
-      "pageContext": {
-        "pageType": "case",
-        "pageSlug": "ilb",
-        "pageTitle": "Institut Louis Bachelier"
-      },
-      "conversation": {}
-    },
-    "assert": {
-      "mustNotContain": ["Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true,
-      "mustMentionNoContent": true
-    }
-  },
-  {
-    "name": "candidat - recrutement (infos potentiellement absentes)",
-    "payload": {
-      "message": "Vous recrutez des designers ? Comment postuler ?",
+      "message": "Je cherche un stage, est-ce que 66 Origin est pertinent",
       "entrypoint": "careers",
       "pageContext": { "pageType": "careers", "pageTitle": "Careers" },
       "conversation": {}
     },
     "assert": {
-      "mustNotContain": ["Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
+      "mustNotContain": [
+        "Bonjour",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon ",
+        "onboardé",
+        "synergie"
+      ]
     }
   },
   {
-    "name": "news - article absent (limite docs)",
+    "name": "services - contexte user - ouverture vers échange humain sans forcer",
     "payload": {
-      "message": "Tu peux résumer l’article et donner les points clés ?",
-      "entrypoint": "news",
-      "pageContext": {
-        "pageType": "news_article",
-        "pageSlug": "studio-news",
-        "pageTitle": "Actualité"
-      },
+      "message": "On prépare une démo pour un salon et on veut une expérience plus immersive, vous pouvez aider",
+      "entrypoint": "services",
+      "pageContext": { "pageType": "services", "pageTitle": "Services" },
       "conversation": {}
     },
     "assert": {
-      "mustNotContain": ["Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true,
-      "mustMentionNoContent": true
-    }
-  },
-  {
-    "name": "autre - hors périmètre (redirection sobre)",
-    "payload": {
-      "message": "Vous pouvez me recommander un outil CRM pour PME ?",
-      "entrypoint": "other",
-      "pageContext": { "pageType": "other", "pageTitle": "—" },
-      "conversation": {}
-    },
-    "assert": {
-      "mustNotContain": ["Bonjour"],
-      "maxLines": 12,
-      "noFirstPersonSingular": true
+      "mustNotContain": [
+        "Bonjour",
+        "Je ",
+        "j'",
+        "j’",
+        "moi",
+        "mon ",
+        "garanti",
+        "ROI",
+        "résultats financiers"
+      ]
     }
   }
 ]

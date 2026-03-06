@@ -39,7 +39,16 @@ export const chatConversationSchema = z
 export const chatRequestSchema = z.object({
   message: z.string().trim().min(1).max(2000),
   entrypoint: z
-    .enum(["home", "services", "project", "agency", "careers", "news", "other"])
+    .enum([
+      "home",
+      "agency",
+      "case",
+      "team",
+      "services",
+      "careers",
+      "news",
+      "other",
+    ])
     .optional(),
   pageContext: pageContextSchema.optional(),
   conversation: chatConversationSchema,

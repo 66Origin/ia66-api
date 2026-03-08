@@ -7,6 +7,16 @@ import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
 import { runRagChat } from "@/lib/gemini/rag";
 
+export async function OPTIONS(req: Request) {
+  const origin = req.headers.get("origin");
+  const { headers } = corsHeaders(origin);
+
+  return new NextResponse(null, {
+    status: 204,
+    headers,
+  });
+}
+
 export async function POST(req: Request) {
   const origin = req.headers.get("origin");
   const { headers, isAllowed } = corsHeaders(origin);

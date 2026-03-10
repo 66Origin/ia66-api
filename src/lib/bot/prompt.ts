@@ -58,8 +58,6 @@ export function buildChatPrompt(input: BuildChatPromptInput): string {
   const { message, entrypoint, pageContext, conversation } = input;
 
   return `
-${SYSTEM_CONTEXT}
-
 CONTEXTE_PAGE
 - pageType: ${pageContext?.pageType ?? "other"}
 - pageSlug: ${pageContext?.pageSlug ? clip(pageContext.pageSlug, 80) : "—"}

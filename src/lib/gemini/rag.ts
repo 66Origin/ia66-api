@@ -1,4 +1,5 @@
 // src/lib/gemini/rag.ts
+import { SYSTEM_CONTEXT } from "../bot/system";
 import { getGeminiClient } from "./client";
 
 export type RagChatInput = {
@@ -29,7 +30,16 @@ export async function runRagChat(
     model,
     contents: [{ role: "user", parts: [{ text: input.prompt }] }],
     config: {
-      tools: [{ fileSearch: { fileSearchStoreNames: [...storeNames] } }],
+      systemInstruction: SYSTEM_CONTEXT,
+      temperature: 0.35,
+      topP: 0.9,
+      tools: [
+        {
+          fileSearch: {
+            fileSearchStoreNames: storeNames,
+          },
+        },
+      ],
     },
   });
 

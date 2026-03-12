@@ -28,7 +28,7 @@ export async function runRagChat(
   const storeNames = input.fileSearchStoreNames.map(normalizeStoreName);
 
   const contents = [
-    ...(input.history ?? []).slice(-4).map((m) => ({
+    ...(input.history ?? []).slice(-3).map((m) => ({
       role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: m.text }],
     })),
@@ -64,20 +64,25 @@ export async function runRagChat(
     throw new Error("Gemini returned no candidate");
   }
 
-  let text =
-    candidate.content?.parts
-      ?.filter((p: any) => typeof p?.text === "string")
+  let text = "";
+
+  if (candidate.content?.parts?.length) {
+    text = candidate.content.parts
+      .filter((p: any) => typeof p?.text === "string")
       .map((p: any) => p.text)
       .join("")
-      .trim() ?? "";
+      .trim();
+  }
 
   if (!text && typeof response?.text === "string") {
     text = response.text.trim();
   }
 
   if (!text) {
-    console.error("Candidate:", JSON.stringify(candidate, null, 2));
-    throw new Error("Gemini response has no text output");
+    console.error("Gemini empty candidate:", candidate);
+    return {
+      text: "Je reformule : peux-tu préciser légèrement ce point ?",
+    };
   }
 
   return { text };

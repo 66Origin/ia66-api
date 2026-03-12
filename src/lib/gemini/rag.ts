@@ -56,12 +56,16 @@ export async function runRagChat(
     },
   });
 
-  console.log(JSON.stringify(response, null, 2));
+  console.log("RAW GEMINI RESPONSE:", JSON.stringify(response, null, 2));
 
   const candidate = response?.candidates?.[0];
 
+  if (!candidate) {
+    throw new Error("Gemini returned no candidate");
+  }
+
   let text =
-    candidate?.content?.parts
+    candidate.content?.parts
       ?.filter((p: any) => typeof p?.text === "string")
       .map((p: any) => p.text)
       .join("")
@@ -72,7 +76,7 @@ export async function runRagChat(
   }
 
   if (!text) {
-    console.error("Gemini raw response:", JSON.stringify(response, null, 2));
+    console.error("Candidate:", JSON.stringify(candidate, null, 2));
     throw new Error("Gemini response has no text output");
   }
 

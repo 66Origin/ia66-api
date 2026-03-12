@@ -56,15 +56,25 @@ export async function runRagChat(
     },
   });
 
+  console.log(JSON.stringify(response, null, 2));
+
   const candidate = response?.candidates?.[0];
 
-  const text =
+  let text =
     candidate?.content?.parts
       ?.filter((p: any) => typeof p?.text === "string")
       .map((p: any) => p.text)
       .join("")
       .trim() ?? "";
 
-  if (!text) throw new Error("Gemini response has no text output");
+  if (!text && typeof response?.text === "string") {
+    text = response.text.trim();
+  }
+
+  if (!text) {
+    console.error("Gemini raw response:", JSON.stringify(response, null, 2));
+    throw new Error("Gemini response has no text output");
+  }
+
   return { text };
 }

@@ -9,6 +9,7 @@
     "lint": "eslint",
     "setup:store": "tsx scripts/filesearch/setup-store.ts",
     "upload:docs": "tsx scripts/filesearch/upload-docs.ts",
+    "clean:store": "tsx scripts/filesearch/clean-store.ts",
     "test:chat": "tsx scripts/test-chat.js"
   },
   "dependencies": {

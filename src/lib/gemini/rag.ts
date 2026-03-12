@@ -56,11 +56,14 @@ export async function runRagChat(
     },
   });
 
+  const candidate = response?.candidates?.[0];
+
   const text =
-    response?.candidates?.[0]?.content?.parts
-      ?.map((p: any) => (typeof p?.text === "string" ? p.text : ""))
+    candidate?.content?.parts
+      ?.filter((p: any) => typeof p?.text === "string")
+      .map((p: any) => p.text)
       .join("")
-      .trim() || "";
+      .trim() ?? "";
 
   if (!text) throw new Error("Gemini response has no text output");
   return { text };

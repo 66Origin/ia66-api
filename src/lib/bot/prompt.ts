@@ -1,5 +1,4 @@
 // src/lib/bot/prompt.ts
-import { SYSTEM_CONTEXT } from "./system";
 
 type PageContext = {
   pageType?:
@@ -44,16 +43,6 @@ function clip(s: string, max = 500): string {
   return t.slice(0, max - 1).trimEnd() + "…";
 }
 
-function formatHistory(
-  history?: Array<{ role: "user" | "assistant"; text: string }>,
-) {
-  if (!history?.length) return "- (vide)";
-  return history
-    .slice(-8)
-    .map((h) => `- ${h.role}: ${clip(h.text, 280)}`)
-    .join("\n");
-}
-
 export function buildChatPrompt(input: BuildChatPromptInput): string {
   const { message, entrypoint, pageContext, conversation } = input;
 
@@ -67,22 +56,12 @@ CONTEXTE_PAGE
 ENTRYPOINT
 - ${entrypoint ?? "other"}
 
-HISTORIQUE (faits déjà donnés par l’utilisateur)
-${formatHistory(conversation?.history)}
-
-RÈGLES D’APPLICATION
-- Commencer directement par une réponse utile, sans détour inutile.
-- Rester concret avant d’être stylistique.
+RÈGLES LOCALES
 - Utiliser le contenu RAG pour toute information factuelle liée à 66 Origin.
-- Si l’information n’est pas présente dans le RAG : ne pas inventer ; projeter ou ouvrir une piste.
-- Réponse courte par défaut.
-- Réponse longue uniquement si l’utilisateur demande explicitement : "détaille", "explique", "approfondis".
-- Toujours garder une ouverture conversationnelle.
-- Si pertinent : proposer un axe d’innovation, une reformulation, ou un brief court.
-- Jamais fermer brutalement l’échange.
+- Réponse longue uniquement si demandé.
 
 MESSAGE UTILISATEUR
-${clip(message, 2000)}
+${clip(message, 1200)}
 
 SORTIE
 Texte brut uniquement.

@@ -1,11 +1,12 @@
 // src/lib/gemini/rag.ts
-import { SYSTEM_CONTEXT } from "../bot/system";
+import { SYSTEM_CONTEXT, RULES } from "../bot/system";
 import { getGeminiClient } from "./client";
 
 export type RagChatInput = {
-  model?: string; // ex: "gemini-2.5-flash"
+  model?: string;
   prompt: string;
-  fileSearchStoreNames: string[]; // ex: ["fileSearchStores/xxx"] ou ["xxx"]
+  history?: Array<{ role: "user" | "assistant"; text: string }>;
+  fileSearchStoreNames: string[];
 };
 
 function normalizeStoreName(name: string) {
@@ -26,13 +27,25 @@ export async function runRagChat(
   const model = input.model ?? "gemini-2.5-flash";
   const storeNames = input.fileSearchStoreNames.map(normalizeStoreName);
 
+  const contents = [
+    ...(input.history ?? []).slice(-6).map((m) => ({
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text: m.text }],
+    })),
+    {
+      role: "user",
+      parts: [{ text: input.prompt }],
+    },
+  ];
+
   const response = await ai.models.generateContent({
     model,
-    contents: [{ role: "user", parts: [{ text: input.prompt }] }],
+    contents,
     config: {
-      systemInstruction: SYSTEM_CONTEXT,
+      systemInstruction: SYSTEM_CONTEXT + "\n\n" + RULES,
       temperature: 0.35,
       topP: 0.9,
+      maxOutputTokens: 700,
       tools: [
         {
           fileSearch: {

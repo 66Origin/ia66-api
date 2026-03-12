@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { corsHeaders } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/ratelimit/hourly";
-import { getGeminiClient, getFileSearchStoreName } from "@/lib/gemini";
+import { getFileSearchStoreName } from "@/lib/gemini";
 import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
 import { runRagChat } from "@/lib/gemini/rag";
@@ -65,6 +65,7 @@ export async function POST(req: Request) {
     const { text } = await runRagChat({
       model: "gemini-2.5-flash",
       prompt,
+      history: conversation?.history,
       fileSearchStoreNames: [storeName],
     });
     if (!text.trim()) {

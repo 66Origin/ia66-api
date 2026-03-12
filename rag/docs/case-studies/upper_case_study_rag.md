@@ -1,4 +1,5 @@
 # CASE STUDY — UPPER | Cocktails sans alcool prêts à boire
+
 **Agence :** 66 Origin  
 **Client :** Oussia (fondateurs : Guillaume & Estelle) → marque UPPER  
 **Type de projet :** Stratégie de marque, naming, branding, packaging, direction artistique, stratégie retail & digital  
@@ -14,6 +15,7 @@ Guillaume et Estelle, fondateurs d'Oussia, souhaitaient lancer une gamme europé
 **Problème central :** Le positionnement initial évoquait une limonade de spa plutôt qu'un cocktail iconique. Le packaging n'était pas aligné avec la promesse produit.
 
 **Enjeux identifiés :**
+
 - Le marché no/low alcohol explose mais souffre d'un déficit d'image
 - Celui qui ne boit pas d'alcool en soirée trinque avec un soda — marqueur d'exclusion sociale
 - Le geste social de lever un verre compte autant que le produit lui-même
@@ -42,11 +44,14 @@ La sobriété devient un signe de maîtrise, un avantage, une supériorité assu
 UPPER incarne la promesse d'être "au-dessus" — au-dessus des conventions sociales, au-dessus de la pression du groupe, au-dessus de la consommation automatique.
 
 ### Gamme de cocktails incarnés
+
 Chaque cocktail iconique est représenté par un personnage manga original :
+
 - **Spritz** → héroïne énergique aux pouvoirs lumineux
 - **Moscow Mule** → oracle du désert
 - **Gin Tonic** → fêtarde espiègle aux talons en verre
 - **Personnage underground** → figure afro et trendy incarnant l'audace urbaine
+  Chaque personnage a été initialement prototypé grâce à l’intelligence artificielle, avant d’être réinterprété et illustré par un artiste.
 
 ---
 
@@ -72,11 +77,13 @@ Chaque cocktail iconique est représenté par un personnage manga original :
 UPPER est pensé comme une saga culturelle. Chaque personnage possède un pouvoir, un territoire, une personnalité et une esthétique forte.
 
 **Dispositif narratif cross-canal :**
+
 - Stories, bandes dessinées digitales, séquences inspirées du manga
 - Les aventures des personnages illustrent le pouvoir symbolique du produit
 - Message constant : le pouvoir ne vient pas de l'alcool — il vient du goût, de l'attitude, d'UPPER
 
 **Effets du dispositif :**
+
 - Désirabilité et identification forte
 - Différenciation immédiate en linéaire GMS
 - Cohérence cross-canal (packaging → social media → site)
@@ -88,6 +95,7 @@ UPPER est pensé comme une saga culturelle. Chaque personnage possède un pouvoi
 **Objectif packaging :** Sortir définitivement de l'univers soda, adopter les codes premium des spiritueux traditionnels sans contenir d'alcool.
 
 **Résultats :**
+
 - Étiquettes assumées, premium, inspirées des spiritueux
 - Impact immédiat en grande distribution
 - Cohérence visuelle européenne
@@ -99,11 +107,13 @@ UPPER est pensé comme une saga culturelle. Chaque personnage possède un pouvoi
 ## BÉNÉFICES & IMPACT
 
 **Pour la marque :**
+
 - Repositionnement du sans alcool en symbole de contrôle, d'énergie et d'élégance
 - Différenciation visuelle et narrative facilitant l'adoption en GMS
 - Univers culturel fort générant de la désirabilité
 
 **Pour le marché :**
+
 - Réponse à la montée de la sobriété choisie sans moraliser ni justifier
 - Alternative premium crédible face aux spiritueux traditionnels
 - Modèle de marque lifestyle transposable à l'international
@@ -113,6 +123,7 @@ UPPER est pensé comme une saga culturelle. Chaque personnage possède un pouvoi
 ## POSITIONNEMENT STRATÉGIQUE
 
 UPPER se positionne à l'intersection de :
+
 - Cocktails sans alcool premium
 - Marché no/low alcohol Europe
 - Branding disruptif

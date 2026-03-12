@@ -1,3 +1,4 @@
+// lib/gemini/filestore.ts
 import { getGeminiClient } from "./client";
 
 export type FileSearchStoreSummary = {
@@ -88,20 +89,31 @@ export async function deleteAllFileSearchStores() {
  * Liste les documents d’un store.
  */
 export async function listFileSearchDocuments(
-  store: string
+  store: string,
 ): Promise<FileSearchDocumentSummary[]> {
   const ai = getGeminiClient();
   const parent = normalizeStoreParent(store);
 
   const documents: FileSearchDocumentSummary[] = [];
-  const iterable = await ai.fileSearchStores.documents.list({ parent });
 
-  for await (const doc of iterable) {
-    documents.push({
-      name: doc?.name,
-      displayName: doc?.displayName,
-      createTime: doc?.createTime,
-    });
+  const pager = await ai.fileSearchStores.documents.list({
+    parent,
+    config: {
+      pageSize: 20,
+    },
+  });
+
+  while (true) {
+    for (const doc of pager.page) {
+      documents.push({
+        name: doc?.name,
+        displayName: doc?.displayName,
+        createTime: doc?.createTime,
+      });
+    }
+
+    if (!pager.hasNextPage()) break;
+    await pager.nextPage();
   }
 
   return documents;
@@ -132,15 +144,31 @@ export async function deleteAllDocumentsFromStore(store: string) {
   const parent = normalizeStoreParent(store);
 
   let deleted = 0;
-  const iterable = await ai.fileSearchStores.documents.list({ parent });
 
-  for await (const doc of iterable) {
-    if (!doc?.name) continue;
-    await ai.fileSearchStores.documents.delete({
-      name: doc.name,
-      config: { force: true },
-    });
-    deleted++;
+  const pager = await ai.fileSearchStores.documents.list({
+    parent,
+    config: {
+      pageSize: 20,
+    },
+  });
+
+  while (true) {
+    for (const doc of pager.page) {
+      if (!doc?.name) continue;
+
+      await ai.fileSearchStores.documents.delete({
+        name: doc.name,
+        config: {
+          force: true,
+        },
+      });
+
+      deleted++;
+    }
+
+    if (!pager.hasNextPage()) break;
+
+    await pager.nextPage();
   }
 
   return { deleted, store: parent };

@@ -18,59 +18,72 @@ function normalizeStoreName(store: string): string {
     : `fileSearchStores/${store}`;
 }
 
-/**
- * Récupère les displayNames existants UNE FOIS (idempotence).
- */
-async function listExistingDisplayNames(
+type ExistingDoc = {
+  name: string;
+  displayName: string;
+};
+
+async function listExistingDocs(
   storeName: string,
-): Promise<Set<string>> {
-  const existing = new Set<string>();
-  const iterable = await ai.fileSearchStores.documents.list({
+): Promise<Map<string, ExistingDoc>> {
+  const docs = new Map<string, ExistingDoc>();
+
+  const pager = await ai.fileSearchStores.documents.list({
     parent: normalizeStoreName(storeName),
+    config: {
+      pageSize: 20,
+    },
   });
 
-  for await (const doc of iterable) {
-    if (doc?.displayName) existing.add(doc.displayName);
+  while (true) {
+    for (const doc of pager.page) {
+      if (doc?.displayName && doc?.name && !docs.has(doc.displayName)) {
+        docs.set(doc.displayName, {
+          name: doc.name,
+          displayName: doc.displayName,
+        });
+      }
+    }
+
+    if (!pager.hasNextPage()) break;
+    await pager.nextPage();
   }
-  return existing;
+
+  return docs;
 }
 
-/**
- * Liste récursivement les fichiers d'un dossier.
- */
 function listFilesRecursive(dir: string): string[] {
   const out: string[] = [];
+
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
+
     if (entry.isDirectory()) out.push(...listFilesRecursive(full));
     else out.push(full);
   }
+
   return out;
 }
 
-/**
- * Construit un displayName stable (inclut le chemin relatif pour éviter collisions).
- * Exemple: contenus/01_identite.md
- */
 function buildDisplayName(docsDir: string, filePath: string): string {
-  const rel = path.relative(docsDir, filePath).replaceAll("\\", "/");
-  return rel;
+  return path.relative(docsDir, filePath).replaceAll("\\", "/");
 }
 
-async function uploadIfMissing(
+async function syncFile(
   storeName: string,
   docsDir: string,
   filePath: string,
-  existing: Set<string>,
-) {
+  existingDocs: Map<string, ExistingDoc>,
+): Promise<"new" | "skipped"> {
   const displayName = buildDisplayName(docsDir, filePath);
 
-  if (existing.has(displayName)) {
-    console.log(`Skip (already exists): ${displayName}`);
-    return { skipped: true, displayName };
+  if (existingDocs.has(displayName)) {
+    console.log(`Skipping existing: ${displayName}`);
+    return "skipped";
   }
 
-  console.log(`Uploading: ${displayName} (${filePath})`);
+  console.log(`Uploading new: ${displayName}`);
+
   await ai.fileSearchStores.uploadToFileSearchStore({
     file: filePath,
     fileSearchStoreName: normalizeStoreName(storeName),
@@ -80,43 +93,31 @@ async function uploadIfMissing(
     },
   });
 
-  existing.add(displayName);
   console.log(`Uploaded: ${displayName}`);
-  return { skipped: false, displayName };
+
+  return "new";
 }
 
 async function main() {
   const storeName = normalizeStoreName(requireEnv("FILE_SEARCH_STORE_NAME"));
-
-  // Dossier local des docs RAG
   const docsDir = path.join(process.cwd(), "rag", "docs");
-  if (!fs.existsSync(docsDir)) throw new Error(`Missing folder: ${docsDir}`);
 
-  // Récupère tous les fichiers .md (récursif)
   const files = listFilesRecursive(docsDir).filter((f) =>
     f.toLowerCase().endsWith(".md"),
   );
 
-  if (!files.length) {
-    console.log("No .md files found in rag/docs/");
-    return;
-  }
+  const existingDocs = await listExistingDocs(storeName);
 
-  // Idempotence: lire l'existant UNE fois
-  const existing = await listExistingDisplayNames(storeName);
-
-  let uploaded = 0;
-  let skipped = 0;
+  let newCount = 0;
+  let skippedCount = 0;
 
   for (const filePath of files) {
-    const res = await uploadIfMissing(storeName, docsDir, filePath, existing);
-    if (res.skipped) skipped++;
-    else uploaded++;
+    const result = await syncFile(storeName, docsDir, filePath, existingDocs);
+    if (result === "new") newCount++;
+    else skippedCount++;
   }
 
-  console.log(
-    `Done. uploaded=${uploaded}, skipped=${skipped}, store=${storeName}`,
-  );
+  console.log(`Done. new=${newCount}, skipped=${skippedCount}`);
 }
 
 main().catch((e) => {

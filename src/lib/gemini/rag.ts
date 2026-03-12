@@ -45,7 +45,7 @@ export async function runRagChat(
       systemInstruction: SYSTEM_CONTEXT + "\n\n" + RULES,
       temperature: 0.35,
       topP: 0.9,
-      maxOutputTokens: 700,
+      maxOutputTokens: 950,
       tools: [
         {
           fileSearch: {

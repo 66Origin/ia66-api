@@ -18,7 +18,7 @@ export async function OPTIONS(req: NextRequest) {
 // GET /api/v1/filesearch/stores/[store]/documents
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ store: string }> }
+  context: { params: Promise<{ store: string }> },
 ) {
   const { store } = await context.params;
 
@@ -31,7 +31,7 @@ export async function GET(
   if (!admin.ok) {
     return NextResponse.json(
       { error: admin.error },
-      { status: admin.status, headers }
+      { status: admin.status, headers },
     );
   }
 
@@ -45,7 +45,7 @@ export async function GET(
       {
         status: 429,
         headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
-      }
+      },
     );
   }
 
@@ -66,12 +66,12 @@ export async function GET(
           "X-RateLimit-Remaining": String(rl.remaining),
           "X-RateLimit-Reset": String(rl.resetSeconds),
         },
-      }
+      },
     );
   } catch (e) {
     return NextResponse.json(
       { error: "Failed to list documents", details: String(e), store },
-      { status: 502, headers }
+      { status: 502, headers },
     );
   }
 }
@@ -80,7 +80,7 @@ export async function GET(
 // Purge tous les documents du store. Confirmation requise: ?confirm=true
 export async function DELETE(
   req: NextRequest,
-  context: { params: Promise<{ store: string }> }
+  context: { params: Promise<{ store: string }> },
 ) {
   const { store } = await context.params;
 
@@ -93,7 +93,7 @@ export async function DELETE(
   if (!admin.ok) {
     return NextResponse.json(
       { error: admin.error },
-      { status: admin.status, headers }
+      { status: admin.status, headers },
     );
   }
 
@@ -101,7 +101,7 @@ export async function DELETE(
   if (confirm !== "true") {
     return NextResponse.json(
       { error: "Missing confirmation", hint: "Add ?confirm=true to proceed" },
-      { status: 400, headers }
+      { status: 400, headers },
     );
   }
 
@@ -115,7 +115,7 @@ export async function DELETE(
       {
         status: 429,
         headers: { ...headers, "Retry-After": String(rl.resetSeconds) },
-      }
+      },
     );
   }
 
@@ -123,7 +123,11 @@ export async function DELETE(
     const result = await deleteAllDocumentsFromStore(store);
 
     return NextResponse.json(
-      { message: "All documents deleted", ...result },
+      {
+        message: "All documents deleted",
+        deleted: result.deleted,
+        store: result.store,
+      },
       {
         status: 200,
         headers: {
@@ -132,12 +136,12 @@ export async function DELETE(
           "X-RateLimit-Remaining": String(rl.remaining),
           "X-RateLimit-Reset": String(rl.resetSeconds),
         },
-      }
+      },
     );
   } catch (e) {
     return NextResponse.json(
       { error: "Failed to delete documents", details: String(e), store },
-      { status: 502, headers }
+      { status: 502, headers },
     );
   }
 }

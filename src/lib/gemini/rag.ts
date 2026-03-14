@@ -44,7 +44,7 @@ export async function runRagChat(
   const storeNames = input.fileSearchStoreNames.map(normalizeStoreName);
 
   const contents = [
-    ...(input.history ?? []).slice(-3).map((m) => ({
+    ...(input.history ?? []).slice(-10).map((m) => ({
       role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: m.text }],
     })),

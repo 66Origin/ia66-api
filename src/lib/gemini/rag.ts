@@ -66,6 +66,8 @@ export async function runRagChat(
 
   let text = "";
 
+  console.log(candidate.finishReason);
+
   if (candidate.content?.parts?.length) {
     text = candidate.content.parts
       .filter((p: any) => typeof p?.text === "string")

@@ -15,6 +15,18 @@ function normalizeStoreName(name: string) {
     : `fileSearchStores/${name}`;
 }
 
+function ensureCompleteSentence(text: string) {
+  if (!text) return text;
+
+  const trimmed = text.trim();
+
+  if (/[.!?»"]$/.test(trimmed)) return trimmed;
+
+  const match = trimmed.match(/[\s\S]*[.!?]/);
+
+  return match ? match[0] : trimmed;
+}
+
 /**
  * Exécute un appel Gemini avec File Search tool activé.
  * Retourne le texte brut.
@@ -45,7 +57,7 @@ export async function runRagChat(
       systemInstruction: SYSTEM_CONTEXT,
       temperature: 0.6,
       topP: 0.9,
-      maxOutputTokens: 340,
+      maxOutputTokens: 450,
       tools: [
         {
           fileSearch: {
@@ -56,8 +68,6 @@ export async function runRagChat(
     },
   });
 
-  console.log("RAW GEMINI RESPONSE:", JSON.stringify(response, null, 2));
-
   const candidate = response?.candidates?.[0];
 
   if (!candidate) {
@@ -65,8 +75,6 @@ export async function runRagChat(
   }
 
   let text = "";
-
-  console.log(candidate.finishReason);
 
   if (candidate.content?.parts?.length) {
     text = candidate.content.parts
@@ -87,5 +95,9 @@ export async function runRagChat(
     };
   }
 
-  return { text };
+  const finalText = ensureCompleteSentence(text);
+
+  console.log(candidate.finishReason);
+
+  return { text: finalText };
 }

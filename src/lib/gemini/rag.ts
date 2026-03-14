@@ -22,9 +22,13 @@ function ensureCompleteSentence(text: string) {
 
   if (/[.!?»"]$/.test(trimmed)) return trimmed;
 
-  const match = trimmed.match(/[\s\S]*[.!?]/);
+  const matches = trimmed.match(/[^.!?]*[.!?]/g);
 
-  return match ? match[0] : trimmed;
+  if (!matches || matches.length === 0) return trimmed;
+
+  const complete = matches.join("").trim();
+
+  return complete.length > 40 ? complete : trimmed;
 }
 
 /**
@@ -57,7 +61,6 @@ export async function runRagChat(
       systemInstruction: SYSTEM_CONTEXT,
       temperature: 0.6,
       topP: 0.9,
-      maxOutputTokens: 600,
       tools: [
         {
           fileSearch: {

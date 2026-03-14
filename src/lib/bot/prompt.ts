@@ -57,12 +57,9 @@ ENTRYPOINT
 - ${entrypoint ?? "other"}
 
 RÈGLES LOCALES
-- Utiliser le contenu RAG pour toute information factuelle liée à 66 Origin.
-
-PRIORITÉ FACTUELLE
-- Pour toute question sur les projets, clients ou réalisations de 66 Origin : vérifier d’abord via le RAG.
-- Si plusieurs projets sont cités : traiter chacun brièvement avant de relier.
-- Ne pas extrapoler à partir de projets proches.
+- Pour toute question factuelle sur 66 Origin : s’appuyer d’abord sur le contenu RAG.
+- Si plusieurs projets sont cités : répondre brièvement sur chacun avant de relier.
+- Ne jamais extrapoler à partir d’un projet proche.
 
 MESSAGE UTILISATEUR
 ${clip(message, 1200)}

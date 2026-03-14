@@ -65,6 +65,8 @@ MESSAGE UTILISATEUR
 ${clip(message, 1200)}
 
 SORTIE
-Texte brut uniquement.
+- Texte brut uniquement
+- Réponse complète, jamais coupée
+- Une seule réponse
 `.trim();
 }

@@ -5,22 +5,19 @@ Ce module contient la logique conversationnelle propre au bot "IA 66 Origin".
 ## Fichiers
 
 - `system.ts`
-
   - Contexte système stable (règles, posture, ton)
 
 - `prompt.ts`
+  - Construction du prompt utilisateur injecté au modèle
 
-  - Construction du prompt utilisateur
+## Architecture
 
-- `run.ts`
-  - Orchestration complète du chat :
-    - validation
-    - prompt
-    - RAG
-    - réponse finale
+- La génération Gemini et le RAG sont gérés dans `src/lib/gemini/rag.ts`
+- Le module bot ne contient que la couche conversationnelle
 
-## Règle
+## Règles
 
-- Aucun HTTP ici
-- Aucune logique File Search bas niveau
-- Le bot appelle des capacités, il ne les implémente pas
+- Aucun appel HTTP ici
+- Aucune logique Gemini bas niveau
+- Aucune logique File Search
+- Le bot formule, la couche gemini exécute

@@ -57,7 +57,6 @@ export async function POST(req: Request) {
     message,
     entrypoint,
     pageContext,
-    conversation,
   });
   const storeName = getFileSearchStoreName();
 

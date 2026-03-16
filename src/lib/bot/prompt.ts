@@ -18,10 +18,6 @@ type PageContext = {
   pageIntentHint?: string;
 };
 
-type Conversation = {
-  history?: Array<{ role: "user" | "assistant"; text: string }>;
-};
-
 export type BuildChatPromptInput = {
   message: string;
   entrypoint?:
@@ -34,7 +30,6 @@ export type BuildChatPromptInput = {
     | "news"
     | "other";
   pageContext?: PageContext;
-  conversation?: Conversation;
 };
 
 function clip(s: string, max = 500): string {
@@ -44,7 +39,7 @@ function clip(s: string, max = 500): string {
 }
 
 export function buildChatPrompt(input: BuildChatPromptInput): string {
-  const { message, entrypoint, pageContext, conversation } = input;
+  const { message, entrypoint, pageContext } = input;
 
   return `
 CONTEXTE_PAGE

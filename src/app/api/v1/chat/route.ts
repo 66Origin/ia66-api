@@ -6,7 +6,7 @@ import { getFileSearchStoreName } from "@/lib/gemini";
 import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
 import { runRagChat } from "@/lib/gemini/rag";
-import { extractEmailTemplate, removeEmailBlock } from "@/lib/parser/email";
+import { extractEmailTemplate } from "@/lib/parser/email";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -80,12 +80,10 @@ export async function POST(req: Request) {
 
     // Parsing email
     const email = extractEmailTemplate(text);
-    // Nettoyage du texte affiché
-    const cleanText = removeEmailBlock(text);
 
     return NextResponse.json(
       {
-        text: cleanText,
+        text,
         email,
       },
       { headers },

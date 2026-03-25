@@ -31,8 +31,3 @@ export function extractEmailTemplate(text: string): EmailTemplate | null {
     body,
   };
 }
-
-export function removeEmailBlock(text: string): string {
-  if (!text) return text;
-  return text.replace(/---[\s\S]*?---/, "").trim();
-}

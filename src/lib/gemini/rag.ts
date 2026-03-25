@@ -93,9 +93,7 @@ export async function runRagChat(
 
   if (!text) {
     console.error("Gemini empty candidate:", candidate);
-    return {
-      text: "Je reformule : peux-tu préciser légèrement ce point ?",
-    };
+    throw new Error("Empty model response");
   }
 
   const finalText = ensureCompleteSentence(text);

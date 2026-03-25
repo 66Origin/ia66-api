@@ -70,10 +70,7 @@ export async function POST(req: Request) {
     if (!text.trim()) {
       return NextResponse.json(
         {
-          text: [
-            "Cette information n’est pas disponible dans les contenus actuels.",
-            "On peut repartir d’un angle innovation : expérience, design, ou transformation.",
-          ].join("\n"),
+          text: "Il me manque un peu de contexte pour te répondre précisément - tu peux préciser ?",
         },
         { headers },
       );

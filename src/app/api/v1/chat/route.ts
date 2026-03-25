@@ -6,6 +6,7 @@ import { getFileSearchStoreName } from "@/lib/gemini";
 import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
 import { runRagChat } from "@/lib/gemini/rag";
+import { extractEmailTemplate, removeEmailBlock } from "@/lib/parser/email";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -67,6 +68,7 @@ export async function POST(req: Request) {
       history: conversation?.history,
       fileSearchStoreNames: [storeName],
     });
+
     if (!text.trim()) {
       return NextResponse.json(
         {
@@ -75,7 +77,19 @@ export async function POST(req: Request) {
         { headers },
       );
     }
-    return NextResponse.json({ text }, { headers });
+
+    // Parsing email
+    const email = extractEmailTemplate(text);
+    // Nettoyage du texte affiché
+    const cleanText = removeEmailBlock(text);
+
+    return NextResponse.json(
+      {
+        text: cleanText,
+        email,
+      },
+      { headers },
+    );
   } catch (e: any) {
     return NextResponse.json(
       { error: "Model error", details: String(e?.message ?? e) },

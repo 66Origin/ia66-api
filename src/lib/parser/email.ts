@@ -4,6 +4,10 @@ export type EmailTemplate = {
   body: string;
 };
 
+function cleanMarkdown(text: string) {
+  return text.replace(/\*\*/g, "").replace(/__+/g, "").trim();
+}
+
 export function extractEmailTemplate(text: string): EmailTemplate | null {
   if (!text) return null;
 
@@ -27,7 +31,7 @@ export function extractEmailTemplate(text: string): EmailTemplate | null {
 
   return {
     to: emailMatch?.[0] || "o@66origin.com",
-    subject: subjectMatch?.[1]?.trim() || "",
-    body,
+    subject: cleanMarkdown(subjectMatch?.[1] || ""),
+    body: cleanMarkdown(body),
   };
 }

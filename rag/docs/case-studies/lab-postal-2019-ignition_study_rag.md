@@ -79,6 +79,37 @@ Le programme de conférences sur deux jours réunissait des profils issus de la 
 
 Ce mix entre démonstration, contenu et scénographie a fait du Lab Postal un véritable événement d'influence — jusqu'à devenir un **topic of the day sur Twitter**.
 
+Intervenants marquants aux conférences :
+- **Arthur Mamou-Mani** — architecture, Galaxia Temple, Burning Man
+- **Harri Santamala** — mobilité, véhicule autonome, projet GACHA, collaboration avec MUJI
+- **Ott Vatter** — e-residency, Estonie, transformation d’État, scalabilité d’un modèle national
+- **Taïg Khris** — entrepreneuriat, défis startup, Estonie, innovation
+- **Celia Hodent** — UX, game design, Fortnite, succès des jeux vidéo
+- **Gillian Ferrabee** — créativité, performance, Kite Parade
+- **Sebastian Errazuriz** — design, création, processus créatif
+- **Guy-Philippe Goldstein** — startups, cyber-stratégie, prospective, innovation
+- **Laurence Fischer** — impact social, dignité, engagement
+- **Alexis Castiel** — innovation produit, usages, attentes utilisateurs
+- **Alexandre Prot** — innovation produit, usages, attentes utilisateurs, fintech
+- **Alexia Cordier** — innovation produit, usages, attentes utilisateurs, fitness
+- **Mathilde Le Rouzic** — innovation produit, usages, attentes utilisateurs, care
+- **Julien Millot** — aventure, exploration, rendre l’incroyable possible
+- **Vanessa Chocteau** — IoT, innovation, French IoT Awards, écosystème startup
+- **Clarisse Berrebi** — startup attitude, entrepreneuriat, croissance
+- **Benjamin Hardy** — startup attitude, entrepreneuriat, croissance
+- **Nicolas Reboud** — startup attitude, entrepreneuriat, croissance
+- **Anne Blondel-Jouin** — jeux vidéo, open innovation, nouveaux modèles économiques
+- **Philippe Silberzahn** — entrepreneuriat, transformation, décryptage des possibles
+- **Beatrice Rousset** — développement personnel, leadership, potentiel, transformation
+- **Philippe Mihelic** — startup studios, innovation, création de ventures
+- **Maxime Brenon** — startup studios, entrepreneuriat, cofondation
+- **Julien Crespel** — startup studios, entrepreneuriat, cofondation
+- **Etienne Klein** — cosmologie, physique, Big Bang, philosophie des sciences
+
+Animateurs :
+- **Thierry Keller** — journaliste, essayiste, consultant, ancien directeur de la rédaction d’Usbek & Rica ; animation d’événements, prospective, innovation et débats de société
+- **Carole Tolila** — animatrice et journaliste du groupe France Télévisions ; télévision, culture, société, écologie, vulgarisation et animation de débats
+
 ---
 
 ## Innovations présentées

@@ -68,6 +68,47 @@ La journée était structurée comme un **tour du monde de l'innovation** :
 
 Cette programmation internationale a donné au Lab Postal 2018 une portée bien au-delà de l'écosystème français.
 
+Intervenants marquants :
+- **Nathalie Collin** — digital business, communication, transformation numérique, grands groupes
+- **Philippe Silberzahn** — entrepreneuriat, stratégie, innovation
+- **Stéphane Coviaux** — histoire de l’art, Renaissance italienne, regard sur les œuvres
+- **Alexandre Cadain** — intelligence artificielle, grands défis contemporains, innovation technologique
+- **Guy-Philippe Goldstein** — cyberwar, géopolitique, cybersécurité
+- **Sharon Sofer** — éducation, science, edtech, projets pour enfants
+- **Philippine Dolbeau** — entrepreneuriat jeune, edtech, innovation étudiante
+- **Anne Blondel** — jeu vidéo, production, business du gaming, e-sport
+- **Eric Couzian** — direction créative, jeu vidéo, création Ubisoft
+- **Tim Brown** — design thinking, innovation, design appliqué au business
+- **Léa Lippera** — design spéculatif, smart cities, travail numérique, quantified self, engagement civique
+- **Axel Dauchez** — entrepreneuriat, lobbying citoyen, opinion publique, plateformes numériques
+- **Jérémie Hornus** — design graphique, typographie, identité de marque
+- **Gregori Vincens** — design d’identité, branding, conseil
+- **Karl Saffré** — identité de marque, design global, design automobile
+- **Simon Bernard** — pollution plastique, économie circulaire, carburants alternatifs, innovation maritime
+- **Marina Vassallo Rachline** — innovation, grands challenges, paradigmes émergents
+- **Joséphine Goube** — entrepreneuriat social, réfugiés, innovation sociale, incubateurs
+- **Mathilde Berchon** — open hardware, entrepreneuriat tech, média
+- **Marjolaine Grondin** — intelligence artificielle, éducation, assistants pour étudiants
+- **Rand Hindi** — bio-informatique, entrepreneuriat tech, innovation scientifique
+- **Carlos Moreno** — human smart city, ville intelligente, urbanisme
+- **Alain Passard** — gastronomie, haute cuisine, création culinaire
+- **Bertrand Périer** — art oratoire, prise de parole, rhétorique, éloquence
+- **Charles Pépin** — philosophie, pensée contemporaine
+- **Augustin Trapenard** — journalisme culturel, littérature, critique
+- **Rachel Delacour** — analytics, management, entrepreneuriat tech, data
+- **Danielle Mérian** — droit, féminisme, engagement
+- **Gaspard Koenig** — philosophie, essais, libéralisme, idées politiques
+- **Laurent Alexandre** — transhumanisme, biotechnologies, futur de l’humanité
+- **Albert Moukheiber** — neurosciences cognitives, psychologie, pensée critique, biais cognitifs
+- **Caroline De Haas** — féminisme, politique, militantisme
+- **Diane Ducret** — littérature, écriture
+- **Jean Meyer** — entrepreneuriat, application mobile
+- **François Ruffin** — journalisme, activisme social, politique
+
+Animateurs :
+- **Thierry Keller** — journaliste, essayiste, consultant, ancien directeur de la rédaction d’Usbek & Rica ; animation d’événements, prospective, innovation et débats de société
+- **Carole Tolila** — animatrice et journaliste du groupe France Télévisions ; télévision, culture, société, écologie, vulgarisation et animation de débats
+
 ---
 
 ## Périmètre de mission (66 Origin)

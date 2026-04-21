@@ -12,14 +12,13 @@
 - Cardif
 - BforBank
 - Institut Louis Bachelier (ILB)
+- Ocean Peak
+- Pavillon
 
 ### Énergie, Industrie & Infrastructures
 - Engie
 - RTE
-- Ocean Peak
-- EPO
-- Useo
-- Maximum
+- Equans
 
 ### Institutions Publiques & Impact Sociétal
 - La Poste
@@ -27,16 +26,20 @@
 - Croix-Rouge
 - Paradigm (Bruxelles)
 
-### Marques, Retail & Luxe
+### Marques, Food, Retail & Luxe
 - KFC
 - Chanel
 - Dior Parfum
 - Silver Square
-- Maximum
 
 ### Médias, Data & Communication
 - Havas
 - Kantar Media
+
+### Industriels
+- Maximum
+- Useo
+- Groupe Muller - intuis
 
 ### Startups, Plateformes & Innovation
 - Quipo
@@ -51,6 +54,7 @@
 - Edge
 - LDS
 - BeWizz
+- EPO
 
 
 ## Ce que cette diversité révèle

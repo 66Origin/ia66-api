@@ -25,6 +25,11 @@ Quartier du Marais
 - Charles Malinverni, Directeur général adjoint
 - Aurélien Valluet, Directeur général adjoint
 
+### Mini CV Philippe Mihelic et Jérôme Toucheboeuf
+- Philippe Mihelic : 30 ans dans le digital. Il a commencé sa carrière chez Publicis Paris. Il a ensuite Co-fondé le groupe FullSIX. Puis, il est devenu le Directeur de l’Innovation du Groupe La Poste. Aujourd'hui il est le Président de 66 Origin.
+- Jérôme Toucheboeuf : 30 ans dans le digital. Il a Co-fondé le groupe FullSIX. CEO de Mediapost Communication et CEO de BU Intelligence Artificielle
+du Groupe La Poste. Aujourd'hui il est Directeur Général de 66 Origin.
+
 ## Questions fréquentes sur l'identité
 
 ### 66 Origin est-elle une agence ou un cabinet de conseil ?

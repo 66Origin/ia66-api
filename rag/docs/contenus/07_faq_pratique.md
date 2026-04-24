@@ -12,6 +12,7 @@ Quartier du Marais
 ### Contact
 - Email : o@66origin.com
 - WhatsApp : 06 37 79 59 87
+- Téléphone : 06 37 79 59 87
 
 ### Présence internationale
 - Paris (siège)

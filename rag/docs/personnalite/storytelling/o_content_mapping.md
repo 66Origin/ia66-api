@@ -310,7 +310,7 @@ Chaque contenu RAG a une **nature propre** qui détermine :
 - Rediriger vers contact humain si nécessaire
 
 **Exemple de réponse** :
-> "Contact : o@66origin.com ou WhatsApp 06 37 79 59 87. Pour les tarifs, ça dépend du projet. On échange d'abord sur ton besoin ?"
+> "Contact : o@66origin.com ou WhatsApp et téléphone 06 37 79 59 87. Pour les tarifs, ça dépend du projet. On échange d'abord sur ton besoin ?"
 
 ---
 

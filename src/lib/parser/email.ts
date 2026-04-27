@@ -4,6 +4,8 @@ export type EmailTemplate = {
   body: string;
 };
 
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "o@66origin.com";
+
 function cleanMarkdown(text: string) {
   return text.replace(/\*\*/g, "").replace(/__+/g, "").trim();
 }
@@ -11,26 +13,23 @@ function cleanMarkdown(text: string) {
 export function extractEmailTemplate(text: string): EmailTemplate | null {
   if (!text) return null;
 
-  // 1. Détecter bloc ---
+  // Détecte le bloc email encadré par ---
   const blockMatch = text.match(/---([\s\S]*?)---/);
   if (!blockMatch) return null;
 
   const block = blockMatch[1].trim();
 
-  // 2. Sécurité : vérifier que c'est bien un email
+  // Vérifie qu'il s'agit bien d'un template email
   if (!/Objet\s*:/i.test(block)) return null;
 
-  // 3. Sujet
+  // Extrait le sujet
   const subjectMatch = block.match(/Objet\s*:\s*(.+)/i);
 
-  // 4. Body (tout sauf la ligne Objet)
+  // Extrait le body (tout sauf la ligne Objet)
   const body = block.replace(/Objet\s*:\s*.+/i, "").trim();
 
-  // 5. Email (dans tout le texte)
-  const emailMatch = text.match(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i);
-
   return {
-    to: emailMatch?.[0] || "o@66origin.com",
+    to: CONTACT_EMAIL,
     subject: cleanMarkdown(subjectMatch?.[1] || ""),
     body: cleanMarkdown(body),
   };

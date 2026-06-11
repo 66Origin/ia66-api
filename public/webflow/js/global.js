@@ -19,27 +19,6 @@ function showConsentBannerIfNeeded() {
   }
 }
 
-function forcePlayHomeHeroVideo() {
-  const video = document.querySelector(
-    ".home-hero video, video[autoplay], video",
-  );
-  if (!video) return;
-
-  video.muted = true;
-  video.defaultMuted = true;
-  video.playsInline = true;
-  video.setAttribute("muted", "");
-  video.setAttribute("playsinline", "");
-  video.setAttribute("webkit-playsinline", "");
-
-  const play = () => video.play()?.catch(() => {});
-
-  play();
-  setTimeout(play, 200);
-  setTimeout(play, 600);
-  setTimeout(play, 1200);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const namespace = getNamespace();
 
@@ -59,8 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof window.startHeroVideo === "function") {
       window.startHeroVideo();
     }
-
-    forcePlayHomeHeroVideo();
   }
 
   showConsentBannerIfNeeded();

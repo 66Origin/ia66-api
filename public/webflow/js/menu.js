@@ -54,16 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "expo.inOut",
     });
 
-    tl.to(
-      panel,
-      {
-        borderTopLeftRadius: OPEN_RADIUS,
-        borderTopRightRadius: OPEN_RADIUS,
-        duration: 0.85,
-        ease: "expo.inOut",
-      },
-      0.32,
-    );
+    // tl.to(
+    //   panel,
+    //   {
+    //     borderTopLeftRadius: OPEN_RADIUS,
+    //     borderTopRightRadius: OPEN_RADIUS,
+    //     duration: 0.85,
+    //     ease: "expo.inOut",
+    //   },
+    //   0.32,
+    // );
 
     tl.to(
       headerItems,
@@ -145,16 +145,16 @@ document.addEventListener("DOMContentLoaded", () => {
         0,
       );
 
-      tl.to(
-        panel,
-        {
-          borderTopLeftRadius: CLOSED_RADIUS,
-          borderTopRightRadius: CLOSED_RADIUS,
-          duration: 0.55,
-          ease: "expo.inOut",
-        },
-        0.05,
-      );
+      //   tl.to(
+      //     panel,
+      //     {
+      //       borderTopLeftRadius: CLOSED_RADIUS,
+      //       borderTopRightRadius: CLOSED_RADIUS,
+      //       duration: 0.55,
+      //       ease: "expo.inOut",
+      //     },
+      //     0.05,
+      //   );
 
       tl.to(
         panel,

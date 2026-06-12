@@ -332,6 +332,16 @@ function initIAChat(rootSelector) {
     isUserNearBottom = pageHeight - scrollBottom < threshold;
   }
 
+  function lockUserScroll() {
+    document.documentElement.classList.add("ia-scroll-locked");
+    document.body.classList.add("ia-scroll-locked");
+  }
+
+  function unlockUserScroll() {
+    document.documentElement.classList.remove("ia-scroll-locked");
+    document.body.classList.remove("ia-scroll-locked");
+  }
+
   function scrollToMessage(element, smooth = true) {
     return new Promise((resolve) => {
       if (!element) {
@@ -616,6 +626,12 @@ function initIAChat(rootSelector) {
   function setWaiting(state) {
     isWaiting = state;
 
+    if (state) {
+      lockUserScroll();
+    } else {
+      unlockUserScroll();
+    }
+
     [introTextarea, chatTextarea].forEach((el) => {
       if (!el) return;
 
@@ -823,6 +839,7 @@ function initIAChat(rootSelector) {
     isWaiting = false;
     isKeyboardOpen = false;
     isAutoScrolling = false;
+    unlockUserScroll();
 
     document.body.classList.remove("keyboard-open");
 

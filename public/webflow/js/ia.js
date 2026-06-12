@@ -148,7 +148,7 @@ function initIAChat(rootSelector) {
   FORMAT FINAL
   ========================================= */
     return safeText
-      .replace(/\*\*(.*?)\*\*   /g, "<strong>$1</strong>")
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
       .replace(/\n/g, "<br>")
       .replace(/---/g, '<div class="ia-email-separator"></div>');
   }
@@ -1126,6 +1126,11 @@ function initIAChat(rootSelector) {
     setTimeout(() => {
       ia.classList.add("is-hidden-ia");
       ia.style.overflow = "hidden";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }, 400);
   }
 

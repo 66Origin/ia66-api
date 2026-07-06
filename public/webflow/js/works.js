@@ -1,16 +1,3 @@
-function waitForImages(container) {
-  const images = Array.from(container.querySelectorAll("img"));
-  return Promise.all(
-    images.map((img) => {
-      if (img.complete) return Promise.resolve();
-      return new Promise((resolve) => {
-        img.addEventListener("load", resolve, { once: true });
-        img.addEventListener("error", resolve, { once: true });
-      });
-    }),
-  );
-}
-
 function layoutWorks() {
   const list = document.querySelector(".collection-list-works-page");
   if (!list) return;
@@ -19,7 +6,6 @@ function layoutWorks() {
   if (!items.length) return;
 
   const width = window.innerWidth;
-
   const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
   let columns = 3;
@@ -43,7 +29,6 @@ function layoutWorks() {
 
   const listWidth = list.clientWidth;
   const itemWidth = (listWidth - horizontalGap * (columns - 1)) / columns;
-
   const columnHeights = new Array(columns).fill(0);
 
   items.forEach((item, index) => {
@@ -56,27 +41,30 @@ function layoutWorks() {
 
     const top = columnHeights[col];
 
-    item.style.width = itemWidth + "px";
-    item.style.left = left + "px";
-    item.style.top = top + "px";
+    item.style.width = `${itemWidth}px`;
+    item.style.left = `${left}px`;
+    item.style.top = `${top}px`;
 
     columnHeights[col] += item.offsetHeight + verticalGap;
   });
 
-  list.style.height = Math.max(...columnHeights) - verticalGap + "px";
+  list.style.height = `${Math.max(...columnHeights) - verticalGap}px`;
+  list.classList.add("is-layout-ready");
 }
 
-async function initWorksLayout() {
+function initWorksLayout() {
   const list = document.querySelector(".collection-list-works-page");
   if (!list) return;
 
-  await waitForImages(list);
-  layoutWorks();
+  requestAnimationFrame(layoutWorks);
 
-  setTimeout(layoutWorks, 150);
-  setTimeout(layoutWorks, 400);
-  setTimeout(layoutWorks, 800);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(layoutWorks);
+  }
+
+  window.addEventListener("resize", () => {
+    requestAnimationFrame(layoutWorks);
+  });
 }
 
-window.addEventListener("load", initWorksLayout);
-window.addEventListener("resize", layoutWorks);
+document.addEventListener("DOMContentLoaded", initWorksLayout);

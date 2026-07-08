@@ -957,16 +957,34 @@ a.w--current {
     --menu-content-offset: 18dvh;
 
     --menu-padding-x: 1rem;
+    --menu-padding-top: 1.5rem;
     --menu-padding-bottom: 1rem;
 
-    --menu-links-margin-top: 10svh;
+    --menu-links-margin-top: 8svh;
+    --menu-links-margin-bottom: 0;
+    --menu-link-gap: 0.35rem;
 
-    --menu-link-size: 2.65rem;
-    --menu-link-line-height: 0.86;
+    --menu-link-size: 2.35rem;
+    --menu-link-line-height: 0.84;
 
-    --menu-link-current-size: 3.45rem;
-    --menu-link-current-line-height: 0.84;
-    --menu-link-current-letter-spacing: -0.12rem;
+    --menu-link-current-size: 2.75rem;
+    --menu-link-current-line-height: 0.82;
+    --menu-link-current-letter-spacing: -0.08rem;
+
+    --menu-link-hover-size: 2.75rem;
+    --menu-link-hover-line-height: 0.82;
+    --menu-link-hover-letter-spacing: -0.08rem;
+  }
+
+  .menu-inner {
+    position: relative;
+    padding-bottom: 6.5rem;
+    overflow: hidden;
+  }
+
+  .menu-links_wrapper {
+    margin: var(--menu-links-margin-top) 0 0;
+    gap: var(--menu-link-gap);
   }
 
   .menu-link {
@@ -974,7 +992,42 @@ a.w--current {
     width: 100%;
     max-width: 100%;
     text-align: center;
-    overflow: hidden;
+    overflow: visible;
+    white-space: nowrap;
+  }
+
+  .slide-in-bottom {
+    overflow: visible;
+  }
+
+  .slide-in-bottom:not(.w--current) div {
+    padding: 0;
+    transition: none;
+    transform: none !important;
+  }
+
+  .slide-in-bottom:not(.w--current) div::before {
+    display: none;
+    content: none;
+  }
+
+  body.menu-open #modal-close-btn,
+  body.menu-open #modal-close-btn-mobile,
+  body.menu-open .menu-close-button {
+    position: absolute !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: max(1.5rem, env(safe-area-inset-bottom)) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+
+    z-index: 10002 !important;
+    margin: 0 !important;
   }
 }
 
@@ -985,41 +1038,49 @@ a.w--current {
     --menu-content-offset: 16dvh;
 
     --menu-padding-x: 0.875rem;
+    --menu-padding-top: 1.25rem;
     --menu-padding-bottom: 0.875rem;
 
-    --menu-links-margin-top: 11svh;
+    --menu-links-margin-top: 7svh;
+    --menu-link-gap: 0.32rem;
 
-    --menu-link-size: 2.35rem;
-    --menu-link-line-height: 0.84;
+    --menu-link-size: 2.12rem;
+    --menu-link-line-height: 0.82;
 
-    --menu-link-current-size: 3rem;
-    --menu-link-current-line-height: 0.84;
-    --menu-link-current-letter-spacing: -0.1rem;
+    --menu-link-current-size: 2.55rem;
+    --menu-link-current-line-height: 0.8;
+    --menu-link-current-letter-spacing: -0.07rem;
+
+    --menu-link-hover-size: 2.55rem;
+    --menu-link-hover-line-height: 0.8;
+    --menu-link-hover-letter-spacing: -0.07rem;
   }
-}
 
-@media screen and (max-width: 767px) {
+  .menu-inner {
+    padding-bottom: 5.75rem;
+  }
+
   body.menu-open #modal-close-btn,
   body.menu-open #modal-close-btn-mobile,
   body.menu-open .menu-close-button {
-    position: fixed !important;
-    top: auto !important;
-    right: auto !important;
-    bottom: calc(7rem + env(safe-area-inset-bottom)) !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 10002 !important;
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    bottom: max(1.25rem, env(safe-area-inset-bottom)) !important;
   }
 }
 
-@media screen and (max-width: 479px) {
-  body.menu-open #modal-close-btn,
-  body.menu-open #modal-close-btn-mobile,
-  body.menu-open .menu-close-button {
-    bottom: calc(6rem + env(safe-area-inset-bottom)) !important;
+@media screen and (max-width: 479px) and (max-height: 740px) {
+  #modal.menu {
+    --menu-links-margin-top: 5svh;
+    --menu-link-gap: 0.22rem;
+
+    --menu-link-size: 1.95rem;
+    --menu-link-line-height: 0.8;
+
+    --menu-link-current-size: 2.3rem;
+    --menu-link-current-line-height: 0.78;
+    --menu-link-current-letter-spacing: -0.06rem;
+  }
+
+  .menu-inner {
+    padding-bottom: 5.25rem;
   }
 }

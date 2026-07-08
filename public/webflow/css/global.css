@@ -795,6 +795,7 @@ a.w--current {
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   padding-inline: var(--menu-padding-x);
   padding-top: var(--menu-padding-top);

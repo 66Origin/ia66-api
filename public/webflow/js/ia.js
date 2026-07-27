@@ -68,7 +68,8 @@ function initIAChat(rootSelector) {
     topBar?.classList.add("is-hidden");
     bottomBar.classList.remove("is-hidden");
     bottomBar.style.position = "fixed";
-    bottomBar.style.width = "100%";
+    bottomBar.style.width = "100vw";
+    bottomBar.style.maxWidth = "100vw";
     bottomBar.style.left = "0";
     bottomBar.style.right = "0";
     bottomBar.style.bottom = "0";
@@ -83,6 +84,7 @@ function initIAChat(rootSelector) {
     bottomBar.style.right = "";
     bottomBar.style.top = "";
     bottomBar.style.bottom = "";
+    bottomBar.style.maxWidth = "";
     showBars();
   }
   function fillRemainingSpaceAfterScroll() {

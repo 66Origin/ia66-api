@@ -316,6 +316,27 @@ body.ia-scroll-locked {
   padding-bottom: calc(env(safe-area-inset-bottom) + 14px);
 }
 
+.ia-chat-top-bar.is-disabled {
+  pointer-events: none;
+}
+
+.ia-chat-top-bar.is-disabled .ia-header-left_text,
+.ia-chat-top-bar.is-disabled .ia-newchat_text,
+.ia-chat-top-bar.is-disabled .ia-top-bar_icon {
+  opacity: 0.4;
+}
+
+.ia-chat-top-bar.is-disabled [data-menu-open],
+.ia-chat-top-bar.is-disabled #ia-newchat {
+  cursor: not-allowed;
+}
+
+.ia-send-button.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /* ==================================================
      DESKTOP
   ================================================== */

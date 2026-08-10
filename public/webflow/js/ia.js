@@ -634,12 +634,22 @@ function initIAChat(rootSelector) {
       unlockUserScroll();
     }
 
+    // disable inputs and buttons
     [introTextarea, chatTextarea].forEach((el) => {
       if (!el) return;
 
       el.disabled = state;
       el.classList.toggle("is-waiting", state);
     });
+
+    [introButton, chatButton].forEach((el) => {
+      if (!el) return;
+
+      el.classList.toggle("is-disabled", state);
+      el.setAttribute("aria-disabled", String(state));
+    });
+
+    topBar?.classList.toggle("is-disabled", state);
 
     if (!state && !isMobile()) {
       chatTextarea?.focus();
@@ -959,6 +969,9 @@ function initIAChat(rootSelector) {
 
   newChatBtn?.addEventListener("click", (e) => {
     e.preventDefault();
+
+    if (isWaiting) return;
+
     resetChat();
   });
 
@@ -1170,6 +1183,8 @@ function initIAChat(rootSelector) {
   });
 
   iaHeaderButton?.addEventListener("click", () => {
+    if (isWaiting) return;
+
     handleHeaderIaButton();
   });
 

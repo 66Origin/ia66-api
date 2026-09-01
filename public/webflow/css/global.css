@@ -68,6 +68,20 @@ body {
   overflow: hidden;
 }
 
+.h-xxl.template h1 {
+  font-size: 5rem !important;
+  line-height: 1;
+  font-weight: normal;
+}
+
+.text-style-2lines {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 /* ==================================================
        VIDEO
     ================================================== */
@@ -605,14 +619,6 @@ body.ia-scroll-locked {
     width: auto;
     padding: 20px;
   }
-
-  /* #consent-banner-buttons {
-      flex-direction: column;
-    }
-
-    .cbtn {
-      width: 100%;
-    } */
 }
 
 .home-header,
@@ -1139,4 +1145,62 @@ a.w--current {
   .menu-inner {
     padding-bottom: 5.25rem;
   }
+}
+
+/* ==================================================
+    CARDS HOVER
+================================================== */
+
+@media not all and (pointer: coarse) {
+  .work-card,
+  .work-card .work-card-title,
+  .work-card .work-card-title .h-card,
+  .work-card .work-card-content,
+  .work-card .work-card-content .p,
+  .work-fullpage .work-fullpage_title,
+  .insight-card .insight-card-title,
+  .insight-card .insight-card-title .h-card,
+  .insight-card .insight-card-content,
+  .insight-card .insight-card-content .p,
+  .insight-fullpage .insight-fullpage_title,
+  .insight-card,
+  .team-content-card_title {
+    transition:
+      color 0.2s linear,
+      border-color 0.2s linear;
+    -webkit-transition:
+      color 0.2s linear,
+      border-color 0.2s linear;
+  }
+
+  .work-card:hover .work-card-title,
+  .work-card:hover .work-card-title .h-card,
+  .work-card:hover .work-card-content,
+  .work-card:hover .work-card-content .p,
+  .work-fullpage:hover .work-fullpage_title,
+  .insight-card:hover .insight-card-title,
+  .insight-card:hover .insight-card-title .h-card,
+  .insight-card:hover .insight-card-content,
+  .insight-card:hover .insight-card-content .p,
+  .insight-fullpage:hover .insight-fullpage_title,
+  .insight-card:hover,
+  .work-card:hover,
+  .team-contents_item:hover,
+  .team-content-card:hover .team-content-card_title,
+  .team-content-card:focus-within .team-content-card_title {
+    color: var(--_colors---accent-magenta);
+    border-color: var(--_colors---accent-magenta);
+  }
+}
+
+/* ==================================================
+    FOOTER
+================================================== */
+
+.footer-button {
+  background: none;
+}
+
+.footer-button:hover {
+  color: var(--_colors---accent-magenta);
 }

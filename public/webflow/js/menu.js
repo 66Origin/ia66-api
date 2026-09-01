@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function resetMenu() {
     gsap.set(modal, {
+      display: "none",
       visibility: "hidden",
       pointerEvents: "none",
     });
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("menu-open");
 
     gsap.set(modal, {
+      display: "flex",
       visibility: "visible",
       pointerEvents: "auto",
     });
@@ -108,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("menu-is-closing");
 
       gsap.set(modal, {
+        display: "flex",
         visibility: "visible",
         pointerEvents: "auto",
       });

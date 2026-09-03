@@ -593,16 +593,18 @@ body.ia-scroll-locked {
   border-radius: var(--_radius---r-0_rem);
   border: 1.5px solid var(--_colors---ink-900);
   color: var(--_colors---ink-900);
-  background: var(--_colors---accent-green);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.cbtn:hover {
-  background: var(--_colors---ink-900);
-  color: var(--_colors---paper-0);
+.cbtn-primary {
+  background: var(--_colors---accent-green);
+}
+
+.cbtn-primary:hover {
+  filter: saturate(0.85);
 }
 
 .cbtn-secondary {

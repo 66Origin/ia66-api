@@ -606,8 +606,7 @@ body.ia-scroll-locked {
 }
 
 .cbtn-secondary {
-  background: transparent;
-  background: var(--_colors---accent-magenta);
+  background: var(--_colors---paper-0);
 }
 
 @media screen and (max-width: 767px) {

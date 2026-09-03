@@ -593,7 +593,7 @@ body.ia-scroll-locked {
   border-radius: var(--_radius---r-0_rem);
   border: 1.5px solid var(--_colors---ink-900);
   color: var(--_colors---ink-900);
-  background: var(--_colors---paper-0);
+  background: var(--_colors---accent-green);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -601,13 +601,13 @@ body.ia-scroll-locked {
 }
 
 .cbtn:hover {
-  background: var(--_colors---accent-magenta);
-  color: var(--_colors---paper-0);
+  background: var(--_colors---paper-0);
+  color: var(--_colors---ink-900);
 }
 
 .cbtn-secondary {
   background: transparent;
-  color: #111;
+  background: var(--_colors---accent-magenta);
 }
 
 @media screen and (max-width: 767px) {

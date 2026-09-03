@@ -601,8 +601,8 @@ body.ia-scroll-locked {
 }
 
 .cbtn:hover {
-  background: var(--_colors---paper-0);
-  color: var(--_colors---ink-900);
+  background: var(--_colors---ink-900);
+  color: var(--_colors---paper-0);
 }
 
 .cbtn-secondary {

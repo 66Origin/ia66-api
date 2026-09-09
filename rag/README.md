@@ -228,7 +228,8 @@ La génération peut être lancée directement avec :
 npm run generate:rag
 ```
 
-Elle peut également être lancée par l’API RAG.
+Elle peut également être lancée par l’API RAG. Sur Vercel, l'API travaille dans
+`/tmp` et retourne un ZIP sans modifier ce dossier dans le déploiement.
 
 Après une génération :
 
@@ -245,20 +246,13 @@ Aucun ajout, remplacement ou retrait dans le File Search Store n’est effectué
 
 ## API de génération
 
-L’API permet de :
-
-- lancer une génération ;
-- suivre son statut ;
-- consulter son rapport ;
-- télécharger une archive ZIP.
+L’API lance le crawl de manière synchrone et retourne son rapport ainsi que
+l'archive ZIP dans la même réponse.
 
 Les routes disponibles sont :
 
 ```
-POST /api/v1/rag/generations
-GET  /api/v1/rag/generations
-GET  /api/v1/rag/generations/{id}
-GET  /api/v1/rag/generations/{id}/download
+POST /api/v1/rag/export
 ```
 
 Toutes ces routes sont protégées par `RAG_ADMIN_TOKEN`, ou par `ADMIN_TOKEN` comme solution de repli.

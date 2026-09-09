@@ -20,3 +20,4 @@ Ce dossier contient uniquement les **adaptateurs HTTP**.
 
 - `/v1/chat` : endpoint public (prod)
 - `/v1/filesearch/*` : endpoints admin / debug
+- `/v1/rag/export` : export Markdown synchrone protégé par `RAG_ADMIN_TOKEN`

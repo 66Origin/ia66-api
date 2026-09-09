@@ -11,7 +11,7 @@
     "upload:docs": "tsx scripts/filesearch/upload-docs.ts",
     "clean:store": "tsx scripts/filesearch/clean-store.ts",
     "generate:rag": "node --import tsx scripts/rag/generate-site-docs.ts",
-    "test:rag-generator": "node --import tsx --test tests/rag-generator.test.ts tests/rag-generation-jobs.test.ts",
+    "test:rag-generator": "node --import tsx --test tests/rag-generator.test.ts tests/rag-export-service.test.ts",
     "test:chat": "tsx scripts/test-chat.js"
   },
   "dependencies": {

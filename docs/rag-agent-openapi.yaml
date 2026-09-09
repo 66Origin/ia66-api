@@ -1,145 +1,70 @@
 openapi: 3.1.0
 info:
-  title: 66 Origin Markdown Generator
-  version: 1.0.0
-  description: Lance, suit et télécharge une génération Markdown de 66origin.com.
+  title: 66 Origin Markdown Export
+  version: 1.1.0
+  description: Génère et retourne une archive Markdown de 66origin.com.
 servers:
   - url: https://YOUR-IA66-API-DOMAIN
 security:
   - bearerAuth: []
 paths:
-  /api/v1/rag/generations:
+  /api/v1/rag/export:
     post:
-      operationId: startRagGeneration
-      summary: Lance une génération après confirmation explicite de l'utilisateur
+      operationId: exportRagDocuments
+      summary: Génère les documents après confirmation explicite de l'utilisateur
       responses:
-        "202":
-          description: Génération créée
+        "200":
+          description: Rapport et archive ZIP générés
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenerationEnvelope"
-        "409":
-          description: Une génération est déjà active
+                $ref: "#/components/schemas/ExportResponse"
         "401":
           description: Authentification invalide
-    get:
-      operationId: listRagGenerations
-      summary: Liste les dernières générations
-      parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 50
-            default: 10
-      responses:
-        "200":
-          description: Liste des générations
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  generations:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Generation"
-                required: [generations]
-  /api/v1/rag/generations/{id}:
-    get:
-      operationId: getRagGeneration
-      summary: Consulte le statut et le rapport d'une génération
-      parameters:
-        - $ref: "#/components/parameters/GenerationId"
-      responses:
-        "200":
-          description: État de la génération
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenerationEnvelope"
-        "404":
-          description: Génération inconnue
-  /api/v1/rag/generations/{id}/download:
-    get:
-      operationId: downloadRagGeneration
-      summary: Télécharge l'archive d'une génération terminée
-      parameters:
-        - $ref: "#/components/parameters/GenerationId"
-      responses:
-        "200":
-          description: Fichier transmis à ChatGPT
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  generationId:
-                    type: string
-                  openaiFileResponse:
-                    type: array
-                    maxItems: 1
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        mime_type:
-                          type: string
-                          const: application/zip
-                        content:
-                          type: string
-                          contentEncoding: base64
-                      required: [name, mime_type, content]
-                required: [generationId, openaiFileResponse]
-        "409":
-          description: Archive pas encore disponible
+        "413":
+          description: Archive trop volumineuse pour la réponse JSON Vercel
+        "500":
+          description: Échec du crawl ou de la création de l'archive
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-  parameters:
-    GenerationId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        pattern: "^rag_[a-zA-Z0-9_-]{8,80}$"
   schemas:
-    GenerationEnvelope:
+    ExportResponse:
       type: object
       properties:
-        generation:
-          $ref: "#/components/schemas/Generation"
-      required: [generation]
-    Generation:
+        export:
+          $ref: "#/components/schemas/Export"
+        openaiFileResponse:
+          type: array
+          maxItems: 1
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              mime_type:
+                type: string
+                const: application/zip
+              content:
+                type: string
+                contentEncoding: base64
+            required: [name, mime_type, content]
+      required: [export, openaiFileResponse]
+    Export:
       type: object
       properties:
         id:
           type: string
         status:
           type: string
-          enum: [queued, running, completed, completed_with_errors, failed]
-        createdAt:
-          type: string
-          format: date-time
-        startedAt:
-          type: string
-          format: date-time
-        completedAt:
-          type: string
-          format: date-time
-        archiveAvailable:
-          type: boolean
-        error:
-          type: string
+          enum: [completed, completed_with_errors]
+        archiveSizeBytes:
+          type: integer
         report:
           $ref: "#/components/schemas/Report"
-      required: [id, status, createdAt, archiveAvailable]
+      required: [id, status, archiveSizeBytes, report]
     Report:
       type: object
       properties:

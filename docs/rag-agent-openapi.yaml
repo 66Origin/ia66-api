@@ -1,0 +1,165 @@
+openapi: 3.1.0
+info:
+  title: 66 Origin Markdown Generator
+  version: 1.0.0
+  description: Lance, suit et télécharge une génération Markdown de 66origin.com.
+servers:
+  - url: https://YOUR-IA66-API-DOMAIN
+security:
+  - bearerAuth: []
+paths:
+  /api/v1/rag/generations:
+    post:
+      operationId: startRagGeneration
+      summary: Lance une génération après confirmation explicite de l'utilisateur
+      responses:
+        "202":
+          description: Génération créée
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerationEnvelope"
+        "409":
+          description: Une génération est déjà active
+        "401":
+          description: Authentification invalide
+    get:
+      operationId: listRagGenerations
+      summary: Liste les dernières générations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        "200":
+          description: Liste des générations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generations:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Generation"
+                required: [generations]
+  /api/v1/rag/generations/{id}:
+    get:
+      operationId: getRagGeneration
+      summary: Consulte le statut et le rapport d'une génération
+      parameters:
+        - $ref: "#/components/parameters/GenerationId"
+      responses:
+        "200":
+          description: État de la génération
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerationEnvelope"
+        "404":
+          description: Génération inconnue
+  /api/v1/rag/generations/{id}/download:
+    get:
+      operationId: downloadRagGeneration
+      summary: Télécharge l'archive d'une génération terminée
+      parameters:
+        - $ref: "#/components/parameters/GenerationId"
+      responses:
+        "200":
+          description: Fichier transmis à ChatGPT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generationId:
+                    type: string
+                  openaiFileResponse:
+                    type: array
+                    maxItems: 1
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        mime_type:
+                          type: string
+                          const: application/zip
+                        content:
+                          type: string
+                          contentEncoding: base64
+                      required: [name, mime_type, content]
+                required: [generationId, openaiFileResponse]
+        "409":
+          description: Archive pas encore disponible
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  parameters:
+    GenerationId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: "^rag_[a-zA-Z0-9_-]{8,80}$"
+  schemas:
+    GenerationEnvelope:
+      type: object
+      properties:
+        generation:
+          $ref: "#/components/schemas/Generation"
+      required: [generation]
+    Generation:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [queued, running, completed, completed_with_errors, failed]
+        createdAt:
+          type: string
+          format: date-time
+        startedAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        archiveAvailable:
+          type: boolean
+        error:
+          type: string
+        report:
+          $ref: "#/components/schemas/Report"
+      required: [id, status, createdAt, archiveAvailable]
+    Report:
+      type: object
+      properties:
+        startedAt: { type: string, format: date-time }
+        completedAt: { type: string, format: date-time }
+        source: { type: string, format: uri }
+        discovered: { type: integer }
+        created: { type: integer }
+        updated: { type: integer }
+        unchanged: { type: integer }
+        missing: { type: integer }
+        failed: { type: integer }
+        failures:
+          type: array
+          items:
+            type: object
+            properties:
+              url: { type: string, format: uri }
+              error: { type: string }
+            required: [url, error]
+      required:
+        [startedAt, completedAt, source, discovered, created, updated,
+         unchanged, missing, failed, failures]

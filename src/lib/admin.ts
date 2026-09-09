@@ -12,6 +12,27 @@ export function requireAdmin(req: Request) {
   return { ok: true as const };
 }
 
+export function requireRagAdmin(req: Request) {
+  const token = process.env.RAG_ADMIN_TOKEN || process.env.ADMIN_TOKEN;
+  if (!token) {
+    return {
+      ok: false as const,
+      status: 503,
+      error: "RAG admin token is not configured",
+    };
+  }
+
+  const headerToken =
+    req.headers.get("x-admin-token") ||
+    req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+
+  if (headerToken !== token) {
+    return { ok: false as const, status: 401, error: "Unauthorized" };
+  }
+
+  return { ok: true as const };
+}
+
 export function normalizeStoreParent(store: string) {
   return store.startsWith("fileSearchStores/")
     ? store

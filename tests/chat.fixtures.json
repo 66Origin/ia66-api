@@ -3,8 +3,6 @@
     "name": "home - positionnement - question générale",
     "payload": {
       "message": "Qu’est-ce que 66 Origin",
-      "entrypoint": "home",
-      "pageContext": { "pageType": "home", "pageTitle": "Home" },
       "conversation": {}
     },
     "assert": {
@@ -25,8 +23,6 @@
     "name": "home - offre - question simple",
     "payload": {
       "message": "C’est quoi votre offre",
-      "entrypoint": "home",
-      "pageContext": { "pageType": "home", "pageTitle": "Home" },
       "conversation": {}
     },
     "assert": {
@@ -45,8 +41,6 @@
     "name": "home - méthode - question directe",
     "payload": {
       "message": "Il y a une méthode 66 Origin",
-      "entrypoint": "home",
-      "pageContext": { "pageType": "method", "pageTitle": "Méthode" },
       "conversation": {}
     },
     "assert": {
@@ -57,8 +51,6 @@
     "name": "home - demande d’exemple - un seul projet max",
     "payload": {
       "message": "Tu as un exemple concret de projet en retail",
-      "entrypoint": "home",
-      "pageContext": { "pageType": "works", "pageTitle": "Works" },
       "conversation": {}
     },
     "assert": {
@@ -80,8 +72,6 @@
     "name": "home - projet similaire - lien attendu si projet cité",
     "payload": {
       "message": "Je cherche un projet similaire à une app mobile avec UX forte",
-      "entrypoint": "home",
-      "pageContext": { "pageType": "works", "pageTitle": "Works" },
       "conversation": {}
     },
     "assert": {
@@ -101,8 +91,6 @@
     "name": "hors périmètre - redirection chaleureuse",
     "payload": {
       "message": "Tu peux me résumer l’actualité politique de cette semaine",
-      "entrypoint": "other",
-      "pageContext": { "pageType": "other", "pageTitle": "—" },
       "conversation": {}
     },
     "assert": {
@@ -122,8 +110,6 @@
     "name": "détaille - autorise plus long",
     "payload": {
       "message": "Explique et détaille votre manière de passer du prototype au déploiement",
-      "entrypoint": "home",
-      "pageContext": { "pageType": "services", "pageTitle": "Services" },
       "conversation": {}
     },
     "assert": {
@@ -134,12 +120,6 @@
     "name": "case - question résultats - doit cadrer sur contenu",
     "payload": {
       "message": "Quels résultats chiffrés sur ce projet",
-      "entrypoint": "case",
-      "pageContext": {
-        "pageType": "case",
-        "pageSlug": "quipo",
-        "pageTitle": "Quipo"
-      },
       "conversation": {}
     },
     "assert": {
@@ -160,8 +140,6 @@
     "name": "careers - question stage - ton direct",
     "payload": {
       "message": "Je cherche un stage, est-ce que 66 Origin est pertinent",
-      "entrypoint": "careers",
-      "pageContext": { "pageType": "careers", "pageTitle": "Careers" },
       "conversation": {}
     },
     "assert": {
@@ -181,8 +159,6 @@
     "name": "services - contexte user - ouverture vers échange humain sans forcer",
     "payload": {
       "message": "On prépare une démo pour un salon et on veut une expérience plus immersive, vous pouvez aider",
-      "entrypoint": "services",
-      "pageContext": { "pageType": "services", "pageTitle": "Services" },
       "conversation": {}
     },
     "assert": {

@@ -27,8 +27,6 @@ rag/
 │   ├── works/
 │   ├── manifest.json
 │   └── last-run.json
-└── index/
-    └── rag_index_66origin.json
 ```
 
 ---
@@ -265,26 +263,6 @@ docs/rag-generation-api.md
 
 ---
 
-## Index historique
-
-Le fichier suivant est conservé pour le moment :
-
-```
-rag/index/rag_index_66origin.json
-```
-
-Il est référencé par un ancien système, mais il ne participe pas au workflow actuel de génération.
-
-Il n’est pas mis à jour automatiquement et ne doit pas être considéré comme la source du versioning des fichiers générés.
-
-Le versioning actuel repose sur :
-
-```
-rag/generated/manifest.json
-```
-
----
-
 ## Règles d’évolution
 
 Toute modification significative des fichiers éditoriaux doit être commitée explicitement.
@@ -294,10 +272,16 @@ Les changements générés automatiquement doivent être examinés séparément 
 La base éditoriale enrichie et la copie automatique du site doivent rester séparées :
 
 ```
-rag/docs       → connaissances enrichies et contrôlées
-rag/generated  → représentation automatique du site public
+
+rag/docs → connaissances enrichies et contrôlées
+rag/generated → représentation automatique du site public
+
 ```
 
 Le système de génération ne doit pas modifier automatiquement les fichiers éditoriaux existants.
 
 L’ajout, la mise à jour et la suppression des fichiers dans le File Search Store feront l’objet d’un workflow distinct.
+
+```
+
+```

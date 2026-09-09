@@ -52,12 +52,10 @@ export async function POST(req: Request) {
     );
   }
 
-  const { message, entrypoint, pageContext, conversation } = parsed.data;
+  const { message, conversation } = parsed.data;
 
   const prompt = buildChatPrompt({
     message,
-    entrypoint,
-    pageContext,
   });
   const storeName = getFileSearchStoreName();
 

@@ -1,35 +1,7 @@
 // src/lib/bot/prompt.ts
 
-type PageContext = {
-  pageType?:
-    | "home"
-    | "services"
-    | "method"
-    | "works"
-    | "case"
-    | "team"
-    | "news"
-    | "news_article"
-    | "careers"
-    | "contact"
-    | "other";
-  pageSlug?: string;
-  pageTitle?: string;
-  pageIntentHint?: string;
-};
-
 export type BuildChatPromptInput = {
   message: string;
-  entrypoint?:
-    | "home"
-    | "agency"
-    | "case"
-    | "team"
-    | "services"
-    | "careers"
-    | "news"
-    | "other";
-  pageContext?: PageContext;
 };
 
 function clip(s: string, max = 500): string {
@@ -39,18 +11,9 @@ function clip(s: string, max = 500): string {
 }
 
 export function buildChatPrompt(input: BuildChatPromptInput): string {
-  const { message, entrypoint, pageContext } = input;
+  const { message } = input;
 
   return `
-CONTEXTE_PAGE
-- pageType: ${pageContext?.pageType ?? "other"}
-- pageSlug: ${pageContext?.pageSlug ? clip(pageContext.pageSlug, 80) : "—"}
-- pageTitle: ${pageContext?.pageTitle ? clip(pageContext.pageTitle, 120) : "—"}
-- pageIntentHint: ${pageContext?.pageIntentHint ? clip(pageContext.pageIntentHint, 160) : "—"}
-
-ENTRYPOINT
-- ${entrypoint ?? "other"}
-
 RÈGLES LOCALES
 - Pour toute question factuelle sur 66 Origin : s’appuyer d’abord sur le contenu RAG.
 - Si plusieurs projets sont cités : répondre brièvement sur chacun avant de relier.

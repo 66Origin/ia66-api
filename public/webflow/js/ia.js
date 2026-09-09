@@ -680,7 +680,6 @@ function initIAChat(rootSelector) {
         },
         body: JSON.stringify({
           message,
-          entrypoint: "home",
           conversation: {
             history: history.slice(-MAX_HISTORY),
           },

@@ -1,0 +1,90 @@
+openapi: 3.1.0
+info:
+  title: 66 Origin Markdown Export
+  version: 1.1.0
+  description: Génère et retourne une archive Markdown de 66origin.com.
+servers:
+  - url: https://YOUR-IA66-API-DOMAIN
+security:
+  - bearerAuth: []
+paths:
+  /api/v1/rag/export:
+    post:
+      operationId: exportRagDocuments
+      summary: Génère les documents après confirmation explicite de l'utilisateur
+      responses:
+        "200":
+          description: Rapport et archive ZIP générés
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportResponse"
+        "401":
+          description: Authentification invalide
+        "413":
+          description: Archive trop volumineuse pour la réponse JSON Vercel
+        "500":
+          description: Échec du crawl ou de la création de l'archive
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    ExportResponse:
+      type: object
+      properties:
+        export:
+          $ref: "#/components/schemas/Export"
+        openaiFileResponse:
+          type: array
+          maxItems: 1
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              mime_type:
+                type: string
+                const: application/zip
+              content:
+                type: string
+                contentEncoding: base64
+            required: [name, mime_type, content]
+      required: [export, openaiFileResponse]
+    Export:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [completed, completed_with_errors]
+        archiveSizeBytes:
+          type: integer
+        report:
+          $ref: "#/components/schemas/Report"
+      required: [id, status, archiveSizeBytes, report]
+    Report:
+      type: object
+      properties:
+        startedAt: { type: string, format: date-time }
+        completedAt: { type: string, format: date-time }
+        source: { type: string, format: uri }
+        discovered: { type: integer }
+        created: { type: integer }
+        updated: { type: integer }
+        unchanged: { type: integer }
+        missing: { type: integer }
+        failed: { type: integer }
+        failures:
+          type: array
+          items:
+            type: object
+            properties:
+              url: { type: string, format: uri }
+              error: { type: string }
+            required: [url, error]
+      required:
+        [startedAt, completedAt, source, discovered, created, updated,
+         unchanged, missing, failed, failures]

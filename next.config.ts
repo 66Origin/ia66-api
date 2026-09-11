@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {
+    root: process.cwd(),
+  },
+  outputFileTracingIncludes: {
+    "/api/v1/rag/export": ["./rag/generated/**/*"],
+  },
 };
 
 export default nextConfig;

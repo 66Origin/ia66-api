@@ -33,6 +33,35 @@ export function requireRagAdmin(req: Request) {
   return { ok: true as const };
 }
 
+export function requireRagExport(req: Request) {
+  const allowedTokens = [
+    process.env.RAG_ADMIN_TOKEN || process.env.ADMIN_TOKEN,
+    process.env.RAG_EXPORT_PASSWORD,
+  ].filter((token): token is string => Boolean(token));
+
+  if (allowedTokens.length === 0) {
+    return {
+      ok: false as const,
+      status: 503,
+      error: "RAG export authentication is not configured",
+    };
+  }
+
+  const headerToken =
+    req.headers.get("x-admin-token") ||
+    req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+
+  if (!headerToken || !allowedTokens.includes(headerToken)) {
+    return {
+      ok: false as const,
+      status: 401,
+      error: "Unauthorized",
+    };
+  }
+
+  return { ok: true as const };
+}
+
 export function normalizeStoreParent(store: string) {
   return store.startsWith("fileSearchStores/")
     ? store

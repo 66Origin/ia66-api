@@ -23,22 +23,37 @@ validation humaine, l'archive téléchargée doit remplacer `rag/generated` puis
 ## Configuration
 
 ```dotenv
-RAG_ADMIN_TOKEN=remplacer-par-un-secret-long
+RAG_ADMIN_TOKEN=secret-reserve-aux-administrateurs-et-integrations
+RAG_EXPORT_PASSWORD=mot-de-passe-de-l-interface-interne
+UPSTASH_REDIS_REST_URL=...
+UPSTASH_REDIS_REST_TOKEN=...
 RAG_SOURCE_URL=https://www.66origin.com
 RAG_REQUEST_DELAY_MS=100
 RAG_CRAWL_CONCURRENCY=4
+
 ```
 
-Seul `RAG_ADMIN_TOKEN` est obligatoire. `ADMIN_TOKEN` peut servir de repli, mais
-un token dédié est recommandé. La route refuse de fonctionner si aucun token
-n'est configuré.
+`RAG_EXPORT_PASSWORD` protège l’interface utilisée par les collaborateurs.
+
+`RAG_ADMIN_TOKEN`, ou `ADMIN_TOKEN` en solution de repli, reste utilisable par
+les administrateurs et les intégrations techniques.
+
+Les variables Upstash Redis permettent de verrouiller temporairement
+l’export afin d’empêcher deux générations simultanées.
+
+## Interface interne
+
+L’interface est accessible à l’adresse :
+
+````text
+/admin/rag-export
 
 ## Utilisation locale
 
 ```bash
 npm install
 npm run dev
-```
+````
 
 Réponse compatible avec une Action GPT :
 
@@ -88,7 +103,9 @@ Le format `raw` reste lui-même soumis à la limite de réponse de Vercel.
 - Il n'existe pas d'historique de tâches côté Vercel.
 - Une requête interrompue doit être relancée.
 - Le versioning repart du snapshot inclus dans le dernier déploiement.
-- Deux instances Vercel peuvent exécuter simultanément deux exports distincts.
+- Un verrou Redis empêche le lancement simultané de deux exports.
+- Une seconde demande reçue pendant un export retourne une réponse HTTP `409`.
+- Le verrou expire automatiquement après 75 secondes afin d’éviter un blocage permanent.
 - La route dispose d'une durée maximale configurée à 60 secondes.
 
 Cette architecture est adaptée à la V1 observée (environ 42 pages, quelques

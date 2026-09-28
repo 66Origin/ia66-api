@@ -40,6 +40,8 @@ type StoreDocument = {
   name: string;
   displayName: string;
   syncHash?: string;
+  sourceType?: string;
+  canonicalUrl?: string;
 };
 
 type ValidationIssue = {
@@ -252,10 +254,20 @@ async function listStoreDocuments(storeName: string): Promise<StoreDocument[]> {
         (metadata) => metadata.key === "sync_sha256",
       )?.stringValue;
 
+      const sourceType = doc.customMetadata?.find(
+        (metadata) => metadata.key === "source_type",
+      )?.stringValue;
+
+      const canonicalUrl = doc.customMetadata?.find(
+        (metadata) => metadata.key === "canonical_url",
+      )?.stringValue;
+
       documents.push({
         name: doc.name,
         displayName: doc.displayName,
         syncHash,
+        sourceType,
+        canonicalUrl,
       });
     }
 
@@ -571,6 +583,58 @@ function validateManualDocument(document: LocalDocument): ValidationIssue[] {
   return issues;
 }
 
+function findDuplicateCanonicalUrls(documents: LocalDocument[]): Array<{
+  canonicalUrl: string;
+  displayNames: string[];
+}> {
+  const byCanonical = new Map<string, string[]>();
+
+  for (const document of documents) {
+    if (document.sourceType !== "generated") {
+      continue;
+    }
+
+    const canonicalUrl = document.metadata.canonicalUrl;
+
+    if (!canonicalUrl) continue;
+
+    const existing = byCanonical.get(canonicalUrl) ?? [];
+
+    existing.push(document.displayName);
+
+    byCanonical.set(canonicalUrl, existing);
+  }
+
+  return [...byCanonical.entries()]
+    .filter(([, displayNames]) => displayNames.length > 1)
+    .map(([canonicalUrl, displayNames]) => ({
+      canonicalUrl,
+      displayNames: displayNames.sort(),
+    }))
+    .sort((a, b) => a.canonicalUrl.localeCompare(b.canonicalUrl));
+}
+
+function findMatchingStoreDocument(
+  localDocument: LocalDocument,
+  storeByName: Map<string, StoreDocument>,
+  generatedStoreByCanonical: Map<string, StoreDocument>,
+): StoreDocument | undefined {
+  const byName = storeByName.get(localDocument.displayName);
+
+  if (byName) {
+    return byName;
+  }
+
+  if (
+    localDocument.sourceType === "generated" &&
+    localDocument.metadata.canonicalUrl
+  ) {
+    return generatedStoreByCanonical.get(localDocument.metadata.canonicalUrl);
+  }
+
+  return undefined;
+}
+
 async function main() {
   const isDryRun = process.argv.includes("--dry-run");
   const isApply = process.argv.includes("--apply");
@@ -586,6 +650,20 @@ async function main() {
   );
 
   const allLocalDocuments = buildLocalDocuments();
+
+  const duplicateCanonicalUrls = findDuplicateCanonicalUrls(allLocalDocuments);
+
+  if (duplicateCanonicalUrls.length > 0) {
+    throw new Error(
+      [
+        "Duplicate canonical_url detected:",
+        ...duplicateCanonicalUrls.flatMap(({ canonicalUrl, displayNames }) => [
+          `- ${canonicalUrl}`,
+          ...displayNames.map((displayName) => `    ${displayName}`),
+        ]),
+      ].join("\n"),
+    );
+  }
 
   const validationIssues = allLocalDocuments.flatMap(validateManualDocument);
 
@@ -650,31 +728,69 @@ async function main() {
     storeDocuments.map((document) => [document.displayName, document]),
   );
 
+  const generatedStoreByCanonical = new Map(
+    storeDocuments
+      .filter(
+        (document) =>
+          document.sourceType === "generated" && document.canonicalUrl,
+      )
+      .map((document) => [document.canonicalUrl!, document]),
+  );
+
   const created = localDocuments.filter(
-    (document) => !storeByName.has(document.displayName),
+    (document) =>
+      !findMatchingStoreDocument(
+        document,
+        storeByName,
+        generatedStoreByCanonical,
+      ),
   );
 
   const updated = localDocuments.filter((document) => {
-    const storeDocument = storeByName.get(document.displayName);
+    const storeDocument = findMatchingStoreDocument(
+      document,
+      storeByName,
+      generatedStoreByCanonical,
+    );
 
     if (!storeDocument) {
       return false;
     }
 
     return (
-      !storeDocument.syncHash || storeDocument.syncHash !== document.syncHash
+      !storeDocument.syncHash ||
+      storeDocument.syncHash !== document.syncHash ||
+      storeDocument.displayName !== document.displayName
     );
   });
 
   const unchanged = localDocuments.filter((document) => {
-    const storeDocument = storeByName.get(document.displayName);
+    const storeDocument = findMatchingStoreDocument(
+      document,
+      storeByName,
+      generatedStoreByCanonical,
+    );
 
     return (
-      Boolean(storeDocument) &&
-      Boolean(storeDocument?.syncHash) &&
-      storeDocument?.syncHash === document.syncHash
+      storeDocument !== undefined &&
+      storeDocument.syncHash === document.syncHash &&
+      storeDocument.displayName === document.displayName
     );
   });
+
+  const matchedStoreDocumentNames = new Set<string>();
+
+  for (const document of localDocuments) {
+    const storeDocument = findMatchingStoreDocument(
+      document,
+      storeByName,
+      generatedStoreByCanonical,
+    );
+
+    if (storeDocument) {
+      matchedStoreDocumentNames.add(storeDocument.name);
+    }
+  }
 
   const deleted = onlyDisplayName
     ? storeDocuments.filter(
@@ -683,7 +799,7 @@ async function main() {
           !localByName.has(document.displayName),
       )
     : storeDocuments.filter(
-        (document) => !localByName.has(document.displayName),
+        (document) => !matchedStoreDocumentNames.has(document.name),
       );
 
   const deletionRatio =
@@ -792,7 +908,11 @@ async function main() {
       console.log(`\nUpdating ${updated.length} document(s)...`);
 
       for (const document of updated) {
-        const storeDocument = storeByName.get(document.displayName);
+        const storeDocument = findMatchingStoreDocument(
+          document,
+          storeByName,
+          generatedStoreByCanonical,
+        );
 
         if (!storeDocument) {
           throw new Error(

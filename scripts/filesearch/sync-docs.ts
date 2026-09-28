@@ -22,6 +22,7 @@ type LocalDocument = {
 };
 
 type DocumentMetadata = {
+  schemaVersion?: number;
   title?: string;
   slug?: string;
   contentType?: string;
@@ -40,6 +41,17 @@ type StoreDocument = {
   displayName: string;
   syncHash?: string;
 };
+
+type ValidationIssue = {
+  displayName: string;
+  message: string;
+};
+
+function getNumber(value: unknown): number | undefined {
+  return typeof value === "number" && Number.isFinite(value)
+    ? value
+    : undefined;
+}
 
 function getString(value: unknown): string | undefined {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
@@ -486,6 +498,8 @@ function extractDocsMetadata(filePath: string): DocumentMetadata {
     const data = parsed.data;
 
     return {
+      schemaVersion: getNumber(data.schema_version),
+
       title: getString(data.title),
       slug: getString(data.slug),
 
@@ -505,6 +519,58 @@ function extractDocsMetadata(filePath: string): DocumentMetadata {
   }
 }
 
+function validateManualDocument(document: LocalDocument): ValidationIssue[] {
+  if (document.sourceType !== "docs") {
+    return [];
+  }
+
+  const issues: ValidationIssue[] = [];
+  const metadata = document.metadata;
+
+  if (metadata.schemaVersion !== 1) {
+    return issues;
+  }
+
+  if (!metadata.title) {
+    issues.push({
+      displayName: document.displayName,
+      message: "Missing title",
+    });
+  }
+
+  if (!metadata.contentType) {
+    issues.push({
+      displayName: document.displayName,
+      message: "Missing content_type",
+    });
+  }
+
+  if (document.displayName.startsWith("docs/case-studies/")) {
+    if (!metadata.slug) {
+      issues.push({
+        displayName: document.displayName,
+        message: "Missing slug",
+      });
+    }
+
+    if (!metadata.description) {
+      issues.push({
+        displayName: document.displayName,
+        message: "Missing description",
+      });
+    }
+
+    if (!metadata.category) {
+      issues.push({
+        displayName: document.displayName,
+        message: "Missing category",
+      });
+    }
+  }
+
+  return issues;
+}
+
 async function main() {
   const isDryRun = process.argv.includes("--dry-run");
   const isApply = process.argv.includes("--apply");
@@ -520,6 +586,16 @@ async function main() {
   );
 
   const allLocalDocuments = buildLocalDocuments();
+
+  const validationIssues = allLocalDocuments.flatMap(validateManualDocument);
+
+  if (validationIssues.length > 0) {
+    console.log("\nDocument validation warnings:");
+
+    for (const issue of validationIssues) {
+      console.log(`  ! ${issue.displayName}: ${issue.message}`);
+    }
+  }
 
   const localDocuments = onlyDisplayName
     ? allLocalDocuments.filter(
@@ -609,6 +685,28 @@ async function main() {
     : storeDocuments.filter(
         (document) => !localByName.has(document.displayName),
       );
+
+  const deletionRatio =
+    storeDocuments.length > 0 ? deleted.length / storeDocuments.length : 0;
+
+  const MAX_DELETION_RATIO = 0.25;
+
+  if (
+    !onlyDisplayName &&
+    deleted.length > 0 &&
+    deletionRatio > MAX_DELETION_RATIO
+  ) {
+    throw new Error(
+      [
+        "Synchronization aborted.",
+        `${deleted.length}/${storeDocuments.length} store documents would be deleted`,
+        `(${Math.round(deletionRatio * 100)}%).`,
+        `Maximum allowed deletion ratio is ${Math.round(
+          MAX_DELETION_RATIO * 100,
+        )}%.`,
+      ].join(" "),
+    );
+  }
 
   console.log("\nFile Search synchronization preview");
   console.log(`Store: ${storeName}`);

@@ -15,6 +15,18 @@ Cette convention s'applique principalement aux nouveaux documents.
 - Les champs métier spécifiques restent facultatifs sauf indication contraire.
 - Les anciens documents hétérogènes ne sont pas à réécrire immédiatement.
 
+## Version du schéma
+
+Tous les nouveaux documents manuels suivant cette convention doivent déclarer :
+
+```yaml
+schema_version: 1
+```
+
+`schema_version` permet au système de synchronisation d'identifier les documents qui suivent explicitement la convention actuelle.
+
+Les documents historiques sans `schema_version` restent compatibles et ne sont pas soumis aux validations strictes du nouveau schéma.
+
 ## Structure des dossiers
 
 ### Case studies
@@ -96,6 +108,7 @@ Exemple :
 
 ```yaml
 ---
+schema_version: 1
 title: "Titre du document"
 slug: "slug-du-document"
 content_type: "..."
@@ -114,6 +127,9 @@ tags:
 Utiliser les noms suivants :
 
 ```text
+schema_version
+content_type
+content_subtype
 category
 agency
 partner
@@ -122,8 +138,6 @@ canonical_url
 date_published
 date_modified
 author_name
-content_type
-content_subtype
 ```
 
 Éviter notamment :
@@ -231,6 +245,7 @@ utiliser ce format :
 
 ```yaml
 ---
+schema_version: 1
 title: "Nom du projet"
 slug: "slug-du-projet"
 content_type: "work"
@@ -249,6 +264,7 @@ date_modified: "YYYY-MM-DD"
 
 ### Champs obligatoires pour les nouveaux case studies
 
+- `schema_version`
 - `title`
 - `slug`
 - `content_type`
@@ -273,6 +289,7 @@ Exemple avec champs métier supplémentaires :
 
 ```yaml
 ---
+schema_version: 1
 title: "Delivery Safe : sac de livraison connecté pour sécuriser les livreurs à vélo"
 slug: "delivery-safe-sac-livraison-connecte-securite-livreurs-velo"
 content_type: "work"
@@ -300,6 +317,7 @@ Exemple :
 
 ```yaml
 ---
+schema_version: 1
 title: "O Storytelling Mode"
 content_type: "personality"
 content_subtype: "storytelling"

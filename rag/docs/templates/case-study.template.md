@@ -1,4 +1,5 @@
 ---
+schema_version: 1
 title: ""
 slug: ""
 content_type: "work"

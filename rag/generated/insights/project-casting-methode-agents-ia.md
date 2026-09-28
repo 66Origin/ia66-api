@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/project-casting-methode-agents-ia"
 source_hash: "sha256:68b2f246da90c723e9bad1e01def309ba7ce5ebd72a2ca35e0e0f2be8ee4b5e8"
 description: "Découvrez Project Casting, la méthode de Philippe Mihelic pour organiser plusieurs agents IA, partager la mémoire du projet et garder le final cut humain."
+date_published: "2026-07-27"
+author_name: "Philippe Mihelic"
+category: "Orchestrer humains et agents"
 ---
 
 # Je ne travaille plus avec une IA. Je caste des équipes.

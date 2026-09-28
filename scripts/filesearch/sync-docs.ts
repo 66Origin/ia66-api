@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { GoogleGenAI } from "@google/genai";
+import matter from "gray-matter";
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!,
@@ -15,24 +16,110 @@ const ai = new GoogleGenAI({
 type LocalDocument = {
   filePath: string;
   displayName: string;
-  sha256: string;
+  syncHash: string;
   sourceType: "docs" | "generated";
+  metadata: DocumentMetadata;
+};
+
+type DocumentMetadata = {
+  title?: string;
+  slug?: string;
+  contentType?: string;
+  contentSubtype?: string;
+  canonicalUrl?: string;
+  sourceHash?: string;
+  description?: string;
+  datePublished?: string;
+  dateModified?: string;
+  authorName?: string;
+  category?: string;
 };
 
 type StoreDocument = {
   name: string;
   displayName: string;
-  sha256?: string;
+  syncHash?: string;
 };
+
+function getString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function extractGeneratedMetadata(filePath: string): DocumentMetadata {
+  const raw = fs.readFileSync(filePath, "utf8");
+  const parsed = matter(raw);
+  const data = parsed.data;
+
+  return {
+    title: getString(data.title),
+    slug: getString(data.slug),
+    contentType: getString(data.type),
+    canonicalUrl: getString(data.source_url),
+    sourceHash: getString(data.source_hash),
+    description: getString(data.description),
+    datePublished: getString(data.date_published),
+    authorName: getString(data.author_name),
+    category: getString(data.category),
+  };
+}
+
+function inferContentMetadata(
+  displayName: string,
+): Pick<DocumentMetadata, "contentType" | "contentSubtype"> {
+  if (displayName.startsWith("docs/case-studies/")) {
+    return {
+      contentType: "work",
+    };
+  }
+
+  if (displayName.startsWith("docs/contenus/")) {
+    return {
+      contentType: "content",
+    };
+  }
+
+  if (displayName.startsWith("docs/personnalite/storytelling/")) {
+    return {
+      contentType: "personality",
+      contentSubtype: "storytelling",
+    };
+  }
+
+  if (displayName.startsWith("docs/personnalite/")) {
+    return {
+      contentType: "personality",
+    };
+  }
+
+  if (displayName.startsWith("generated/works/")) {
+    return {
+      contentType: "work",
+    };
+  }
+
+  if (displayName.startsWith("generated/insights/")) {
+    return {
+      contentType: "insight",
+    };
+  }
+
+  if (displayName.startsWith("generated/team/")) {
+    return {
+      contentType: "team",
+    };
+  }
+
+  if (displayName.startsWith("generated/pages/")) {
+    return {
+      contentType: "page",
+    };
+  }
+
+  return {};
+}
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function computeSha256(filePath: string): string {
-  const content = fs.readFileSync(filePath);
-
-  return crypto.createHash("sha256").update(content).digest("hex");
 }
 
 function requireEnv(name: string): string {
@@ -102,11 +189,30 @@ function buildLocalDocuments(): LocalDocument[] {
         .relative(source.directory, filePath)
         .replaceAll("\\", "/");
 
+      if (source.prefix === "docs" && relativePath.startsWith("templates/")) {
+        continue;
+      }
+
+      const displayName = `${source.prefix}/${relativePath}`;
+
+      const inferredMetadata = inferContentMetadata(displayName);
+
+      const extractedMetadata =
+        source.prefix === "generated"
+          ? extractGeneratedMetadata(filePath)
+          : extractDocsMetadata(filePath);
+
+      const metadata: DocumentMetadata = {
+        ...extractedMetadata,
+        ...inferredMetadata,
+      };
+
       documents.push({
         filePath,
-        displayName: `${source.prefix}/${relativePath}`,
-        sha256: computeSha256(filePath),
+        displayName,
+        syncHash: computeSyncHash(filePath, metadata),
         sourceType: source.prefix as "docs" | "generated",
+        metadata,
       });
     }
   }
@@ -130,14 +236,14 @@ async function listStoreDocuments(storeName: string): Promise<StoreDocument[]> {
         continue;
       }
 
-      const sha256 = doc.customMetadata?.find(
-        (metadata) => metadata.key === "content_sha256",
+      const syncHash = doc.customMetadata?.find(
+        (metadata) => metadata.key === "sync_sha256",
       )?.stringValue;
 
       documents.push({
         name: doc.name,
         displayName: doc.displayName,
-        sha256,
+        syncHash,
       });
     }
 
@@ -149,6 +255,15 @@ async function listStoreDocuments(storeName: string): Promise<StoreDocument[]> {
   }
 
   return documents;
+}
+
+async function findStoreDocumentsByDisplayName(
+  storeName: string,
+  displayName: string,
+): Promise<StoreDocument[]> {
+  const documents = await listStoreDocuments(storeName);
+
+  return documents.filter((document) => document.displayName === displayName);
 }
 
 async function uploadDocument(
@@ -163,22 +278,11 @@ async function uploadDocument(
     config: {
       displayName: document.displayName,
       mimeType: "text/markdown",
-      customMetadata: [
-        {
-          key: "content_sha256",
-          stringValue: document.sha256,
-        },
-        {
-          key: "source_path",
-          stringValue: document.displayName,
-        },
-        {
-          key: "source_type",
-          stringValue: document.sourceType,
-        },
-      ],
+      customMetadata: buildCustomMetadata(document),
     },
   });
+
+  let pollCount = 0;
 
   while (!operation.done) {
     await sleep(2000);
@@ -186,6 +290,14 @@ async function uploadDocument(
     operation = await ai.operations.get({
       operation,
     });
+
+    pollCount++;
+
+    if (pollCount % 15 === 0) {
+      console.log(
+        `Still indexing: ${document.displayName} (${pollCount * 2}s)`,
+      );
+    }
   }
 
   if (operation.error) {
@@ -206,7 +318,50 @@ async function updateDocument(
 ): Promise<void> {
   console.log(`Updating: ${localDocument.displayName}`);
 
-  await uploadDocument(storeName, localDocument);
+  let uploadError: unknown;
+
+  try {
+    await uploadDocument(storeName, localDocument);
+  } catch (error) {
+    uploadError = error;
+
+    console.warn(
+      `Upload reported an error for ${localDocument.displayName}. Checking store state...`,
+    );
+  }
+
+  const matchingDocuments = await findStoreDocumentsByDisplayName(
+    storeName,
+    localDocument.displayName,
+  );
+
+  const newDocument = matchingDocuments.find(
+    (document) => document.syncHash === localDocument.syncHash,
+  );
+
+  if (!newDocument) {
+    if (uploadError) {
+      throw uploadError;
+    }
+
+    throw new Error(
+      `Uploaded document could not be verified: ${localDocument.displayName}`,
+    );
+  }
+
+  if (uploadError) {
+    console.log(
+      `Upload succeeded despite polling error: ${localDocument.displayName}`,
+    );
+  }
+
+  if (newDocument.name === storeDocument.name) {
+    throw new Error(
+      `New and previous document have the same name: ${localDocument.displayName}`,
+    );
+  }
+
+  console.log(`Verified new version: ${newDocument.name}`);
 
   console.log(`Deleting previous version: ${storeDocument.name}`);
 
@@ -240,6 +395,114 @@ function findDuplicateDisplayNames<T extends { displayName: string }>(
     .filter(([, count]) => count > 1)
     .map(([displayName]) => displayName)
     .sort();
+}
+
+function buildCustomMetadata(document: LocalDocument) {
+  const metadata = [
+    {
+      key: "sync_sha256",
+      stringValue: document.syncHash,
+    },
+    {
+      key: "source_path",
+      stringValue: document.displayName,
+    },
+    {
+      key: "source_type",
+      stringValue: document.sourceType,
+    },
+  ];
+
+  const optionalMetadata: Array<[string, string | undefined]> = [
+    ["content_type", document.metadata.contentType],
+    ["content_subtype", document.metadata.contentSubtype],
+    ["title", document.metadata.title],
+    ["slug", document.metadata.slug],
+    ["canonical_url", document.metadata.canonicalUrl],
+    ["source_hash", document.metadata.sourceHash],
+    ["description", document.metadata.description],
+    ["date_published", document.metadata.datePublished],
+    ["date_modified", document.metadata.dateModified],
+    ["author_name", document.metadata.authorName],
+    ["category", document.metadata.category],
+  ];
+
+  for (const [key, value] of optionalMetadata) {
+    if (value) {
+      metadata.push({
+        key,
+        stringValue: value,
+      });
+    }
+  }
+
+  return metadata;
+}
+
+function computeSyncHash(filePath: string, metadata: DocumentMetadata): string {
+  const content = fs.readFileSync(filePath);
+
+  const normalizedMetadata = JSON.stringify(
+    {
+      contentType: metadata.contentType,
+      contentSubtype: metadata.contentSubtype,
+      title: metadata.title,
+      slug: metadata.slug,
+      canonicalUrl: metadata.canonicalUrl,
+      sourceHash: metadata.sourceHash,
+      description: metadata.description,
+      datePublished: metadata.datePublished,
+      dateModified: metadata.dateModified,
+      authorName: metadata.authorName,
+      category: metadata.category,
+    },
+    Object.keys({
+      contentType: metadata.contentType,
+      contentSubtype: metadata.contentSubtype,
+      title: metadata.title,
+      slug: metadata.slug,
+      canonicalUrl: metadata.canonicalUrl,
+      sourceHash: metadata.sourceHash,
+      description: metadata.description,
+      datePublished: metadata.datePublished,
+      dateModified: metadata.dateModified,
+      authorName: metadata.authorName,
+      category: metadata.category,
+    }).sort(),
+  );
+
+  return crypto
+    .createHash("sha256")
+    .update(content)
+    .update(normalizedMetadata)
+    .digest("hex");
+}
+
+function extractDocsMetadata(filePath: string): DocumentMetadata {
+  const raw = fs.readFileSync(filePath, "utf8");
+
+  try {
+    const parsed = matter(raw);
+    const data = parsed.data;
+
+    return {
+      title: getString(data.title),
+      slug: getString(data.slug),
+
+      canonicalUrl: getString(data.canonical_url) ?? getString(data.source_url),
+
+      description: getString(data.description),
+
+      datePublished: getString(data.date_published),
+      dateModified: getString(data.date_modified),
+
+      authorName: getString(data.author_name) ?? getString(data.author),
+
+      category: getString(data.category) ?? getString(data.categorie),
+    };
+  } catch {
+    return {};
+  }
 }
 
 async function main() {
@@ -322,7 +585,9 @@ async function main() {
       return false;
     }
 
-    return !storeDocument.sha256 || storeDocument.sha256 !== document.sha256;
+    return (
+      !storeDocument.syncHash || storeDocument.syncHash !== document.syncHash
+    );
   });
 
   const unchanged = localDocuments.filter((document) => {
@@ -330,8 +595,8 @@ async function main() {
 
     return (
       Boolean(storeDocument) &&
-      Boolean(storeDocument?.sha256) &&
-      storeDocument?.sha256 === document.sha256
+      Boolean(storeDocument?.syncHash) &&
+      storeDocument?.syncHash === document.syncHash
     );
   });
 

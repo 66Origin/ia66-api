@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "https://www.66origin.com",
-  "generatedAt": "2026-09-09T13:09:26.237Z",
+  "generatedAt": "2026-09-28T13:49:17.600Z",
   "documents": [
     {
       "type": "page",
@@ -13,7 +13,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:44.808Z",
-      "lastSeenAt": "2026-09-09T13:09:24.781Z",
+      "lastSeenAt": "2026-09-28T13:49:15.911Z",
       "lastGeneratedAt": "2026-09-09T13:09:04.120Z"
     },
     {
@@ -26,7 +26,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.341Z",
-      "lastSeenAt": "2026-09-09T13:09:24.836Z",
+      "lastSeenAt": "2026-09-28T13:49:15.930Z",
       "lastGeneratedAt": "2026-09-08T13:14:53.341Z"
     },
     {
@@ -39,7 +39,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.287Z",
-      "lastSeenAt": "2026-09-09T13:09:24.821Z",
+      "lastSeenAt": "2026-09-28T13:49:15.930Z",
       "lastGeneratedAt": "2026-09-08T13:14:53.287Z"
     },
     {
@@ -52,8 +52,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.321Z",
-      "lastSeenAt": "2026-09-09T13:09:24.836Z",
-      "lastGeneratedAt": "2026-09-08T13:14:53.321Z"
+      "lastSeenAt": "2026-09-28T13:49:15.931Z",
+      "lastGeneratedAt": "2026-09-28T13:49:15.931Z"
     },
     {
       "type": "insight",
@@ -65,8 +65,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:44.942Z",
-      "lastSeenAt": "2026-09-09T13:09:24.921Z",
-      "lastGeneratedAt": "2026-09-08T13:14:44.942Z"
+      "lastSeenAt": "2026-09-28T13:49:16.085Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.085Z"
     },
     {
       "type": "insight",
@@ -78,8 +78,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.125Z",
-      "lastSeenAt": "2026-09-09T13:09:24.961Z",
-      "lastGeneratedAt": "2026-09-08T13:14:45.125Z"
+      "lastSeenAt": "2026-09-28T13:49:16.085Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.085Z"
     },
     {
       "type": "insight",
@@ -91,8 +91,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.276Z",
-      "lastSeenAt": "2026-09-09T13:09:24.991Z",
-      "lastGeneratedAt": "2026-09-08T13:14:45.276Z"
+      "lastSeenAt": "2026-09-28T13:49:16.246Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.246Z"
     },
     {
       "type": "insight",
@@ -104,8 +104,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.437Z",
-      "lastSeenAt": "2026-09-09T13:09:24.984Z",
-      "lastGeneratedAt": "2026-09-08T13:14:45.437Z"
+      "lastSeenAt": "2026-09-28T13:49:16.086Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.086Z"
     },
     {
       "type": "insight",
@@ -117,8 +117,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.687Z",
-      "lastSeenAt": "2026-09-09T13:09:25.063Z",
-      "lastGeneratedAt": "2026-09-08T13:14:45.687Z"
+      "lastSeenAt": "2026-09-28T13:49:16.338Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.338Z"
     },
     {
       "type": "insight",
@@ -130,8 +130,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.863Z",
-      "lastSeenAt": "2026-09-09T13:09:25.102Z",
-      "lastGeneratedAt": "2026-09-08T13:14:45.863Z"
+      "lastSeenAt": "2026-09-28T13:49:16.350Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.350Z"
     },
     {
       "type": "insight",
@@ -143,8 +143,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.073Z",
-      "lastSeenAt": "2026-09-09T13:09:25.142Z",
-      "lastGeneratedAt": "2026-09-08T13:14:46.073Z"
+      "lastSeenAt": "2026-09-28T13:49:16.338Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.338Z"
     },
     {
       "type": "insight",
@@ -156,8 +156,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.296Z",
-      "lastSeenAt": "2026-09-09T13:09:25.142Z",
-      "lastGeneratedAt": "2026-09-08T13:14:46.296Z"
+      "lastSeenAt": "2026-09-28T13:49:16.397Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.397Z"
     },
     {
       "type": "insight",
@@ -169,8 +169,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.558Z",
-      "lastSeenAt": "2026-09-09T13:09:25.207Z",
-      "lastGeneratedAt": "2026-09-08T13:14:46.558Z"
+      "lastSeenAt": "2026-09-28T13:49:16.613Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.613Z"
     },
     {
       "type": "insight",
@@ -178,12 +178,12 @@
       "sourceUrl": "https://www.66origin.com/insights/quand-nos-agents-choisiront-les-marques-pour-nous",
       "canonicalUrl": "https://www.66origin.com/insights/quand-nos-agents-choisiront-les-marques-pour-nous",
       "outputFile": "insights/quand-nos-agents-choisiront-les-marques-pour-nous.md",
-      "sourceHash": "sha256:b3695af0dd743b63844a891e4475fc397613867f79ba2248cb50fde06f3d1814",
-      "version": 1,
+      "sourceHash": "sha256:7a6d721132b5b4a719013c31ad821ee66e022f28f6cf7480cc396dec916d2073",
+      "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-09T13:09:03.634Z",
-      "lastSeenAt": "2026-09-09T13:09:25.243Z",
-      "lastGeneratedAt": "2026-09-09T13:09:03.634Z"
+      "lastSeenAt": "2026-09-28T13:49:16.613Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.613Z"
     },
     {
       "type": "insight",
@@ -195,8 +195,8 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.792Z",
-      "lastSeenAt": "2026-09-09T13:09:25.289Z",
-      "lastGeneratedAt": "2026-09-08T13:14:46.792Z"
+      "lastSeenAt": "2026-09-28T13:49:16.494Z",
+      "lastGeneratedAt": "2026-09-28T13:49:16.494Z"
     },
     {
       "type": "page",
@@ -208,7 +208,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.964Z",
-      "lastSeenAt": "2026-09-09T13:09:25.312Z",
+      "lastSeenAt": "2026-09-28T13:49:16.534Z",
       "lastGeneratedAt": "2026-09-08T13:14:46.964Z"
     },
     {
@@ -221,7 +221,7 @@
       "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:17:40.589Z",
-      "lastSeenAt": "2026-09-09T13:09:25.346Z",
+      "lastSeenAt": "2026-09-28T13:49:16.638Z",
       "lastGeneratedAt": "2026-09-09T13:09:03.799Z"
     },
     {
@@ -234,7 +234,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.307Z",
-      "lastSeenAt": "2026-09-09T13:09:25.383Z",
+      "lastSeenAt": "2026-09-28T13:49:16.689Z",
       "lastGeneratedAt": "2026-09-08T13:14:47.307Z"
     },
     {
@@ -247,7 +247,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.531Z",
-      "lastSeenAt": "2026-09-09T13:09:25.427Z",
+      "lastSeenAt": "2026-09-28T13:49:16.763Z",
       "lastGeneratedAt": "2026-09-08T13:14:47.531Z"
     },
     {
@@ -260,7 +260,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.761Z",
-      "lastSeenAt": "2026-09-09T13:09:25.456Z",
+      "lastSeenAt": "2026-09-28T13:49:16.751Z",
       "lastGeneratedAt": "2026-09-08T13:14:47.761Z"
     },
     {
@@ -273,7 +273,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.894Z",
-      "lastSeenAt": "2026-09-09T13:09:25.492Z",
+      "lastSeenAt": "2026-09-28T13:49:16.783Z",
       "lastGeneratedAt": "2026-09-08T13:14:47.894Z"
     },
     {
@@ -286,7 +286,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.054Z",
-      "lastSeenAt": "2026-09-09T13:09:25.523Z",
+      "lastSeenAt": "2026-09-28T13:49:16.844Z",
       "lastGeneratedAt": "2026-09-08T13:14:48.054Z"
     },
     {
@@ -299,7 +299,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.209Z",
-      "lastSeenAt": "2026-09-09T13:09:25.564Z",
+      "lastSeenAt": "2026-09-28T13:49:16.912Z",
       "lastGeneratedAt": "2026-09-08T13:14:48.209Z"
     },
     {
@@ -312,7 +312,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.437Z",
-      "lastSeenAt": "2026-09-09T13:09:25.600Z",
+      "lastSeenAt": "2026-09-28T13:49:16.902Z",
       "lastGeneratedAt": "2026-09-08T13:14:48.437Z"
     },
     {
@@ -325,7 +325,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.626Z",
-      "lastSeenAt": "2026-09-09T13:09:25.641Z",
+      "lastSeenAt": "2026-09-28T13:49:16.927Z",
       "lastGeneratedAt": "2026-09-08T13:14:48.626Z"
     },
     {
@@ -338,7 +338,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.864Z",
-      "lastSeenAt": "2026-09-09T13:09:25.662Z",
+      "lastSeenAt": "2026-09-28T13:49:16.999Z",
       "lastGeneratedAt": "2026-09-08T13:14:48.864Z"
     },
     {
@@ -351,7 +351,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.112Z",
-      "lastSeenAt": "2026-09-09T13:09:25.708Z",
+      "lastSeenAt": "2026-09-28T13:49:17.055Z",
       "lastGeneratedAt": "2026-09-08T13:14:49.112Z"
     },
     {
@@ -364,7 +364,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.283Z",
-      "lastSeenAt": "2026-09-09T13:09:25.747Z",
+      "lastSeenAt": "2026-09-28T13:49:17.050Z",
       "lastGeneratedAt": "2026-09-08T13:14:49.283Z"
     },
     {
@@ -377,7 +377,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.556Z",
-      "lastSeenAt": "2026-09-09T13:09:25.780Z",
+      "lastSeenAt": "2026-09-28T13:49:17.066Z",
       "lastGeneratedAt": "2026-09-08T13:14:49.556Z"
     },
     {
@@ -390,7 +390,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.926Z",
-      "lastSeenAt": "2026-09-09T13:09:25.802Z",
+      "lastSeenAt": "2026-09-28T13:49:17.151Z",
       "lastGeneratedAt": "2026-09-08T13:14:49.926Z"
     },
     {
@@ -403,7 +403,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.160Z",
-      "lastSeenAt": "2026-09-09T13:09:25.849Z",
+      "lastSeenAt": "2026-09-28T13:49:17.200Z",
       "lastGeneratedAt": "2026-09-08T13:14:50.160Z"
     },
     {
@@ -416,7 +416,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.323Z",
-      "lastSeenAt": "2026-09-09T13:09:25.883Z",
+      "lastSeenAt": "2026-09-28T13:49:17.196Z",
       "lastGeneratedAt": "2026-09-08T13:14:50.323Z"
     },
     {
@@ -429,7 +429,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.482Z",
-      "lastSeenAt": "2026-09-09T13:09:25.921Z",
+      "lastSeenAt": "2026-09-28T13:49:17.208Z",
       "lastGeneratedAt": "2026-09-08T13:14:50.482Z"
     },
     {
@@ -442,7 +442,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.779Z",
-      "lastSeenAt": "2026-09-09T13:09:25.947Z",
+      "lastSeenAt": "2026-09-28T13:49:17.299Z",
       "lastGeneratedAt": "2026-09-08T13:14:50.779Z"
     },
     {
@@ -451,12 +451,12 @@
       "sourceUrl": "https://www.66origin.com/works/silversquare-plateforme-data-ia-coworking",
       "canonicalUrl": "https://www.66origin.com/works/silversquare-plateforme-data-ia-coworking",
       "outputFile": "works/silversquare-plateforme-data-ia-coworking.md",
-      "sourceHash": "sha256:30c777d61130b0613f64b4538d54331483db43f13e68863e17dc2958fad2aa38",
-      "version": 1,
+      "sourceHash": "sha256:27a420e9fbac750cc6e308dca46a710030fe28ae59e64dd79ea4c5e618afa3ae",
+      "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.952Z",
-      "lastSeenAt": "2026-09-09T13:09:25.990Z",
-      "lastGeneratedAt": "2026-09-08T13:14:50.952Z"
+      "lastSeenAt": "2026-09-28T13:49:17.363Z",
+      "lastGeneratedAt": "2026-09-28T13:49:17.363Z"
     },
     {
       "type": "work",
@@ -468,7 +468,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.187Z",
-      "lastSeenAt": "2026-09-09T13:09:26.024Z",
+      "lastSeenAt": "2026-09-28T13:49:17.341Z",
       "lastGeneratedAt": "2026-09-08T13:14:51.187Z"
     },
     {
@@ -481,7 +481,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.375Z",
-      "lastSeenAt": "2026-09-09T13:09:26.061Z",
+      "lastSeenAt": "2026-09-28T13:49:17.361Z",
       "lastGeneratedAt": "2026-09-08T13:14:51.375Z"
     },
     {
@@ -494,7 +494,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.642Z",
-      "lastSeenAt": "2026-09-09T13:09:26.088Z",
+      "lastSeenAt": "2026-09-28T13:49:17.446Z",
       "lastGeneratedAt": "2026-09-08T13:14:51.642Z"
     },
     {
@@ -507,7 +507,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.911Z",
-      "lastSeenAt": "2026-09-09T13:09:26.139Z",
+      "lastSeenAt": "2026-09-28T13:49:17.600Z",
       "lastGeneratedAt": "2026-09-08T13:14:51.911Z"
     },
     {
@@ -520,7 +520,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.142Z",
-      "lastSeenAt": "2026-09-09T13:09:26.182Z",
+      "lastSeenAt": "2026-09-28T13:49:17.548Z",
       "lastGeneratedAt": "2026-09-08T13:14:52.142Z"
     },
     {
@@ -533,7 +533,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.309Z",
-      "lastSeenAt": "2026-09-09T13:09:26.204Z",
+      "lastSeenAt": "2026-09-28T13:49:17.540Z",
       "lastGeneratedAt": "2026-09-08T13:14:52.309Z"
     },
     {
@@ -546,7 +546,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.482Z",
-      "lastSeenAt": "2026-09-09T13:09:26.237Z",
+      "lastSeenAt": "2026-09-28T13:49:17.593Z",
       "lastGeneratedAt": "2026-09-08T13:14:52.482Z"
     }
   ]

@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/avec-ia-mon-cerveau-travaille-en-derivation"
 source_hash: "sha256:0dbeb7a5c7ba7f2a66c2012c91d729f99214d214470c61bde1a06d2b11e7183a"
 description: "Comment l’IA aide Philippe Mihelic à reformuler, contredire et amplifier ses idées, tout en exigeant davantage de jugement et d’esprit critique."
+date_published: "2026-07-09"
+author_name: "Philippe Mihelic"
+category: "Travailler avec l'IA"
 ---
 
 # Avec l’IA, mon cerveau travaille en dérivation, plus en série.

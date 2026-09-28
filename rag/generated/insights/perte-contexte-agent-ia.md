@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/perte-contexte-agent-ia"
 source_hash: "sha256:3516729557f4f92747d66449913fc6eaafc43dd0531e663df4697fd3e958615d"
 description: "Comment reconnaître la perte de contexte d’un agent IA, décider s’il faut le recadrer ou le remplacer, et préparer une passation propre."
+date_published: "2026-08-08"
+author_name: "Philippe Mihelic"
+category: "Orchestrer humains et agents"
 ---
 
 # Mon IA avait la tête sous l’eau

@@ -19,6 +19,9 @@ export type ExtractedPage = PageTarget & {
   description?: string;
   markdown: string;
   sourceHash: string;
+  datePublished?: string;
+  authorName?: string;
+  category?: string;
 };
 
 export type ManifestDocument = {
@@ -151,6 +154,75 @@ export function discoverTargetsFromHtml(
   return [...found.values()].sort((a, b) => a.url.localeCompare(b.url));
 }
 
+const FRENCH_MONTHS: Record<string, string> = {
+  janvier: "01",
+  février: "02",
+  fevrier: "02",
+  mars: "03",
+  avril: "04",
+  mai: "05",
+  juin: "06",
+  juillet: "07",
+  août: "08",
+  aout: "08",
+  septembre: "09",
+  octobre: "10",
+  novembre: "11",
+  décembre: "12",
+  decembre: "12",
+};
+
+function normalizeFrenchDate(value: string): string | undefined {
+  const match = value
+    .trim()
+    .toLowerCase()
+    .match(/^(\d{1,2})\s+([a-zéèêëàâäîïôöûüùç]+)\s+(\d{4})$/i);
+
+  if (!match) return undefined;
+
+  const [, day, monthName, year] = match;
+  const month = FRENCH_MONTHS[monthName];
+
+  if (!month) return undefined;
+
+  return `${year}-${month}-${day.padStart(2, "0")}`;
+}
+
+function cleanMarkdownText(value: string): string {
+  return value
+    .replace(/\[|\]/g, "")
+    .replace(/\([^)]+\)/g, "")
+    .replace(/\*\*/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractDatePublished(markdown: string): string | undefined {
+  const match = markdown.match(/Date de publication\s*:\s*\n+\s*([^\n]+)/i);
+
+  if (!match) return undefined;
+
+  return normalizeFrenchDate(match[1]);
+}
+
+function extractAuthorName(markdown: string): string | undefined {
+  const match = markdown.match(/Par\s*:\s*([\s\S]*?)Date de publication\s*:/i);
+
+  if (!match) return undefined;
+
+  const cleaned = cleanMarkdownText(match[1]);
+
+  if (!cleaned) return undefined;
+
+  return cleaned.split(",")[0]?.trim() || undefined;
+}
+
+function extractCategory(markdown: string): string | undefined {
+  const match = markdown.match(/Catégorie\s*:\s*\n+\s*([^\n]+)/i);
+
+  return match?.[1]?.trim() || undefined;
+}
+
 export function extractPage(
   html: string,
   target: PageTarget,
@@ -215,6 +287,15 @@ export function extractPage(
   const markdown = cleanText(turndown.turndown(main.html() ?? ""));
   if (!markdown) throw new Error("Contenu principal vide");
 
+  const datePublished =
+    target.type === "insight" ? extractDatePublished(markdown) : undefined;
+
+  const authorName =
+    target.type === "insight" ? extractAuthorName(markdown) : undefined;
+
+  const category =
+    target.type === "insight" ? extractCategory(markdown) : undefined;
+
   const sourceHash = sha256(
     [target.type, canonicalUrl, title, description, markdown].join("\n"),
   );
@@ -226,6 +307,9 @@ export function extractPage(
     description: description || undefined,
     markdown,
     sourceHash,
+    datePublished,
+    authorName,
+    category,
   };
 }
 
@@ -242,6 +326,18 @@ export function renderMarkdown(page: ExtractedPage): string {
 
   if (page.description) {
     frontmatter.push(`description: ${yamlString(page.description)}`);
+  }
+
+  if (page.datePublished) {
+    frontmatter.push(`date_published: ${yamlString(page.datePublished)}`);
+  }
+
+  if (page.authorName) {
+    frontmatter.push(`author_name: ${yamlString(page.authorName)}`);
+  }
+
+  if (page.category) {
+    frontmatter.push(`category: ${yamlString(page.category)}`);
   }
 
   frontmatter.push("---");

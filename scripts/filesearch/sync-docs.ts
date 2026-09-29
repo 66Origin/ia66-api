@@ -203,7 +203,11 @@ function buildLocalDocuments(): LocalDocument[] {
         .relative(source.directory, filePath)
         .replaceAll("\\", "/");
 
-      if (source.prefix === "docs" && relativePath.startsWith("templates/")) {
+      if (
+        source.prefix === "docs" &&
+        (relativePath.startsWith("templates/") ||
+          relativePath.startsWith("personnalite/"))
+      ) {
         continue;
       }
 

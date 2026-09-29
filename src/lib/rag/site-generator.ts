@@ -87,6 +87,7 @@ const TYPE_DIRECTORIES: Record<PageType, string> = {
 function cleanText(value: string): string {
   return value
     .replace(/[\u200B-\u200D\u2060\uFEFF]/g, "")
+    .replace(/[\u2028\u2029]/g, "\n")
     .replace(/\u00a0/g, " ")
     .replace(/[ \t]+\n/g, "\n")
     .replace(/\n[ \t]+/g, "\n")

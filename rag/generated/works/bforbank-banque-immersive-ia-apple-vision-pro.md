@@ -4,7 +4,7 @@ slug: "bforbank-banque-immersive-ia-apple-vision-pro"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/bforbank-banque-immersive-ia-apple-vision-pro"
-source_hash: "sha256:e35c2271e0c72e519023655dfe70b7a74f367859218e1e2de07a59156899a0d3"
+source_hash: "sha256:8cda26c7cf18d07c8c44f60bdf486fed1ce95c440caab85f376d3b7beea88892"
 description: "66 Origin imagine avec BforBank une banque immersive sur Apple Vision Pro : visualisation 3D des finances, achats assistés et conseil IA contextuel."
 ---
 
@@ -36,19 +36,19 @@ Pour réinventer la banque, il ne suffisait pas de transposer une application ex
 
 L’intelligence artificielle devait donc être placée au cœur du dispositif. Non comme simple assistant de support, mais comme moteur d’interprétation, de recommandation et d’anticipation. Grâce à la data, à l’analyse des habitudes de vie, au contexte d’usage et à la projection en temps réel, l’IA devient capable d’optimiser la lecture des comptes, de suggérer les bons arbitrages, d’accompagner les achats, d’anticiper les risques et de fluidifier la relation client.
 
-## La solution : BforBank x Apple Vision Pro 
+## La solution : BforBank x Apple Vision Pro
 
 66 Origin a imaginé et prototypé avec BforBank une expérience bancaire immersive sur Apple Vision Pro. Ce prototype prospectif a été conçu comme une démonstration de ce que pourrait devenir la banque dans un environnement de spatial computing, puis présenté à VivaTech en juin 2025.
 
 Le choix d’Apple Vision Pro répondait à un objectif clair : utiliser aujourd’hui l’un des supports les plus immersifs du marché pour explorer l’usage bancaire de demain sur des lunettes connectées plus légères. Le casque a servi de terrain d’expérimentation pour concevoir une banque qui sort du téléphone, s’inscrit directement dans l’espace physique de l’utilisateur et s’appuie en permanence sur l’intelligence artificielle pour contextualiser les interactions.
 
-## La technologie : IA bancaire, data contextuelle et interface spatiale 
+## La technologie : IA bancaire, data contextuelle et interface spatiale
 
 Le prototype repose sur la combinaison de plusieurs briques : visualisation 3D, interface gestuelle, environnement immersif, avatar conversationnel, data financière temps réel et intelligence artificielle décisionnelle. L’IA analyse les comportements de dépense, les capacités financières, les usages du client, ses objectifs potentiels et les signaux faibles de son contexte pour générer des suggestions pertinentes et immédiatement compréhensibles.
 
 Cette logique change profondément la relation à la banque. Les comptes ne sont plus affichés comme une liste de lignes ou un tableau abstrait. Ils prennent forme dans l’espace, sous une représentation visuelle et physique des dépenses, des postes budgétaires, des arbitrages possibles et des projections à venir. L’IA classe, hiérarchise, rapproche les informations, signale les anomalies, met en avant les opportunités d’optimisation et accompagne la prise de décision en temps réel.
 
-## Trois cas d’usage : visualiser, choisir, acheter 
+## Trois cas d’usage : visualiser, choisir, acheter
 
 Premier cas d’usage : la représentation du compte bancaire. Grâce à Apple Vision Pro, le compte s’affiche directement dans la pièce et devient manipulable. Les dépenses apparaissent sous forme d’objets, de services ou de catégories matérialisées dans l’espace. L’utilisateur peut les trier, les regrouper, les comparer et en tirer des lectures plus claires. L’intelligence artificielle intervient ici pour classer automatiquement les flux, suggérer des regroupements, identifier des optimisations budgétaires, projeter des évolutions et faire émerger des recommandations en fonction des habitudes de vie.
 
@@ -56,7 +56,7 @@ Deuxième cas d’usage : le voyage immersif assisté par l’IA. L’utilisateu
 
 Troisième cas d’usage : l’achat dans une boutique virtuelle projetée dans le salon. L’utilisateur entre dans un espace retail immersif, découvre une sélection personnalisée de produits et interagit par la gestuelle. Ici encore, l’IA joue un rôle central. Elle sélectionne les articles selon les usages, les préférences et le profil de vie, compare les alternatives, met en avant le meilleur rapport qualité-prix et aide à faire un choix cohérent avec la situation financière du client. Le paiement s’effectue ensuite par un geste simple, avec un niveau de sécurité renforcé par les capacités biométriques du device.
 
-## Du prototype à la vision bancaire de demain 
+## Du prototype à la vision bancaire de demain
 
 Ce projet ne se limite pas à une démonstration technologique. Il constitue un outil de prospective concret pour penser le rôle futur d’une banque dans un monde où les interfaces se déplacent du mobile vers des lunettes connectées, des environnements augmentés et des assistants intelligents. Il permet à BforBank d’explorer en conditions réelles de nouveaux usages, de nouvelles grammaires d’interaction et un nouveau niveau de service client.
 

@@ -4,7 +4,7 @@ slug: "silversquare-plateforme-data-ia-coworking"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/silversquare-plateforme-data-ia-coworking"
-source_hash: "sha256:27a420e9fbac750cc6e308dca46a710030fe28ae59e64dd79ea4c5e618afa3ae"
+source_hash: "sha256:2cb52a80d853b42bdcbe99653700618c9f8b99786d7dd1e554bdfb4648e3a509"
 description: "66 Origin développe pour Silversquare une plateforme data & IA de pilotage immobilier flexible : facturation pay per use, dashboard temps réel et optimisation des espaces."
 ---
 
@@ -194,11 +194,11 @@ Grâce à un onboarding digital et un système de reconnaissance multi-device, s
 
 Oui. Elle consolide les données de l’ensemble des Silversquare pour une vision globale et comparative.
 
-### L’intelligence artificielle intervient-elle réellement ? 
+### L’intelligence artificielle intervient-elle réellement ?
 
 Oui. L’IA analyse les données historiques et exogènes (météo, trafic) pour suggérer des décisions d’optimisation.
 
-### Est-ce uniquement un outil de facturation ? 
+### Est-ce uniquement un outil de facturation ?
 
 Non.
 C’est une solution complète de pilotage immobilier flexible et d’animation data-driven des espaces.

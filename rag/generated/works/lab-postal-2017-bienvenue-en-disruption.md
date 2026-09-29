@@ -4,7 +4,7 @@ slug: "lab-postal-2017-bienvenue-en-disruption"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/lab-postal-2017-bienvenue-en-disruption"
-source_hash: "sha256:605e10dec7e74aca53487da5c9d7c28b8beda01ae84929e170b525aa6c5b66b9"
+source_hash: "sha256:5d7fb4defb37b49a42bc46d89920df50b7212e27da0ccffb5ca0101ecaba9659"
 description: "66 Origin transforme le Lab Postal 2017 en expérience immersive : concept créatif, scénographie, branding, conférences et UX événementielle."
 ---
 
@@ -34,7 +34,7 @@ Pour révéler le potentiel du Lab Postal, il ne suffisait pas d’améliorer l�
 
 Notre conviction était simple : pour marquer les esprits, il fallait un concept central, lisible immédiatement, capable d’unifier la scénographie, le branding, le programme de conférences et le parcours visiteur. En 2017, ce concept a été la disruption. Non pas comme mot à la mode, mais comme idée concrète : si les grands groupes entraient réellement en disruption, alors le monde pouvait déjà changer à très court terme, dès 2020. Cette logique est cohérente avec le positionnement décrit sur la page Lab Postal 2017 du site 66 Origin.
 
-## La solution : Lab Postal 2017 – Bienvenue en Disruption 
+## La solution : Lab Postal 2017 – Bienvenue en Disruption
 
 66 Origin a entièrement repensé le Lab Postal 2017 autour d’un concept créatif global : Bienvenue en Disruption. Toute l’édition a été conçue comme une immersion dans un futur proche, avec une identité inspirée du basculement entre présent et monde transformé.
 
@@ -50,7 +50,7 @@ Parmi les temps forts figuraient Chris Messina, venu des États-Unis, Monika Bie
 
 Cette programmation donnait au Lab Postal une dimension internationale, radicale et immédiatement mémorable. Le programme ne se limitait pas à des prises de parole expertes. Il mettait en scène des personnalités dont le parcours rendait la disruption concrète, visible et presque physique pour les visiteurs.
 
-## Un écosystème complet : site, scène et parcours visiteur 
+## Un écosystème complet : site, scène et parcours visiteur
 
 Le projet ne se limitait pas à un décor ou à une suite de conférences. 66 Origin a pris en charge un périmètre très large : concept créatif, scénographie, branding, sourcing d’innovations, sourcing d’intervenants, programmation de contenu, UX événementielle et logistique.
 
@@ -74,7 +74,7 @@ Au-delà de la fréquentation, c’est tout le format qui a été requalifié. L
 
 Le Lab Postal 2017 est l’édition de l’événement innovation de La Poste repensée par 66 Origin autour du concept Bienvenue en Disruption.
 
-### Quelle a été la mission de 66 Origin ? 
+### Quelle a été la mission de 66 Origin ?
 
 66 Origin a pris en charge le concept créatif, la scénographie, le branding, le sourcing des innovations, le sourcing des intervenants, la programmation, l’UX événementielle et la logistique.
 

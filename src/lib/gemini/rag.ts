@@ -15,18 +15,34 @@ function normalizeStoreName(name: string) {
     : `fileSearchStores/${name}`;
 }
 
-function ensureCompleteSentence(text: string) {
+function ensureCompleteSentence(text: string, finishReason?: string): string {
   if (!text) return text;
 
   const trimmed = text.trim();
 
-  if (/[.!?»"]$/.test(trimmed)) return trimmed;
+  // Gemini indique que la génération s'est terminée normalement :
+  // ne surtout pas modifier le contenu.
+  if (finishReason === "STOP") {
+    return trimmed;
+  }
 
-  const matches = trimmed.match(/[^.!?]*[.!?]/g);
+  // La réponse se termine déjà proprement.
+  if (/[.!?»"]$/.test(trimmed)) {
+    return trimmed;
+  }
 
-  if (!matches || matches.length === 0) return trimmed;
+  // Ne considérer comme fin de phrase qu'une ponctuation
+  // suivie d'un espace ou de la fin du texte.
+  const sentenceEndRegex = /[.!?](?=\s|$)/g;
+  const matches = [...trimmed.matchAll(sentenceEndRegex)];
 
-  const complete = matches.join("").trim();
+  if (matches.length === 0) {
+    return trimmed;
+  }
+
+  const lastMatch = matches[matches.length - 1];
+  const endIndex = (lastMatch.index ?? 0) + 1;
+  const complete = trimmed.slice(0, endIndex).trim();
 
   return complete.length > 40 ? complete : trimmed;
 }
@@ -97,7 +113,7 @@ export async function runRagChat(
     throw new Error("Empty model response");
   }
 
-  const finalText = ensureCompleteSentence(text);
+  const finalText = ensureCompleteSentence(text, candidate.finishReason);
 
   console.log(candidate.finishReason);
 

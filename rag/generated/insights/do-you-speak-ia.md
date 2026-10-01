@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/do-you-speak-ia"
 source_hash: "sha256:e3b81973a7dc52606c324da6a6adf2d0a0c3a69bca59312554f7e48682e26bd5"
 description: "Le prompt engineering est-il toujours indispensable ? Pourquoi la conversation avec l’IA peut désormais précéder le prompt et aider à mieux formuler le problème."
+date_published: "2026-08-22"
+author_name: "Philippe Mihelic"
+category: "Travailler avec l'IA"
 ---
 
 # Do you speak IA ?

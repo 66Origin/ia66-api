@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/l-ia-me-met-dans-les-starting-blocks"
 source_hash: "sha256:fcb9894c214676ac6d9ca465cde4de61c328758a91b120f345dfcb0bfe9952f4"
 description: "L’IA réduit la barrière de démarrage : elle transforme plus vite une intuition en première forme concrète que l’on peut juger, critiquer et améliorer."
+date_published: "2026-06-17"
+author_name: "Philippe Mihelic"
+category: "Transformer une idée"
 ---
 
 # L’IA me met dans les starting-blocks

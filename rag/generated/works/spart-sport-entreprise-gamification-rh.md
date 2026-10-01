@@ -4,7 +4,7 @@ slug: "spart-sport-entreprise-gamification-rh"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/spart-sport-entreprise-gamification-rh"
-source_hash: "sha256:e928ce0c16a8120e92d69d637887e8619dcb40fd19b0b6345f186426f5dbfb75"
+source_hash: "sha256:515e5ba038b6ee8b1f58db5574f43c33ecd4db2809dbcf074f4eba2ac51f42d5"
 description: "66 Origin crée SPART : application mobile de sport en entreprise et gamification RH. Défis, XP, saisons, récompenses et back-office pour recréer la cohésion à distance."
 ---
 
@@ -157,7 +157,8 @@ Le back-office permet aux administrateurs et community managers de créer des sa
 
 ### Comment fonctionne la gamification dans SPART ?
 
-Les collaborateurs relèvent des défis physiques quotidiens et gagnent des points d’expérience (XP). Ces XP alimentent des classements individuels et collectifs organisés en saisons compétitives.
+Les collaborateurs relèvent des défis physiques quotidiens et gagnent des points d’expérience (XP).
+Ces XP alimentent des classements individuels et collectifs organisés en saisons compétitives.
 
 ### Quels sont les bénéfices pour l’entreprise ?
 

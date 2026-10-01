@@ -4,7 +4,7 @@ slug: "quipo-ticket-de-caisse-numerique"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/quipo-ticket-de-caisse-numerique"
-source_hash: "sha256:6084d0546adfe79d9b686b2668ceda32ec578fd55633536aa2e66fd338c3d8d2"
+source_hash: "sha256:a27aea14dbb64313c96e5b059a391369c267ef0f88852c3298106e4aa39c09cd"
 description: "66 Origin crée QUIPO : marque, app mobile et site commerçants primé. QR code enrichi, ticket instantané, sans serveur. Gamification et canal retail-client."
 ---
 
@@ -137,12 +137,12 @@ Après paiement, un QR code est affiché. Le client le scanne et le ticket appar
 Non.
 Le traitement est local et peut fonctionner sans connexion.
 
-### Les données clients sont-elles collectées et stockées ? 
+### Les données clients sont-elles collectées et stockées ?
 
 Non.
 Pas d’email, pas de cloud : pas de stockage serveur par défaut.
 
-### Pourquoi avoir choisi le nom QUIPO ? 
+### Pourquoi avoir choisi le nom QUIPO ?
 
 Le quipu inca servait à gérer la comptabilité et les stocks. QUIPO reprend cette idée pour le ticket moderne.
 

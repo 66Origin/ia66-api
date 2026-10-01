@@ -7,6 +7,10 @@ import { chatRequestSchema } from "@/lib/schema";
 import { buildChatPrompt } from "@/lib/bot/prompt";
 import { runRagChat } from "@/lib/gemini/rag";
 import { extractEmailTemplate } from "@/lib/parser/email";
+import {
+  buildLatestInsightsContext,
+  isInsightsFreshnessQuery,
+} from "@/lib/rag/insights";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -54,9 +58,15 @@ export async function POST(req: Request) {
 
   const { message, conversation } = parsed.data;
 
+  const latestInsightsContext = isInsightsFreshnessQuery(message)
+    ? buildLatestInsightsContext(3)
+    : undefined;
+
   const prompt = buildChatPrompt({
     message,
+    latestInsightsContext,
   });
+
   const storeName = getFileSearchStoreName();
 
   try {
@@ -86,9 +96,11 @@ export async function POST(req: Request) {
       },
       { headers },
     );
-  } catch (e: any) {
+  } catch (e: unknown) {
+    const details = e instanceof Error ? e.message : String(e);
+
     return NextResponse.json(
-      { error: "Model error", details: String(e?.message ?? e) },
+      { error: "Model error", details },
       { status: 500, headers },
     );
   }

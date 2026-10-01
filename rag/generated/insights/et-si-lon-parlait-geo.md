@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/et-si-lon-parlait-geo"
 source_hash: "sha256:86059eefaa1b4f43fac13e5e463e9f3b4ffcb75491772dc39b17a8ec555b00b0"
 description: "Le GEO déplace la visibilité vers la compréhension des marques par les IA. Positionnement, contenus, preuves et sources : ce qui change vraiment."
+date_published: "2026-06-17"
+author_name: "Philippe Mihelic"
+category: "Nouveaux usages"
 ---
 
 # Et si l’on parlait GEO ?

@@ -4,7 +4,7 @@ slug: "lab-postal-2018-evenement-innovation-business-odyssey"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/lab-postal-2018-evenement-innovation-business-odyssey"
-source_hash: "sha256:2e03a2ee882ed1ac5af6d6ebda2f2e4042f06d6022c1727b90e7be9cb408c8ce"
+source_hash: "sha256:0a8cbae1279ec18289013099f7fbfc26ca9bffa8ea560f13897c7c59aed5d6b4"
 description: "66 Origin conçoit pour La Poste le Lab Postal 2018 : concept créatif, scénographie immersive, conférences internationales et parcours visiteur à fort impact."
 ---
 
@@ -32,17 +32,17 @@ Le Lab Postal 2018 devait donc rendre visible une conviction forte : une expéri
 Pour marquer les esprits, il ne suffisait pas d’aligner des stands. Il fallait faire vivre une aventure. Nous avons donc construit le Lab Postal 2018 autour d’un concept central : la Business Odyssey.
 Cette idée emprunte au jeu vidéo sa capacité à embarquer, créer du rythme et transformer une succession de contenus en expérience globale. Si une interface désirable peut générer du business, alors un événement d’innovation peut lui aussi démontrer que l’expérience utilisateur crée de la valeur. Toute la ligne éditoriale, la scénographie et le parcours visiteur ont été pensés dans ce sens.
 
-## La solution : Lab Postal 2018 
+## La solution : Lab Postal 2018
 
 66 Origin a imaginé pour La Poste un univers événementiel complet inspiré du langage du jeu vidéo. La scénographie reprenait les codes d’une ville imaginaire, exubérante et colorée, avec de grands volumes et des zones très identifiées. On passait d’une ville à un bar puis à une jungle, dans un décor pop inspiré de Nintendo et de Mario.
 Chaque innovation trouvait sa place dans cette grammaire immersive. Les visiteurs ne découvraient pas seulement des projets : ils traversaient des situations, vivaient des interactions et comprenaient les dispositifs dans une expérience d’ensemble. Chaque zone jouait le rôle d’interface narrative pour rendre les usages, les bénéfices et la valeur des innovations immédiatement lisibles. 66 Origin a aussi imaginé des animations comme un bar à bonbons Haribo avec bucket dédié. Le Lab Postal devenait un moment à vivre, pas une simple visite.
 
-## La technologie : scénographie immersive, expérience visiteur et programmation mondiale 
+## La technologie : scénographie immersive, expérience visiteur et programmation mondiale
 
 Le projet reposait sur une architecture d’expérience complète. Mise en scène des innovations, découpage des espaces, rythme des découvertes et programmation formaient un même système. Les conférences démarraient à 8 heures en direct de Shanghai avec des intervenants autour de WeChat.
 La journée se poursuivait comme un tour du monde de l’innovation. Alain Passard montrait comment l’innovation peut transformer la gastronomie. Ubisoft apportait la vision du jeu vidéo. La soirée se terminait entre Los Angeles et San Francisco, avec l’écosystème de la Silicon Valley. Cette programmation internationale donnait au Lab Postal 2018 une portée bien plus large que le seul écosystème français.
 
-## Un écosystème complet : scène, stands & animations 
+## Un écosystème complet : scène, stands & animations
 
 À partir de cette base stratégique et créative, 66 Origin a déployé un dispositif complet : concept créatif, identité événementielle, parcours visiteur, scénographie des stands, animations périphériques et programmation de conférences.
 Chaque composant renforçait la cohérence d’ensemble. La scène portait le récit mondial de la Business Odyssey. Les espaces d’exposition traduisaient l’idée d’expérience utilisateur appliquée aux innovations de La Poste. Les animations renforçaient le plaisir de visite. L’événement fonctionnait comme un écosystème cohérent, où branding, innovation et hospitalité travaillaient ensemble.

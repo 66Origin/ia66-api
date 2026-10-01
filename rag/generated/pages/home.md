@@ -4,7 +4,7 @@ slug: "home"
 type: "page"
 source: "66origin.com"
 source_url: "https://www.66origin.com/"
-source_hash: "sha256:cbda786419140e25f6a5c3968f8c2f825bf252c9028b5745226b6b1734141f1e"
+source_hash: "sha256:c99c5654066cc95b2152f24335e506b0c823e5b74c82a6730a3a9019a0f7ed4b"
 description: "66 Origin est un studio d’innovation qui conçoit et déploie des stratégies, expériences et solutions mêlant design, intelligence artificielle et technologie."
 ---
 
@@ -183,7 +183,8 @@ AR/VR
 
 ## Des innovations concrètes, des impacts mesurables.
 
-Chaque projet présenté ici a été conçu pour répondre à un enjeu réel et produire un impact mesurable. Banque augmentée avec Apple Vision Pro, mobilité douce pilotée par l’IA, sécurité des livreurs, plateformes data-driven, lieux de santé transformés en écosystèmes de vie… Nos projets traduisent une même conviction : l’innovation n’a de valeur que lorsqu’elle se concrétise.
+Chaque projet présenté ici a été conçu pour répondre à un enjeu réel et produire un impact mesurable. Banque augmentée avec Apple Vision Pro, mobilité douce pilotée par l’IA, sécurité des livreurs, plateformes data-driven, lieux de santé transformés en écosystèmes de vie…
+Nos projets traduisent une même conviction : l’innovation n’a de valeur que lorsqu’elle se concrétise.
 
 ## Sélection de projets en innovation, design et intelligence artificielle
 
@@ -325,7 +326,7 @@ IA
 
 [### SILVERSQUARE - plateforme data & IA pour coworking flexible
 
-66 Origin développe pour Silversquare une plateforme data & IA de pilotage immobilier flexible : facturation pay per use, dashboard temps réel et optimisation des espaces.](/works/silversquare-plateforme-data-ia-coworking) 
+66 Origin développe pour Silversquare une plateforme data & IA de pilotage immobilier flexible : facturation pay per use, dashboard temps réel et optimisation des espaces.](/works/silversquare-plateforme-data-ia-coworking)
 
 ## Nos derniers Insights
 

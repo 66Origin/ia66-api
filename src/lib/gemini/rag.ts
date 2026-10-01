@@ -80,9 +80,10 @@ export async function runRagChat(
   let text = "";
 
   if (candidate.content?.parts?.length) {
-    text = candidate.content.parts
-      .filter((p: any) => typeof p?.text === "string")
-      .map((p: any) => p.text)
+    const parts = candidate.content.parts;
+
+    text = parts
+      .map((part) => (typeof part.text === "string" ? part.text : ""))
       .join("")
       .trim();
   }

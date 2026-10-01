@@ -78,6 +78,7 @@ body {
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
@@ -262,16 +263,24 @@ body.ia-scroll-locked {
 .ia66o-work-link,
 .ia66o-source-link {
   color: var(--_colors---ink-900);
-  font-weight: bold;
   text-underline-offset: 3px;
 }
 
-.ia66o-mail-link {
+.ia66o-mail-link,
+.ia66o-work-link {
+  font-weight: bold;
+}
+
+.ia66o-source-link {
+  font-weight: normal;
+}
+
+.ia66o-mail-link,
+.ia66o-source-link {
   text-decoration: underline;
 }
 
-.ia66o-work-link,
-.ia66o-source-link {
+.ia66o-work-link {
   text-decoration: underline dotted;
 }
 

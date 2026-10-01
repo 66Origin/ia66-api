@@ -259,7 +259,8 @@ body.ia-scroll-locked {
   ================================================== */
 
 .ia66o-mail-link,
-.ia66o-work-link {
+.ia66o-work-link,
+.ia66o-source-link {
   color: var(--_colors---ink-900);
   font-weight: bold;
   text-underline-offset: 3px;
@@ -269,7 +270,8 @@ body.ia-scroll-locked {
   text-decoration: underline;
 }
 
-.ia66o-work-link {
+.ia66o-work-link,
+.ia66o-source-link {
   text-decoration: underline dotted;
 }
 

@@ -128,17 +128,21 @@ function initIAChat(rootSelector) {
   }
   function formatMessage(text, emailData = null) {
     let safeText = escapeHtml(text);
+
     if (emailData?.to) {
       const mailto =
         `mailto:${emailData.to}` +
         `?subject=${encodeURIComponent(emailData.subject || "")}` +
         `&body=${encodeURIComponent(emailData.body || "")}`;
+
       const escapedEmail = emailData.to.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
       safeText = safeText.replace(
         new RegExp(`(?<!\\w)${escapedEmail}(?!\\w)`, "g"),
         `<a href="${mailto}" class="ia66o-mail-link">${emailData.to}</a>`,
       );
     }
+
     const emailRegex =
       /(?<!mailto:)(?<!">)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
 
@@ -146,9 +150,15 @@ function initIAChat(rootSelector) {
       return `<a href="mailto:${email}" class="ia66o-mail-link">${email}</a>`;
     });
 
+    const urlRegex = /https?:\/\/[^\s<]+/gi;
+
+    safeText = safeText.replace(urlRegex, (url) => {
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="ia66o-source-link">${url}</a>`;
+    });
+
     /* =========================================
-  FORMAT FINAL
-  ========================================= */
+      FORMAT FINAL
+    ========================================= */
     return safeText
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
       .replace(/\n/g, "<br>")

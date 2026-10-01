@@ -70,7 +70,7 @@ export async function POST(req: Request) {
   const storeName = getFileSearchStoreName();
 
   try {
-    const { text } = await runRagChat({
+    const { text, sourceUrls } = await runRagChat({
       model: "gemini-2.5-flash",
       prompt,
       history: conversation?.history,
@@ -93,6 +93,7 @@ export async function POST(req: Request) {
       {
         text,
         email,
+        sources: sourceUrls,
       },
       { headers },
     );

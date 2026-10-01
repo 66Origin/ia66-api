@@ -1,6 +1,7 @@
 // src/lib/gemini/rag.ts
 import { SYSTEM_CONTEXT } from "../bot/system";
 import { getGeminiClient } from "./client";
+import type { Candidate } from "@google/genai";
 
 export type RagChatInput = {
   model?: string;
@@ -47,13 +48,50 @@ function ensureCompleteSentence(text: string, finishReason?: string): string {
   return complete.length > 40 ? complete : trimmed;
 }
 
+function extractGroundedCanonicalUrls(candidate: Candidate): string[] {
+  const metadata = candidate.groundingMetadata;
+
+  if (!metadata?.groundingChunks?.length) {
+    return [];
+  }
+
+  const usedChunkIndexes = new Set<number>();
+
+  for (const support of metadata.groundingSupports ?? []) {
+    for (const index of support.groundingChunkIndices ?? []) {
+      usedChunkIndexes.add(index);
+    }
+  }
+
+  const urls = new Set<string>();
+
+  for (const index of usedChunkIndexes) {
+    const chunk = metadata.groundingChunks[index];
+    const customMetadata = chunk?.retrievedContext?.customMetadata;
+
+    if (!customMetadata) continue;
+
+    const canonicalUrl = customMetadata.find(
+      (item) =>
+        item.key === "canonical_url" && typeof item.stringValue === "string",
+    )?.stringValue;
+
+    if (canonicalUrl) {
+      urls.add(canonicalUrl);
+    }
+  }
+
+  return [...urls];
+}
+
 /**
  * Exécute un appel Gemini avec File Search tool activé.
  * Retourne le texte brut.
  */
-export async function runRagChat(
-  input: RagChatInput,
-): Promise<{ text: string }> {
+export async function runRagChat(input: RagChatInput): Promise<{
+  text: string;
+  sourceUrls: string[];
+}> {
   const ai = getGeminiClient();
 
   const model = input.model ?? "gemini-2.5-flash";
@@ -89,6 +127,10 @@ export async function runRagChat(
 
   const candidate = response?.candidates?.[0];
 
+  console.dir(candidate?.groundingMetadata, {
+    depth: null,
+  });
+
   if (!candidate) {
     throw new Error("Gemini returned no candidate");
   }
@@ -115,7 +157,12 @@ export async function runRagChat(
 
   const finalText = ensureCompleteSentence(text, candidate.finishReason);
 
+  const sourceUrls = extractGroundedCanonicalUrls(candidate);
+
   console.log(candidate.finishReason);
 
-  return { text: finalText };
+  return {
+    text: finalText,
+    sourceUrls,
+  };
 }

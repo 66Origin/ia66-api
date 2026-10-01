@@ -165,6 +165,23 @@ function initIAChat(rootSelector) {
       .replace(/---/g, '<div class="ia-email-separator"></div>');
   }
 
+  function renderSources(sources = []) {
+    if (!Array.isArray(sources) || sources.length === 0) {
+      return "";
+    }
+
+    const uniqueSources = [...new Set(sources)];
+
+    const links = uniqueSources
+      .map(
+        (url) =>
+          `<a href="${url}" target="_blank" rel="noopener noreferrer" class="ia66o-source-link">${url}</a>`,
+      )
+      .join("<br>");
+
+    return `<div class="ia66o-sources">${links}</div>`;
+  }
+
   function updateCaretState() {
     if (introWrapper && introTextarea) {
       introWrapper.classList.toggle(
@@ -599,14 +616,15 @@ function initIAChat(rootSelector) {
     });
   }
 
-  async function transformLoader(loader, text, emailData = null) {
+  async function transformLoader(loader, text, emailData = null, sources = []) {
     loader
       .querySelector(".ia66o-chat-message")
       ?.classList.remove("ia66o-loader");
 
     const messageEl = loader.querySelector(".ia66o-chat-message_text");
 
-    messageEl.innerHTML = formatMessage(text, emailData);
+    messageEl.innerHTML =
+      formatMessage(text, emailData) + renderSources(sources);
 
     await waitForProjects();
     linkifyProjectsInElement(messageEl);
@@ -708,7 +726,7 @@ function initIAChat(rootSelector) {
         throw new Error("NO_ANSWER");
       }
 
-      transformLoader(loader, data.text, data.email);
+      transformLoader(loader, data.text, data.email, data.sources);
     } catch (err) {
       loader.remove();
 

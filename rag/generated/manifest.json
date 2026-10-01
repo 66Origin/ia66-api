@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "https://www.66origin.com",
-  "generatedAt": "2026-09-29T11:06:18.581Z",
+  "generatedAt": "2026-09-30T14:57:03.222Z",
   "documents": [
     {
       "type": "page",
@@ -10,10 +10,12 @@
       "canonicalUrl": "https://www.66origin.com/",
       "outputFile": "pages/home.md",
       "sourceHash": "sha256:c99c5654066cc95b2152f24335e506b0c823e5b74c82a6730a3a9019a0f7ed4b",
+      "title": "66 Origin - Studio d’innovation, design et intelligence artificielle",
+      "description": "66 Origin est un studio d’innovation qui conçoit et déploie des stratégies, expériences et solutions mêlant design, intelligence artificielle et technologie.",
       "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:44.808Z",
-      "lastSeenAt": "2026-09-29T11:06:17.077Z",
+      "lastSeenAt": "2026-09-30T14:57:01.401Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.077Z"
     },
     {
@@ -23,10 +25,12 @@
       "canonicalUrl": "https://www.66origin.com/approche",
       "outputFile": "pages/approche.md",
       "sourceHash": "sha256:e9c1d35b72bd3c74d22ac39d99dee8748b3f17440fdcce21ef51c0dceb124a84",
+      "title": "Notre approche",
+      "description": "Découvrez la méthode 66 Origin pour clarifier un enjeu, concevoir, prototyper, tester et déployer une solution avec vos équipes.",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.341Z",
-      "lastSeenAt": "2026-09-29T11:06:17.096Z",
+      "lastSeenAt": "2026-09-30T14:57:01.431Z",
       "lastGeneratedAt": "2026-09-08T13:14:53.341Z"
     },
     {
@@ -36,10 +40,12 @@
       "canonicalUrl": "https://www.66origin.com/diagnostic-ia",
       "outputFile": "pages/diagnostic-ia.md",
       "sourceHash": "sha256:13ce2ec080569a6a3d1de8b5ffa8b2fdb9f5caced956c99cf6d345ee998c10c7",
+      "title": "Diagnostic IA",
+      "description": "Identifiez les cas d'usage IA pertinents, évaluez vos données, vos risques et votre maturité, puis construisez une feuille de route réaliste.",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.287Z",
-      "lastSeenAt": "2026-09-29T11:06:17.133Z",
+      "lastSeenAt": "2026-09-30T14:57:01.431Z",
       "lastGeneratedAt": "2026-09-08T13:14:53.287Z"
     },
     {
@@ -49,10 +55,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/a-qui-tu-parles",
       "outputFile": "insights/a-qui-tu-parles.md",
       "sourceHash": "sha256:c0090d77d39c7bafe7e52bb8974c3bd3199f0ba207f18c8d805f71c5f212c380",
+      "title": "À qui tu parles ?",
+      "description": "Parler à une IA change-t-il seulement notre façon de travailler ? Philippe Mihelic observe ce que la voix déplace dans nos conversations.",
+      "datePublished": "2026-06-24",
+      "authorName": "Philippe Mihelic",
+      "category": "Nouveaux usages",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.321Z",
-      "lastSeenAt": "2026-09-29T11:06:17.107Z",
+      "lastSeenAt": "2026-09-30T14:57:01.423Z",
       "lastGeneratedAt": "2026-09-28T13:49:15.931Z"
     },
     {
@@ -62,10 +73,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/avec-ia-mon-cerveau-travaille-en-derivation",
       "outputFile": "insights/avec-ia-mon-cerveau-travaille-en-derivation.md",
       "sourceHash": "sha256:0dbeb7a5c7ba7f2a66c2012c91d729f99214d214470c61bde1a06d2b11e7183a",
+      "title": "Avec l’IA, mon cerveau travaille en dérivation, plus en série.",
+      "description": "Comment l’IA aide Philippe Mihelic à reformuler, contredire et amplifier ses idées, tout en exigeant davantage de jugement et d’esprit critique.",
+      "datePublished": "2026-07-09",
+      "authorName": "Philippe Mihelic",
+      "category": "Travailler avec l'IA",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:44.942Z",
-      "lastSeenAt": "2026-09-29T11:06:17.300Z",
+      "lastSeenAt": "2026-09-30T14:57:01.542Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.085Z"
     },
     {
@@ -75,10 +91,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/do-you-speak-ia",
       "outputFile": "insights/do-you-speak-ia.md",
       "sourceHash": "sha256:e3b81973a7dc52606c324da6a6adf2d0a0c3a69bca59312554f7e48682e26bd5",
+      "title": "Do you speak IA ?",
+      "description": "Le prompt engineering est-il toujours indispensable ? Pourquoi la conversation avec l’IA peut désormais précéder le prompt et aider à mieux formuler le problème.",
+      "datePublished": "2026-08-22",
+      "authorName": "Philippe Mihelic",
+      "category": "Travailler avec l'IA",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.125Z",
-      "lastSeenAt": "2026-09-29T11:06:17.235Z",
+      "lastSeenAt": "2026-09-30T14:57:01.601Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.085Z"
     },
     {
@@ -88,10 +109,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/et-si-lon-parlait-geo",
       "outputFile": "insights/et-si-lon-parlait-geo.md",
       "sourceHash": "sha256:86059eefaa1b4f43fac13e5e463e9f3b4ffcb75491772dc39b17a8ec555b00b0",
+      "title": "Et si l’on parlait GEO ?",
+      "description": "Le GEO déplace la visibilité vers la compréhension des marques par les IA. Positionnement, contenus, preuves et sources : ce qui change vraiment.",
+      "datePublished": "2026-06-17",
+      "authorName": "Philippe Mihelic",
+      "category": "Nouveaux usages",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.276Z",
-      "lastSeenAt": "2026-09-29T11:06:17.280Z",
+      "lastSeenAt": "2026-09-30T14:57:01.623Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.246Z"
     },
     {
@@ -101,10 +127,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/faut-il-etre-plus-intelligent-quune-ia-pour-utiliser-une-ia",
       "outputFile": "insights/faut-il-etre-plus-intelligent-quune-ia-pour-utiliser-une-ia.md",
       "sourceHash": "sha256:6cf6c8319007c225f65d142ffa92e06a1c2462506a550aceff4ce198371a62dd",
+      "title": "Faut-il être plus intelligent qu’une IA pour utiliser une IA ?",
+      "description": "Bien utiliser une IA ne consiste pas seulement à savoir la solliciter : il faut aussi vérifier, recadrer et parfois désapprendre ses propres méthodes.",
+      "datePublished": "2026-08-13",
+      "authorName": "Philippe Mihelic",
+      "category": "Travailler avec l'IA",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.437Z",
-      "lastSeenAt": "2026-09-29T11:06:17.280Z",
+      "lastSeenAt": "2026-09-30T14:57:01.601Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.086Z"
     },
     {
@@ -114,10 +145,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/l-ia-me-met-dans-les-starting-blocks",
       "outputFile": "insights/l-ia-me-met-dans-les-starting-blocks.md",
       "sourceHash": "sha256:fcb9894c214676ac6d9ca465cde4de61c328758a91b120f345dfcb0bfe9952f4",
+      "title": "L’IA me met dans les starting-blocks",
+      "description": "L’IA réduit la barrière de démarrage : elle transforme plus vite une intuition en première forme concrète que l’on peut juger, critiquer et améliorer.",
+      "datePublished": "2026-06-17",
+      "authorName": "Philippe Mihelic",
+      "category": "Transformer une idée",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.687Z",
-      "lastSeenAt": "2026-09-29T11:06:17.368Z",
+      "lastSeenAt": "2026-09-30T14:57:01.698Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.338Z"
     },
     {
@@ -127,10 +163,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/lia-ecrit-elle-trop-bien-pour-nous",
       "outputFile": "insights/lia-ecrit-elle-trop-bien-pour-nous.md",
       "sourceHash": "sha256:ab41fc9eb943003a0864588ed7f9183dd795b849bd32464cd4ce581ecef613f9",
+      "title": "L’IA écrit-elle trop bien pour nous ?",
+      "description": "À force d’utiliser l’IA pour écrire, adoptons-nous ses tics et ses structures ? Philippe Mihelic interroge son influence sur notre voix et notre style.",
+      "datePublished": "2026-07-03",
+      "authorName": "Philippe Mihelic",
+      "category": "Travailler avec l'IA",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.863Z",
-      "lastSeenAt": "2026-09-29T11:06:17.428Z",
+      "lastSeenAt": "2026-09-30T14:57:01.742Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.350Z"
     },
     {
@@ -140,10 +181,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/o-na-tenu-que-quatre-jours-sur-linkedin",
       "outputFile": "insights/o-na-tenu-que-quatre-jours-sur-linkedin.md",
       "sourceHash": "sha256:cd39ecb6a91185563b35bf171eddebe94cb9b586cec24fb9c5258579ae231f8e",
+      "title": "« O » n’a tenu que quatre jours sur LinkedIn",
+      "description": "« O », l’IA de 66 Origin, a disparu de LinkedIn après quatre jours. Ce que cette expérience révèle sur les profils IA, l’automatisation et l’identité.",
+      "datePublished": "2026-07-15",
+      "authorName": "Philippe Mihelic",
+      "category": "Nouveaux usages",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.073Z",
-      "lastSeenAt": "2026-09-29T11:06:17.423Z",
+      "lastSeenAt": "2026-09-30T14:57:01.771Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.338Z"
     },
     {
@@ -153,10 +199,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/perte-contexte-agent-ia",
       "outputFile": "insights/perte-contexte-agent-ia.md",
       "sourceHash": "sha256:3516729557f4f92747d66449913fc6eaafc43dd0531e663df4697fd3e958615d",
+      "title": "Mon IA avait la tête sous l’eau",
+      "description": "Comment reconnaître la perte de contexte d’un agent IA, décider s’il faut le recadrer ou le remplacer, et préparer une passation propre.",
+      "datePublished": "2026-08-08",
+      "authorName": "Philippe Mihelic",
+      "category": "Orchestrer humains et agents",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.296Z",
-      "lastSeenAt": "2026-09-29T11:06:17.455Z",
+      "lastSeenAt": "2026-09-30T14:57:01.779Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.397Z"
     },
     {
@@ -166,10 +217,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/project-casting-methode-agents-ia",
       "outputFile": "insights/project-casting-methode-agents-ia.md",
       "sourceHash": "sha256:68b2f246da90c723e9bad1e01def309ba7ce5ebd72a2ca35e0e0f2be8ee4b5e8",
+      "title": "Je ne travaille plus avec une IA. Je caste des équipes.",
+      "description": "Découvrez Project Casting, la méthode de Philippe Mihelic pour organiser plusieurs agents IA, partager la mémoire du projet et garder le final cut humain.",
+      "datePublished": "2026-07-27",
+      "authorName": "Philippe Mihelic",
+      "category": "Orchestrer humains et agents",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.558Z",
-      "lastSeenAt": "2026-09-29T11:06:17.511Z",
+      "lastSeenAt": "2026-09-30T14:57:01.849Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.613Z"
     },
     {
@@ -179,10 +235,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/quand-nos-agents-choisiront-les-marques-pour-nous",
       "outputFile": "insights/quand-nos-agents-choisiront-les-marques-pour-nous.md",
       "sourceHash": "sha256:7a6d721132b5b4a719013c31ad821ee66e022f28f6cf7480cc396dec916d2073",
+      "title": "Quand nos agents choisiront les marques pour nous",
+      "description": "L’agentic commerce transforme la relation aux marques : recherche, achat, personnalisation, preuve et confiance. Ce que les entreprises doivent préparer.",
+      "datePublished": "2026-09-08",
+      "authorName": "Philippe Mihelic",
+      "category": "Nouveaux usages",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-09T13:09:03.634Z",
-      "lastSeenAt": "2026-09-29T11:06:17.573Z",
+      "lastSeenAt": "2026-09-30T14:57:01.894Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.613Z"
     },
     {
@@ -192,10 +253,15 @@
       "canonicalUrl": "https://www.66origin.com/insights/supportrice-2-0-moi-le-maroc-la-france-lia",
       "outputFile": "insights/supportrice-2-0-moi-le-maroc-la-france-lia.md",
       "sourceHash": "sha256:017cea3974024ce099aea755f488302a2fc514d88b5745f5e3a24877b3673116",
+      "title": "Supportrice 2.0 : moi, le Maroc, la France et l’IA",
+      "description": "À la veille de France–Maroc, Aïda raconte comment l’IA, le hors-jeu semi-automatisé et la caméra arbitrale transforment son expérience de supportrice.",
+      "datePublished": "2026-07-08",
+      "authorName": "Aïda Laraki",
+      "category": "Nouveaux usages",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.792Z",
-      "lastSeenAt": "2026-09-29T11:06:17.565Z",
+      "lastSeenAt": "2026-09-30T14:57:01.918Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.494Z"
     },
     {
@@ -205,10 +271,12 @@
       "canonicalUrl": "https://www.66origin.com/maison",
       "outputFile": "pages/maison.md",
       "sourceHash": "sha256:d69119edbfedc44c09ac8febfb4c25471e348e8a684371d24e3973b0c38172a5",
+      "title": "La Maison 66 : studio d’innovation, design et intelligence artificielle à Paris",
+      "description": "Découvrez la Maison 66 Origin : un studio parisien qui relie stratégie, design, intelligence artificielle, technologie et exécution.",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.964Z",
-      "lastSeenAt": "2026-09-29T11:06:17.646Z",
+      "lastSeenAt": "2026-09-30T14:57:01.929Z",
       "lastGeneratedAt": "2026-09-08T13:14:46.964Z"
     },
     {
@@ -218,10 +286,12 @@
       "canonicalUrl": "https://www.66origin.com/team/philippe-mihelic",
       "outputFile": "team/philippe-mihelic.md",
       "sourceHash": "sha256:4c693cacb4428e99e1f4999e1bcc1b63ff9d34ebbb0962dfc064b3136739ce4d",
+      "title": "Philippe Mihelic",
+      "description": "Parcours, expertises, projets et Insights de Philippe Mihelic, cofondateur et CEO de 66 Origin, de FullSIX à Yellow Innovation et à l’IA.",
       "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:17:40.589Z",
-      "lastSeenAt": "2026-09-29T11:06:17.646Z",
+      "lastSeenAt": "2026-09-30T14:57:02.978Z",
       "lastGeneratedAt": "2026-09-09T13:09:03.799Z"
     },
     {
@@ -231,10 +301,12 @@
       "canonicalUrl": "https://www.66origin.com/works/bewiz-rebranding-cabinet-comptable-identite-digitale",
       "outputFile": "works/bewiz-rebranding-cabinet-comptable-identite-digitale.md",
       "sourceHash": "sha256:460188d3fe5237bb0110125ca5fb7f784f3cbca53a964250f33592c8376b65c3",
+      "title": "BEWIZ, le rebranding d’un cabinet comptable tout-terrain",
+      "description": "66 Origin accompagne Bewiz dans son rebranding : plateforme de marque, identité visuelle, site web et supports pour moderniser un cabinet comptable.",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.307Z",
-      "lastSeenAt": "2026-09-29T11:06:17.699Z",
+      "lastSeenAt": "2026-09-30T14:57:02.061Z",
       "lastGeneratedAt": "2026-09-08T13:14:47.307Z"
     },
     {
@@ -244,10 +316,12 @@
       "canonicalUrl": "https://www.66origin.com/works/bforbank-banque-immersive-ia-apple-vision-pro",
       "outputFile": "works/bforbank-banque-immersive-ia-apple-vision-pro.md",
       "sourceHash": "sha256:8cda26c7cf18d07c8c44f60bdf486fed1ce95c440caab85f376d3b7beea88892",
+      "title": "BforBank, la banque du futur imaginée entre spatial computing et intelligence artificielle",
+      "description": "66 Origin imagine avec BforBank une banque immersive sur Apple Vision Pro : visualisation 3D des finances, achats assistés et conseil IA contextuel.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.531Z",
-      "lastSeenAt": "2026-09-29T11:06:17.711Z",
+      "lastSeenAt": "2026-09-30T14:57:02.077Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.711Z"
     },
     {
@@ -257,10 +331,12 @@
       "canonicalUrl": "https://www.66origin.com/works/cirb-branding-public-transformation-numerique",
       "outputFile": "works/cirb-branding-public-transformation-numerique.md",
       "sourceHash": "sha256:37b6b8c3b83adff34a924095beb5e2edf5b90db5548e4ef7720a75dfeac36b64",
+      "title": "CIRB, structurer l’innovation publique et la rendre visible",
+      "description": "66 Origin accompagne le CIRB à Bruxelles sur le branding, Compass, WePulse, la prospective et la communication de l’innovation publique.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.761Z",
-      "lastSeenAt": "2026-09-29T11:06:17.791Z",
+      "lastSeenAt": "2026-09-30T14:57:02.070Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.791Z"
     },
     {
@@ -270,10 +346,12 @@
       "canonicalUrl": "https://www.66origin.com/works/delivery-safe-sac-livraison-connecte-securite-livreurs-velo",
       "outputFile": "works/delivery-safe-sac-livraison-connecte-securite-livreurs-velo.md",
       "sourceHash": "sha256:29552ced84bd7a829668809b182c6fd295c2da07f6ceabf6b1c5430c74bd78d8",
+      "title": "Delivery Safe, un sac de livraison KFC pensé pour rendre les livreurs à vélo visibles.",
+      "description": "66 Origin conçoit Delivery Safe pour KFC et Havas Paris : un sac de livraison lumineux avec clignotants et feu stop pour améliorer la sécurité des livreurs urbains.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.894Z",
-      "lastSeenAt": "2026-09-29T11:06:17.790Z",
+      "lastSeenAt": "2026-09-30T14:57:02.224Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.790Z"
     },
     {
@@ -283,10 +361,12 @@
       "canonicalUrl": "https://www.66origin.com/works/fabled-branding-international-fabricant-ebike-b2b",
       "outputFile": "works/fabled-branding-international-fabricant-ebike-b2b.md",
       "sourceHash": "sha256:94582c6429d7d31ba4374af085a0d5c6f392e703471d28b15637dea66f2f8703",
+      "title": "Fabled, le rebranding international d’un acteur e-bike B2B",
+      "description": "66 Origin crée Fabled pour HHH : naming, logo, branding, stand B2B et site web afin d’accélérer son déploiement en Europe et sur les marchés internationaux.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.054Z",
-      "lastSeenAt": "2026-09-29T11:06:17.834Z",
+      "lastSeenAt": "2026-09-30T14:57:02.245Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.834Z"
     },
     {
@@ -296,10 +376,12 @@
       "canonicalUrl": "https://www.66origin.com/works/galerie-s-bureau-poste-hybride-services-proximite",
       "outputFile": "works/galerie-s-bureau-poste-hybride-services-proximite.md",
       "sourceHash": "sha256:506d6d39a2f63168a6a2924c5a81be5c9c9927739456e6aed9b47f09bbe3ef9a",
+      "title": "GALERIE S, le concept de bureau de poste hybride pensé pour les usages locaux et la vie de quartier",
+      "description": "Galerie S est un concept imaginé par 66 Origin pour transformer le bureau de poste en lieu de services, de proximité, de retail et de lien social.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.209Z",
-      "lastSeenAt": "2026-09-29T11:06:17.850Z",
+      "lastSeenAt": "2026-09-30T14:57:02.224Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.850Z"
     },
     {
@@ -309,10 +391,12 @@
       "canonicalUrl": "https://www.66origin.com/works/ignition-collection-capsule-mode-patrimoine-la-poste",
       "outputFile": "works/ignition-collection-capsule-mode-patrimoine-la-poste.md",
       "sourceHash": "sha256:772ad066bac1fb93640b319aaa835f0310d81e894b73fbddb73ebff701943b8e",
+      "title": "Ignition Collection, la capsule mode patrimoniale de La Poste",
+      "description": "66 Origin imagine pour La Poste une capsule mode inspirée du patrimoine postal, entre design contemporain, stylisme, défilé et activation culturelle.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.437Z",
-      "lastSeenAt": "2026-09-29T11:06:17.932Z",
+      "lastSeenAt": "2026-09-30T14:57:02.398Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.932Z"
     },
     {
@@ -322,10 +406,12 @@
       "canonicalUrl": "https://www.66origin.com/works/institut-louis-bachelier-branding-site-ia",
       "outputFile": "works/institut-louis-bachelier-branding-site-ia.md",
       "sourceHash": "sha256:f09b1eaf7492551a3b47cd7718338a74a4405ff3d59c1034405665bc333f0efc",
+      "title": "Institut Louis Bachelier, rendre la recherche plus lisible",
+      "description": "66 Origin accompagne l’Institut Louis Bachelier sur son repositionnement, son identité, son site web et sa réflexion IA pour mieux diffuser la recherche.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.626Z",
-      "lastSeenAt": "2026-09-29T11:06:17.932Z",
+      "lastSeenAt": "2026-09-30T14:57:02.398Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.932Z"
     },
     {
@@ -335,10 +421,12 @@
       "canonicalUrl": "https://www.66origin.com/works/lab-postal-2017-bienvenue-en-disruption",
       "outputFile": "works/lab-postal-2017-bienvenue-en-disruption.md",
       "sourceHash": "sha256:5d7fb4defb37b49a42bc46d89920df50b7212e27da0ccffb5ca0101ecaba9659",
+      "title": "Lab Postal 2017, quand La Poste transforme son événement innovation en expérience immersive",
+      "description": "66 Origin transforme le Lab Postal 2017 en expérience immersive : concept créatif, scénographie, branding, conférences et UX événementielle.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.864Z",
-      "lastSeenAt": "2026-09-29T11:06:17.969Z",
+      "lastSeenAt": "2026-09-30T14:57:02.403Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.969Z"
     },
     {
@@ -348,10 +436,12 @@
       "canonicalUrl": "https://www.66origin.com/works/lab-postal-2018-evenement-innovation-business-odyssey",
       "outputFile": "works/lab-postal-2018-evenement-innovation-business-odyssey.md",
       "sourceHash": "sha256:0a8cbae1279ec18289013099f7fbfc26ca9bffa8ea560f13897c7c59aed5d6b4",
+      "title": "Lab Postal 2018, une business odyssey au service de l’innovation",
+      "description": "66 Origin conçoit pour La Poste le Lab Postal 2018 : concept créatif, scénographie immersive, conférences internationales et parcours visiteur à fort impact.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.112Z",
-      "lastSeenAt": "2026-09-29T11:06:17.986Z",
+      "lastSeenAt": "2026-09-30T14:57:02.563Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.986Z"
     },
     {
@@ -361,10 +451,12 @@
       "canonicalUrl": "https://www.66origin.com/works/lab-postal-2019-ignition-scenographie-innovation-la-poste",
       "outputFile": "works/lab-postal-2019-ignition-scenographie-innovation-la-poste.md",
       "sourceHash": "sha256:52a2177047e90a5d507c9ea5901ee22191610c73728a2838a6e4af756ca5b472",
+      "title": "Lab Postal 2019, “Ignition”, le décollage spectaculaire de l’innovation La Poste",
+      "description": "66 Origin conçoit Lab Postal 2019 “Ignition” : naming, scénographie immersive, programmation, contenus et production pour valoriser l’innovation La Poste.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.283Z",
-      "lastSeenAt": "2026-09-29T11:06:18.075Z",
+      "lastSeenAt": "2026-09-30T14:57:02.563Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.075Z"
     },
     {
@@ -374,10 +466,12 @@
       "canonicalUrl": "https://www.66origin.com/works/lifebox-box-autonome-eau-energie-connectivite",
       "outputFile": "works/lifebox-box-autonome-eau-energie-connectivite.md",
       "sourceHash": "sha256:1974be20881577e0e51057d2563f060cd2c66c860029539f7fe23d5d0e766628",
+      "title": "Lifebox, la box autonome pour alimenter les sites isolés",
+      "description": "66 Origin imagine Lifebox, une box autonome capable d’apporter électricité, eau potable et connectivité à des sites isolés, du Rwanda aux zones reculées.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.556Z",
-      "lastSeenAt": "2026-09-29T11:06:18.074Z",
+      "lastSeenAt": "2026-09-30T14:57:02.563Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.074Z"
     },
     {
@@ -387,10 +481,12 @@
       "canonicalUrl": "https://www.66origin.com/works/lifepost-rwanda-design-service-sante",
       "outputFile": "works/lifepost-rwanda-design-service-sante.md",
       "sourceHash": "sha256:8cd8f77dd372c7660b02c8697911116bf13693857f484b9f4cd05af289aea069",
+      "title": "LifePost, Design de service pour l’accès aux soins au Rwanda",
+      "description": "66 Origin a accompagné le ministère de la Santé du Rwanda pour repenser l’accès aux soins en zone rurale, en transformant le HealthPost en LifePost, un lieu de vie, de santé et de services de proximité.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.926Z",
-      "lastSeenAt": "2026-09-29T11:06:18.110Z",
+      "lastSeenAt": "2026-09-30T14:57:02.735Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.110Z"
     },
     {
@@ -400,10 +496,12 @@
       "canonicalUrl": "https://www.66origin.com/works/monimalz-tirelire-connectee-fintech-famille-banque",
       "outputFile": "works/monimalz-tirelire-connectee-fintech-famille-banque.md",
       "sourceHash": "sha256:b49dfe2e8a3c79fde6d2bdccd705d0fd5e2668675e9a83786bc6ddc58f7b3836",
+      "title": "Monimalz, réinventer la relation entre la banque et l’enfant.",
+      "description": "66 Origin conçoit Monimalz pour La Banque Postale : une tirelire connectée et pédagogique qui recrée un lien bancaire avec les enfants, les parents et les grands-parents.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.160Z",
-      "lastSeenAt": "2026-09-29T11:06:18.121Z",
+      "lastSeenAt": "2026-09-30T14:57:02.734Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.121Z"
     },
     {
@@ -413,10 +511,12 @@
       "canonicalUrl": "https://www.66origin.com/works/mr-tracer-application-tracking-colis-multi-transporteurs",
       "outputFile": "works/mr-tracer-application-tracking-colis-multi-transporteurs.md",
       "sourceHash": "sha256:5282f7c3674e8ec0380bba2302bd44b579d1633c2d4851a22b12e3a19f7105d5",
+      "title": "Mr Tracer, le tracking colis unifié pensé côté utilisateur",
+      "description": "66 Origin conçoit Mr Tracer pour La Poste : une application mobile de suivi de colis multi-transporteurs avec chatbot, carte, notifications et UX conversationnelle.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.323Z",
-      "lastSeenAt": "2026-09-29T11:06:18.218Z",
+      "lastSeenAt": "2026-09-30T14:57:02.715Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.218Z"
     },
     {
@@ -426,10 +526,12 @@
       "canonicalUrl": "https://www.66origin.com/works/my-food-my-future-magazine-rse-sante-bnp-paribas-cardif",
       "outputFile": "works/my-food-my-future-magazine-rse-sante-bnp-paribas-cardif.md",
       "sourceHash": "sha256:df316581dafbd6be8078695fdff14f3b6ad8c260fcc24db4f6fe36583ea55c3e",
+      "title": "My Food My Future, un magazine corporate pour rendre lisible un programme international de prévention santé",
+      "description": "66 Origin conçoit My Food My Future pour BNP Paribas Cardif : un magazine PDF corporate sur la prévention de l’obésité, la nutrition et l’impact social.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.482Z",
-      "lastSeenAt": "2026-09-29T11:06:18.218Z",
+      "lastSeenAt": "2026-09-30T14:57:02.884Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.218Z"
     },
     {
@@ -439,10 +541,12 @@
       "canonicalUrl": "https://www.66origin.com/works/quipo-ticket-de-caisse-numerique",
       "outputFile": "works/quipo-ticket-de-caisse-numerique.md",
       "sourceHash": "sha256:a27aea14dbb64313c96e5b059a391369c267ef0f88852c3298106e4aa39c09cd",
+      "title": "QUIPO l’application mobile de ticket de caisse numérique et dématérialisation responsable.",
+      "description": "66 Origin crée QUIPO : marque, app mobile et site commerçants primé. QR code enrichi, ticket instantané, sans serveur. Gamification et canal retail-client.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.779Z",
-      "lastSeenAt": "2026-09-29T11:06:18.245Z",
+      "lastSeenAt": "2026-09-30T14:57:02.902Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.245Z"
     },
     {
@@ -452,10 +556,12 @@
       "canonicalUrl": "https://www.66origin.com/works/silversquare-plateforme-data-ia-coworking",
       "outputFile": "works/silversquare-plateforme-data-ia-coworking.md",
       "sourceHash": "sha256:2cb52a80d853b42bdcbe99653700618c9f8b99786d7dd1e554bdfb4648e3a509",
+      "title": "SILVERSQUARE la plateforme data & IA pour piloter le coworking flexible",
+      "description": "66 Origin développe pour Silversquare une plateforme data & IA de pilotage immobilier flexible : facturation pay per use, dashboard temps réel et optimisation des espaces.",
       "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.952Z",
-      "lastSeenAt": "2026-09-29T11:06:18.259Z",
+      "lastSeenAt": "2026-09-30T14:57:02.884Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.259Z"
     },
     {
@@ -465,10 +571,12 @@
       "canonicalUrl": "https://www.66origin.com/works/spart-sport-entreprise-gamification-rh",
       "outputFile": "works/spart-sport-entreprise-gamification-rh.md",
       "sourceHash": "sha256:515e5ba038b6ee8b1f58db5574f43c33ecd4db2809dbcf074f4eba2ac51f42d5",
+      "title": "SPART l’application mobile de sport en entreprise et gamification RH.",
+      "description": "66 Origin crée SPART : application mobile de sport en entreprise et gamification RH. Défis, XP, saisons, récompenses et back-office pour recréer la cohésion à distance.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.187Z",
-      "lastSeenAt": "2026-09-29T11:06:18.406Z",
+      "lastSeenAt": "2026-09-30T14:57:03.039Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.406Z"
     },
     {
@@ -478,10 +586,12 @@
       "canonicalUrl": "https://www.66origin.com/works/taiji-kit-mains-libres-velo-securite-cycliste",
       "outputFile": "works/taiji-kit-mains-libres-velo-securite-cycliste.md",
       "sourceHash": "sha256:69525fd8f908ed0410af0d5e82352ae6a611d44551befae3938ddabbe8ee2cad",
+      "title": "Taiji, le kit mains libres vélo qui rend la mobilité plus sûre et plus intelligente",
+      "description": "66 Origin a incubé Taiji puis créé 66 Mobility pour lancer ce kit mains libres vélo : télécommande guidon, app mobile, IA et sécurité cycliste.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.375Z",
-      "lastSeenAt": "2026-09-29T11:06:18.408Z",
+      "lastSeenAt": "2026-09-30T14:57:03.055Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.408Z"
     },
     {
@@ -491,10 +601,12 @@
       "canonicalUrl": "https://www.66origin.com/works/the-bird-livre-blanc-ia-edition-design-generatif",
       "outputFile": "works/the-bird-livre-blanc-ia-edition-design-generatif.md",
       "sourceHash": "sha256:6aaa123f4590df90fabb7fa234d11bce412ad3b9b5456e04988c68f77cd8f084",
+      "title": "The Bird, le livre blanc IA qui fait la démonstration par le fond et par la forme",
+      "description": "66 Origin conçoit The Bird pour La Poste : deux livres blancs IA, un travail éditorial signé Sophie Abouchahin et un univers visuel 100 % généré par IA.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.642Z",
-      "lastSeenAt": "2026-09-29T11:06:18.453Z",
+      "lastSeenAt": "2026-09-30T14:57:03.055Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.453Z"
     },
     {
@@ -504,10 +616,12 @@
       "canonicalUrl": "https://www.66origin.com/works/the-brand-show-kantar-evenement-immersif-temps-reel",
       "outputFile": "works/the-brand-show-kantar-evenement-immersif-temps-reel.md",
       "sourceHash": "sha256:7e2fc316259e5de643dfde7534a7434bca068553e8ce913c33a5c3c365aaa4c5",
+      "title": "The Brand Show by Kantar, un show de marque spatialisé en temps réel",
+      "description": "66 Origin conçoit The Brand Show by Kantar : direction artistique, spatialisation temps réel, IA, TouchDesigner et pipeline cloud des contenus sur scène.",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.911Z",
-      "lastSeenAt": "2026-09-29T11:06:18.406Z",
+      "lastSeenAt": "2026-09-30T14:57:03.116Z",
       "lastGeneratedAt": "2026-09-08T13:14:51.911Z"
     },
     {
@@ -517,10 +631,12 @@
       "canonicalUrl": "https://www.66origin.com/works/upper-cocktails-sans-alcool-branding",
       "outputFile": "works/upper-cocktails-sans-alcool-branding.md",
       "sourceHash": "sha256:29b39513608d06e89d08bcc6bdd44c807d0a8a56be86d6d273cab85077405d18",
+      "title": "UPPER les cocktails sans alcool prêts à boire qui assument la fête",
+      "description": "66 Origin crée UPPER pour Oussia : plateforme de marque, personnages manga, branding GMS et stratégie européenne pour cocktails sans alcool prêts à boire.",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.142Z",
-      "lastSeenAt": "2026-09-29T11:06:18.568Z",
+      "lastSeenAt": "2026-09-30T14:57:03.196Z",
       "lastGeneratedAt": "2026-09-08T13:14:52.142Z"
     },
     {
@@ -530,10 +646,12 @@
       "canonicalUrl": "https://www.66origin.com/works/useo-ia-metier-rag-industriel-appels-offres",
       "outputFile": "works/useo-ia-metier-rag-industriel-appels-offres.md",
       "sourceHash": "sha256:91ab5ac77728df961200ace64be9959af707d7f36e3dd3d3acef724e5c6ba969",
+      "title": "USEO, une IA métier pour accélérer les réponses commerciales et les appels d’offres",
+      "description": "66 Origin conçoit pour USEO un prototype d’IA métier avec RAG, interface UX et prompts visuels pour accélérer les réponses commerciales.",
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.309Z",
-      "lastSeenAt": "2026-09-29T11:06:18.568Z",
+      "lastSeenAt": "2026-09-30T14:57:03.222Z",
       "lastGeneratedAt": "2026-09-08T13:14:52.309Z"
     },
     {
@@ -543,10 +661,12 @@
       "canonicalUrl": "https://www.66origin.com/works/velo-electrique-urbain-connecte-design-compact-ia",
       "outputFile": "works/velo-electrique-urbain-connecte-design-compact-ia.md",
       "sourceHash": "sha256:df9f57b4fa87604608ba4968071df82a4be13ff9390ffd590cd9d8a4f32b5aea",
+      "title": "Le Vélo, un vélo électrique urbain pensé à 100 % pour la ville",
+      "description": "66 Origin conçoit un vélo électrique urbain compact, connecté et personnalisable : design produit, double batterie, IA embarquée et prototype industriel.",
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.482Z",
-      "lastSeenAt": "2026-09-29T11:06:18.581Z",
+      "lastSeenAt": "2026-09-30T14:57:03.216Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.581Z"
     }
   ]

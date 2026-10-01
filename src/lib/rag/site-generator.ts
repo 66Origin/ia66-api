@@ -31,6 +31,13 @@ export type ManifestDocument = {
   canonicalUrl: string;
   outputFile: string;
   sourceHash: string;
+
+  title?: string;
+  description?: string;
+  datePublished?: string;
+  authorName?: string;
+  category?: string;
+
   version: number;
   status: DocumentStatus;
   firstSeenAt: string;
@@ -530,6 +537,13 @@ export async function generateSiteDocuments(
             canonicalUrl: page.canonicalUrl,
             outputFile: relativePath,
             sourceHash: page.sourceHash,
+
+            title: page.title,
+            description: page.description,
+            datePublished: page.datePublished,
+            authorName: page.authorName,
+            category: page.category,
+
             version:
               previous && previous.sourceHash === page.sourceHash
                 ? previous.version

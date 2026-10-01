@@ -2,6 +2,7 @@
 
 export type BuildChatPromptInput = {
   message: string;
+  latestInsightsContext?: string;
 };
 
 function clip(s: string, max = 500): string {
@@ -11,13 +12,24 @@ function clip(s: string, max = 500): string {
 }
 
 export function buildChatPrompt(input: BuildChatPromptInput): string {
-  const { message } = input;
+  const { message, latestInsightsContext } = input;
 
   return `
 RÈGLES LOCALES
 - Pour toute question factuelle sur 66 Origin : s’appuyer d’abord sur le contenu RAG.
 - Si plusieurs projets sont cités : répondre brièvement sur chacun avant de relier.
 - Ne jamais extrapoler à partir d’un projet proche.
+${
+  latestInsightsContext
+    ? `
+- Pour cette question de fraîcheur, utiliser la liste structurée ci-dessous comme référence chronologique autoritative.
+- Ne pas déterminer le plus récent à partir du classement File Search.
+
+INSIGHTS RÉCENTS — ORDRE CHRONOLOGIQUE DÉCROISSANT
+${latestInsightsContext}
+`
+    : ""
+}
 
 MESSAGE UTILISATEUR
 ${clip(message, 1200)}

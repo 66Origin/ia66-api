@@ -1,11 +1,11 @@
 {
-  "startedAt": "2026-09-29T11:06:16.374Z",
-  "completedAt": "2026-09-29T11:06:18.581Z",
+  "startedAt": "2026-09-30T14:56:59.750Z",
+  "completedAt": "2026-09-30T14:57:03.222Z",
   "source": "https://www.66origin.com",
   "discovered": 42,
   "created": 0,
-  "updated": 22,
-  "unchanged": 20,
+  "updated": 0,
+  "unchanged": 42,
   "missing": 0,
   "failed": 0,
   "failures": []

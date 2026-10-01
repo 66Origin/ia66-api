@@ -170,7 +170,13 @@ function initIAChat(rootSelector) {
       return "";
     }
 
-    const uniqueSources = [...new Set(sources)];
+    const uniqueSources = [...new Set(sources)].filter(
+      (url) => !url.includes("/works/"),
+    );
+
+    if (uniqueSources.length === 0) {
+      return "";
+    }
 
     const links = uniqueSources
       .map(

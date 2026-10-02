@@ -190,9 +190,19 @@ function initIAChat(rootSelector) {
       .map((source) => {
         const label = source.title || source.url;
 
-        return `<a href="${source.url}" target="_blank" rel="noopener noreferrer" class="ia66o-source-link">${label}</a>`;
+        return `
+      <a
+        href="${source.url}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ia66o-source-link"
+      >
+        <span class="ia66o-source-label">Voir l’Insight</span>
+        <span class="ia66o-source-title">${label}</span>
+      </a>
+    `;
       })
-      .join("<br>");
+      .join("");
 
     return `<div class="ia66o-sources">${links}</div>`;
   }

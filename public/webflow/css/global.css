@@ -273,15 +273,32 @@ body.ia-scroll-locked {
 
 .ia66o-source-link {
   font-weight: normal;
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.125rem;
 }
 
-.ia66o-mail-link,
-.ia66o-source-link {
+.ia66o-mail-link {
   text-decoration: underline;
 }
 
 .ia66o-work-link {
   text-decoration: underline dotted;
+}
+
+.ia66o-sources {
+  margin-top: 1rem;
+}
+
+.ia66o-source-label {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.ia66o-source-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .ia66o-chat-message.bot-message.ia66o-loader {

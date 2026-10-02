@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import type { RagSource } from "@/lib/gemini/rag";
+
 type ManifestInsight = {
   type: "insight";
   slug: string;
@@ -87,4 +89,29 @@ export function buildLatestInsightsContext(limit = 3): string {
       return lines.join("\n");
     })
     .join("\n\n");
+}
+
+export function getLatestInsightSources(limit = 3): RagSource[] {
+  return getLatestInsights(limit).map((insight) => ({
+    url: insight.canonicalUrl,
+    type: "insight",
+    title: insight.title ?? insight.slug,
+  }));
+}
+
+export function getLatestInsightsLimit(message: string): number {
+  const normalized = message
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "");
+
+  const asksMultiple =
+    normalized.includes("trois") ||
+    normalized.includes("3 ") ||
+    normalized.includes("derniers") ||
+    normalized.includes("dernieres") ||
+    normalized.includes("plus recents") ||
+    normalized.includes("plus recentes");
+
+  return asksMultiple ? 3 : 1;
 }

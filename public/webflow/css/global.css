@@ -291,9 +291,31 @@ body.ia-scroll-locked {
   margin-top: 1rem;
 }
 
-.ia66o-source-label {
+.ia66o-sources-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ia66o-source-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  color: var(--_colors---ink-900);
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.ia66o-source-label,
+.ia66o-sources-label {
   font-size: 0.75rem;
   opacity: 0.6;
+}
+
+.ia66o-sources-label {
+  margin-bottom: 0.25rem;
 }
 
 .ia66o-source-title {

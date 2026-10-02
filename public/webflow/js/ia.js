@@ -186,25 +186,52 @@ function initIAChat(rootSelector) {
       return "";
     }
 
+    const isMultiple = visibleSources.length > 1;
+
+    const getSourceLabel = (source) => {
+      switch (source.type) {
+        case "insight":
+          return "Voir l’Insight";
+        case "team":
+          return "Voir le profil";
+        case "page":
+          return "Voir la page";
+        default:
+          return "En savoir plus";
+      }
+    };
+
     const links = visibleSources
       .map((source) => {
-        const label = source.title || source.url;
+        const title = escapeHtml(source.title || source.url);
+        const label = getSourceLabel(source);
 
         return `
-      <a
-        href="${source.url}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="ia66o-source-link"
-      >
-        <span class="ia66o-source-label">Voir l’Insight</span>
-        <span class="ia66o-source-title">${label}</span>
-      </a>
-    `;
+        <a
+          href="${source.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ia66o-source-link"
+        >
+          ${
+            !isMultiple
+              ? `<span class="ia66o-source-label">${label}</span>`
+              : ""
+          }
+          <span class="ia66o-source-title">${title}</span>
+        </a>
+      `;
       })
       .join("");
 
-    return `<div class="ia66o-sources">${links}</div>`;
+    return `
+    <div class="ia66o-sources">
+      ${isMultiple ? `<div class="ia66o-sources-label">À consulter</div>` : ""}
+      <div class="ia66o-sources-list">
+        ${links}
+      </div>
+    </div>
+  `;
   }
 
   function updateCaretState() {

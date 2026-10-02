@@ -170,19 +170,28 @@ function initIAChat(rootSelector) {
       return "";
     }
 
-    const uniqueSources = [...new Set(sources)].filter(
-      (url) => !url.includes("/works/"),
+    const uniqueSources = [
+      ...new Map(
+        sources
+          .filter((source) => source?.url)
+          .map((source) => [source.url, source]),
+      ).values(),
+    ];
+
+    const visibleSources = uniqueSources.filter(
+      (source) => source.type !== "work",
     );
 
-    if (uniqueSources.length === 0) {
+    if (visibleSources.length === 0) {
       return "";
     }
 
-    const links = uniqueSources
-      .map(
-        (url) =>
-          `<a href="${url}" target="_blank" rel="noopener noreferrer" class="ia66o-source-link">${url}</a>`,
-      )
+    const links = visibleSources
+      .map((source) => {
+        const label = source.title || source.url;
+
+        return `<a href="${source.url}" target="_blank" rel="noopener noreferrer" class="ia66o-source-link">${label}</a>`;
+      })
       .join("<br>");
 
     return `<div class="ia66o-sources">${links}</div>`;

@@ -10,6 +10,12 @@ export type RagChatInput = {
   fileSearchStoreNames: string[];
 };
 
+export type RagSource = {
+  url: string;
+  type?: string;
+  title?: string;
+};
+
 function normalizeStoreName(name: string) {
   return name.startsWith("fileSearchStores/")
     ? name
@@ -48,7 +54,7 @@ function ensureCompleteSentence(text: string, finishReason?: string): string {
   return complete.length > 40 ? complete : trimmed;
 }
 
-function extractGroundedCanonicalUrls(candidate: Candidate): string[] {
+function extractGroundedSources(candidate: Candidate): RagSource[] {
   const metadata = candidate.groundingMetadata;
 
   if (!metadata?.groundingChunks?.length) {
@@ -63,7 +69,7 @@ function extractGroundedCanonicalUrls(candidate: Candidate): string[] {
     }
   }
 
-  const urls = new Set<string>();
+  const sources = new Map<string, RagSource>();
 
   for (const index of usedChunkIndexes) {
     const chunk = metadata.groundingChunks[index];
@@ -71,17 +77,23 @@ function extractGroundedCanonicalUrls(candidate: Candidate): string[] {
 
     if (!customMetadata) continue;
 
-    const canonicalUrl = customMetadata.find(
-      (item) =>
-        item.key === "canonical_url" && typeof item.stringValue === "string",
-    )?.stringValue;
+    const getStringMetadata = (key: string) =>
+      customMetadata.find(
+        (item) => item.key === key && typeof item.stringValue === "string",
+      )?.stringValue;
 
-    if (canonicalUrl) {
-      urls.add(canonicalUrl);
-    }
+    const url = getStringMetadata("canonical_url");
+
+    if (!url) continue;
+
+    sources.set(url, {
+      url,
+      type: getStringMetadata("content_type"),
+      title: getStringMetadata("title"),
+    });
   }
 
-  return [...urls];
+  return [...sources.values()];
 }
 
 /**
@@ -90,7 +102,7 @@ function extractGroundedCanonicalUrls(candidate: Candidate): string[] {
  */
 export async function runRagChat(input: RagChatInput): Promise<{
   text: string;
-  sourceUrls: string[];
+  sources: RagSource[];
 }> {
   const ai = getGeminiClient();
 
@@ -157,12 +169,12 @@ export async function runRagChat(input: RagChatInput): Promise<{
 
   const finalText = ensureCompleteSentence(text, candidate.finishReason);
 
-  const sourceUrls = extractGroundedCanonicalUrls(candidate);
+  const sources = extractGroundedSources(candidate);
 
   console.log(candidate.finishReason);
 
   return {
     text: finalText,
-    sourceUrls,
+    sources,
   };
 }

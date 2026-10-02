@@ -24,8 +24,6 @@ ${
     ? `
 - Pour cette question de fraîcheur, utiliser la liste structurée ci-dessous comme référence chronologique autoritative.
 - Ne pas déterminer le plus récent à partir du classement File Search.
-- Si la réponse cite un Insight précis, inclure son URL canonique à la fin de la réponse.
-- Utiliser uniquement la valeur 'canonical_url' fournie dans le contexte structuré.
 
 INSIGHTS RÉCENTS — ORDRE CHRONOLOGIQUE DÉCROISSANT
 ${latestInsightsContext}

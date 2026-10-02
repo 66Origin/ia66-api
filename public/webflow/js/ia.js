@@ -778,7 +778,7 @@ function initIAChat(rootSelector) {
         throw new Error("NO_ANSWER");
       }
 
-      transformLoader(loader, data.text, data.email, data.sources);
+      transformLoader(loader, data.text, data.email, data.visibleSources);
     } catch (err) {
       loader.remove();
 

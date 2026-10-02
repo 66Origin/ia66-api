@@ -9,8 +9,11 @@ import { runRagChat } from "@/lib/gemini/rag";
 import { extractEmailTemplate } from "@/lib/parser/email";
 import {
   buildLatestInsightsContext,
+  getLatestInsightSources,
   isInsightsFreshnessQuery,
+  getLatestInsightsLimit,
 } from "@/lib/rag/insights";
+import { selectVisibleSources } from "@/lib/rag/sources";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -58,9 +61,19 @@ export async function POST(req: Request) {
 
   const { message, conversation } = parsed.data;
 
-  const latestInsightsContext = isInsightsFreshnessQuery(message)
-    ? buildLatestInsightsContext(3)
+  const isInsightsFreshness = isInsightsFreshnessQuery(message);
+
+  const latestInsightsLimit = isInsightsFreshness
+    ? getLatestInsightsLimit(message)
+    : 0;
+
+  const latestInsightsContext = isInsightsFreshness
+    ? buildLatestInsightsContext(latestInsightsLimit)
     : undefined;
+
+  const latestInsightSources = isInsightsFreshness
+    ? getLatestInsightSources(latestInsightsLimit)
+    : [];
 
   const prompt = buildChatPrompt({
     message,
@@ -89,11 +102,17 @@ export async function POST(req: Request) {
     // Parsing email
     const email = extractEmailTemplate(text);
 
+    const visibleSources =
+      latestInsightSources.length > 0
+        ? latestInsightSources
+        : selectVisibleSources(message, sources);
+
     return NextResponse.json(
       {
         text,
         email,
         sources,
+        visibleSources,
       },
       { headers },
     );

@@ -11,6 +11,7 @@ import {
   buildLatestInsightsContext,
   isInsightsFreshnessQuery,
 } from "@/lib/rag/insights";
+import { selectVisibleSources } from "@/lib/rag/sources";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -89,11 +90,14 @@ export async function POST(req: Request) {
     // Parsing email
     const email = extractEmailTemplate(text);
 
+    const visibleSources = selectVisibleSources(message, sources);
+
     return NextResponse.json(
       {
         text,
         email,
         sources,
+        visibleSources,
       },
       { headers },
     );

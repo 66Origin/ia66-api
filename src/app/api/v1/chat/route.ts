@@ -84,7 +84,7 @@ export async function POST(req: Request) {
 
   try {
     const { text, sources } = await runRagChat({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.8-flash",
       prompt,
       history: conversation?.history,
       fileSearchStoreNames: [storeName],

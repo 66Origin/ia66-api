@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/lia-ecrit-elle-trop-bien-pour-nous"
 source_hash: "sha256:ab41fc9eb943003a0864588ed7f9183dd795b849bd32464cd4ce581ecef613f9"
 description: "À force d’utiliser l’IA pour écrire, adoptons-nous ses tics et ses structures ? Philippe Mihelic interroge son influence sur notre voix et notre style."
+date_published: "2026-07-03"
+author_name: "Philippe Mihelic"
+category: "Travailler avec l'IA"
 ---
 
 # L’IA écrit-elle trop bien pour nous ?

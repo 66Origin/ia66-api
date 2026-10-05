@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/faut-il-etre-plus-intelligent-quune-ia-pour-utiliser-une-ia"
 source_hash: "sha256:6cf6c8319007c225f65d142ffa92e06a1c2462506a550aceff4ce198371a62dd"
 description: "Bien utiliser une IA ne consiste pas seulement à savoir la solliciter : il faut aussi vérifier, recadrer et parfois désapprendre ses propres méthodes."
+date_published: "2026-08-13"
+author_name: "Philippe Mihelic"
+category: "Travailler avec l'IA"
 ---
 
 # Faut-il être plus intelligent qu’une IA pour utiliser une IA ?

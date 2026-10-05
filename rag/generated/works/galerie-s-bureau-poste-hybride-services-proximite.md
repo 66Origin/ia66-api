@@ -4,7 +4,7 @@ slug: "galerie-s-bureau-poste-hybride-services-proximite"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/galerie-s-bureau-poste-hybride-services-proximite"
-source_hash: "sha256:131e5fb039602c2e43cea386d240b3a2594d7d34e7bdb5f5f83c4a168ae93360"
+source_hash: "sha256:506d6d39a2f63168a6a2924c5a81be5c9c9927739456e6aed9b47f09bbe3ef9a"
 description: "Galerie S est un concept imaginé par 66 Origin pour transformer le bureau de poste en lieu de services, de proximité, de retail et de lien social."
 ---
 
@@ -64,7 +64,7 @@ Palme Expérience Citoyen 2025
 
 Galerie S est un prototype de bureau de poste hybride imaginé par 66 Origin pour accueillir des services adaptés à chaque quartier.
 
-### Comment fonctionne Galerie S ? 
+### Comment fonctionne Galerie S ?
 
 Le lieu combine services postaux, corners partenaires et programmation locale selon la zone de chalandise et les publics visés.
 

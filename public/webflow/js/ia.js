@@ -128,17 +128,21 @@ function initIAChat(rootSelector) {
   }
   function formatMessage(text, emailData = null) {
     let safeText = escapeHtml(text);
+
     if (emailData?.to) {
       const mailto =
         `mailto:${emailData.to}` +
         `?subject=${encodeURIComponent(emailData.subject || "")}` +
         `&body=${encodeURIComponent(emailData.body || "")}`;
+
       const escapedEmail = emailData.to.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
       safeText = safeText.replace(
         new RegExp(`(?<!\\w)${escapedEmail}(?!\\w)`, "g"),
         `<a href="${mailto}" class="ia66o-mail-link">${emailData.to}</a>`,
       );
     }
+
     const emailRegex =
       /(?<!mailto:)(?<!">)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
 
@@ -146,13 +150,88 @@ function initIAChat(rootSelector) {
       return `<a href="mailto:${email}" class="ia66o-mail-link">${email}</a>`;
     });
 
+    const urlRegex = /https?:\/\/[^\s<]+/gi;
+
+    safeText = safeText.replace(urlRegex, (url) => {
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="ia66o-source-link">${url}</a>`;
+    });
+
     /* =========================================
-  FORMAT FINAL
-  ========================================= */
+      FORMAT FINAL
+    ========================================= */
     return safeText
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
       .replace(/\n/g, "<br>")
       .replace(/---/g, '<div class="ia-email-separator"></div>');
+  }
+
+  function renderSources(sources = []) {
+    if (!Array.isArray(sources) || sources.length === 0) {
+      return "";
+    }
+
+    const uniqueSources = [
+      ...new Map(
+        sources
+          .filter((source) => source?.url)
+          .map((source) => [source.url, source]),
+      ).values(),
+    ];
+
+    const visibleSources = uniqueSources.filter(
+      (source) => source.type !== "work",
+    );
+
+    if (visibleSources.length === 0) {
+      return "";
+    }
+
+    const isMultiple = visibleSources.length > 1;
+
+    const getSourceLabel = (source) => {
+      switch (source.type) {
+        case "insight":
+          return "Voir l’Insight";
+        case "team":
+          return "Voir le profil";
+        case "page":
+          return "Voir la page";
+        default:
+          return "En savoir plus";
+      }
+    };
+
+    const links = visibleSources
+      .map((source) => {
+        const title = escapeHtml(source.title || source.url);
+        const label = getSourceLabel(source);
+
+        return `
+        <a
+          href="${source.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ia66o-source-link"
+        >
+          ${
+            !isMultiple
+              ? `<span class="ia66o-source-label">${label}</span>`
+              : ""
+          }
+          <span class="ia66o-source-title">${title}</span>
+        </a>
+      `;
+      })
+      .join("");
+
+    return `
+    <div class="ia66o-sources">
+      ${isMultiple ? `<div class="ia66o-sources-label">À consulter</div>` : ""}
+      <div class="ia66o-sources-list">
+        ${links}
+      </div>
+    </div>
+  `;
   }
 
   function updateCaretState() {
@@ -589,14 +668,15 @@ function initIAChat(rootSelector) {
     });
   }
 
-  async function transformLoader(loader, text, emailData = null) {
+  async function transformLoader(loader, text, emailData = null, sources = []) {
     loader
       .querySelector(".ia66o-chat-message")
       ?.classList.remove("ia66o-loader");
 
     const messageEl = loader.querySelector(".ia66o-chat-message_text");
 
-    messageEl.innerHTML = formatMessage(text, emailData);
+    messageEl.innerHTML =
+      formatMessage(text, emailData) + renderSources(sources);
 
     await waitForProjects();
     linkifyProjectsInElement(messageEl);
@@ -698,7 +778,7 @@ function initIAChat(rootSelector) {
         throw new Error("NO_ANSWER");
       }
 
-      transformLoader(loader, data.text, data.email);
+      transformLoader(loader, data.text, data.email, data.visibleSources);
     } catch (err) {
       loader.remove();
 

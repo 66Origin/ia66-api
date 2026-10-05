@@ -1,6 +1,7 @@
 // src/lib/gemini/rag.ts
 import { SYSTEM_CONTEXT } from "../bot/system";
 import { getGeminiClient } from "./client";
+import type { Candidate } from "@google/genai";
 
 export type RagChatInput = {
   model?: string;
@@ -9,38 +10,103 @@ export type RagChatInput = {
   fileSearchStoreNames: string[];
 };
 
+export type RagSource = {
+  url: string;
+  type?: string;
+  title?: string;
+};
+
 function normalizeStoreName(name: string) {
   return name.startsWith("fileSearchStores/")
     ? name
     : `fileSearchStores/${name}`;
 }
 
-function ensureCompleteSentence(text: string) {
+function ensureCompleteSentence(text: string, finishReason?: string): string {
   if (!text) return text;
 
   const trimmed = text.trim();
 
-  if (/[.!?»"]$/.test(trimmed)) return trimmed;
+  // Gemini indique que la génération s'est terminée normalement :
+  // ne surtout pas modifier le contenu.
+  if (finishReason === "STOP") {
+    return trimmed;
+  }
 
-  const matches = trimmed.match(/[^.!?]*[.!?]/g);
+  // La réponse se termine déjà proprement.
+  if (/[.!?»"]$/.test(trimmed)) {
+    return trimmed;
+  }
 
-  if (!matches || matches.length === 0) return trimmed;
+  // Ne considérer comme fin de phrase qu'une ponctuation
+  // suivie d'un espace ou de la fin du texte.
+  const sentenceEndRegex = /[.!?](?=\s|$)/g;
+  const matches = [...trimmed.matchAll(sentenceEndRegex)];
 
-  const complete = matches.join("").trim();
+  if (matches.length === 0) {
+    return trimmed;
+  }
+
+  const lastMatch = matches[matches.length - 1];
+  const endIndex = (lastMatch.index ?? 0) + 1;
+  const complete = trimmed.slice(0, endIndex).trim();
 
   return complete.length > 40 ? complete : trimmed;
+}
+
+function extractGroundedSources(candidate: Candidate): RagSource[] {
+  const metadata = candidate.groundingMetadata;
+
+  if (!metadata?.groundingChunks?.length) {
+    return [];
+  }
+
+  const usedChunkIndexes = new Set<number>();
+
+  for (const support of metadata.groundingSupports ?? []) {
+    for (const index of support.groundingChunkIndices ?? []) {
+      usedChunkIndexes.add(index);
+    }
+  }
+
+  const sources = new Map<string, RagSource>();
+
+  for (const index of usedChunkIndexes) {
+    const chunk = metadata.groundingChunks[index];
+    const customMetadata = chunk?.retrievedContext?.customMetadata;
+
+    if (!customMetadata) continue;
+
+    const getStringMetadata = (key: string) =>
+      customMetadata.find(
+        (item) => item.key === key && typeof item.stringValue === "string",
+      )?.stringValue;
+
+    const url = getStringMetadata("canonical_url");
+
+    if (!url) continue;
+
+    sources.set(url, {
+      url,
+      type: getStringMetadata("content_type"),
+      title: getStringMetadata("title"),
+    });
+  }
+
+  return [...sources.values()];
 }
 
 /**
  * Exécute un appel Gemini avec File Search tool activé.
  * Retourne le texte brut.
  */
-export async function runRagChat(
-  input: RagChatInput,
-): Promise<{ text: string }> {
+export async function runRagChat(input: RagChatInput): Promise<{
+  text: string;
+  sources: RagSource[];
+}> {
   const ai = getGeminiClient();
 
-  const model = input.model ?? "gemini-2.5-flash";
+  const model = input.model ?? "gemini-3.8-flash";
   const storeNames = input.fileSearchStoreNames.map(normalizeStoreName);
 
   const contents = [
@@ -73,6 +139,10 @@ export async function runRagChat(
 
   const candidate = response?.candidates?.[0];
 
+  console.dir(candidate?.groundingMetadata, {
+    depth: null,
+  });
+
   if (!candidate) {
     throw new Error("Gemini returned no candidate");
   }
@@ -80,9 +150,10 @@ export async function runRagChat(
   let text = "";
 
   if (candidate.content?.parts?.length) {
-    text = candidate.content.parts
-      .filter((p: any) => typeof p?.text === "string")
-      .map((p: any) => p.text)
+    const parts = candidate.content.parts;
+
+    text = parts
+      .map((part) => (typeof part.text === "string" ? part.text : ""))
       .join("")
       .trim();
   }
@@ -96,9 +167,14 @@ export async function runRagChat(
     throw new Error("Empty model response");
   }
 
-  const finalText = ensureCompleteSentence(text);
+  const finalText = ensureCompleteSentence(text, candidate.finishReason);
+
+  const sources = extractGroundedSources(candidate);
 
   console.log(candidate.finishReason);
 
-  return { text: finalText };
+  return {
+    text: finalText,
+    sources,
+  };
 }

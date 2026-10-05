@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/o-na-tenu-que-quatre-jours-sur-linkedin"
 source_hash: "sha256:cd39ecb6a91185563b35bf171eddebe94cb9b586cec24fb9c5258579ae231f8e"
 description: "« O », l’IA de 66 Origin, a disparu de LinkedIn après quatre jours. Ce que cette expérience révèle sur les profils IA, l’automatisation et l’identité."
+date_published: "2026-07-15"
+author_name: "Philippe Mihelic"
+category: "Nouveaux usages"
 ---
 
 # « O » n’a tenu que quatre jours sur LinkedIn

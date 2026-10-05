@@ -4,7 +4,7 @@ slug: "institut-louis-bachelier-branding-site-ia"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/institut-louis-bachelier-branding-site-ia"
-source_hash: "sha256:ae8947969282373685c6ca55a20a4f65c49c4dff575362f2fbd613e642355fdd"
+source_hash: "sha256:f09b1eaf7492551a3b47cd7718338a74a4405ff3d59c1034405665bc333f0efc"
 description: "66 Origin accompagne l’Institut Louis Bachelier sur son repositionnement, son identité, son site web et sa réflexion IA pour mieux diffuser la recherche."
 ---
 
@@ -46,7 +46,7 @@ Nous avons donc défendu un territoire plus premium, plus contemporain et plus �
 La nouvelle identité a été pensée comme un système mutualisable. Elle permet d’aligner les différents niveaux de communication, de renforcer la cohérence de l’écosystème et d’offrir davantage de puissance aux prises de parole de l’institut comme à celles des chaires.
 Le dispositif a aussi nourri plusieurs temps forts, comme Conversations A/Venir avec la Fondation BNP Paribas, le Risk Forum ou d’autres conférences organisées dans des lieux prestigieux comme le Collège de France, avec des personnalités telles que Philippe Aghion, Gérald Bronner ou Isabelle Giordano.
 
-## La technologie : architecture éditoriale, design system et IA de recherche 
+## La technologie : architecture éditoriale, design system et IA de recherche
 
 Au-delà de l’identité, 66 Origin a co-construit avec l’ILB l’organisation de l’information et la refonte graphique de son site web. Le défi était d’absorber une masse importante de contenus — publications, papiers de chaires, événements, programmes et ressources institutionnelles — sans perdre les utilisateurs.
 Nous avons donc travaillé une hiérarchisation éditoriale, une navigation et un design plus clairs. En parallèle, une réflexion IA est en cours d’élaboration sous la forme d’un assistant conversationnel destiné à faciliter l’accès à des contenus de recherche complexes et à adapter le niveau de réponse selon les publics.
@@ -68,7 +68,7 @@ Le bénéfice est double : une image plus premium pour l’institution, et un ca
 
 ## FAQ - ILB
 
-### Qu’est-ce que l’Institut Louis Bachelier ? 
+### Qu’est-ce que l’Institut Louis Bachelier ?
 
 Une structure qui accompagne, relie et valorise la recherche en finance, banque et assurance.
 

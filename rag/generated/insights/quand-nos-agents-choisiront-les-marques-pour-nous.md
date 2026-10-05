@@ -4,8 +4,11 @@ slug: "quand-nos-agents-choisiront-les-marques-pour-nous"
 type: "insight"
 source: "66origin.com"
 source_url: "https://www.66origin.com/insights/quand-nos-agents-choisiront-les-marques-pour-nous"
-source_hash: "sha256:b3695af0dd743b63844a891e4475fc397613867f79ba2248cb50fde06f3d1814"
+source_hash: "sha256:7a6d721132b5b4a719013c31ad821ee66e022f28f6cf7480cc396dec916d2073"
 description: "L’agentic commerce transforme la relation aux marques : recherche, achat, personnalisation, preuve et confiance. Ce que les entreprises doivent préparer."
+date_published: "2026-09-08"
+author_name: "Philippe Mihelic"
+category: "Nouveaux usages"
 ---
 
 # Quand nos agents choisiront les marques pour nous
@@ -30,7 +33,7 @@ Nouveaux usages
 
 Temps de lecture :
 
-8 mintes
+8 minutes
 
 Le commerce agentique ne se limite plus à recommander un produit. Des agents commencent à comparer, suivre, réserver, acheter ou dialoguer avec les systèmes des commerçants. Pour les marques, le sujet dépasse largement l’e-commerce : il touche à la preuve, à la personnalisation, à la confiance et à la cohérence entre ce qu’elles racontent et ce qu’elles proposent réellement.
 
@@ -88,7 +91,7 @@ Dans un commerce médié par des agents, la cohérence de marque se joue donc au
 
 Reste une question assez énorme : jusqu’où allons-nous laisser faire nos agents ?
 
-Je n’ai pas l’impression qu’il existe une limite universelle. Elle se déplacera avec la confiance. Plus un assistant nous connaîtra, plus les décisions qu’il prendront à notre place auront fait leurs preuves, plus nous serons susceptibles de lui laisser de latitude. Un peu comme quelqu’un de notre famille à qui l’on peut dire : « tu sais ce que j’aime, occupe-t’en ».
+Je n’ai pas l’impression qu’il existe une limite universelle. Elle se déplacera avec la confiance. Plus un assistant nous connaîtra, plus les décisions qu’il prendra à notre place auront fait leurs preuves, plus nous serons susceptibles de lui laisser de latitude. Un peu comme quelqu’un de notre famille à qui l’on peut dire : « tu sais ce que j’aime, occupe-t’en ».
 
 Pour l’instant, nous en sommes encore loin. Dans son rapport Signals publié en août, Mastercard indique que 85 % des consommateurs interrogés se disent ouverts à collaborer avec un agent pour trouver la meilleure option, mais seulement 10 % à le laisser finaliser un achat de façon autonome. Ce sont des chiffres publiés par un acteur du paiement, pas une mesure universelle du marché, mais l’écart raconte assez bien la situation actuelle : l’utilité séduit plus vite que la délégation totale.
 

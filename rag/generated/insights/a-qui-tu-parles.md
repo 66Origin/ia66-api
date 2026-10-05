@@ -6,6 +6,9 @@ source: "66origin.com"
 source_url: "https://www.66origin.com/insights/a-qui-tu-parles"
 source_hash: "sha256:c0090d77d39c7bafe7e52bb8974c3bd3199f0ba207f18c8d805f71c5f212c380"
 description: "Parler à une IA change-t-il seulement notre façon de travailler ? Philippe Mihelic observe ce que la voix déplace dans nos conversations."
+date_published: "2026-06-24"
+author_name: "Philippe Mihelic"
+category: "Nouveaux usages"
 ---
 
 # À qui tu parles ?

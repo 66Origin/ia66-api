@@ -4,7 +4,7 @@ slug: "lifepost-rwanda-design-service-sante"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/lifepost-rwanda-design-service-sante"
-source_hash: "sha256:b12a179ced2aef46ea397b2efbcccb6cbc62ca7cb0dd6b016fc349c4352c3279"
+source_hash: "sha256:8cd8f77dd372c7660b02c8697911116bf13693857f484b9f4cd05af289aea069"
 description: "66 Origin a accompagné le ministère de la Santé du Rwanda pour repenser l’accès aux soins en zone rurale, en transformant le HealthPost en LifePost, un lieu de vie, de santé et de services de proximité."
 ---
 
@@ -44,13 +44,13 @@ Nous avons proposé de sortir de la logique HealthPost pour formuler un concept 
 
 Le LifePost peut accueillir des services de proximité, devenir un point de rencontre, soutenir les échanges locaux ou servir de relais pour des activités utiles au village. Un agriculteur peut y vendre une partie de sa production, des habitants peuvent s’y retrouver, des événements simples peuvent y être organisés. Même la diffusion de matchs de football devient un levier d’attractivité. En attirant naturellement la population, le lieu redevient un espace d’observation, de prévention, de dialogue et d’orientation. Une infirmière peut y repérer un besoin, relancer un suivi vaccinal ou déclencher une prise en charge plus tôt.
 
-## La technologie : un design de service centré sur les usages réels 
+## La technologie : un design de service centré sur les usages réels
 
 Le projet n’a pas été abordé comme une réponse architecturale classique, mais comme un sujet de design de service et d’expérience utilisateur appliqué à la santé publique. Notre travail a consisté à analyser les irritants structurels, à comprendre les raisons de non-fréquentation, à identifier les conditions de viabilité d’un lieu et à reformuler le problème dans sa globalité.
 
 Cette approche a permis de faire émerger un modèle plus robuste. Le LifePost repose sur une articulation entre services de santé, usages quotidiens, attractivité locale et connectivité. Il peut aussi devenir une base pour une santé plus mobile, en servant de relais à des soignants itinérants capables d’aller de village en village. Le lieu n’est plus seulement un point fixe sur une carte : il devient un nœud actif dans un écosystème sanitaire et social plus large.
 
-## Un écosystème complet : terrain, concept et magazine éditorial 
+## Un écosystème complet : terrain, concept et magazine éditorial
 
 Pour rendre cette philosophie tangible, 66 Origin a conçu un dispositif de restitution original. Plutôt qu’un rapport théorique, nous avons imaginé un magazine papier racontant une semaine type dans un LifePost. Jour après jour, ce support montrait comment le lieu pouvait vivre, quels services y prendre place, comment l’infirmière pouvait y exercer différemment son rôle et comment les habitants pouvaient se réapproprier ce point d’ancrage local.
 
@@ -82,6 +82,6 @@ Un LifePost est un lieu de vie qui combine santé, services de proximité et usa
 
 Il attire davantage les habitants grâce à des usages quotidiens, ce qui facilite la prévention, le repérage des besoins, le suivi médical et l’ancrage local du soin.
 
-### Pourquoi la connectivité est-elle un enjeu clé ? 
+### Pourquoi la connectivité est-elle un enjeu clé ?
 
 Parce qu’un poste de santé non connecté devient difficile à administrer, à approvisionner et à faire fonctionner durablement. La connectivité conditionne la continuité réelle du service.

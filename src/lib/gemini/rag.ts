@@ -106,7 +106,7 @@ export async function runRagChat(input: RagChatInput): Promise<{
 }> {
   const ai = getGeminiClient();
 
-  const model = input.model ?? "gemini-2.5-flash";
+  const model = input.model ?? "gemini-3.8-flash";
   const storeNames = input.fileSearchStoreNames.map(normalizeStoreName);
 
   const contents = [

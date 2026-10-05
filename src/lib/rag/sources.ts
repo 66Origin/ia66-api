@@ -39,5 +39,9 @@ export function selectVisibleSources(
     return sources.filter((source) => source.type === "insight");
   }
 
+  if (sources.length === 1 && sources[0]?.type === "insight") {
+    return sources;
+  }
+
   return [];
 }

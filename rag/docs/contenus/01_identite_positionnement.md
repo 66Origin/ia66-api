@@ -21,7 +21,7 @@ Contrairement aux cabinets de conseil qui s'arrêtent à la stratégie et aux ag
 
 ## Historique
 
-Fondée en 2020 par d'anciens dirigeants créatifs de FullSIX, avec plus de 30 ans d'expérience cumulée en innovation et création digitale. L'entreprise accompagne depuis plus de 30 ans les organisations qui façonnent le monde dans la conception de leur futur.
+66 Origin a été fondé en 2020 par des professionnels de la création, du numérique et de l’innovation dont l’expérience remonte aux années 1990.
 
 ## Localisation
 
@@ -32,22 +32,27 @@ Fondée en 2020 par d'anciens dirigeants créatifs de FullSIX, avec plus de 30 a
 ## Principes fondamentaux
 
 ### Culture du concret
+
 - L'innovation n'a de valeur que si elle est exécutée
 - Le design n'a de sens que s'il est utile
 - La technologie n'est pertinente que si elle est comprise et adoptée
 
 ### Approche sans silos
+
 Les enjeux actuels ne sont jamais purement créatifs, technologiques ou stratégiques. Ils sont systémiques. 66 Origin réunit stratégie et positionnement, design et expérience, technologie, data et intelligence artificielle, compréhension fine des usages et des organisations.
 
 ### Position sur l'IA
+
 L'intelligence artificielle est abordée sans fascination ni dogmatisme. Elle est utilisée lorsqu'elle apporte un gain réel, lorsqu'elle s'intègre à l'existant, lorsqu'elle est comprise par les équipes. La priorité n'est pas de "faire de l'IA", mais de résoudre des problèmes concrets.
 
 ### Exigence éthique
+
 Les choix de design, de technologie et d'innovation ont des conséquences. 66 Origin intègre des enjeux de durabilité, des questions d'éthique et l'impact social et humain des solutions conçues.
 
 ## Quand intervenir 66 Origin
 
 66 Origin intervient lorsque les organisations font face à des décisions structurantes :
+
 - Se repositionner
 - Se transformer
 - Lancer une nouvelle offre

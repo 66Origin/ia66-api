@@ -11,6 +11,7 @@ L'offre de 66 Origin couvre l'intégralité du cycle de l'innovation : penser �
 **Quand intervenir** : Lorsque les décisions deviennent structurantes et qu'il faut choisir une direction claire sans perdre de temps.
 
 **Ce qui est proposé** :
+
 - Co-création de visions stratégiques activables
 - Plateformes de marque solides et durables
 - Positionnements alignés avec les usages, la culture interne et les mutations du marché
@@ -18,6 +19,7 @@ L'offre de 66 Origin couvre l'intégralité du cycle de l'innovation : penser �
 - Approches data-driven pour aider les dirigeants à repenser leur modèle
 
 **Compétences mobilisées** :
+
 - Conseil en stratégie
 - Vision stratégique
 - Plateformes de marque
@@ -38,11 +40,13 @@ L'offre de 66 Origin couvre l'intégralité du cycle de l'innovation : penser �
 **Quand intervenir** : Lorsque la stratégie doit se traduire en expériences concrètes, utiles et désirables.
 
 **Ce qui est proposé** :
+
 - Expériences et produits augmentés par l'IA
 - Interactions utiles, fluides et mémorables
 - Du digital au physique : sites web, applications mobiles, e-commerce, retail expérientiel, AR/VR, film, motion, 3D, sound design
 
 **Compétences mobilisées** :
+
 - UX (expérience utilisateur)
 - UI (interfaces)
 - Design global et direction artistique
@@ -66,12 +70,14 @@ L'offre de 66 Origin couvre l'intégralité du cycle de l'innovation : penser �
 **Quand intervenir** : Lorsque la technologie est nécessaire, mais qu'elle doit être comprise, maîtrisée et adoptée.
 
 **Ce qui est proposé** :
+
 - Solutions technologiques intelligentes : plateformes, objets connectés, automatisations
 - Intégration IA et IoT
 - Du prototypage rapide à l'industrialisation
 - Transformation des idées en solutions déployables et scalables
 
 **Compétences mobilisées** :
+
 - Développement de logiciels et plateformes digitales
 - Applications mobiles
 - Développement IA et IA générative
@@ -91,6 +97,7 @@ L'offre de 66 Origin couvre l'intégralité du cycle de l'innovation : penser �
 ## Logique d'assemblage
 
 Ces piliers ne sont jamais activés isolément. Chaque projet mobilise une combinaison spécifique de compétences en fonction :
+
 - Du niveau de maturité du client
 - De la complexité du sujet
 - Des usages visés

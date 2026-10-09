@@ -4,7 +4,7 @@ slug: "upper-cocktails-sans-alcool-branding"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/upper-cocktails-sans-alcool-branding"
-source_hash: "sha256:29b39513608d06e89d08bcc6bdd44c807d0a8a56be86d6d273cab85077405d18"
+source_hash: "sha256:7cb4c5874c5cabe969fc3cdd12e55c7e8326026ba78b93e1acdb648c04a85db5"
 description: "66 Origin crée UPPER pour Oussia : plateforme de marque, personnages manga, branding GMS et stratégie européenne pour cocktails sans alcool prêts à boire."
 ---
 
@@ -178,7 +178,7 @@ Sans justifier.
 
 Elle transforme le non-alcool en symbole de contrôle, d’énergie et d’élégance.
 
-## FAQ - upper
+## FAQ - Upper
 
 ### Qu’est-ce qu’UPPER ?
 

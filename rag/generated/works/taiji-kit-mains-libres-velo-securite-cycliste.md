@@ -4,7 +4,7 @@ slug: "taiji-kit-mains-libres-velo-securite-cycliste"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/taiji-kit-mains-libres-velo-securite-cycliste"
-source_hash: "sha256:69525fd8f908ed0410af0d5e82352ae6a611d44551befae3938ddabbe8ee2cad"
+source_hash: "sha256:8c8c65f7c88ed2abc116b7c7be0711a5172614a2d2a8086f75acc4ee42fa1a8c"
 description: "66 Origin a incubé Taiji puis créé 66 Mobility pour lancer ce kit mains libres vélo : télécommande guidon, app mobile, IA et sécurité cycliste."
 ---
 
@@ -84,9 +84,9 @@ Le projet couvre ainsi toute la chaîne de valeur : vision, stratégie, concept,
 
 ## Impact du rebranding
 
-Le positionnement de Taiji crée un impact immédiat sur trois terrains : la sécurité cycliste, la lisibilité de l’offre et l’intérêt marché. Le produit répond à un comportement largement répandu — l’usage du smartphone à vélo — en proposant une alternative mains libres pensée pour réduire la distraction. Le communiqué rappelle d’ailleurs que plus de 7 cyclistes sur 10 continuent à utiliser leur smartphone en roulant.
+Le positionnement de Taiji crée un impact immédiat sur trois terrains : la sécurité cycliste, la lisibilité de l’offre et l’intérêt marché. Le produit répond à un comportement largement répandu - l’usage du smartphone à vélo - en proposant une alternative mains libres pensée pour réduire la distraction. Le communiqué rappelle d’ailleurs que plus de 7 cyclistes sur 10 continuent à utiliser leur smartphone en roulant.
 
-Le projet a déjà obtenu une première reconnaissance publique en remportant le prix de la meilleure expérience utilisateur au salon Vélo In Paris. Les tests utilisateurs et l’intérêt observé confirment aussi la pertinence du pivot vers une solution compatible avec tout vélo existant.
+Le projet a déjà obtenu une première reconnaissance publique en remportant le prix du meilleur test produit au festival Vélo In Paris. Les tests utilisateurs et l’intérêt observé confirment aussi la pertinence du pivot vers une solution compatible avec tout vélo existant.
 
 ### RÉCOMPENSES
 

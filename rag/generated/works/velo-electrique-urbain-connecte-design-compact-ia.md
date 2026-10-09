@@ -4,7 +4,7 @@ slug: "velo-electrique-urbain-connecte-design-compact-ia"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/velo-electrique-urbain-connecte-design-compact-ia"
-source_hash: "sha256:df9f57b4fa87604608ba4968071df82a4be13ff9390ffd590cd9d8a4f32b5aea"
+source_hash: "sha256:1071b76b6bf68eaa2728651fbfedc66f3407f20ed2756086d2640ff18cf1c772"
 description: "66 Origin conçoit un vélo électrique urbain compact, connecté et personnalisable : design produit, double batterie, IA embarquée et prototype industriel."
 ---
 
@@ -62,7 +62,7 @@ Cette continuité entre stratégie et exécution évite les concepts séduisants
 Même resté au stade du prototype industriel, le projet démontre qu’une autre approche du vélo électrique urbain est possible. Il apporte une réponse claire à plusieurs limites du marché : poids excessif, batteries encombrantes, manque d’agilité, interfaces peu adaptées à la mobilité et sécurité insuffisamment contextualisée.
 Le Vélo fonctionne ainsi comme un démonstrateur de design centré usage, de mobilité connectée et d’innovation produit. Compact, personnalisable et assisté par IA, il propose une vision concrète d’un vélo urbain plus fluide et plus cohérent avec la vie en ville.
 
-## FAQ - Levelo
+## FAQ - Le Vélo
 
 ### Qu’est-ce que Le Vélo ?
 

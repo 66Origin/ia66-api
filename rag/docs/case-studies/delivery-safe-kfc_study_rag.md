@@ -6,10 +6,12 @@ partenaire: Havas Paris
 studio: 66 Origin
 categorie: Design produit / Innovation mobilité
 awards:
-  - "2x Bronze Lion — Cannes Lions"
-  - "Bronze — LIA, catégorie Traditional Retail"
-  - "Silver — Clio Awards, catégorie Media Outdoor"
-  - "Silver — Eurobest, catégorie Outdoor"
+  - "Bronze — Cannes Lions, Outdoor"
+  - "Bronze — Cannes Lions, Brand Experience & Activation"
+  - "Silver — Eurobest, Corporate Purpose & Social Responsibility"
+  - "Bronze — London International Awards (LIA), Non-Traditional / Retail"
+  - "Silver — Clio Awards, Media / Out of Home"
+
 tags:
   - sac de livraison connecté
   - sécurité des livreurs à vélo
@@ -79,6 +81,7 @@ Le projet associe **design produit**, **prototypage** et **électronique embarqu
 L'enjeu : intégrer une logique de signalisation inspirée de l'automobile dans un sac portable, exploitable par un cycliste en circulation, cohérent avec l'univers KFC.
 
 Axes de développement :
+
 - Surface lumineuse à haute visibilité longue distance
 - Activation des clignotants depuis le guidon
 - Passage automatique en mode feu stop au freinage
@@ -92,19 +95,20 @@ Cette approche transforme un support logistique en **objet de sécurité active*
 
 Delivery Safe croise plusieurs dimensions habituellement traitées séparément :
 
-| Dimension | Rôle dans le projet |
-|---|---|
-| Innovation de service | Réponse concrète à un risque réel pour les livreurs |
-| Sécurité routière | Signalisation active lisible pour tous les usagers |
-| Expérience livreur | Dispositif intégré, sans contrainte supplémentaire |
-| Visibilité de marque | KFC inscrit dans une démarche de protection concrète |
-| Design d'objet | Convergence forme, fonction et identité |
+| Dimension             | Rôle dans le projet                                  |
+| --------------------- | ---------------------------------------------------- |
+| Innovation de service | Réponse concrète à un risque réel pour les livreurs  |
+| Sécurité routière     | Signalisation active lisible pour tous les usagers   |
+| Expérience livreur    | Dispositif intégré, sans contrainte supplémentaire   |
+| Visibilité de marque  | KFC inscrit dans une démarche de protection concrète |
+| Design d'objet        | Convergence forme, fonction et identité              |
 
 ---
 
 ## Rôle de 66 Origin
 
 66 Origin a pris en charge :
+
 - Le conseil stratégique et la définition du concept
 - La logique d'usage et le design du sac
 - L'intégration des fonctions lumineuses
@@ -116,12 +120,18 @@ Ce travail relie un enjeu de marque à une réponse industrielle et fonctionnell
 
 ## Impact et récompenses
 
-Delivery Safe a été reconnu dans les grands circuits internationaux de la création et de l'innovation, avec **5 awards** :
+Delivery Safe a reçu **5 distinctions internationales** :
 
-- 🥉 2× Bronze Lion — Cannes Lions
-- 🥉 Bronze — LIA, catégorie Traditional Retail
-- 🥈 Silver — Clio Awards, catégorie Media Outdoor
-- 🥈 Silver — Eurobest, catégorie Outdoor
+### 2024
+
+- Cannes Lions — Bronze, Outdoor
+- Cannes Lions — Bronze, Brand Experience & Activation
+- Eurobest — Silver, Corporate Purpose & Social Responsibility
+- London International Awards (LIA) — Bronze, Non-Traditional / Retail
+
+### 2025
+
+- Clio Awards — Silver, Media / Out of Home
 
 Au-delà des prix, le projet démontre qu'un sujet de sécurité peut être traité par un **produit utile et lisible**, directement lié à l'usage — plutôt que par un discours de communication.
 

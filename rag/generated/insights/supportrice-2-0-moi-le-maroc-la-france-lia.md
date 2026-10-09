@@ -4,7 +4,7 @@ slug: "supportrice-2-0-moi-le-maroc-la-france-lia"
 type: "insight"
 source: "66origin.com"
 source_url: "https://www.66origin.com/insights/supportrice-2-0-moi-le-maroc-la-france-lia"
-source_hash: "sha256:017cea3974024ce099aea755f488302a2fc514d88b5745f5e3a24877b3673116"
+source_hash: "sha256:c5d9fb282b0a210ccdfb6276236959dd27febeff496b466cc902f35f63900054"
 description: "À la veille de France–Maroc, Aïda raconte comment l’IA, le hors-jeu semi-automatisé et la caméra arbitrale transforment son expérience de supportrice."
 date_published: "2026-07-08"
 author_name: "Aïda Laraki"
@@ -17,7 +17,11 @@ category: "Nouveaux usages"
 
 Par :
 
+[
+
 Aïda Laraki, Directrice de projets, 66 Origin
+
+](/team/aida-laraki)
 
 Date de publication :
 

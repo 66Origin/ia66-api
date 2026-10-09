@@ -4,7 +4,7 @@ slug: "my-food-my-future-magazine-rse-sante-bnp-paribas-cardif"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/my-food-my-future-magazine-rse-sante-bnp-paribas-cardif"
-source_hash: "sha256:df316581dafbd6be8078695fdff14f3b6ad8c260fcc24db4f6fe36583ea55c3e"
+source_hash: "sha256:2e329565c9b52eba97e6f814862516653eb029d4252ff866663b05ea32fed3a0"
 description: "66 Origin conçoit My Food My Future pour BNP Paribas Cardif : un magazine PDF corporate sur la prévention de l’obésité, la nutrition et l’impact social."
 ---
 
@@ -58,7 +58,7 @@ Cette méthode permet de passer d’initiatives dispersées à un produit édito
 Le premier impact du magazine est un gain de clarté. My Food My Future rend le programme plus compréhensible, plus tangible et plus simple à partager. Il aide BNP Paribas Cardif à relier engagement RSE, partenariats et résultats autour d’un même récit.
 Le second impact tient à la valorisation de l’engagement. Le magazine renforce la crédibilité du programme et fournit un support international de mobilisation pour les agences, courtiers, partenaires et collaborateurs.
 
-## FAQ - Cardif
+## FAQ - My Food My Future
 
 ### Qu’est-ce que My Food My Future ?
 

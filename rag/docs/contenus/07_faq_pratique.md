@@ -162,10 +162,12 @@ La cohérence repose sur :
 
 Un large écosystème permet à 66 Origin :
 
-- De couvrir un spectre très étendu de compétences
-- De croiser des disciplines rarement réunies
-- D'accélérer les projets sans perte de qualité
-- De répondre à des enjeux aussi bien digitaux que physiques ou industriels
+- De couvrir un spectre très étendu de compétences ;
+- De croiser des disciplines rarement réunies ;
+- D'accélérer les projets en mobilisant les expertises adaptées ;
+- De répondre à des enjeux aussi bien digitaux que physiques ou industriels.
+
+Ces talents ne constituent pas l’effectif permanent de 66 Origin : ils peuvent être mobilisés selon les besoins des projets.
 
 ### 66 Origin peut-elle intervenir sur des projets mêlant IA, design et hardware ?
 

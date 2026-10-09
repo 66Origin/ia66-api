@@ -2,7 +2,9 @@
 
 ## Vision de 66 Origin sur la transformation
 
-Chez 66 Origin, l'observation depuis des années montre que la difficulté à se transformer ne vient pas d'un manque d'idées ou de technologies, mais de **freins structurels profondément ancrés** dans les organisations.
+Chez 66 Origin, plusieurs freins reviennent régulièrement lorsqu’une organisation cherche à se transformer.
+
+Ils ne relèvent pas uniquement de la technologie ou du manque d’idées : ils peuvent aussi être culturels, humains, économiques, organisationnels ou liés aux systèmes existants.
 
 ## Frein 1 : Culture d'entreprise trop enracinée
 
@@ -15,10 +17,6 @@ Les compétences, habitudes, processus et représentations qui ont contribué à
 ### Conclusion
 
 Une culture trop rigide peut ralentir la transformation lorsqu’elle empêche l’organisation de remettre en question ses modèles existants.
-
-### Conclusion
-
-La culture d'entreprise, lorsqu'elle est trop rigide, empêche d'explorer de nouveaux territoires.
 
 ## Frein 2 : Difficulté à faire évoluer les savoir-faire des collaborateurs
 

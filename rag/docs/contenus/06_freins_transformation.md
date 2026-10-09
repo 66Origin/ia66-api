@@ -30,7 +30,7 @@ Ce n'est pas une question de mauvaise volonté, mais de réalité sociale et psy
 
 ### Conclusion
 
-La transformation implique aussi d’accompagner les personnes dans l’évolution de leurs compétences, de leurs rôles et de leurs façons de travailler.
+La transformation implique aussi une évolution des compétences, des rôles et des façons de travailler.
 
 ## Frein 3 : Logique de profitabilité trop court-termiste
 

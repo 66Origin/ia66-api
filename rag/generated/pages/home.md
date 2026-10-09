@@ -4,7 +4,7 @@ slug: "home"
 type: "page"
 source: "66origin.com"
 source_url: "https://www.66origin.com/"
-source_hash: "sha256:c99c5654066cc95b2152f24335e506b0c823e5b74c82a6730a3a9019a0f7ed4b"
+source_hash: "sha256:3addba5d43708f62bd2378dc6da2fcb702af8e451e1018fba16665d5cfb0352c"
 description: "66 Origin est un studio d’innovation qui conçoit et déploie des stratégies, expériences et solutions mêlant design, intelligence artificielle et technologie."
 ---
 
@@ -218,26 +218,6 @@ user experience
 
 [
 
-### Institut Louis Bachelier - branding, site web et IA
-
-](/works/institut-louis-bachelier-branding-site-ia)
-
-[](/works/institut-louis-bachelier-branding-site-ia)
-
-branding
-
-website
-
-event
-
-[
-
-66 Origin accompagne l’Institut Louis Bachelier sur son repositionnement, son identité, son site web et sa réflexion IA pour mieux diffuser la recherche.
-
-](/works/institut-louis-bachelier-branding-site-ia)
-
-[
-
 ### Taiji - kit mains libres vélo et sécurité cycliste
 
 ](/works/taiji-kit-mains-libres-velo-securite-cycliste)
@@ -255,6 +235,26 @@ app mobile
 66 Origin a incubé Taiji puis créé 66 Mobility pour lancer ce kit mains libres vélo : télécommande guidon, app mobile, IA et sécurité cycliste.
 
 ](/works/taiji-kit-mains-libres-velo-securite-cycliste)
+
+[
+
+### USEO - IA métier, RAG industriel et aide aux appels d’offres
+
+](/works/useo-ia-metier-rag-industriel-appels-offres)
+
+[](/works/useo-ia-metier-rag-industriel-appels-offres)
+
+IA
+
+process d’automatisation
+
+prototypage
+
+[
+
+66 Origin conçoit pour USEO un prototype d’IA métier avec RAG, interface UX et prompts visuels pour accélérer les réponses commerciales.
+
+](/works/useo-ia-metier-rag-industriel-appels-offres)
 
 [
 

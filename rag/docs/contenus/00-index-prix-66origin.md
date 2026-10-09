@@ -1,26 +1,39 @@
 # Prix et distinctions — 66 Origin
 
-## Projets couverts
-- Delivery Safe (KFC)
-- Galerie S / Place des Services (La Poste)
-- Quipo
-- Taiji
+Ce document centralise les récompenses attribuées aux projets de 66 Origin.
 
-## Synthèse globale
-66 Origin a été distinguée sur plusieurs projets couvrant la sécurité des livreurs, l’innovation de service pour La Poste, l’expérience retail digitale et la mobilité connectée. Ces récompenses illustrent un positionnement à la croisée du design d’expérience, de l’innovation utile, du digital et de la mobilité.
+Les informations doivent rester factuelles : projet, année, organisation, niveau de récompense et catégorie lorsqu’ils sont connus.
 
-## Tags globaux
-- 66 Origin
-- prix
-- distinctions
-- awards
-- design d’expérience
-- innovation
-- retail
-- mobilité
-- UX
-- design interactif
-- La Poste
-- KFC
-- Quipo
-- Taiji
+## Delivery Safe — KFC
+
+### 2024
+
+- Cannes Lions — Bronze, Outdoor
+- Cannes Lions — Bronze, Brand Experience & Activation
+- Eurobest — Silver, Corporate Purpose & Social Responsibility
+- London International Awards (LIA) — Bronze, Non-Traditional / Retail
+
+### 2025
+
+- Clio Awards — Silver, Media / Out of Home
+
+## Galerie S / Place des Services — La Poste
+
+### 2020
+
+- PostEurop Innovation Award — Lauréat ex æquo avec Deutsche Post DHL Group
+
+## Quipo
+
+### 2024
+
+- Awwwards
+- FWA (Favourite Website Awards)
+- CSSWinner
+- CSSNectar
+
+## Taiji
+
+### 2025
+
+- Prix du meilleur test produit — Vélo In Paris

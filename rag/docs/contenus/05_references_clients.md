@@ -7,6 +7,7 @@
 ## Liste des clients par secteur
 
 ### Banques, Finance & Assurance
+
 - BNP Personal Finance
 - BNP Paribas
 - Cardif
@@ -16,32 +17,38 @@
 - Pavillon
 
 ### Énergie, Industrie & Infrastructures
+
 - Engie
 - RTE
 - Equans
 
 ### Institutions Publiques & Impact Sociétal
+
 - La Poste
 - Ministère de la Santé du Rwanda
 - Croix-Rouge
 - Paradigm (Bruxelles)
 
 ### Marques, Food, Retail & Luxe
+
 - KFC
 - Chanel
 - Dior Parfum
 - Silver Square
 
 ### Médias, Data & Communication
+
 - Havas
 - Kantar Media
 
 ### Industriels
+
 - Maximum
 - Useo
 - Groupe Muller - intuis
 
 ### Startups, Plateformes & Innovation
+
 - Quipo
 - Ousia
 - Graam
@@ -51,15 +58,16 @@
 - Sixty-Six Mobility
 
 ### Conseil, Services
+
 - Edge
 - LDS
 - BeWizz
 - EPO
 
-
 ## Ce que cette diversité révèle
 
 Cette liste reflète la capacité de 66 Origin à intervenir sur :
+
 - Des environnements fortement réglementés
 - Des marques premium et grand public
 - Des institutions publiques et projets à impact
@@ -71,6 +79,7 @@ Cette liste reflète la capacité de 66 Origin à intervenir sur :
 ## Champs d'intervention géographique
 
 Les projets de 66 Origin couvrent plusieurs territoires :
+
 - France
 - Belgique
 - Europe
@@ -79,41 +88,56 @@ Les projets de 66 Origin couvrent plusieurs territoires :
 
 66 Origin est basée à Paris avec une présence à Bruxelles et New York.
 
-## Projets reconnus
+## Projets représentatifs
 
-### Delivery Safe (KFC)
-Projet reconnu pour la sécurité des livreurs
+Pour les détails sur un projet, privilégier le Work correspondant.
 
-### Quipo
-Expérience retail digitale innovante
+Les références du corpus couvrent notamment :
 
-### Taiji
-Mobilité connectée mains libres
-
-### Autres domaines d'intervention mentionnés
-- Banque augmentée avec Apple Vision Pro
-- Mobilité douce pilotée par l'IA
-- Plateformes data-driven
-- Lieux de santé transformés en écosystèmes de vie
-
-**Conviction** : L'innovation n'a de valeur que lorsqu'elle se concrétise.
+- mobilité et sécurité ;
+- finance et assurance ;
+- transformation de services ;
+- branding et identité ;
+- retail et expériences digitales ;
+- intelligence artificielle et data ;
+- événements et expériences immersives ;
+- santé et projets à impact.
 
 ## Reconnaissance et récompenses
 
-### Récompenses 2024
-En 2024, 66 Origin a remporté **8 prix internationaux**, dont :
-- 2 Cannes Lions
-- Eurobest
-- Awwwards
-- FWA (Favourite Website Awards)
-- CSSWinner
-- CSSNectar
+### Récompenses 2020
 
-### Domaines de reconnaissance
-Récompenses pour l'impact :
-- Sociétal
-- Technologique
-- Expérientiel
+#### Galerie S / Place des Services — La Poste
+
+- PostEurop Innovation Award — Lauréat ex æquo avec Deutsche Post DHL Group
+
+### Récompenses 2024
+
+En 2024, deux projets de 66 Origin ont reçu **8 distinctions internationales**.
+
+#### Delivery Safe — KFC
+
+- Cannes Lions — Bronze, Outdoor
+- Cannes Lions — Bronze, Brand Experience & Activation
+- Eurobest — Silver, Corporate Purpose & Social Responsibility
+- London International Awards (LIA) — Bronze, Non-Traditional Retail
+
+#### Quipo
+
+- Awwwards — Honorable Mention
+- FWA (Favourite Website Awards) — FWA of the Day
+- CSSWinner — SOTD (Site Of The Day)
+- CSSNectar — SOTD (Site Of The Day)
+
+### Récompenses 2025
+
+#### Delivery Safe — KFC
+
+- Clio Awards — Silver, Media / Out of Home
+
+#### Taiji
+
+- Prix du meilleur test produit au festival Vélo In Paris
 
 ## Critères de sélection des projets
 
@@ -121,28 +145,32 @@ Récompenses pour l'impact :
 
 ## Capacités sectorielles
 
-### Environnements réglementés
-66 Origin intervient régulièrement dans des environnements réglementés et complexes :
-- Finance et assurance
-- Énergie et infrastructures
-- Santé
-- Données sensibles
-- Secteur public
+La diversité des références montre que 66 Origin intervient aussi bien auprès :
 
-### Taille des organisations
-66 Origin accompagne :
-- Des grands groupes internationaux
-- Des institutions et organismes de recherche
-- Des marques premium et grand public
-- Des startups et plateformes innovantes
+- de grands groupes internationaux ;
+- d’institutions publiques et organismes de recherche ;
+- de marques premium et grand public ;
+- de startups et plateformes technologiques.
 
-**Principe** : Le critère n'est pas la taille, mais la complexité du problème à résoudre.
+Les projets peuvent concerner des environnements complexes ou réglementés, notamment :
 
-## Exemples de cas d'usage concrets
+- finance et assurance ;
+- énergie et infrastructures ;
+- santé ;
+- données sensibles ;
+- secteur public.
 
-Chaque projet présenté a été conçu pour répondre à un enjeu réel et produire un impact mesurable. Les domaines couverts incluent :
-- Expériences bancaires innovantes
-- Solutions de mobilité intelligente
-- Sécurité et protection
-- Transformation d'espaces et de services
-- Plateformes pilotées par la data
+Cette diversité permet à 66 Origin d’aborder des problématiques variées sans limiter son approche à un secteur particulier.
+
+## Exemples de domaines d'intervention
+
+Les projets du corpus couvrent notamment :
+
+- expériences bancaires et financières ;
+- mobilité et sécurité ;
+- transformation d’espaces et de services ;
+- plateformes data et IA ;
+- branding et identité ;
+- santé et impact ;
+- retail et expériences digitales ;
+- événements et dispositifs immersifs.

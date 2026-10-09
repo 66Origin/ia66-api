@@ -11,12 +11,14 @@ Un projet réussi commence par une compréhension partagée, se construit ensemb
 66 Origin travaille main dans la main avec les directions générales, métiers, communication, innovation et IT. Chaque projet est conçu comme un travail collectif, dans lequel les équipes clients restent pleinement actrices des décisions.
 
 ### Rôle de 66 Origin
+
 - Apporter un regard extérieur structurant
 - Clarifier les enjeux
 - Accélérer les arbitrages
 - Sécuriser le passage de l'idée à la réalité
 
 ### Principe de collaboration
+
 Le client garde la vision et la décision. 66 Origin apporte la méthode, l'expérience et l'accélération.
 
 ## Le brief en 144 caractères
@@ -24,11 +26,13 @@ Le client garde la vision et la décision. 66 Origin apporte la méthode, l'exp�
 Chaque projet débute par un exercice volontairement simple et exigeant : formuler l'enjeu en 144 caractères.
 
 ### Pourquoi 144 caractères ?
+
 - La contrainte oblige à aller à l'essentiel
 - Un projet flou est un projet à risque
 - L'alignement se joue dès le départ
 
 ### Ce que permet ce brief
+
 - Poser un cadre partagé
 - Aligner les parties prenantes
 - Éviter les angles morts
@@ -48,17 +52,18 @@ Une fois l'enjeu clarifié, 66 Origin engage les étapes suivantes, toujours en 
 
 **Principe** : Chaque étape est pensée pour réduire le risque, favoriser l'adhésion et produire des résultats concrets.
 
-## Méthode propriétaire
+## Une méthode structurée et pragmatique
 
-66 Origin travaille avec une méthode propriétaire, pragmatique et rapide, capable de livrer un prototype fonctionnel en moins de 4 mois, quelle que soit la complexité du projet.
+66 Origin travaille avec une méthode structurée qui vise à clarifier rapidement les enjeux, construire avec les équipes clientes et concrétiser les idées par le prototypage et les tests.
 
 ### Différenciation méthodologique
 
-66 Origin revendique une approche plus directe et opérationnelle que le design thinking classique, sans ateliers post-it inutiles, orientée action et résultat.
+L’approche privilégie les formats de travail utiles à la décision et à l’avancement du projet, avec une attention portée à l’exécution et au passage de l’idée à la réalité.
 
 ## Position sur l'intelligence artificielle
 
 ### Principe général
+
 Chez 66 Origin, l'IA n'est ni une mode ni une fin en soi. Elle est utilisée lorsqu'elle apporte une valeur réelle, et seulement si elle s'intègre à la réalité opérationnelle du client.
 
 ### Diagnostic IA : un point d'entrée dédié
@@ -66,19 +71,24 @@ Chez 66 Origin, l'IA n'est ni une mode ni une fin en soi. Elle est utilisée lor
 Pour les organisations qui veulent intégrer l'IA, 66 Origin propose un diagnostic spécifique conçu pour décider avant d'investir.
 
 #### Caractéristiques du Diagnostic IA
+
 - Financièrement accessible
 - Sans engagement long
 - Pensé comme une aide à la décision, pas comme un projet déguisé
 - Permet de prendre du recul, poser les bonnes questions et éviter les effets de mode
 
 #### Objectifs du Diagnostic
+
 Répondre à trois questions clés :
+
 1. **Pourquoi** l'IA est pertinente (ou non) pour l'organisation
 2. **Où** elle peut créer de la valeur réelle
 3. **Comment** la déployer avec les données, l'infrastructure et les contraintes existantes
 
 #### Processus du Diagnostic
+
 Mené en collaboration avec les équipes internes (direction, métiers, IT, communication, innovation), le diagnostic permet de :
+
 - Comprendre les activités, processus et métiers
 - Cartographier les données (qualité, accessibilité, gouvernance)
 - Évaluer la maturité IA (outils, culture, compétences)
@@ -87,6 +97,7 @@ Mené en collaboration avec les équipes internes (direction, métiers, IT, comm
 **Principe** : Pas d'audit descendant. Pas de boîte noire.
 
 #### Livrables du Diagnostic
+
 - Identification des cas d'usage IA prioritaires à forte valeur
 - Distinction entre quick wins et chantiers structurants
 - Benchmark des bonnes pratiques d'organisations comparables
@@ -95,12 +106,15 @@ Mené en collaboration avec les équipes internes (direction, métiers, IT, comm
 - Recommandations stratégiques, fonctionnelles et techniques
 
 #### Issue du Diagnostic
+
 À l'issue, le client peut :
+
 - Avancer avec 66 Origin
 - Avancer avec ses équipes
 - Décider de ne pas engager de chantier pour le moment
 
 #### Public cible du Diagnostic IA
+
 - Dirigeants et COMEX
 - Directions de la communication
 - Directions innovation et transformation
@@ -109,6 +123,7 @@ Mené en collaboration avec les équipes internes (direction, métiers, IT, comm
 ## Pourquoi cette approche fonctionne
 
 L'approche de 66 Origin est :
+
 - **Exigeante** sur le fond
 - **Collaborative** dans la forme
 - **Réaliste** dans l'exécution

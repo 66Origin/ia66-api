@@ -3,7 +3,19 @@ title: "Taiji – Kit mains libres vélo et sécurité cycliste"
 slug: taiji-kit-mains-libres-velo-securite-cycliste
 source: 66 Origin / 66 Mobility
 type: case_study
-tags: [vélo connecté, sécurité cycliste, kit mains libres, télécommande guidon, application mobile, IA, mobilité douce, hardware, UX/UI, startup]
+tags:
+  [
+    vélo connecté,
+    sécurité cycliste,
+    kit mains libres,
+    télécommande guidon,
+    application mobile,
+    IA,
+    mobilité douce,
+    hardware,
+    UX/UI,
+    startup,
+  ]
 ---
 
 # Taiji – Kit mains libres vélo et sécurité cycliste
@@ -51,12 +63,12 @@ Le kit Taiji se compose de :
 
 La valeur de Taiji repose sur un assemblage de couches complémentaires :
 
-| Couche | Description |
-|---|---|
-| Hardware | Télécommande guidon compacte, autonomie longue durée, compatibilité multi-véhicules |
-| UX/UI mobile | Interfaces conçues pour une lisibilité instantanée avec un temps d'attention minimal |
+| Couche                    | Description                                                                           |
+| ------------------------- | ------------------------------------------------------------------------------------- |
+| Hardware                  | Télécommande guidon compacte, autonomie longue durée, compatibilité multi-véhicules   |
+| UX/UI mobile              | Interfaces conçues pour une lisibilité instantanée avec un temps d'attention minimal  |
 | Intelligence artificielle | Génération d'itinéraires, suggestions de balades, conseils contextuels selon la météo |
-| Data de mobilité | Statistiques de trajet, signalements, carnet d'entretien, données communautaires |
+| Data de mobilité          | Statistiques de trajet, signalements, carnet d'entretien, données communautaires      |
 
 ---
 
@@ -80,7 +92,7 @@ Vision → Stratégie → Concept → Branding → UX/UI → Électronique → A
 
 ## Résultats et reconnaissance
 
-- **Prix de la meilleure expérience utilisateur** au salon Vélo In Paris
+- **Prix du meilleur test produit** au salon Vélo In Paris 2025
 - Validation du pivot stratégique par les tests utilisateurs et l'intérêt marché observé
 - Confirmation de la pertinence d'une solution compatible avec tout vélo existant
 

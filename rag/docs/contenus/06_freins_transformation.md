@@ -2,100 +2,122 @@
 
 ## Vision de 66 Origin sur la transformation
 
-Chez 66 Origin, l'observation depuis des années montre que la difficulté à se transformer ne vient pas d'un manque d'idées ou de technologies, mais de **freins structurels profondément ancrés** dans les organisations.
+Chez 66 Origin, plusieurs freins reviennent régulièrement lorsqu’une organisation cherche à se transformer.
+
+Ils ne relèvent pas uniquement de la technologie ou du manque d’idées : ils peuvent aussi être culturels, humains, économiques, organisationnels ou liés aux systèmes existants.
 
 ## Frein 1 : Culture d'entreprise trop enracinée
 
 ### Le problème
-La culture d'entreprise est souvent le premier frein à la transformation. Lorsqu'une organisation s'est construite autour d'un savoir-faire historique, il devient extrêmement difficile de changer de trajectoire.
 
-### Exemples
-- **Kodak** : Spécialiste mondial de la chimie photographique, l'entreprise aurait pu être un acteur majeur du numérique. Mais sa culture, son ADN et ses compétences historiques rendaient ce virage presque impossible à opérer.
-- **Renault** : Pour un constructeur automobile historiquement centré sur le moteur thermique, passer à l'électrique revient à disrupter son cœur de compétences.
+Lorsqu’une organisation s’est construite pendant longtemps autour d’un modèle, d’un savoir-faire ou d’une manière de fonctionner, changer de trajectoire peut devenir particulièrement difficile.
+
+Les compétences, habitudes, processus et représentations qui ont contribué à son succès peuvent aussi limiter l’exploration de nouveaux territoires.
 
 ### Conclusion
-La culture d'entreprise, lorsqu'elle est trop rigide, empêche d'explorer de nouveaux territoires.
+
+Une culture trop rigide peut ralentir la transformation lorsqu’elle empêche l’organisation de remettre en question ses modèles existants.
 
 ## Frein 2 : Difficulté à faire évoluer les savoir-faire des collaborateurs
 
 ### Le problème
+
 La transformation implique souvent de demander aux collaborateurs de remettre en question des compétences acquises parfois sur plusieurs décennies. Changer de métier, de posture ou de manière de travailler est humainement complexe.
 
 ### Nature du blocage
+
 Ce n'est pas une question de mauvaise volonté, mais de réalité sociale et psychologique.
 
 ### Conclusion
-On ne transforme pas une organisation sans accompagner profondément les femmes et les hommes qui la composent.
+
+La transformation implique aussi une évolution des compétences, des rôles et des façons de travailler.
 
 ## Frein 3 : Logique de profitabilité trop court-termiste
 
 ### Le problème
-L'innovation nécessite du temps. Souvent plusieurs années, parfois près de dix ans, avant qu'une solution devienne réellement rentable.
 
-Or, beaucoup d'entreprises fonctionnent avec des exigences de profitabilité à court ou moyen terme, incompatibles avec les cycles longs de l'innovation.
+L’innovation demande souvent du temps pour être explorée, testée, déployée puis trouver son modèle économique.
+
+Des exigences de rentabilité trop immédiates peuvent rendre difficile l’expérimentation de solutions dont la valeur se construit progressivement.
 
 ### Conclusion
-Tant que l'innovation est jugée avec les mêmes critères que l'exploitation, elle est mécaniquement freinée.
+
+Évaluer une initiative d’innovation uniquement avec les mêmes critères et horizons que l’activité existante peut limiter sa capacité à émerger.
 
 ## Frein 4 : Contraintes IT et dette technologique
 
 ### Caractéristiques des systèmes IT des grandes organisations
+
 Les systèmes informatiques sont souvent :
+
 - Anciens
 - Lourds
 - Complexes
 - Interconnectés de manière rigide
 
 ### Conséquences
-Cette dette technique rend toute transformation :
-- Lente
-- Coûteuse
-- Risquée
 
-Dans de nombreux cas, la seule solution serait de repartir de zéro — une décision lourde, rarement prise.
+Cette dette technique peut rendre la transformation :
+
+- plus lente ;
+- plus coûteuse ;
+- plus risquée ;
+- plus difficile à intégrer aux systèmes existants.
+
+Dans certains cas, elle impose des arbitrages importants entre adaptation de l’existant, modernisation progressive et reconstruction de certaines briques.
 
 ### Absorption des équipes IT
+
 Les équipes IT sont absorbées par :
+
 - La maintenance
 - La sécurité
 - Les roadmaps longues
 - Les contraintes réglementaires
 
 ### Conclusion
-L'IT devient un frein structurel à l'innovation, faute de bande passante pour expérimenter.
+
+Les contraintes IT peuvent devenir un frein structurel lorsque les équipes et les systèmes disposent de peu de marge pour expérimenter ou intégrer de nouvelles solutions.
 
 ## Frein 5 : Vision client trop autocentrée et non orientée utilisateur
 
 ### Le problème
+
 Beaucoup d'entreprises raisonnent encore à partir de ce qu'elles savent déjà faire :
 « Voici nos produits, comment allons-nous les vendre ? »
 
-Plutôt que de se poser la vraie question :
+Une autre question devient alors centrale :
 « De quoi les utilisateurs ont-ils réellement besoin aujourd'hui ? »
 
 ### Conséquences
+
 Cette vision interne conduit à :
+
 - Prolonger artificiellement des offres obsolètes
 - Répondre à des usages qui n'existent plus
 - Ignorer les évolutions profondes du marché
 
 ### Conclusion
-Sans une approche réellement centrée utilisateur, la transformation reste cosmétique.
+
+Une transformation qui reste principalement guidée par les offres et modèles existants risque de passer à côté de nouveaux usages et besoins.
 
 ## Synthèse
 
-Les entreprises peinent à se transformer à cause de cinq freins majeurs :
-1. Une culture d'entreprise trop ancrée
-2. La difficulté à faire évoluer les compétences des collaborateurs
-3. Une recherche de profitabilité à court terme
-4. Des systèmes IT rigides et une dette technologique
-5. Une vision trop autocentrée, insuffisamment orientée utilisateur
+Cinq freins peuvent particulièrement limiter la transformation des organisations :
 
-## Réponse de 66 Origin à ces freins
+1. Une culture d'entreprise difficile à faire évoluer
+2. La transformation des compétences et des pratiques
+3. Une logique de rentabilité trop court-termiste
+4. Les contraintes IT et la dette technologique
+5. Une vision trop centrée sur l’existant plutôt que sur les usages
 
-L'approche de 66 Origin est précisément conçue pour contourner ou surmonter ces freins structurels :
-- Accompagnement humain et culturel des transformations
-- Vision centrée utilisateur systématique
-- Approche pragmatique tenant compte des contraintes IT
-- Construction progressive et itérative
-- Alignement des parties prenantes dès le départ
+## Comment l'approche de 66 Origin répond à ces enjeux
+
+L’approche de 66 Origin cherche à prendre en compte ces différents freins à travers notamment :
+
+- la clarification des enjeux en amont ;
+- l’immersion et l’analyse du contexte ;
+- la co-construction avec les parties prenantes ;
+- une attention portée aux usages ;
+- le prototypage et les tests ;
+- une approche pragmatique tenant compte des contraintes existantes.

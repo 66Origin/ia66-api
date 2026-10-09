@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "https://www.66origin.com",
-  "generatedAt": "2026-09-30T14:57:03.222Z",
+  "generatedAt": "2026-10-09T14:53:09.036Z",
   "documents": [
     {
       "type": "page",
@@ -9,14 +9,14 @@
       "sourceUrl": "https://www.66origin.com/",
       "canonicalUrl": "https://www.66origin.com/",
       "outputFile": "pages/home.md",
-      "sourceHash": "sha256:c99c5654066cc95b2152f24335e506b0c823e5b74c82a6730a3a9019a0f7ed4b",
+      "sourceHash": "sha256:3addba5d43708f62bd2378dc6da2fcb702af8e451e1018fba16665d5cfb0352c",
       "title": "66 Origin - Studio d’innovation, design et intelligence artificielle",
       "description": "66 Origin est un studio d’innovation qui conçoit et déploie des stratégies, expériences et solutions mêlant design, intelligence artificielle et technologie.",
-      "version": 3,
+      "version": 4,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:44.808Z",
-      "lastSeenAt": "2026-09-30T14:57:01.401Z",
-      "lastGeneratedAt": "2026-09-29T11:06:17.077Z"
+      "lastSeenAt": "2026-10-09T14:53:01.066Z",
+      "lastGeneratedAt": "2026-10-09T10:49:46.037Z"
     },
     {
       "type": "page",
@@ -30,7 +30,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.341Z",
-      "lastSeenAt": "2026-09-30T14:57:01.431Z",
+      "lastSeenAt": "2026-10-09T14:53:01.084Z",
       "lastGeneratedAt": "2026-09-08T13:14:53.341Z"
     },
     {
@@ -45,7 +45,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.287Z",
-      "lastSeenAt": "2026-09-30T14:57:01.431Z",
+      "lastSeenAt": "2026-10-09T14:53:01.083Z",
       "lastGeneratedAt": "2026-09-08T13:14:53.287Z"
     },
     {
@@ -63,7 +63,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:53.321Z",
-      "lastSeenAt": "2026-09-30T14:57:01.423Z",
+      "lastSeenAt": "2026-10-09T14:53:01.084Z",
       "lastGeneratedAt": "2026-09-28T13:49:15.931Z"
     },
     {
@@ -81,7 +81,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:44.942Z",
-      "lastSeenAt": "2026-09-30T14:57:01.542Z",
+      "lastSeenAt": "2026-10-09T14:53:01.210Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.085Z"
     },
     {
@@ -99,7 +99,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.125Z",
-      "lastSeenAt": "2026-09-30T14:57:01.601Z",
+      "lastSeenAt": "2026-10-09T14:53:01.237Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.085Z"
     },
     {
@@ -117,7 +117,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.276Z",
-      "lastSeenAt": "2026-09-30T14:57:01.623Z",
+      "lastSeenAt": "2026-10-09T14:53:01.232Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.246Z"
     },
     {
@@ -135,7 +135,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.437Z",
-      "lastSeenAt": "2026-09-30T14:57:01.601Z",
+      "lastSeenAt": "2026-10-09T14:53:01.232Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.086Z"
     },
     {
@@ -153,7 +153,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.687Z",
-      "lastSeenAt": "2026-09-30T14:57:01.698Z",
+      "lastSeenAt": "2026-10-09T14:53:01.354Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.338Z"
     },
     {
@@ -171,7 +171,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:45.863Z",
-      "lastSeenAt": "2026-09-30T14:57:01.742Z",
+      "lastSeenAt": "2026-10-09T14:53:01.378Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.350Z"
     },
     {
@@ -189,7 +189,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.073Z",
-      "lastSeenAt": "2026-09-30T14:57:01.771Z",
+      "lastSeenAt": "2026-10-09T14:53:01.378Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.338Z"
     },
     {
@@ -207,7 +207,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.296Z",
-      "lastSeenAt": "2026-09-30T14:57:01.779Z",
+      "lastSeenAt": "2026-10-09T14:53:01.385Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.397Z"
     },
     {
@@ -225,7 +225,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.558Z",
-      "lastSeenAt": "2026-09-30T14:57:01.849Z",
+      "lastSeenAt": "2026-10-09T14:53:01.501Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.613Z"
     },
     {
@@ -243,7 +243,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-09T13:09:03.634Z",
-      "lastSeenAt": "2026-09-30T14:57:01.894Z",
+      "lastSeenAt": "2026-10-09T14:53:01.533Z",
       "lastGeneratedAt": "2026-09-28T13:49:16.613Z"
     },
     {
@@ -252,17 +252,17 @@
       "sourceUrl": "https://www.66origin.com/insights/supportrice-2-0-moi-le-maroc-la-france-lia",
       "canonicalUrl": "https://www.66origin.com/insights/supportrice-2-0-moi-le-maroc-la-france-lia",
       "outputFile": "insights/supportrice-2-0-moi-le-maroc-la-france-lia.md",
-      "sourceHash": "sha256:017cea3974024ce099aea755f488302a2fc514d88b5745f5e3a24877b3673116",
+      "sourceHash": "sha256:c5d9fb282b0a210ccdfb6276236959dd27febeff496b466cc902f35f63900054",
       "title": "Supportrice 2.0 : moi, le Maroc, la France et l’IA",
       "description": "À la veille de France–Maroc, Aïda raconte comment l’IA, le hors-jeu semi-automatisé et la caméra arbitrale transforment son expérience de supportrice.",
       "datePublished": "2026-07-08",
       "authorName": "Aïda Laraki",
       "category": "Nouveaux usages",
-      "version": 1,
+      "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.792Z",
-      "lastSeenAt": "2026-09-30T14:57:01.918Z",
-      "lastGeneratedAt": "2026-09-28T13:49:16.494Z"
+      "lastSeenAt": "2026-10-09T14:53:01.528Z",
+      "lastGeneratedAt": "2026-10-09T10:49:48.852Z"
     },
     {
       "type": "page",
@@ -276,8 +276,22 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:46.964Z",
-      "lastSeenAt": "2026-09-30T14:57:01.929Z",
+      "lastSeenAt": "2026-10-09T14:53:01.533Z",
       "lastGeneratedAt": "2026-09-08T13:14:46.964Z"
+    },
+    {
+      "type": "team",
+      "slug": "aida-laraki",
+      "sourceUrl": "https://www.66origin.com/team/aida-laraki",
+      "canonicalUrl": "https://www.66origin.com/team/aida-laraki",
+      "outputFile": "team/aida-laraki.md",
+      "sourceHash": "sha256:57f8700cff6fec94aae4d650fe91ccf1922ec3c3a393988fc18d0618b553000f",
+      "title": "Aïda Laraki",
+      "version": 2,
+      "status": "active",
+      "firstSeenAt": "2026-10-09T10:49:47.016Z",
+      "lastSeenAt": "2026-10-09T14:53:01.651Z",
+      "lastGeneratedAt": "2026-10-09T10:53:02.269Z"
     },
     {
       "type": "team",
@@ -288,11 +302,11 @@
       "sourceHash": "sha256:4c693cacb4428e99e1f4999e1bcc1b63ff9d34ebbb0962dfc064b3136739ce4d",
       "title": "Philippe Mihelic",
       "description": "Parcours, expertises, projets et Insights de Philippe Mihelic, cofondateur et CEO de 66 Origin, de FullSIX à Yellow Innovation et à l’IA.",
-      "version": 3,
+      "version": 5,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:17:40.589Z",
-      "lastSeenAt": "2026-09-30T14:57:02.978Z",
-      "lastGeneratedAt": "2026-09-09T13:09:03.799Z"
+      "lastSeenAt": "2026-10-09T14:53:01.674Z",
+      "lastGeneratedAt": "2026-10-09T10:53:01.558Z"
     },
     {
       "type": "work",
@@ -306,7 +320,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.307Z",
-      "lastSeenAt": "2026-09-30T14:57:02.061Z",
+      "lastSeenAt": "2026-10-09T14:53:02.859Z",
       "lastGeneratedAt": "2026-09-08T13:14:47.307Z"
     },
     {
@@ -321,7 +335,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.531Z",
-      "lastSeenAt": "2026-09-30T14:57:02.077Z",
+      "lastSeenAt": "2026-10-09T14:53:02.604Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.711Z"
     },
     {
@@ -336,7 +350,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.761Z",
-      "lastSeenAt": "2026-09-30T14:57:02.070Z",
+      "lastSeenAt": "2026-10-09T14:53:02.687Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.791Z"
     },
     {
@@ -345,14 +359,14 @@
       "sourceUrl": "https://www.66origin.com/works/delivery-safe-sac-livraison-connecte-securite-livreurs-velo",
       "canonicalUrl": "https://www.66origin.com/works/delivery-safe-sac-livraison-connecte-securite-livreurs-velo",
       "outputFile": "works/delivery-safe-sac-livraison-connecte-securite-livreurs-velo.md",
-      "sourceHash": "sha256:29552ced84bd7a829668809b182c6fd295c2da07f6ceabf6b1c5430c74bd78d8",
+      "sourceHash": "sha256:dea35f8590c5f9a23cdea56d37905ddc34c17c4c9b44fdf3c78d124a1ca04b80",
       "title": "Delivery Safe, un sac de livraison KFC pensé pour rendre les livreurs à vélo visibles.",
       "description": "66 Origin conçoit Delivery Safe pour KFC et Havas Paris : un sac de livraison lumineux avec clignotants et feu stop pour améliorer la sécurité des livreurs urbains.",
-      "version": 2,
+      "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:47.894Z",
-      "lastSeenAt": "2026-09-30T14:57:02.224Z",
-      "lastGeneratedAt": "2026-09-29T11:06:17.790Z"
+      "lastSeenAt": "2026-10-09T14:53:02.687Z",
+      "lastGeneratedAt": "2026-10-09T11:03:16.186Z"
     },
     {
       "type": "work",
@@ -366,7 +380,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.054Z",
-      "lastSeenAt": "2026-09-30T14:57:02.245Z",
+      "lastSeenAt": "2026-10-09T14:53:03.979Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.834Z"
     },
     {
@@ -381,7 +395,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.209Z",
-      "lastSeenAt": "2026-09-30T14:57:02.224Z",
+      "lastSeenAt": "2026-10-09T14:53:03.861Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.850Z"
     },
     {
@@ -396,7 +410,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.437Z",
-      "lastSeenAt": "2026-09-30T14:57:02.398Z",
+      "lastSeenAt": "2026-10-09T14:53:03.861Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.932Z"
     },
     {
@@ -405,14 +419,14 @@
       "sourceUrl": "https://www.66origin.com/works/institut-louis-bachelier-branding-site-ia",
       "canonicalUrl": "https://www.66origin.com/works/institut-louis-bachelier-branding-site-ia",
       "outputFile": "works/institut-louis-bachelier-branding-site-ia.md",
-      "sourceHash": "sha256:f09b1eaf7492551a3b47cd7718338a74a4405ff3d59c1034405665bc333f0efc",
+      "sourceHash": "sha256:b6eb6428299e1760787101c9593d946b429d40f4f4b17d0df846711830ac428b",
       "title": "Institut Louis Bachelier, rendre la recherche plus lisible",
       "description": "66 Origin accompagne l’Institut Louis Bachelier sur son repositionnement, son identité, son site web et sa réflexion IA pour mieux diffuser la recherche.",
-      "version": 2,
+      "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.626Z",
-      "lastSeenAt": "2026-09-30T14:57:02.398Z",
-      "lastGeneratedAt": "2026-09-29T11:06:17.932Z"
+      "lastSeenAt": "2026-10-09T14:53:03.861Z",
+      "lastGeneratedAt": "2026-10-09T10:49:47.536Z"
     },
     {
       "type": "work",
@@ -426,7 +440,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:48.864Z",
-      "lastSeenAt": "2026-09-30T14:57:02.403Z",
+      "lastSeenAt": "2026-10-09T14:53:04.986Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.969Z"
     },
     {
@@ -441,7 +455,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.112Z",
-      "lastSeenAt": "2026-09-30T14:57:02.563Z",
+      "lastSeenAt": "2026-10-09T14:53:04.994Z",
       "lastGeneratedAt": "2026-09-29T11:06:17.986Z"
     },
     {
@@ -456,7 +470,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.283Z",
-      "lastSeenAt": "2026-09-30T14:57:02.563Z",
+      "lastSeenAt": "2026-10-09T14:53:05.244Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.075Z"
     },
     {
@@ -471,7 +485,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.556Z",
-      "lastSeenAt": "2026-09-30T14:57:02.563Z",
+      "lastSeenAt": "2026-10-09T14:53:04.964Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.074Z"
     },
     {
@@ -486,7 +500,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:49.926Z",
-      "lastSeenAt": "2026-09-30T14:57:02.735Z",
+      "lastSeenAt": "2026-10-09T14:53:05.995Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.110Z"
     },
     {
@@ -501,7 +515,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.160Z",
-      "lastSeenAt": "2026-09-30T14:57:02.734Z",
+      "lastSeenAt": "2026-10-09T14:53:06.072Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.121Z"
     },
     {
@@ -516,7 +530,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.323Z",
-      "lastSeenAt": "2026-09-30T14:57:02.715Z",
+      "lastSeenAt": "2026-10-09T14:53:06.104Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.218Z"
     },
     {
@@ -525,14 +539,14 @@
       "sourceUrl": "https://www.66origin.com/works/my-food-my-future-magazine-rse-sante-bnp-paribas-cardif",
       "canonicalUrl": "https://www.66origin.com/works/my-food-my-future-magazine-rse-sante-bnp-paribas-cardif",
       "outputFile": "works/my-food-my-future-magazine-rse-sante-bnp-paribas-cardif.md",
-      "sourceHash": "sha256:df316581dafbd6be8078695fdff14f3b6ad8c260fcc24db4f6fe36583ea55c3e",
+      "sourceHash": "sha256:2e329565c9b52eba97e6f814862516653eb029d4252ff866663b05ea32fed3a0",
       "title": "My Food My Future, un magazine corporate pour rendre lisible un programme international de prévention santé",
       "description": "66 Origin conçoit My Food My Future pour BNP Paribas Cardif : un magazine PDF corporate sur la prévention de l’obésité, la nutrition et l’impact social.",
-      "version": 2,
+      "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.482Z",
-      "lastSeenAt": "2026-09-30T14:57:02.884Z",
-      "lastGeneratedAt": "2026-09-29T11:06:18.218Z"
+      "lastSeenAt": "2026-10-09T14:53:06.276Z",
+      "lastGeneratedAt": "2026-10-09T10:49:47.960Z"
     },
     {
       "type": "work",
@@ -546,7 +560,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.779Z",
-      "lastSeenAt": "2026-09-30T14:57:02.902Z",
+      "lastSeenAt": "2026-10-09T14:53:07.016Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.245Z"
     },
     {
@@ -561,7 +575,7 @@
       "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:50.952Z",
-      "lastSeenAt": "2026-09-30T14:57:02.884Z",
+      "lastSeenAt": "2026-10-09T14:53:07.247Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.259Z"
     },
     {
@@ -576,7 +590,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.187Z",
-      "lastSeenAt": "2026-09-30T14:57:03.039Z",
+      "lastSeenAt": "2026-10-09T14:53:07.017Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.406Z"
     },
     {
@@ -585,14 +599,14 @@
       "sourceUrl": "https://www.66origin.com/works/taiji-kit-mains-libres-velo-securite-cycliste",
       "canonicalUrl": "https://www.66origin.com/works/taiji-kit-mains-libres-velo-securite-cycliste",
       "outputFile": "works/taiji-kit-mains-libres-velo-securite-cycliste.md",
-      "sourceHash": "sha256:69525fd8f908ed0410af0d5e82352ae6a611d44551befae3938ddabbe8ee2cad",
+      "sourceHash": "sha256:8c8c65f7c88ed2abc116b7c7be0711a5172614a2d2a8086f75acc4ee42fa1a8c",
       "title": "Taiji, le kit mains libres vélo qui rend la mobilité plus sûre et plus intelligente",
       "description": "66 Origin a incubé Taiji puis créé 66 Mobility pour lancer ce kit mains libres vélo : télécommande guidon, app mobile, IA et sécurité cycliste.",
-      "version": 2,
+      "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.375Z",
-      "lastSeenAt": "2026-09-30T14:57:03.055Z",
-      "lastGeneratedAt": "2026-09-29T11:06:18.408Z"
+      "lastSeenAt": "2026-10-09T14:53:07.467Z",
+      "lastGeneratedAt": "2026-10-09T14:53:07.467Z"
     },
     {
       "type": "work",
@@ -606,7 +620,7 @@
       "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.642Z",
-      "lastSeenAt": "2026-09-30T14:57:03.055Z",
+      "lastSeenAt": "2026-10-09T14:53:08.054Z",
       "lastGeneratedAt": "2026-09-29T11:06:18.453Z"
     },
     {
@@ -621,7 +635,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:51.911Z",
-      "lastSeenAt": "2026-09-30T14:57:03.116Z",
+      "lastSeenAt": "2026-10-09T14:53:08.033Z",
       "lastGeneratedAt": "2026-09-08T13:14:51.911Z"
     },
     {
@@ -630,14 +644,14 @@
       "sourceUrl": "https://www.66origin.com/works/upper-cocktails-sans-alcool-branding",
       "canonicalUrl": "https://www.66origin.com/works/upper-cocktails-sans-alcool-branding",
       "outputFile": "works/upper-cocktails-sans-alcool-branding.md",
-      "sourceHash": "sha256:29b39513608d06e89d08bcc6bdd44c807d0a8a56be86d6d273cab85077405d18",
+      "sourceHash": "sha256:7cb4c5874c5cabe969fc3cdd12e55c7e8326026ba78b93e1acdb648c04a85db5",
       "title": "UPPER les cocktails sans alcool prêts à boire qui assument la fête",
       "description": "66 Origin crée UPPER pour Oussia : plateforme de marque, personnages manga, branding GMS et stratégie européenne pour cocktails sans alcool prêts à boire.",
-      "version": 1,
+      "version": 2,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.142Z",
-      "lastSeenAt": "2026-09-30T14:57:03.196Z",
-      "lastGeneratedAt": "2026-09-08T13:14:52.142Z"
+      "lastSeenAt": "2026-10-09T14:53:08.262Z",
+      "lastGeneratedAt": "2026-10-09T10:49:48.465Z"
     },
     {
       "type": "work",
@@ -651,7 +665,7 @@
       "version": 1,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.309Z",
-      "lastSeenAt": "2026-09-30T14:57:03.222Z",
+      "lastSeenAt": "2026-10-09T14:53:08.643Z",
       "lastGeneratedAt": "2026-09-08T13:14:52.309Z"
     },
     {
@@ -660,14 +674,14 @@
       "sourceUrl": "https://www.66origin.com/works/velo-electrique-urbain-connecte-design-compact-ia",
       "canonicalUrl": "https://www.66origin.com/works/velo-electrique-urbain-connecte-design-compact-ia",
       "outputFile": "works/velo-electrique-urbain-connecte-design-compact-ia.md",
-      "sourceHash": "sha256:df9f57b4fa87604608ba4968071df82a4be13ff9390ffd590cd9d8a4f32b5aea",
+      "sourceHash": "sha256:1071b76b6bf68eaa2728651fbfedc66f3407f20ed2756086d2640ff18cf1c772",
       "title": "Le Vélo, un vélo électrique urbain pensé à 100 % pour la ville",
       "description": "66 Origin conçoit un vélo électrique urbain compact, connecté et personnalisable : design produit, double batterie, IA embarquée et prototype industriel.",
-      "version": 2,
+      "version": 3,
       "status": "active",
       "firstSeenAt": "2026-09-08T13:14:52.482Z",
-      "lastSeenAt": "2026-09-30T14:57:03.216Z",
-      "lastGeneratedAt": "2026-09-29T11:06:18.581Z"
+      "lastSeenAt": "2026-10-09T14:53:09.036Z",
+      "lastGeneratedAt": "2026-10-09T10:49:48.618Z"
     }
   ]
 }

@@ -4,7 +4,7 @@ slug: "institut-louis-bachelier-branding-site-ia"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/institut-louis-bachelier-branding-site-ia"
-source_hash: "sha256:f09b1eaf7492551a3b47cd7718338a74a4405ff3d59c1034405665bc333f0efc"
+source_hash: "sha256:b6eb6428299e1760787101c9593d946b429d40f4f4b17d0df846711830ac428b"
 description: "66 Origin accompagne l’Institut Louis Bachelier sur son repositionnement, son identité, son site web et sa réflexion IA pour mieux diffuser la recherche."
 ---
 
@@ -66,7 +66,7 @@ Cette approche globale aligne fond, forme et expérience. L’ILB se dote d’un
 La transformation engagée a permis à l’Institut Louis Bachelier de monter en gamme dans sa représentation et de gagner en visibilité au sein de son écosystème. La nouvelle identité renforce sa capacité à émerger face à des partenaires puissants, à clarifier son rôle et à valoriser la qualité des travaux qu’il porte ou accompagne.
 Le bénéfice est double : une image plus premium pour l’institution, et un cadre plus lisible pour les chaires, les labs et les événements qu’elle fédère. Cette base prépare aussi un accès assisté par IA.
 
-## FAQ - ILB
+## FAQ - Institut Louis Bachelier
 
 ### Qu’est-ce que l’Institut Louis Bachelier ?
 

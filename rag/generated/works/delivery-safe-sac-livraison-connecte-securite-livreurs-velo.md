@@ -4,7 +4,7 @@ slug: "delivery-safe-sac-livraison-connecte-securite-livreurs-velo"
 type: "work"
 source: "66origin.com"
 source_url: "https://www.66origin.com/works/delivery-safe-sac-livraison-connecte-securite-livreurs-velo"
-source_hash: "sha256:29552ced84bd7a829668809b182c6fd295c2da07f6ceabf6b1c5430c74bd78d8"
+source_hash: "sha256:dea35f8590c5f9a23cdea56d37905ddc34c17c4c9b44fdf3c78d124a1ca04b80"
 description: "66 Origin conçoit Delivery Safe pour KFC et Havas Paris : un sac de livraison lumineux avec clignotants et feu stop pour améliorer la sécurité des livreurs urbains."
 ---
 
@@ -40,10 +40,16 @@ Ce système n’a pas été conçu comme un habillage visuel ajouté après coup
 
 ### RÉCOMPENSES
 
-\- 2 Lions de bronze à Cannes
-\- 1 bronze aux LIA - Traditional Retail
-\- 1 silver aux Clio Awards - Media Outdoor
-\- 1 silver aux Eurobest - Outdoor.
+2024
+
+\- Cannes Lions - Bronze, Outdoor
+\- Cannes Lions - Bronze, Brand Experience & Activation
+\- Eurobest - Silver, Corporate Purpose & Social Responsibility
+\- London International Awards (LIA) - Bronze, Non-Traditional / Retail
+
+2025
+
+\- Clio Awards - Silver, Media / Out of Home
 
 ## La technologie : design embarqué, signalisation active et visibilité longue distance
 
@@ -62,7 +68,12 @@ Le projet montre comment une intuition stratégique peut devenir un objet crédi
 
 ## Impact de Delivery Safe
 
-Delivery Safe a été remarqué dans les grands circuits internationaux de la création et de l’innovation. Le projet a remporté cinq awards : deux Lions de bronze à Cannes, un bronze aux LIA dans la catégorie Traditional Retail, un silver aux Clio Awards dans la catégorie Media Outdoor et un silver aux Eurobest dans la catégorie Outdoor.
+Delivery Safe a été remarqué dans les grands circuits internationaux de la création et de l’innovation. Le projet a reçu cinq distinctions internationales.
+
+En 2024, il a remporté deux Lions de bronze aux Cannes Lions - dans les catégories Outdoor et Brand Experience & Activation - ainsi qu’un Silver à Eurobest en Corporate Purpose & Social Responsibility et un Bronze aux London International Awards (LIA) en Non-Traditional / Retail.
+
+En 2025, il a également reçu un Silver aux Clio Awards dans la catégorie Media / Out of Home.
+
 Au-delà des prix, le projet montre qu’un sujet de sécurité des livreurs peut être traité par un produit utile, lisible et directement lié à l’usage, plutôt que par un simple discours de communication.
 
 ## FAQ - Delivery Safe

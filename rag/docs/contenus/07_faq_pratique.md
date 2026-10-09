@@ -23,16 +23,15 @@ Quartier du Marais
 - Bruxelles
 - New York
 
-### Équipe et associés
+### Équipe actuelle
 
-66 Origin a été fondé par trois cofondateurs, qui sont également associés :
+66 Origin a été fondé en 2020 par six cofondateurs issus de la création, du numérique et de l’innovation.
+
+Aujourd’hui, l’organisation comprend notamment :
 
 - Philippe Mihelic — cofondateur et CEO de 66 Origin
 - Jérôme Toucheboeuf — cofondateur et directeur général de 66 Origin
 - Charles Malinverni — cofondateur et directeur créatif de 66 Origin
-
-L’équipe opérationnelle comprend notamment :
-
 - Aïda Laraki — directrice de projets
 - Christelle Boquillion — développeuse
 

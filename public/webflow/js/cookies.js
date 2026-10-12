@@ -84,12 +84,16 @@
     .getElementById("consent-banner-close")
     .addEventListener("click", () => hideBanner());
 
-  window.showConsentBanner = showBanner;
-
   const saved = getCookie();
 
   if (!saved) {
-    window.shouldShowConsentBanner = true;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", showBanner, {
+        once: true,
+      });
+    } else {
+      showBanner();
+    }
   } else {
     pushGTM(saved);
   }

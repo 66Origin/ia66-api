@@ -686,19 +686,6 @@ body.ia-scroll-locked {
   }
 }
 
-.home-header,
-.site-header {
-  display: none;
-}
-
-body.is-home .home-header {
-  display: block;
-}
-
-body.is-page .site-header {
-  display: block;
-}
-
 .ia-context-global {
   display: none;
   transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);

@@ -642,6 +642,8 @@ function findMatchingStoreDocument(
 async function main() {
   const isDryRun = process.argv.includes("--dry-run");
   const isApply = process.argv.includes("--apply");
+  const isProd = process.argv.includes("--prod");
+
   const onlyArg = process.argv.find((arg) => arg.startsWith("--only="));
   const onlyDisplayName = onlyArg?.slice("--only=".length);
 
@@ -650,7 +652,9 @@ async function main() {
   }
 
   const storeName = normalizeStoreName(
-    requireEnv("FILE_SEARCH_TEST_STORE_NAME"),
+    requireEnv(
+      isProd ? "FILE_SEARCH_STORE_NAME" : "FILE_SEARCH_TEST_STORE_NAME",
+    ),
   );
 
   const allLocalDocuments = buildLocalDocuments();

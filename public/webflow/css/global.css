@@ -510,11 +510,25 @@ body.ia-scroll-locked {
   }
 }
 
+.home-background-video_wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.home-background-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .home-background-video .bg-video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 @media screen and (max-width: 767px) {

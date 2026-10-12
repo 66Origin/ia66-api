@@ -720,6 +720,7 @@ body.menu-open {
 .collection-list-works-page {
   position: relative;
   display: block !important;
+  min-height: 140rem;
 }
 
 .collection-list-works-page .collection-item-works {

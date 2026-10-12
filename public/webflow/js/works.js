@@ -56,14 +56,36 @@ function initWorksLayout() {
   const list = document.querySelector(".collection-list-works-page");
   if (!list) return;
 
-  requestAnimationFrame(layoutWorks);
+  const items = Array.from(list.querySelectorAll(".collection-item-works"));
 
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(layoutWorks);
+  let rafId = null;
+
+  const scheduleLayout = () => {
+    if (rafId !== null) return;
+
+    rafId = requestAnimationFrame(() => {
+      rafId = null;
+      layoutWorks();
+    });
+  };
+
+  scheduleLayout();
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(scheduleLayout);
   }
 
-  window.addEventListener("resize", () => {
-    requestAnimationFrame(layoutWorks);
+  const observer = new ResizeObserver(scheduleLayout);
+
+  items.forEach((item) => observer.observe(item));
+
+  window.addEventListener("resize", scheduleLayout);
+
+  list.querySelectorAll("img").forEach((img) => {
+    if (!img.complete) {
+      img.addEventListener("load", scheduleLayout, { once: true });
+      img.addEventListener("error", scheduleLayout, { once: true });
+    }
   });
 }
 

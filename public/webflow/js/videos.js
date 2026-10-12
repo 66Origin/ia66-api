@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!src) return;
 
   video.poster = poster || "";
-
   video.muted = true;
   video.defaultMuted = true;
   video.autoplay = true;
@@ -20,12 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
   video.playsInline = true;
   video.preload = "auto";
 
-  video.setAttribute("muted", "");
-  video.setAttribute("autoplay", "");
-  video.setAttribute("loop", "");
-  video.setAttribute("playsinline", "");
   video.setAttribute("webkit-playsinline", "");
-  video.setAttribute("preload", "auto");
+
+  const tryPlay = async () => {
+    if (!video.paused) return;
+
+    try {
+      await video.play();
+    } catch (error) {
+      console.warn("Video autoplay failed:", error);
+    }
+  };
 
   let source = video.querySelector("source");
 
@@ -35,49 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
     video.appendChild(source);
   }
 
-  if (source.src !== src) {
+  if (source.getAttribute("src") !== src) {
     source.src = src;
     video.load();
   }
 
-  const tryPlay = () => {
-    video.muted = true;
-    video.defaultMuted = true;
+  video.addEventListener("canplay", tryPlay, { once: true });
 
-    const playPromise = video.play();
-
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {
-        console.warn("Video autoplay failed:", error);
-      });
-    }
-  };
-
-  const startVideo = () => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        tryPlay();
-        setTimeout(tryPlay, 250);
-        setTimeout(tryPlay, 750);
-        setTimeout(tryPlay, 1500);
-      });
-    });
-  };
-
-  video.addEventListener("loadedmetadata", startVideo, { once: true });
-  video.addEventListener("loadeddata", startVideo, { once: true });
-  video.addEventListener("canplay", startVideo, { once: true });
-
-  if (video.readyState >= 2) {
-    startVideo();
+  if (video.readyState >= 3) {
+    tryPlay();
   }
 
-  window.addEventListener("load", startVideo, { once: true });
-
-  window.addEventListener("pageshow", startVideo);
+  window.addEventListener("pageshow", tryPlay);
 
   const unlockVideo = () => {
     tryPlay();
+
     window.removeEventListener("touchstart", unlockVideo);
     window.removeEventListener("click", unlockVideo);
   };
@@ -86,5 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
     once: true,
     passive: true,
   });
+
   window.addEventListener("click", unlockVideo, { once: true });
 });

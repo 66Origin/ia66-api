@@ -28,6 +28,17 @@ export function selectVisibleSources(
     return sources;
   }
 
+  const matchingTeamSources = sources.filter(
+    (source) =>
+      source.type === "team" &&
+      source.title &&
+      normalized.includes(normalize(source.title)),
+  );
+
+  if (matchingTeamSources.length > 0) {
+    return matchingTeamSources;
+  }
+
   const asksSpecificInsight =
     sources.some((source) => source.type === "insight") &&
     (normalized.includes("resume") ||

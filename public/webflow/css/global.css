@@ -687,22 +687,11 @@ body.ia-scroll-locked {
 }
 
 .ia-context-global {
-  display: none;
-  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-body.is-page .ia-context-global {
   display: block;
-}
-
-body.is-home .ia-context-global,
-body.is-home .ia-context-global:has(.ia-state--chat.is-active) {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+  height: 0;
+  min-height: 0;
+  overflow: hidden;
+  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .page-transition {

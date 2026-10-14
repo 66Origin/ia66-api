@@ -28,6 +28,29 @@ export function selectVisibleSources(
     return sources;
   }
 
+  const teamSources = sources.filter(
+    (source) => source.type === "team" && source.title,
+  );
+
+  const exactTeamMatches = teamSources.filter((source) =>
+    normalized.includes(normalize(source.title!)),
+  );
+
+  if (exactTeamMatches.length > 0) {
+    return exactTeamMatches;
+  }
+
+  const messageWords = new Set(normalized.split(/\s+/));
+
+  const firstNameMatches = teamSources.filter((source) => {
+    const firstName = normalize(source.title!).split(/\s+/)[0];
+    return firstName && messageWords.has(firstName);
+  });
+
+  if (firstNameMatches.length === 1) {
+    return firstNameMatches;
+  }
+
   const asksSpecificInsight =
     sources.some((source) => source.type === "insight") &&
     (normalized.includes("resume") ||

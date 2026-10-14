@@ -717,36 +717,6 @@ body.menu-open {
   overflow: hidden;
 }
 
-.collection-list-works-page {
-  position: relative;
-  display: block !important;
-  min-height: 140rem;
-}
-
-.collection-list-works-page .collection-item-works {
-  box-sizing: border-box;
-  margin: 0 !important;
-  position: absolute !important;
-}
-
-.collection-list-works-page {
-  position: relative;
-  display: block !important;
-  min-height: 140rem;
-}
-
-@media screen and (max-width: 767px) {
-  .collection-list-works-page {
-    min-height: 180rem;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .collection-list-works-page {
-    min-height: 260rem;
-  }
-}
-
 /* ==================================================
     LOGOS MARQUEE
 ================================================== */

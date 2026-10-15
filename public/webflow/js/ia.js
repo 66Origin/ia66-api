@@ -295,27 +295,19 @@ function initIAChat(rootSelector) {
 
   function waitForProjects() {
     return new Promise((resolve) => {
-      const hasProjects = () =>
-        Array.isArray(window.PROJECTS) && window.PROJECTS.length > 0;
+      if (window.PROJECTS && window.PROJECTS.length) return resolve();
 
-      if (hasProjects()) return resolve();
-
-      // Project links are optional: never keep the chat waiting indefinitely.
-      const interval = setInterval(() => {
-        if (hasProjects()) finish();
+      const i = setInterval(() => {
+        if (window.PROJECTS && window.PROJECTS.length) {
+          clearInterval(i);
+          resolve();
+        }
       }, 50);
-      const timeout = setTimeout(finish, 1000);
-
-      function finish() {
-        clearInterval(interval);
-        clearTimeout(timeout);
-        resolve();
-      }
     });
   }
 
   function linkifyProjectsInElement(element) {
-    if (!Array.isArray(window.PROJECTS) || !window.PROJECTS.length) return;
+    if (!window.PROJECTS || !window.PROJECTS.length) return;
 
     const projects = [...window.PROJECTS].sort(
       (a, b) => b.name.length - a.name.length,
@@ -705,6 +697,8 @@ function initIAChat(rootSelector) {
       }
     });
 
+    setWaiting(false);
+
     setTimeout(() => {
       enableInputCaret();
       updateCaretState();
@@ -756,7 +750,7 @@ function initIAChat(rootSelector) {
     ? "https://ia66-api-git-develop-christellebqns-projects.vercel.app"
     : "https://ia66-api.vercel.app";
 
-  async function sendMessage(message, previousHistory) {
+  async function sendMessage(message) {
     const loader = addBotLoader();
     try {
       const response = await fetch(`${API_BASE}/api/v1/chat`, {
@@ -767,49 +761,40 @@ function initIAChat(rootSelector) {
         body: JSON.stringify({
           message,
           conversation: {
-            history: previousHistory,
+            history: history.slice(-MAX_HISTORY),
           },
         }),
-      }).catch(() => {
-        throw new Error("NETWORK_ERROR");
       });
-
-      // Inspect HTTP status before parsing: error pages may not contain JSON.
-      if (!response.ok) {
-        if (response.status === 429) throw new Error("RATE_LIMITED");
-        if (response.status === 400) throw new Error("INVALID_MESSAGE");
-        throw new Error("API_ERROR");
-      }
 
       const data = await response.json();
 
-      if (typeof data?.text !== "string" || !data.text.trim()) {
+      /* erreur API */
+      if (!response.ok) {
+        throw new Error("API_ERROR");
+      }
+
+      /* réponse vide ou inutilisable */
+      if (!data?.text || data.text.trim() === "") {
         throw new Error("NO_ANSWER");
       }
 
-      await transformLoader(loader, data.text, data.email, data.visibleSources);
+      transformLoader(loader, data.text, data.email, data.visibleSources);
     } catch (err) {
       loader.remove();
 
-      const code = err instanceof Error ? err.message : "API_ERROR";
-      let message =
-        "Un souci technique empêche ma réponse. Tu peux réessayer ?";
+      console.log(err.message);
 
-      if (code === "NO_ANSWER") {
-        message =
-          "Je manque un peu de contexte pour bien te répondre. Tu peux préciser ?";
-      } else if (code === "RATE_LIMITED") {
-        message =
-          "La limite de demandes est atteinte. Réessaie un peu plus tard.";
-      } else if (code === "INVALID_MESSAGE") {
-        message =
-          "Ton message ou l’historique est trop long ou invalide. Raccourcis ton message ou démarre une nouvelle conversation.";
-      } else if (code === "NETWORK_ERROR") {
-        message =
-          "La connexion au service a échoué. Vérifie ta connexion et réessaie.";
+      if (err.message === "NO_ANSWER") {
+        addBotMessage(
+          "Je manque un peu de contexte pour bien te répondre. Tu peux préciser ?",
+        );
+      } else {
+        addBotMessage(
+          "Un souci technique empêche ma réponse. Tu peux réessayer ?",
+        );
       }
 
-      await addBotMessage(message);
+      setWaiting(false);
     }
   }
 
@@ -822,51 +807,46 @@ function initIAChat(rootSelector) {
     const text = activeTextarea.value.trim();
     if (!text) return;
 
-    // Lock before the first await to prevent overlapping submissions.
-    setWaiting(true);
-    try {
-      if (!iaStarted) {
-        iaStarted = true;
-        startChatMode();
-      }
-
-      const iaHidden =
-        ia && ia.classList.contains("is-open") && ia.offsetHeight === 0;
-
-      if (iaHidden) {
-        showIA();
-
-        await new Promise((resolve) => {
-          setTimeout(resolve, 450);
-        });
-      }
-
-      const userMessage = addUserMessage(text);
-
-      if (isMobile()) {
-        activeTextarea.blur();
-      }
-
-      const previousHistory = history.slice(-MAX_HISTORY);
-      storeMessage("user", text);
-
-      resetTextarea(activeTextarea);
-      updateTypewriterState();
-      updateCaretState();
-
-      if (isMobile()) {
-        fillRemainingSpaceAfterScroll();
-      } else {
-        const EXTRA_SPACE = window.innerHeight * 0.75;
-        chatShell.style.minHeight = `${chatShell.scrollHeight + EXTRA_SPACE}px`;
-      }
-
-      await scrollToMessage(userMessage, true);
-
-      await sendMessage(text, previousHistory);
-    } finally {
-      setWaiting(false);
+    if (!iaStarted) {
+      iaStarted = true;
+      startChatMode();
     }
+
+    const iaHidden =
+      ia && ia.classList.contains("is-open") && ia.offsetHeight === 0;
+
+    if (iaHidden) {
+      showIA();
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, 450);
+      });
+    }
+
+    const userMessage = addUserMessage(text);
+
+    if (isMobile()) {
+      activeTextarea.blur();
+    }
+
+    storeMessage("user", text);
+
+    setWaiting(true);
+
+    resetTextarea(activeTextarea);
+    updateTypewriterState();
+    updateCaretState();
+
+    if (isMobile()) {
+      fillRemainingSpaceAfterScroll();
+    } else {
+      const EXTRA_SPACE = window.innerHeight * 0.75;
+      chatShell.style.minHeight = `${chatShell.scrollHeight + EXTRA_SPACE}px`;
+    }
+
+    await scrollToMessage(userMessage, true);
+
+    await sendMessage(text);
   }
 
   /* ==================================================

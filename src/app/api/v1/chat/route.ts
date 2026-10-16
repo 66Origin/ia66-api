@@ -13,6 +13,7 @@ import {
   isInsightsFreshnessQuery,
   getLatestInsightsLimit,
 } from "@/lib/rag/insights";
+import { selectProjectLinks } from "@/lib/rag/project-links";
 import { selectVisibleSources } from "@/lib/rag/sources";
 
 export async function OPTIONS(req: Request) {
@@ -113,6 +114,7 @@ export async function POST(req: Request) {
         email,
         sources,
         visibleSources,
+        projectLinks: selectProjectLinks(text),
       },
       { headers },
     );

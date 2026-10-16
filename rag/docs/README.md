@@ -382,3 +382,9 @@ Le système de synchronisation doit :
 - extraire les métadonnées disponibles lorsque c'est possible
 - garantir au minimum `source_path`, `source_type` et `content_type`
 - appliquer les conventions strictes principalement aux nouveaux documents
+
+## Documentation technique complémentaire
+
+Le manifeste `rag/generated/manifest.json` sert également de catalogue d’URL pour les liens projets renvoyés par l’API de O.
+
+Voir [Liens projets dans les réponses de O](../docs/project-links.md).

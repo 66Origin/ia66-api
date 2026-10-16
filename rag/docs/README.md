@@ -387,4 +387,4 @@ Le système de synchronisation doit :
 
 Le manifeste `rag/generated/manifest.json` sert également de catalogue d’URL pour les liens projets renvoyés par l’API de O.
 
-Voir [Liens projets dans les réponses de O](../docs/project-links.md).
+Voir [Liens projets dans les réponses de O](../../docs/project-links.md).

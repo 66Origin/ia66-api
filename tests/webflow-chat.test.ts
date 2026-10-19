@@ -26,15 +26,6 @@ type ChatContext = vm.Context & {
   handleSend: (input: ChatInput) => Promise<void>;
 };
 
-type ProjectsContext = vm.Context & {
-  waitForProjects: () => Promise<void>;
-};
-
-type Project = {
-  name: string;
-  slug: string;
-};
-
 const source = readFileSync("public/webflow/js/ia.js", "utf8");
 
 function installFunctions(context: vm.Context, names: string[]): void {
@@ -222,6 +213,35 @@ test("mobile submission blurs the keyboard and sends only previous history", asy
   assert.equal(context.isWaiting, false);
 });
 
+test("project links returned by the API are passed to the renderer", async () => {
+  const links = [
+    { label: "Bewiz", url: "https://www.66origin.com/works/bewiz" },
+  ];
+  let received: unknown;
+  const { context } = chat({
+    async fetch() {
+      return {
+        ok: true,
+        async json() {
+          return { text: "Bewiz", projectLinks: links };
+        },
+      };
+    },
+    async transformLoader(
+      _loader: unknown,
+      _text: string,
+      _email: unknown,
+      _sources: unknown,
+      projectLinks: unknown,
+    ) {
+      received = projectLinks;
+    },
+  });
+  await context.handleSend({ value: "Parle-moi de Bewiz" });
+  assert.deepEqual(received, links);
+  assert.equal(context.isWaiting, false);
+});
+
 const httpCases: Array<[number, RegExp]> = [
   [429, /limite de demandes/],
   [400, /invalide/],
@@ -328,67 +348,7 @@ test("inputs unlock even if fallback rendering fails", async () => {
   assert.equal(context.isWaiting, false);
 });
 
-const projectCases: Array<[string, Project[] | undefined]> = [
-  ["absent", undefined],
-  ["empty", []],
-];
-
-for (const [name, projects] of projectCases) {
-  test(`project wait ends when the CMS list is ${name}`, async (t) => {
-    t.mock.timers.enable({
-      apis: ["setTimeout", "setInterval"],
-    });
-
-    const context = loadFunctions<ProjectsContext>(["waitForProjects"], {
-      window: { PROJECTS: projects },
-      setTimeout,
-      setInterval,
-      clearTimeout,
-      clearInterval,
-    });
-
-    let finished = false;
-
-    const pending = context.waitForProjects().then(() => {
-      finished = true;
-    });
-
-    t.mock.timers.tick(999);
-    await Promise.resolve();
-
-    assert.equal(finished, false);
-
-    t.mock.timers.tick(1);
-    await pending;
-
-    assert.equal(finished, true);
-  });
-}
-
-test("project wait resolves as soon as a delayed CMS list is available", async (t) => {
-  t.mock.timers.enable({
-    apis: ["setTimeout", "setInterval"],
-  });
-
-  const window: { PROJECTS?: Project[] } = {};
-
-  const context = loadFunctions<ProjectsContext>(["waitForProjects"], {
-    window,
-    setTimeout,
-    setInterval,
-    clearTimeout,
-    clearInterval,
-  });
-
-  const pending = context.waitForProjects();
-
-  window.PROJECTS = [{ name: "Bewiz", slug: "bewiz" }];
-
-  t.mock.timers.tick(50);
-  await pending;
-});
-
-test("a response renders without projects and the chat unlocks after the bounded wait", async (t) => {
+test("a response renders immediately without a CMS project list", async (t) => {
   t.mock.timers.enable({
     apis: ["setTimeout", "setInterval"],
   });
@@ -413,6 +373,7 @@ test("a response renders without projects and the chat unlocks after the bounded
       };
     },
 
+    linkifyProjectsInElement() {},
     formatMessage(text: string) {
       return text;
     },
@@ -427,20 +388,13 @@ test("a response renders without projects and the chat unlocks after the bounded
     enableInputCaret() {},
   });
 
-  installFunctions(context, [
-    "waitForProjects",
-    "linkifyProjectsInElement",
-    "transformLoader",
-  ]);
+  installFunctions(context, ["transformLoader"]);
 
   const pending = context.handleSend({ value: "Question" });
 
   await new Promise<void>((resolve) => setImmediate(resolve));
 
   assert.equal(textElement.innerHTML, "Réponse");
-  assert.equal(context.isWaiting, true);
-
-  t.mock.timers.tick(1000);
   await pending;
 
   assert.equal(context.isWaiting, false);

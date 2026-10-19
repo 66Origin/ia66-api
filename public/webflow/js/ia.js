@@ -293,55 +293,84 @@ function initIAChat(rootSelector) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
-  function waitForProjects() {
-    return new Promise((resolve) => {
-      const hasProjects = () =>
-        Array.isArray(window.PROJECTS) && window.PROJECTS.length > 0;
+  function linkifyProjectsInElement(element, projectLinks = []) {
+    if (!element || !Array.isArray(projectLinks)) return;
 
-      if (hasProjects()) return resolve();
-
-      const interval = setInterval(() => {
-        if (hasProjects()) finish();
-      }, 50);
-      const timeout = setTimeout(finish, 1000);
-
-      function finish() {
-        clearInterval(interval);
-        clearTimeout(timeout);
-        resolve();
+    const validLinks = projectLinks.filter((link) => {
+      if (typeof link?.label !== "string" || !link.label.trim()) return false;
+      try {
+        const url = new URL(link.url);
+        return (
+          url.protocol === "https:" &&
+          url.hostname === "www.66origin.com" &&
+          !url.port &&
+          !url.username &&
+          !url.password &&
+          !url.search &&
+          !url.hash &&
+          /^\/works\/[a-z0-9-]+\/?$/i.test(url.pathname)
+        );
+      } catch {
+        return false;
       }
     });
-  }
 
-  function linkifyProjectsInElement(element) {
-    if (!Array.isArray(window.PROJECTS) || !window.PROJECTS.length) return;
+    // Ignore ambiguous labels rather than choosing an arbitrary project.
+    const links = new Map();
+    for (const link of validLinks) {
+      const key = link.label.toLocaleLowerCase("fr");
+      if (!links.has(key)) links.set(key, link);
+      else if (links.get(key)?.url !== link.url) links.set(key, null);
+    }
+    const projects = [...links.values()]
+      .filter(Boolean)
+      .sort((a, b) => b.label.length - a.label.length);
+    if (!projects.length) return;
 
-    const projects = [...window.PROJECTS].sort(
-      (a, b) => b.name.length - a.name.length,
+    const pattern = new RegExp(
+      `(?<![\\p{L}\\p{N}_])(${projects.map((p) => escapeRegExp(p.label)).join("|")})(?![\\p{L}\\p{N}_])`,
+      "giu",
+    );
+    const byLabel = new Map(
+      projects.map((p) => [p.label.toLocaleLowerCase("fr"), p]),
     );
 
     function processNode(node) {
-      if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "A") return;
+      if (
+        node.nodeType === Node.ELEMENT_NODE &&
+        ["A", "CODE", "PRE", "SCRIPT", "STYLE", "TEXTAREA"].includes(
+          node.tagName,
+        )
+      )
+        return;
 
       if (node.nodeType === Node.TEXT_NODE) {
-        let content = node.nodeValue;
-
-        projects.forEach((project) => {
-          const regex = new RegExp(`\\b${escapeRegExp(project.name)}\\b`, "gi");
-
-          content = content.replace(regex, (match) => {
-            return `<a href="/works/${project.slug}" target="_blank" rel="noopener noreferrer" class="ia66o-work-link">${match}</a>`;
-          });
-        });
-
-        if (content !== node.nodeValue) {
-          const span = document.createElement("span");
-          span.innerHTML = content;
-          node.replaceWith(...span.childNodes);
+        const content = node.nodeValue || "";
+        const fragment = document.createDocumentFragment();
+        let cursor = 0;
+        pattern.lastIndex = 0;
+        for (const match of content.matchAll(pattern)) {
+          const project = byLabel.get(match[0].toLocaleLowerCase("fr"));
+          if (!project) continue;
+          fragment.appendChild(
+            document.createTextNode(content.slice(cursor, match.index)),
+          );
+          const link = document.createElement("a");
+          link.href = project.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.className = "ia66o-work-link";
+          link.textContent = match[0];
+          fragment.appendChild(link);
+          cursor = match.index + match[0].length;
         }
+        if (cursor > 0) {
+          fragment.appendChild(document.createTextNode(content.slice(cursor)));
+          node.replaceWith(fragment);
+        }
+        return;
       }
-
-      node.childNodes.forEach(processNode);
+      [...node.childNodes].forEach(processNode);
     }
 
     processNode(element);
@@ -663,7 +692,6 @@ function initIAChat(rootSelector) {
 
     const messageEl = wrapper.querySelector(".js-bot-text");
 
-    await waitForProjects();
     linkifyProjectsInElement(messageEl);
 
     storeMessage("assistant", text);
@@ -675,7 +703,13 @@ function initIAChat(rootSelector) {
     });
   }
 
-  async function transformLoader(loader, text, emailData = null, sources = []) {
+  async function transformLoader(
+    loader,
+    text,
+    emailData = null,
+    sources = [],
+    projectLinks = [],
+  ) {
     loader
       .querySelector(".ia66o-chat-message")
       ?.classList.remove("ia66o-loader");
@@ -685,8 +719,7 @@ function initIAChat(rootSelector) {
     messageEl.innerHTML =
       formatMessage(text, emailData) + renderSources(sources);
 
-    await waitForProjects();
-    linkifyProjectsInElement(messageEl);
+    linkifyProjectsInElement(messageEl, projectLinks);
 
     storeMessage("assistant", text);
 
@@ -785,7 +818,13 @@ function initIAChat(rootSelector) {
         throw new Error("NO_ANSWER");
       }
 
-      await transformLoader(loader, data.text, data.email, data.visibleSources);
+      await transformLoader(
+        loader,
+        data.text,
+        data.email,
+        data.visibleSources,
+        data.projectLinks,
+      );
     } catch (err) {
       loader.remove();
 

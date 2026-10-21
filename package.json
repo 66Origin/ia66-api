@@ -15,7 +15,8 @@
     "test:rag-generator": "node --import tsx --test tests/rag-generator.test.ts tests/rag-export-service.test.ts tests/rag-admin.test.ts",
     "test:chat": "tsx scripts/test-chat.js",
     "analytics:check": "node --import tsx scripts/analytics/check-connection.ts",
-    "analytics:check-concurrency": "node --import tsx scripts/analytics/check-concurrency.ts"
+    "analytics:check-concurrency": "node --import tsx scripts/analytics/check-concurrency.ts",
+    "analytics:check-recording": "node --import tsx scripts/analytics/check-recording.ts"
   },
   "dependencies": {
     "@google/genai": "^1.33.0",

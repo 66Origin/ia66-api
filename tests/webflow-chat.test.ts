@@ -67,7 +67,12 @@ function chat(overrides: Record<string, unknown> = {}) {
   };
 
   const context: ChatContext = loadFunctions<ChatContext>(
-    ["buildAnalyticsMetadata", "sendMessage", "handleSend"],
+    [
+      "getAnalyticsVisitorForConversation",
+      "buildAnalyticsMetadata",
+      "sendMessage",
+      "handleSend",
+    ],
     {
       API_BASE: "https://example.test",
       MAX_HISTORY: 20,
@@ -77,6 +82,7 @@ function chat(overrides: Record<string, unknown> = {}) {
       ia: null,
       isGlobalIA: false,
       analyticsConversationId: null,
+      analyticsVisitorPromise: null,
       chatShell: { style: {}, scrollHeight: 100 },
       window: { innerHeight: 800 },
       setTimeout,

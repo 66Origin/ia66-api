@@ -42,6 +42,7 @@ function initIAChat(rootSelector) {
   let ticking = false;
   let history = [];
   let analyticsConversationId = null;
+  let analyticsVisitorPromise = null;
   const MAX_HISTORY = 20;
   const SCROLL_THRESHOLD = 10;
   function isMobile() {
@@ -292,7 +293,17 @@ function initIAChat(rootSelector) {
     autoResizeTextarea(textarea);
   }
 
-  function buildAnalyticsMetadata() {
+  async function getAnalyticsVisitorForConversation() {
+    if (!analyticsVisitorPromise) {
+      analyticsVisitorPromise = Promise.resolve()
+        .then(() => window.OAnalyticsVisitor?.prepare?.() ?? null)
+        .catch(() => null);
+    }
+
+    return analyticsVisitorPromise;
+  }
+
+  async function buildAnalyticsMetadata() {
     try {
       if (ia?.getAttribute("data-o-analytics") !== "true") {
         return null;
@@ -304,10 +315,18 @@ function initIAChat(rootSelector) {
         analyticsConversationId = window.crypto.randomUUID();
       }
 
+      const visitor = await getAnalyticsVisitorForConversation();
+
+      // Keep the current conversation's identity unchanged after expiration.
+      if (visitor && visitor.expiresAt <= Date.now()) {
+        return null;
+      }
+
       return {
         requestId,
         conversationId: analyticsConversationId,
         placement: isGlobalIA ? "global" : "home",
+        ...(visitor ? { visitorToken: visitor.visitorToken } : {}),
       };
     } catch {
       // Analytics must not prevent sending a chat message.
@@ -828,7 +847,7 @@ function initIAChat(rootSelector) {
   async function sendMessage(message, previousHistory) {
     const loader = addBotLoader();
     try {
-      const analytics = buildAnalyticsMetadata();
+      const analytics = await buildAnalyticsMetadata();
 
       const response = await fetch(`${API_BASE}/api/v1/chat`, {
         method: "POST",
@@ -1022,6 +1041,7 @@ function initIAChat(rootSelector) {
     messagesContainer.innerHTML = "";
     history = [];
     analyticsConversationId = null;
+    analyticsVisitorPromise = null;
 
     iaStarted = false;
     isWaiting = false;

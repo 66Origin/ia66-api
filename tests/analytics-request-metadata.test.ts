@@ -54,3 +54,29 @@ test("malformed request bodies return no analytics metadata", () => {
     assert.equal(parseChatAnalyticsMetadata(body), null);
   }
 });
+
+test("a visitor token is accepted without accepting a raw visitor ID", () => {
+  const analytics = {
+    ...metadata,
+    visitorToken: "token-to-verify-on-the-server",
+  };
+
+  assert.deepEqual(
+    parseChatAnalyticsMetadata({
+      message: "Bonjour",
+      analytics,
+    }),
+    analytics,
+  );
+
+  assert.equal(
+    parseChatAnalyticsMetadata({
+      message: "Bonjour",
+      analytics: {
+        ...analytics,
+        visitorId: metadata.requestId,
+      },
+    }),
+    null,
+  );
+});

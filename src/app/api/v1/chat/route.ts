@@ -18,8 +18,8 @@ import { selectVisibleSources } from "@/lib/rag/sources";
 import {
   finishChatTracking,
   isChatTrackingEnabled,
-  startChatTracking,
 } from "@/lib/analytics/chat-tracking";
+import { startTrackedChat } from "@/lib/analytics/start-tracked-chat";
 import { parseChatAnalyticsMetadata } from "@/lib/analytics/request-metadata";
 
 export async function OPTIONS(req: Request) {
@@ -102,13 +102,7 @@ export async function POST(req: Request) {
     ? parseChatAnalyticsMetadata(body)
     : null;
 
-  const tracking = metadata
-    ? await startChatTracking({
-        ...metadata,
-        visitorId: null,
-      })
-    : null;
-
+  const tracking = await startTrackedChat(metadata);
   let errorStage: "model" | "response_processing" = "model";
   let generationDurationMs: number | null = null;
 

@@ -5,6 +5,7 @@ const metadataSchema = z
     requestId: z.uuid(),
     conversationId: z.uuid(),
     placement: z.enum(["home", "global"]),
+    visitorToken: z.string().max(200).optional().catch(undefined),
   })
   .strict();
 

@@ -41,6 +41,7 @@ function initIAChat(rootSelector) {
   let lastScrollY = window.scrollY;
   let ticking = false;
   let history = [];
+  let analyticsConversationId = null;
   const MAX_HISTORY = 20;
   const SCROLL_THRESHOLD = 10;
   function isMobile() {
@@ -289,6 +290,29 @@ function initIAChat(rootSelector) {
   function resetTextarea(textarea) {
     textarea.value = "";
     autoResizeTextarea(textarea);
+  }
+
+  function buildAnalyticsMetadata() {
+    try {
+      if (ia?.getAttribute("data-o-analytics") !== "true") {
+        return null;
+      }
+
+      const requestId = window.crypto.randomUUID();
+
+      if (!analyticsConversationId) {
+        analyticsConversationId = window.crypto.randomUUID();
+      }
+
+      return {
+        requestId,
+        conversationId: analyticsConversationId,
+        placement: isGlobalIA ? "global" : "home",
+      };
+    } catch {
+      // Analytics must not prevent sending a chat message.
+      return null;
+    }
   }
 
   /* ==================================================
@@ -798,6 +822,8 @@ function initIAChat(rootSelector) {
   async function sendMessage(message, previousHistory) {
     const loader = addBotLoader();
     try {
+      const analytics = buildAnalyticsMetadata();
+
       const response = await fetch(`${API_BASE}/api/v1/chat`, {
         method: "POST",
         headers: {
@@ -808,6 +834,7 @@ function initIAChat(rootSelector) {
           conversation: {
             history: previousHistory,
           },
+          ...(analytics ? { analytics } : {}),
         }),
       }).catch(() => {
         throw new Error("NETWORK_ERROR");
@@ -988,6 +1015,7 @@ function initIAChat(rootSelector) {
   function resetChat() {
     messagesContainer.innerHTML = "";
     history = [];
+    analyticsConversationId = null;
 
     iaStarted = false;
     isWaiting = false;

@@ -67,7 +67,7 @@ function chat(overrides: Record<string, unknown> = {}) {
   };
 
   const context: ChatContext = loadFunctions<ChatContext>(
-    ["sendMessage", "handleSend"],
+    ["buildAnalyticsMetadata", "sendMessage", "handleSend"],
     {
       API_BASE: "https://example.test",
       MAX_HISTORY: 20,
@@ -75,6 +75,8 @@ function chat(overrides: Record<string, unknown> = {}) {
       isWaiting: false,
       iaStarted: false,
       ia: null,
+      isGlobalIA: false,
+      analyticsConversationId: null,
       chatShell: { style: {}, scrollHeight: 100 },
       window: { innerHeight: 800 },
       setTimeout,
@@ -399,4 +401,81 @@ test("a response renders immediately without a CMS project list", async (t) => {
 
   assert.equal(context.isWaiting, false);
   assert.equal(context.history.at(-1)?.text, "Réponse");
+});
+
+test("analytics use a distinct request ID and a stable conversation ID", async () => {
+  let nextId = 0;
+
+  const { context, captured } = chat({
+    ia: {
+      getAttribute(name: string) {
+        return name === "data-o-analytics" ? "true" : null;
+      },
+      classList: {
+        contains() {
+          return false;
+        },
+      },
+    },
+    window: {
+      innerHeight: 800,
+      crypto: {
+        randomUUID() {
+          nextId++;
+          return `00000000-0000-4000-8000-${String(nextId).padStart(12, "0")}`;
+        },
+      },
+    },
+  });
+
+  await context.handleSend({ value: "Question 1" });
+  await context.handleSend({ value: "Question 2" });
+
+  const requests = captured.requests as Array<{
+    analytics?: {
+      requestId: string;
+      conversationId: string;
+      placement: string;
+    };
+  }>;
+
+  const first = requests[0].analytics;
+  const second = requests[1].analytics;
+
+  assert.ok(first);
+  assert.ok(second);
+  assert.notEqual(first.requestId, second.requestId);
+  assert.equal(first.conversationId, second.conversationId);
+  assert.equal(first.placement, "home");
+  assert.equal(second.placement, "home");
+});
+
+test("UUID generation failure does not prevent sending a message", async () => {
+  const { context, captured } = chat({
+    ia: {
+      getAttribute() {
+        return "true";
+      },
+      classList: {
+        contains() {
+          return false;
+        },
+      },
+    },
+    window: {
+      innerHeight: 800,
+      crypto: {
+        randomUUID() {
+          throw new Error("UUID unavailable");
+        },
+      },
+    },
+  });
+
+  await context.handleSend({ value: "Question" });
+
+  assert.equal(captured.requests.length, 1);
+  assert.equal("analytics" in captured.requests[0], false);
+  assert.deepEqual(captured.rendered, ["Réponse"]);
+  assert.equal(context.isWaiting, false);
 });

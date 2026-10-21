@@ -1,31 +1,37 @@
 function initIAChat(rootSelector) {
   const ia = document.querySelector(rootSelector);
   if (!ia) return;
-  const module = ia.querySelector(".ia-66o");
-  if (!module) return;
+  const chatModule = ia.querySelector(".ia-66o");
+  if (!chatModule) return;
   const isGlobalIA = ia.classList.contains("ia-context-global");
-  const introState = module.querySelector(".ia-state--intro");
-  const chatState = module.querySelector(".ia-state--chat");
-  const introForm = module.querySelector(".ia-state--intro .ia-form");
-  const introTextarea = module.querySelector(
+  const introState = chatModule.querySelector(".ia-state--intro");
+  const chatState = chatModule.querySelector(".ia-state--chat");
+  const introForm = chatModule.querySelector(".ia-state--intro .ia-form");
+  const introTextarea = chatModule.querySelector(
     ".ia-state--intro .ia-input-textarea",
   );
-  const introButton = module.querySelector(".ia-state--intro .ia-send-button");
-  const chatForm = module.querySelector(".ia-state--chat .ia-form");
-  const chatTextarea = module.querySelector(
+  const introButton = chatModule.querySelector(
+    ".ia-state--intro .ia-send-button",
+  );
+  const chatForm = chatModule.querySelector(".ia-state--chat .ia-form");
+  const chatTextarea = chatModule.querySelector(
     ".ia-state--chat .ia-input-textarea",
   );
-  const chatButton = module.querySelector(".ia-state--chat .ia-send-button");
-  const topBar = module.querySelector(".ia-chat-top-bar");
-  const bottomBar = module.querySelector(".ia-chat-bottom-bar");
+  const chatButton = chatModule.querySelector(
+    ".ia-state--chat .ia-send-button",
+  );
+  const topBar = chatModule.querySelector(".ia-chat-top-bar");
+  const bottomBar = chatModule.querySelector(".ia-chat-bottom-bar");
   const newChatBtn = ia.querySelector("#ia-newchat, [data-ia-newchat]");
-  const messagesContainer = module.querySelector(".ia-messages");
-  const chatShell = module.querySelector(".ia-chat-shell");
-  const typewriter = module.querySelector(".ia-typewriter");
-  const introWrapper = module.querySelector(
+  const messagesContainer = chatModule.querySelector(".ia-messages");
+  const chatShell = chatModule.querySelector(".ia-chat-shell");
+  const typewriter = chatModule.querySelector(".ia-typewriter");
+  const introWrapper = chatModule.querySelector(
     ".ia-state--intro .ia-input-wrapper",
   );
-  const chatWrapper = module.querySelector(".ia-state--chat .ia-input-wrapper");
+  const chatWrapper = chatModule.querySelector(
+    ".ia-state--chat .ia-input-wrapper",
+  );
   const isCollapsible = ia?.classList.contains("is-collapsible") || false;
   let iaStarted = false;
   let isWaiting = false;
@@ -532,11 +538,12 @@ function initIAChat(rootSelector) {
       return;
     }
 
-    /* position réelle du module */
-    const moduleTop = module.getBoundingClientRect().top + currentScrollY;
+    /* position réelle du chatModule */
+    const chatModuleTop =
+      chatModule.getBoundingClientRect().top + currentScrollY;
 
     /* si contenu au-dessus du chat */
-    const hasContentAboveIA = moduleTop > 80;
+    const hasContentAboveIA = chatModuleTop > 80;
 
     /* IA repliée via header */
     const iaHiddenByHeader =

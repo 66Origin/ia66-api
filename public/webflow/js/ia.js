@@ -813,11 +813,17 @@ function initIAChat(rootSelector) {
     API
     ================================================== */
 
+  const IS_LOCAL = ["localhost", "127.0.0.1"].includes(
+    window.location.hostname,
+  );
+
   const IS_STAGING = window.location.hostname.includes("webflow.io");
 
-  const API_BASE = IS_STAGING
-    ? "https://ia66-api-git-develop-christellebqns-projects.vercel.app"
-    : "https://ia66-api.vercel.app";
+  const API_BASE = IS_LOCAL
+    ? window.location.origin
+    : IS_STAGING
+      ? "https://ia66-api-git-develop-christellebqns-projects.vercel.app"
+      : "https://ia66-api.vercel.app";
 
   async function sendMessage(message, previousHistory) {
     const loader = addBotLoader();

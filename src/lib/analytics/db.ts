@@ -19,9 +19,9 @@ export function getAnalyticsPool(): Pool {
       rejectUnauthorized: true,
     },
     max: 2,
-    connectionTimeoutMillis: 10_000,
+    connectionTimeoutMillis: 2_000,
     idleTimeoutMillis: 10_000,
-    query_timeout: 5_000,
+    query_timeout: 2_000,
   });
 
   pool.on("error", () => {

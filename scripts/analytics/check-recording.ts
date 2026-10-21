@@ -6,6 +6,7 @@ import {
   getAnalyticsPool,
 } from "../../src/lib/analytics/db";
 import { recordChatRequest } from "../../src/lib/analytics/record-chat-request";
+import { completeChatRequest } from "../../src/lib/analytics/complete-chat-request";
 
 config({ path: ".env.local", quiet: true });
 config({ path: ".env", quiet: true });
@@ -61,7 +62,48 @@ async function main() {
       { name: "ZodError" },
     );
 
-    console.log("Analytics request recording: OK");
+    const completed = await completeChatRequest({
+      requestId: input.requestId,
+      status: "generated",
+      generationDurationMs: 150,
+    });
+
+    assert.deepEqual(completed, { updated: true });
+
+    const completedAgain = await completeChatRequest({
+      requestId: input.requestId,
+      status: "generated",
+      generationDurationMs: 200,
+    });
+
+    assert.deepEqual(completedAgain, { updated: false });
+
+    await assert.rejects(
+      () =>
+        completeChatRequest({
+          requestId: input.requestId,
+          status: "failed",
+          generationDurationMs: null,
+          errorStage: "model",
+          errorCode: "model_error",
+        }),
+      { message: "Analytics request already has a different outcome." },
+    );
+
+    const saved = await getAnalyticsPool().query<{
+      status: string;
+      generation_duration_ms: number;
+    }>(
+      `SELECT status, generation_duration_ms
+       FROM analytics.chat_requests
+       WHERE request_id = $1::uuid`,
+      [input.requestId],
+    );
+
+    assert.deepEqual(saved.rows[0], {
+      status: "generated",
+      generation_duration_ms: 150,
+    });
   } finally {
     try {
       const pool = getAnalyticsPool();
@@ -88,6 +130,8 @@ async function main() {
       await closeAnalyticsPool();
     }
   }
+
+  console.log("Analytics request recording: OK");
 }
 
 main().catch((error: unknown) => {

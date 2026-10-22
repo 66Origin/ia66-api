@@ -1,31 +1,37 @@
 function initIAChat(rootSelector) {
   const ia = document.querySelector(rootSelector);
   if (!ia) return;
-  const module = ia.querySelector(".ia-66o");
-  if (!module) return;
+  const chatModule = ia.querySelector(".ia-66o");
+  if (!chatModule) return;
   const isGlobalIA = ia.classList.contains("ia-context-global");
-  const introState = module.querySelector(".ia-state--intro");
-  const chatState = module.querySelector(".ia-state--chat");
-  const introForm = module.querySelector(".ia-state--intro .ia-form");
-  const introTextarea = module.querySelector(
+  const introState = chatModule.querySelector(".ia-state--intro");
+  const chatState = chatModule.querySelector(".ia-state--chat");
+  const introForm = chatModule.querySelector(".ia-state--intro .ia-form");
+  const introTextarea = chatModule.querySelector(
     ".ia-state--intro .ia-input-textarea",
   );
-  const introButton = module.querySelector(".ia-state--intro .ia-send-button");
-  const chatForm = module.querySelector(".ia-state--chat .ia-form");
-  const chatTextarea = module.querySelector(
+  const introButton = chatModule.querySelector(
+    ".ia-state--intro .ia-send-button",
+  );
+  const chatForm = chatModule.querySelector(".ia-state--chat .ia-form");
+  const chatTextarea = chatModule.querySelector(
     ".ia-state--chat .ia-input-textarea",
   );
-  const chatButton = module.querySelector(".ia-state--chat .ia-send-button");
-  const topBar = module.querySelector(".ia-chat-top-bar");
-  const bottomBar = module.querySelector(".ia-chat-bottom-bar");
+  const chatButton = chatModule.querySelector(
+    ".ia-state--chat .ia-send-button",
+  );
+  const topBar = chatModule.querySelector(".ia-chat-top-bar");
+  const bottomBar = chatModule.querySelector(".ia-chat-bottom-bar");
   const newChatBtn = ia.querySelector("#ia-newchat, [data-ia-newchat]");
-  const messagesContainer = module.querySelector(".ia-messages");
-  const chatShell = module.querySelector(".ia-chat-shell");
-  const typewriter = module.querySelector(".ia-typewriter");
-  const introWrapper = module.querySelector(
+  const messagesContainer = chatModule.querySelector(".ia-messages");
+  const chatShell = chatModule.querySelector(".ia-chat-shell");
+  const typewriter = chatModule.querySelector(".ia-typewriter");
+  const introWrapper = chatModule.querySelector(
     ".ia-state--intro .ia-input-wrapper",
   );
-  const chatWrapper = module.querySelector(".ia-state--chat .ia-input-wrapper");
+  const chatWrapper = chatModule.querySelector(
+    ".ia-state--chat .ia-input-wrapper",
+  );
   const isCollapsible = ia?.classList.contains("is-collapsible") || false;
   let iaStarted = false;
   let isWaiting = false;
@@ -35,6 +41,8 @@ function initIAChat(rootSelector) {
   let lastScrollY = window.scrollY;
   let ticking = false;
   let history = [];
+  let analyticsConversationId = null;
+  let analyticsVisitorPromise = null;
   const MAX_HISTORY = 20;
   const SCROLL_THRESHOLD = 10;
   function isMobile() {
@@ -285,6 +293,47 @@ function initIAChat(rootSelector) {
     autoResizeTextarea(textarea);
   }
 
+  async function getAnalyticsVisitorForConversation() {
+    if (!analyticsVisitorPromise) {
+      analyticsVisitorPromise = Promise.resolve()
+        .then(() => window.OAnalyticsVisitor?.prepare?.() ?? null)
+        .catch(() => null);
+    }
+
+    return analyticsVisitorPromise;
+  }
+
+  async function buildAnalyticsMetadata() {
+    try {
+      if (ia?.getAttribute("data-o-analytics") !== "true") {
+        return null;
+      }
+
+      const requestId = window.crypto.randomUUID();
+
+      if (!analyticsConversationId) {
+        analyticsConversationId = window.crypto.randomUUID();
+      }
+
+      const visitor = await getAnalyticsVisitorForConversation();
+
+      // Keep the current conversation's identity unchanged after expiration.
+      if (visitor && visitor.expiresAt <= Date.now()) {
+        return null;
+      }
+
+      return {
+        requestId,
+        conversationId: analyticsConversationId,
+        placement: isGlobalIA ? "global" : "home",
+        ...(visitor ? { visitorToken: visitor.visitorToken } : {}),
+      };
+    } catch {
+      // Analytics must not prevent sending a chat message.
+      return null;
+    }
+  }
+
   /* ==================================================
     PROJECT LINKIFY
     ================================================== */
@@ -532,11 +581,12 @@ function initIAChat(rootSelector) {
       return;
     }
 
-    /* position réelle du module */
-    const moduleTop = module.getBoundingClientRect().top + currentScrollY;
+    /* position réelle du chatModule */
+    const chatModuleTop =
+      chatModule.getBoundingClientRect().top + currentScrollY;
 
     /* si contenu au-dessus du chat */
-    const hasContentAboveIA = moduleTop > 80;
+    const hasContentAboveIA = chatModuleTop > 80;
 
     /* IA repliée via header */
     const iaHiddenByHeader =
@@ -782,15 +832,23 @@ function initIAChat(rootSelector) {
     API
     ================================================== */
 
+  const IS_LOCAL = ["localhost", "127.0.0.1"].includes(
+    window.location.hostname,
+  );
+
   const IS_STAGING = window.location.hostname.includes("webflow.io");
 
-  const API_BASE = IS_STAGING
-    ? "https://ia66-api-git-develop-christellebqns-projects.vercel.app"
-    : "https://ia66-api.vercel.app";
+  const API_BASE = IS_LOCAL
+    ? window.location.origin
+    : IS_STAGING
+      ? "https://ia66-api-git-develop-christellebqns-projects.vercel.app"
+      : "https://ia66-api.vercel.app";
 
   async function sendMessage(message, previousHistory) {
     const loader = addBotLoader();
     try {
+      const analytics = await buildAnalyticsMetadata();
+
       const response = await fetch(`${API_BASE}/api/v1/chat`, {
         method: "POST",
         headers: {
@@ -801,6 +859,7 @@ function initIAChat(rootSelector) {
           conversation: {
             history: previousHistory,
           },
+          ...(analytics ? { analytics } : {}),
         }),
       }).catch(() => {
         throw new Error("NETWORK_ERROR");
@@ -981,6 +1040,8 @@ function initIAChat(rootSelector) {
   function resetChat() {
     messagesContainer.innerHTML = "";
     history = [];
+    analyticsConversationId = null;
+    analyticsVisitorPromise = null;
 
     iaStarted = false;
     isWaiting = false;

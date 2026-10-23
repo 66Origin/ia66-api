@@ -1,5 +1,5 @@
 // src/app/api/v1/chat/route.ts
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { corsHeaders } from "@/lib/security";
 import { rateLimitHourly } from "@/lib/ratelimit/hourly";
 import { getFileSearchStoreName } from "@/lib/gemini";
@@ -21,6 +21,10 @@ import {
 } from "@/lib/analytics/chat-tracking";
 import { startTrackedChat } from "@/lib/analytics/start-tracked-chat";
 import { parseChatAnalyticsMetadata } from "@/lib/analytics/request-metadata";
+import {
+  classifyTrackedChat,
+  isChatClassificationEnabled,
+} from "@/lib/analytics/classify-tracked-chat";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -103,6 +107,27 @@ export async function POST(req: Request) {
     : null;
 
   const tracking = await startTrackedChat(metadata);
+
+  if (tracking && isChatClassificationEnabled()) {
+    const classificationTracking = tracking;
+    const classificationInput = parsed.data;
+
+    try {
+      after(async () => {
+        try {
+          await classifyTrackedChat(
+            classificationTracking,
+            classificationInput,
+          );
+        } catch {
+          console.error("[analytics] Could not run classification.");
+        }
+      });
+    } catch {
+      console.error("[analytics] Could not schedule classification.");
+    }
+  }
+
   let errorStage: "model" | "response_processing" = "model";
   let generationDurationMs: number | null = null;
 

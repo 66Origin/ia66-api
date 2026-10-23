@@ -6,7 +6,9 @@
     const isTestEnvironment =
       ["localhost", "127.0.0.1"].includes(hostname) ||
       hostname.endsWith(".webflow.io") ||
-      hostname === "ia66-api-analytics-test.vercel.app";
+      hostname === "ia66-api-analytics-test.vercel.app" ||
+      hostname ===
+        "ia66-api-analytics-test-git-feat-254a10-christellebqns-projects.vercel.app";
 
     if (!isTestEnvironment) {
       return null;

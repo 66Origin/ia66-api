@@ -213,6 +213,7 @@ test("the timeout aborts a pending request without saving a token", async () => 
 for (const hostname of [
   "66origin-test.webflow.io",
   "ia66-api-analytics-test.vercel.app",
+  "ia66-api-analytics-test-git-feat-254a10-christellebqns-projects.vercel.app",
 ]) {
   test(`${hostname} uses the supplied API address`, async () => {
     const { client, browserWindow, state, visitor } = setup();

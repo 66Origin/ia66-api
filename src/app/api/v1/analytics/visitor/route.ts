@@ -14,11 +14,36 @@ const requestSchema = z.object({
 // Development-only duration, pending the production retention decision.
 const TOKEN_DURATION_MS = 24 * 60 * 60 * 1000;
 
+function isVisitorRecognitionEnabled(): boolean {
+  return (
+    process.env.O_ANALYTICS_ENABLED === "true" &&
+    (process.env.NODE_ENV === "development" ||
+      process.env.O_ANALYTICS_VISITOR_TEST_ENABLED === "true")
+  );
+}
+
+export async function OPTIONS(request: Request) {
+  if (!isVisitorRecognitionEnabled()) {
+    return new NextResponse(null, {
+      status: 404,
+      headers: { "Cache-Control": "no-store" },
+    });
+  }
+
+  const origin = request.headers.get("origin");
+  const { headers, isAllowed } = corsHeaders(origin);
+
+  return new NextResponse(null, {
+    status: isAllowed ? 204 : 403,
+    headers: {
+      ...headers,
+      "Cache-Control": "no-store",
+    },
+  });
+}
+
 export async function POST(request: Request) {
-  if (
-    process.env.NODE_ENV !== "development" ||
-    process.env.O_ANALYTICS_ENABLED !== "true"
-  ) {
+  if (!isVisitorRecognitionEnabled()) {
     return new NextResponse(null, {
       status: 404,
       headers: { "Cache-Control": "no-store" },

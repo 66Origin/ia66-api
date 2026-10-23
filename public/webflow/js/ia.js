@@ -296,7 +296,7 @@ function initIAChat(rootSelector) {
   async function getAnalyticsVisitorForConversation() {
     if (!analyticsVisitorPromise) {
       analyticsVisitorPromise = Promise.resolve()
-        .then(() => window.OAnalyticsVisitor?.prepare?.() ?? null)
+        .then(() => window.OAnalyticsVisitor?.prepare?.(API_BASE) ?? null)
         .catch(() => null);
     }
 

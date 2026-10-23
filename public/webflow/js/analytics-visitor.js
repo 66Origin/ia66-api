@@ -1,8 +1,14 @@
 (function () {
   let pendingPreparation = null;
 
-  async function prepare() {
-    if (!["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+  async function prepare(apiBase = window.location.origin) {
+    const hostname = window.location.hostname;
+    const isTestEnvironment =
+      ["localhost", "127.0.0.1"].includes(hostname) ||
+      hostname.endsWith(".webflow.io") ||
+      hostname === "ia66-api-analytics-test.vercel.app";
+
+    if (!isTestEnvironment) {
       return null;
     }
 
@@ -10,7 +16,7 @@
       return pendingPreparation;
     }
 
-    pendingPreparation = prepareWithLock();
+    pendingPreparation = prepareWithLock(apiBase);
 
     try {
       return await pendingPreparation;
@@ -19,7 +25,7 @@
     }
   }
 
-  async function prepareWithLock() {
+  async function prepareWithLock(apiBase) {
     const storage = window.OAnalyticsVisitorStorage;
     const locks = window.navigator?.locks;
 
@@ -42,20 +48,17 @@
           // Read inside the lock so another tab's saved token is reused.
           const saved = storage.read();
 
-          const response = await fetch(
-            `${window.location.origin}/api/v1/analytics/visitor`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              cache: "no-store",
-              signal: controller.signal,
-              body: JSON.stringify(
-                saved ? { visitorToken: saved.visitorToken } : {},
-              ),
+          const response = await fetch(`${apiBase}/api/v1/analytics/visitor`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          );
+            cache: "no-store",
+            signal: controller.signal,
+            body: JSON.stringify(
+              saved ? { visitorToken: saved.visitorToken } : {},
+            ),
+          });
 
           if (!response.ok) {
             return null;

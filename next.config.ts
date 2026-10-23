@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingIncludes: {
     "/api/v1/rag/export": ["./rag/generated/**/*"],
+    "/api/v1/chat": ["./certs/supabase-ca.crt"],
   },
 };
 

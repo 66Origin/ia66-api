@@ -9,7 +9,7 @@ type Visitor = {
 };
 
 type VisitorClient = {
-  prepare(): Promise<Visitor | null>;
+  prepare(apiBase?: string): Promise<Visitor | null>;
 };
 
 const source = readFileSync("public/webflow/js/analytics-visitor.js", "utf8");
@@ -209,3 +209,45 @@ test("the timeout aborts a pending request without saving a token", async () => 
   assert.equal(await preparation, null);
   assert.equal(state.saveCalls, 0);
 });
+
+for (const hostname of [
+  "66origin-test.webflow.io",
+  "ia66-api-analytics-test.vercel.app",
+  "ia66-api-analytics-test-git-feat-254a10-christellebqns-projects.vercel.app",
+]) {
+  test(`${hostname} uses the supplied API address`, async () => {
+    const { client, browserWindow, state, visitor } = setup();
+
+    browserWindow.location.hostname = hostname;
+    browserWindow.location.origin = `https://${hostname}`;
+
+    const apiBase = "https://ia66-api-analytics-test.vercel.app";
+
+    assert.deepEqual(await client.prepare(apiBase), visitor);
+    assert.equal(state.requests.length, 1);
+    assert.equal(state.requests[0].url, `${apiBase}/api/v1/analytics/visitor`);
+    assert.equal(state.saveCalls, 1);
+  });
+}
+
+for (const hostname of [
+  "www.66origin.com",
+  "66origin.com",
+  "fakewebflow.io",
+  "test.webflow.io.example.com",
+]) {
+  test(`${hostname} cannot enable recognition through an API address`, async () => {
+    const { client, browserWindow, state } = setup();
+
+    browserWindow.location.hostname = hostname;
+    browserWindow.location.origin = `https://${hostname}`;
+
+    assert.equal(
+      await client.prepare("https://ia66-api-analytics-test.vercel.app"),
+      null,
+    );
+    assert.equal(state.requests.length, 0);
+    assert.equal(state.saveCalls, 0);
+    assert.equal(state.lockCalls, 0);
+  });
+}

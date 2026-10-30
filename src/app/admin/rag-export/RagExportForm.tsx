@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState, type SubmitEvent } from "react";
+import adminStyles from "@/components/admin/admin.module.css";
 import styles from "./page.module.css";
 
 type GenerationReport = {
@@ -136,18 +136,9 @@ export function RagExportForm() {
   }
 
   return (
-    <main className={styles.page}>
-      <section className={styles.panel}>
-        <p className={styles.eyebrow}>
-          <Link href="/admin">66 Origin · Administration</Link>
-        </p>
-
-        <h1>Générateur de fichiers Markdown</h1>
-
-        <p className={styles.introduction}>
-          Analyse le site 66origin.com, compare les contenus au dernier
-          instantané et génère une archive ZIP prête à être vérifiée.
-        </p>
+    <>
+      <section className={adminStyles.panel}>
+        <h2>Nouvel export</h2>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <button type="submit" disabled={isGenerating}>
@@ -165,77 +156,61 @@ export function RagExportForm() {
             </p>
           )}
 
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className={adminStyles.error}>{error}</p>}
         </div>
+      </section>
 
-        {report && (
-          <section className={styles.result}>
-            <div className={styles.resultHeader}>
-              <div>
-                <p className={styles.success}>Export terminé</p>
-                <h2>{archive?.name}</h2>
-              </div>
-
-              {archive && (
-                <button
-                  className={styles.download}
-                  type="button"
-                  onClick={() => downloadArchive(archive)}
-                >
-                  Télécharger à nouveau
-                </button>
-              )}
+      {report && (
+        <section className={adminStyles.panel}>
+          <div className={styles.resultHeader}>
+            <div>
+              <p className={styles.success}>Export terminé</p>
+              <h2>{archive?.name}</h2>
             </div>
 
-            <dl className={styles.metrics}>
-              <div>
-                <dt>Détectées</dt>
-                <dd>{report.discovered}</dd>
-              </div>
-
-              <div>
-                <dt>Créées</dt>
-                <dd>{report.created}</dd>
-              </div>
-
-              <div>
-                <dt>Modifiées</dt>
-                <dd>{report.updated}</dd>
-              </div>
-
-              <div>
-                <dt>Inchangées</dt>
-                <dd>{report.unchanged}</dd>
-              </div>
-
-              <div>
-                <dt>Manquantes</dt>
-                <dd>{report.missing}</dd>
-              </div>
-
-              <div>
-                <dt>En erreur</dt>
-                <dd>{report.failed}</dd>
-              </div>
-            </dl>
-
-            {report.failures.length > 0 && (
-              <div className={styles.failures}>
-                <h3>Pages en erreur</h3>
-
-                <ul>
-                  {report.failures.map((failure) => (
-                    <li key={failure.url}>
-                      <strong>{failure.url}</strong>
-                      <span>{failure.error}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {archive && (
+              <button
+                className={styles.download}
+                type="button"
+                onClick={() => downloadArchive(archive)}
+              >
+                Télécharger à nouveau
+              </button>
             )}
-          </section>
-        )}
-      </section>
-    </main>
+          </div>
+
+          <dl className={adminStyles.kpis}>
+            {[
+              ["Détectées", report.discovered],
+              ["Créées", report.created],
+              ["Modifiées", report.updated],
+              ["Inchangées", report.unchanged],
+              ["Manquantes", report.missing],
+              ["En erreur", report.failed],
+            ].map(([label, value]) => (
+              <div className={adminStyles.kpi} key={label}>
+                <dt className={adminStyles.kpiLabel}>{label}</dt>
+                <dd className={adminStyles.kpiValue}>{value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          {report.failures.length > 0 && (
+            <div className={styles.failures}>
+              <h3>Pages en erreur</h3>
+
+              <ul>
+                {report.failures.map((failure) => (
+                  <li key={failure.url}>
+                    <strong>{failure.url}</strong>
+                    <span>{failure.error}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+    </>
   );
 }

@@ -1,6 +1,15 @@
 export function requireAdmin(req: Request) {
   const token = process.env.ADMIN_TOKEN;
-  if (!token) return { ok: true as const };
+
+  // Refuse everything when the token is missing instead of leaving the
+  // routes open.
+  if (!token) {
+    return {
+      ok: false as const,
+      status: 503,
+      error: "Admin token is not configured",
+    };
+  }
 
   const headerToken =
     req.headers.get("x-admin-token") ||

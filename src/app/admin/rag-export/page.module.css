@@ -25,6 +25,11 @@
   text-transform: uppercase;
 }
 
+.eyebrow a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .panel h1 {
   max-width: 600px;
   font-size: clamp(32px, 6vw, 54px);

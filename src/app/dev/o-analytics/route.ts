@@ -96,8 +96,6 @@ export async function GET(request: Request) {
       height: 28px;
     }
   </style>
-  <script src="/webflow/js/analytics-visitor-storage.js" defer></script>
-  <script src="/webflow/js/analytics-visitor.js" defer></script>
   <script src="/webflow/js/ia.js" defer></script>
 </head>
 <body>

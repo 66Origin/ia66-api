@@ -129,7 +129,7 @@ async function main() {
           'EXECUTE'
         )
         OR has_function_privilege(
-          'analytics.purge_expired(interval)',
+          'analytics.purge_expired(interval,interval)',
           'EXECUTE'
         )
         OR has_function_privilege(
@@ -141,6 +141,35 @@ async function main() {
     assert.deepEqual(retention.rows[0], {
       stats_access: false,
       retention_execute: false,
+    });
+
+    // Unanswered questions: write-only for the API.
+    const unanswered = await pool.query<{
+      can_insert: boolean;
+      can_select: boolean;
+      can_update: boolean;
+      can_delete: boolean;
+    }>(`
+      SELECT
+        has_any_column_privilege(
+          'analytics.unanswered_questions', 'INSERT'
+        ) AS can_insert,
+        has_any_column_privilege(
+          'analytics.unanswered_questions', 'SELECT'
+        ) AS can_select,
+        has_any_column_privilege(
+          'analytics.unanswered_questions', 'UPDATE'
+        ) AS can_update,
+        has_table_privilege(
+          'analytics.unanswered_questions', 'DELETE'
+        ) AS can_delete
+    `);
+
+    assert.deepEqual(unanswered.rows[0], {
+      can_insert: true,
+      can_select: false,
+      can_update: false,
+      can_delete: false,
     });
 
     console.log("Analytics writer permissions: OK");

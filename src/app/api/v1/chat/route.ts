@@ -25,6 +25,11 @@ import {
   classifyTrackedChat,
   isChatClassificationEnabled,
 } from "@/lib/analytics/classify-tracked-chat";
+import {
+  isUnansweredRecordingEnabled,
+  keepUnansweredQuestion,
+  type UnansweredReason,
+} from "@/lib/analytics/record-unanswered-question";
 
 export async function OPTIONS(req: Request) {
   const origin = req.headers.get("origin");
@@ -128,6 +133,21 @@ export async function POST(req: Request) {
     }
   }
 
+  // Questions O could not answer are kept 90 days to improve the corpus.
+  const keepUnanswered = (reason: UnansweredReason) => {
+    if (!tracking || !isUnansweredRecordingEnabled()) {
+      return;
+    }
+
+    const requestId = tracking.requestId;
+
+    try {
+      after(() => keepUnansweredQuestion(requestId, message, reason));
+    } catch {
+      console.error("[analytics] Could not schedule unanswered question.");
+    }
+  };
+
   let errorStage: "model" | "response_processing" = "model";
   let generationDurationMs: number | null = null;
 
@@ -160,6 +180,8 @@ export async function POST(req: Request) {
         errorStage: "model",
         errorCode: "empty_response",
       });
+
+      keepUnanswered("empty_response");
 
       return response;
     }
@@ -202,6 +224,8 @@ export async function POST(req: Request) {
       errorCode:
         errorStage === "model" ? "model_error" : "response_processing_error",
     });
+
+    keepUnanswered("generation_failed");
 
     const details = error instanceof Error ? error.message : String(error);
 

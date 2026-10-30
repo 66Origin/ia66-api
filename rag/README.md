@@ -288,10 +288,7 @@ Deux formats de réponse sont disponibles :
 
 L’interface interne `/admin/rag-export` utilise la session d’administration.
 
-Les clients techniques peuvent également utiliser :
-
-- `RAG_ADMIN_TOKEN` ;
-- `ADMIN_TOKEN` comme solution de repli.
+Les appels techniques (`curl`) utilisent `ADMIN_TOKEN` en en-tête.
 
 Un verrou Redis empêche deux générations simultanées.
 

@@ -27,11 +27,11 @@ type ExportResponse = {
     archiveSizeBytes: number;
     report: GenerationReport;
   };
-  openaiFileResponse: Array<{
+  archive: {
     name: string;
-    mime_type: string;
+    mimeType: string;
     content: string;
-  }>;
+  };
 };
 
 type Archive = {
@@ -106,7 +106,7 @@ export function RagExportForm() {
       }
 
       const result = payload as ExportResponse;
-      const exportedFile = result.openaiFileResponse[0];
+      const exportedFile = result.archive;
 
       if (!exportedFile) {
         throw new Error("L’archive générée est introuvable.");
@@ -116,7 +116,7 @@ export function RagExportForm() {
         name: exportedFile.name,
         blob: base64ToBlob(
           exportedFile.content,
-          exportedFile.mime_type || "application/zip",
+          exportedFile.mimeType || "application/zip",
         ),
       };
 

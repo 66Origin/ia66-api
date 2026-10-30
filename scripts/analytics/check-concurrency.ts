@@ -6,6 +6,7 @@ import {
   closeAnalyticsPool,
   getAnalyticsPool,
 } from "../../src/lib/analytics/db";
+import { deleteTestConversations } from "./cleanup-test-data";
 
 config({ path: ".env.local", quiet: true });
 config({ path: ".env", quiet: true });
@@ -97,30 +98,11 @@ async function checkConcurrentRequests(duplicate: boolean) {
       expectedCount,
     );
   } finally {
+    second?.release();
+    first.release();
+
     // Delete only this scenario's randomly identified data.
-    try {
-      await first.query("BEGIN");
-
-      await first.query(
-        `DELETE FROM analytics.chat_requests
-         WHERE conversation_id = ANY($1::uuid[])`,
-        [conversationIds],
-      );
-
-      await first.query(
-        `DELETE FROM analytics.conversations
-         WHERE conversation_id = ANY($1::uuid[])`,
-        [conversationIds],
-      );
-
-      await first.query("COMMIT");
-    } catch (error) {
-      await first.query("ROLLBACK");
-      throw error;
-    } finally {
-      second?.release();
-      first.release();
-    }
+    await deleteTestConversations(conversationIds);
   }
 }
 

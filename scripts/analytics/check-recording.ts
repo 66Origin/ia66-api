@@ -7,6 +7,7 @@ import {
 } from "../../src/lib/analytics/db";
 import { recordChatRequest } from "../../src/lib/analytics/record-chat-request";
 import { completeChatRequest } from "../../src/lib/analytics/complete-chat-request";
+import { deleteTestConversations } from "./cleanup-test-data";
 
 config({ path: ".env.local", quiet: true });
 config({ path: ".env", quiet: true });
@@ -110,20 +111,7 @@ async function main() {
     });
   } finally {
     try {
-      const pool = getAnalyticsPool();
-      const conversationIds = [conversationId, otherConversationId];
-
-      await pool.query(
-        `DELETE FROM analytics.chat_requests
-         WHERE conversation_id = ANY($1::uuid[])`,
-        [conversationIds],
-      );
-
-      await pool.query(
-        `DELETE FROM analytics.conversations
-         WHERE conversation_id = ANY($1::uuid[])`,
-        [conversationIds],
-      );
+      await deleteTestConversations([conversationId, otherConversationId]);
     } finally {
       await closeAnalyticsPool();
     }

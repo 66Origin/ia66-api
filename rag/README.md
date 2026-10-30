@@ -286,7 +286,7 @@ Deux formats de réponse sont disponibles :
 - réponse JSON contenant le rapport et l’archive encodée en Base64 ;
 - téléchargement direct du ZIP avec `?format=raw`.
 
-L’interface interne utilise `RAG_EXPORT_PASSWORD`.
+L’interface interne `/admin/rag-export` utilise la session d’administration.
 
 Les clients techniques peuvent également utiliser :
 

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   createAdminSessionToken,
+  hasAdminSession,
   isAdminAccessConfigured,
   safeAdminRedirect,
   verifyAdminPassword,
@@ -112,4 +113,20 @@ test("redirects stay inside the administration section", () => {
   ] as const) {
     assert.equal(safeAdminRedirect(target), expected);
   }
+});
+
+test("the session is read from a route handler request", () => {
+  withAdminEnvironment({ password: "mot-de-passe", secret: SECRET }, () => {
+    const token = createAdminSessionToken();
+    const request = (cookie?: string) =>
+      new Request("http://localhost/api/v1/rag/export", {
+        method: "POST",
+        headers: cookie ? { cookie } : undefined,
+      });
+
+    assert.equal(hasAdminSession(request(`other=1; o_admin_session=${token}`)), true);
+    assert.equal(hasAdminSession(request(`o_admin_session=${token}x`)), false);
+    assert.equal(hasAdminSession(request("o_admin_session_old=abc")), false);
+    assert.equal(hasAdminSession(request()), false);
+  });
 });

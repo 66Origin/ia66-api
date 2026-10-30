@@ -52,27 +52,6 @@
   margin-top: 40px;
 }
 
-.form label {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.form input {
-  width: 100%;
-  min-height: 52px;
-  padding: 0 16px;
-  border: 1px solid #c9c6bd;
-  border-radius: 12px;
-  background: #ffffff;
-  color: #171717;
-  font: inherit;
-}
-
-.form input:focus {
-  border-color: #171717;
-  outline: 3px solid rgb(23 23 23 / 10%);
-}
-
 .form button,
 .download {
   min-height: 52px;

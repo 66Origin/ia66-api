@@ -64,7 +64,6 @@ function downloadArchive(archive: Archive) {
 }
 
 export function RagExportForm() {
-  const [password, setPassword] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<GenerationReport | null>(null);
@@ -79,18 +78,18 @@ export function RagExportForm() {
     setArchive(null);
 
     try {
+      // The administration session cookie authenticates the request.
       const response = await fetch("/api/v1/rag/export", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${password}`,
-        },
       });
 
       const payload = await response.json();
 
       if (!response.ok) {
         if (response.status === 401) {
-          throw new Error("Le mot de passe est incorrect.");
+          throw new Error(
+            "La session a expiré. Rechargez la page pour vous reconnecter.",
+          );
         }
 
         if (response.status === 409) {
@@ -123,7 +122,6 @@ export function RagExportForm() {
 
       setReport(result.export.report);
       setArchive(generatedArchive);
-      setPassword("");
 
       downloadArchive(generatedArchive);
     } catch (caughtError) {
@@ -152,19 +150,7 @@ export function RagExportForm() {
         </p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="password">Mot de passe</label>
-
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            autoComplete="current-password"
-            required
-            disabled={isGenerating}
-          />
-
-          <button type="submit" disabled={isGenerating || !password}>
+          <button type="submit" disabled={isGenerating}>
             {isGenerating
               ? "Génération en cours…"
               : "Générer les fichiers Markdown"}

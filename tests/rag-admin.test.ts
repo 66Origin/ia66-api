@@ -7,6 +7,7 @@ const AUTH_ENV_KEYS = [
   "RAG_ADMIN_TOKEN",
   "RAG_EXPORT_PASSWORD",
 ] as const;
+// RAG_EXPORT_PASSWORD is kept in the list only to prove it is now ignored.
 
 type AuthEnvironment = Partial<
   Record<(typeof AUTH_ENV_KEYS)[number], string>
@@ -63,7 +64,23 @@ test("refuse l’export lorsqu’aucune authentification n’est configurée", (
   }
 });
 
-test("accepte le mot de passe de l’interface", () => {
+test("n’accepte plus l’ancien mot de passe de l’interface", () => {
+  const restoreEnvironment = useAuthEnvironment({
+    RAG_ADMIN_TOKEN: "rag-admin-token",
+    RAG_EXPORT_PASSWORD: "interface-password",
+  });
+
+  try {
+    assert.deepEqual(
+      requireRagExport(requestWithToken("interface-password")),
+      { ok: false, status: 401, error: "Unauthorized" },
+    );
+  } finally {
+    restoreEnvironment();
+  }
+});
+
+test("refuse l’export si seul l’ancien mot de passe est configuré", () => {
   const restoreEnvironment = useAuthEnvironment({
     RAG_EXPORT_PASSWORD: "interface-password",
   });
@@ -71,8 +88,26 @@ test("accepte le mot de passe de l’interface", () => {
   try {
     assert.deepEqual(
       requireRagExport(requestWithToken("interface-password")),
-      { ok: true },
+      {
+        ok: false,
+        status: 503,
+        error: "RAG export authentication is not configured",
+      },
     );
+  } finally {
+    restoreEnvironment();
+  }
+});
+
+test("accepte ADMIN_TOKEN en solution de repli", () => {
+  const restoreEnvironment = useAuthEnvironment({
+    ADMIN_TOKEN: "admin-token",
+  });
+
+  try {
+    assert.deepEqual(requireRagExport(requestWithToken("admin-token")), {
+      ok: true,
+    });
   } finally {
     restoreEnvironment();
   }

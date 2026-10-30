@@ -23,8 +23,7 @@ validation humaine, l'archive téléchargée doit remplacer `rag/generated` puis
 ## Configuration
 
 ```dotenv
-RAG_ADMIN_TOKEN=secret-reserve-aux-administrateurs-et-integrations
-RAG_EXPORT_PASSWORD=mot-de-passe-de-l-interface-interne
+RAG_ADMIN_TOKEN=secret-reserve-aux-integrations-techniques
 UPSTASH_REDIS_REST_URL=...
 UPSTASH_REDIS_REST_TOKEN=...
 RAG_SOURCE_URL=https://www.66origin.com
@@ -33,10 +32,12 @@ RAG_CRAWL_CONCURRENCY=4
 
 ```
 
-`RAG_EXPORT_PASSWORD` protège l’interface utilisée par les collaborateurs.
+L’interface `/admin/rag-export` utilise la session d’administration
+(`ADMIN_PASSWORD`, voir `docs/analytics-admin.md`) : aucun mot de passe
+supplémentaire n’est demandé.
 
-`RAG_ADMIN_TOKEN`, ou `ADMIN_TOKEN` en solution de repli, reste utilisable par
-les administrateurs et les intégrations techniques.
+`RAG_ADMIN_TOKEN`, ou `ADMIN_TOKEN` en solution de repli, est réservé aux
+intégrations techniques : l’action du GPT d’export et les appels `curl`.
 
 Les variables Upstash Redis permettent de verrouiller temporairement
 l’export afin d’empêcher deux générations simultanées.

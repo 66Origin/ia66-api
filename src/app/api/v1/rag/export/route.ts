@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { requireRagExport } from "@/lib/admin";
+import { hasAdminSession } from "@/lib/admin-session";
 import { ragExportService } from "@/lib/rag/export-service";
 import { redis } from "@/lib/redis";
 
@@ -15,7 +16,11 @@ const EXPORT_LOCK_KEY = "rag:export:lock";
 const EXPORT_LOCK_DURATION_SECONDS = 75;
 
 export async function POST(req: Request) {
-  const authorization = requireRagExport(req);
+  // People are authenticated by their administration session; the ChatGPT
+  // action and technical clients send RAG_ADMIN_TOKEN.
+  const authorization = hasAdminSession(req)
+    ? ({ ok: true } as const)
+    : requireRagExport(req);
 
   if (!authorization.ok) {
     return NextResponse.json(

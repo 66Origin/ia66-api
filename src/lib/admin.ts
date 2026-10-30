@@ -21,34 +21,14 @@ export function requireAdmin(req: Request) {
   return { ok: true as const };
 }
 
-export function requireRagAdmin(req: Request) {
-  const token = process.env.RAG_ADMIN_TOKEN || process.env.ADMIN_TOKEN;
-  if (!token) {
-    return {
-      ok: false as const,
-      status: 503,
-      error: "RAG admin token is not configured",
-    };
-  }
-
-  const headerToken =
-    req.headers.get("x-admin-token") ||
-    req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
-
-  if (headerToken !== token) {
-    return { ok: false as const, status: 401, error: "Unauthorized" };
-  }
-
-  return { ok: true as const };
-}
-
+/**
+ * Technical access to the RAG export (ChatGPT action, curl). People use the
+ * administration session instead, checked in the route itself.
+ */
 export function requireRagExport(req: Request) {
-  const allowedTokens = [
-    process.env.RAG_ADMIN_TOKEN || process.env.ADMIN_TOKEN,
-    process.env.RAG_EXPORT_PASSWORD,
-  ].filter((token): token is string => Boolean(token));
+  const token = process.env.RAG_ADMIN_TOKEN || process.env.ADMIN_TOKEN;
 
-  if (allowedTokens.length === 0) {
+  if (!token) {
     return {
       ok: false as const,
       status: 503,
@@ -60,7 +40,7 @@ export function requireRagExport(req: Request) {
     req.headers.get("x-admin-token") ||
     req.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
 
-  if (!headerToken || !allowedTokens.includes(headerToken)) {
+  if (headerToken !== token) {
     return {
       ok: false as const,
       status: 401,

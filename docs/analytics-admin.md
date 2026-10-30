@@ -36,6 +36,7 @@ Rétention, exécutée chaque nuit par `analytics.run_retention()` :
 | `ADMIN_PASSWORD` | Mot de passe partagé de `/admin` |
 | `ADMIN_SESSION_SECRET` | Secret de signature de la session, 32 caractères au moins |
 | `ADMIN_TOKEN` | Jeton des routes `/api/v1/filesearch` ; tout est refusé s'il manque |
+| `RAG_ADMIN_TOKEN` | Jeton de l'export RAG pour l'action du GPT et `curl` |
 | `O_ANALYTICS_CLEANUP_DATABASE_URL` | `.env.local` uniquement : connexion privilégiée des scripts de vérification |
 
 Le chat Webflow n'envoie les métadonnées analytics que si l'élément du chat
@@ -48,8 +49,10 @@ page (`requireAdminPage`). La connexion pose un cookie de session signé,
 `HttpOnly`, `Secure`, `SameSite=Strict`, valable 8 heures. Les tentatives sont
 limitées par adresse IP.
 
-`/api/v1/rag/export` et `/api/v1/filesearch` gardent leurs jetons en en-tête :
-ils sont appelés par des scripts et par l'agent RAG.
+`/api/v1/rag/export` accepte la session d'administration, utilisée par le
+générateur Markdown, ou `RAG_ADMIN_TOKEN` en en-tête, utilisé par l'action du
+GPT d'export. `/api/v1/filesearch` garde `ADMIN_TOKEN` en en-tête pour les
+scripts.
 
 Dans les tableaux croisés du tableau de bord, les valeurs inférieures à 10
 sont masquées.

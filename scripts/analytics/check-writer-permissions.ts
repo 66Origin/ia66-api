@@ -57,7 +57,7 @@ async function main() {
         has_schema_privilege('analytics', 'USAGE') AS schema_usage,
         has_schema_privilege('analytics', 'CREATE') AS schema_create,
         has_function_privilege(
-          'analytics.record_chat_request(uuid,uuid,uuid,text)',
+          'analytics.record_chat_request(uuid,uuid,text)',
           'EXECUTE'
         ) AS function_execute
     `);
@@ -89,7 +89,6 @@ async function main() {
       JOIN pg_namespace AS n ON n.oid = c.relnamespace
       WHERE n.nspname = 'analytics'
         AND c.relname IN (
-          'browser_visitors',
           'conversations',
           'chat_requests'
         )
@@ -98,7 +97,7 @@ async function main() {
 
     assert.deepEqual(
       tables.rows,
-      ["browser_visitors", "chat_requests", "conversations"].map(
+      ["chat_requests", "conversations"].map(
         (tableName) => ({
           table_name: tableName,
           can_select: true,

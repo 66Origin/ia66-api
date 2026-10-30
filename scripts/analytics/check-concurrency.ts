@@ -13,21 +13,19 @@ config({ path: ".env", quiet: true });
 type RecordedRequest = {
   request_created: boolean;
   conversation_created: boolean;
-  previous_conversation_count: number | null;
 };
 
 async function record(
   client: PoolClient,
   requestId: string,
   conversationId: string,
-  visitorId: string,
 ) {
   const result = await client.query<RecordedRequest>(
     `SELECT *
      FROM analytics.record_chat_request(
-       $1::uuid, $2::uuid, $3::uuid, $4::text
+       $1::uuid, $2::uuid, $3::text
      )`,
-    [requestId, conversationId, visitorId, "home"],
+    [requestId, conversationId, "home"],
   );
 
   return result.rows[0];
@@ -35,7 +33,6 @@ async function record(
 
 async function checkConcurrentRequests(duplicate: boolean) {
   const pool = getAnalyticsPool();
-  const visitorId = randomUUID();
   const conversationA = randomUUID();
   const conversationB = duplicate ? conversationA : randomUUID();
   const requestA = randomUUID();
@@ -50,8 +47,8 @@ async function checkConcurrentRequests(duplicate: boolean) {
 
     // Each call runs in its own transaction and connection.
     const results = await Promise.allSettled([
-      record(first, requestA, conversationA, visitorId),
-      record(second, requestB, conversationB, visitorId),
+      record(first, requestA, conversationA),
+      record(second, requestB, conversationB),
     ]);
 
     const rows = results.map((result) => {
@@ -64,33 +61,17 @@ async function checkConcurrentRequests(duplicate: boolean) {
 
     const expectedCount = duplicate ? 1 : 2;
 
-    const visitor = await first.query<{ conversation_count: number }>(
-      `SELECT conversation_count
-       FROM analytics.browser_visitors
-       WHERE visitor_id = $1::uuid`,
-      [visitorId],
+    const conversations = await first.query<{ count: number }>(
+      `SELECT count(*)::integer AS count
+       FROM analytics.conversations
+       WHERE conversation_id = ANY($1::uuid[])`,
+      [conversationIds],
     );
 
     assert.equal(
-      visitor.rows[0]?.conversation_count,
+      conversations.rows[0]?.count,
       expectedCount,
-      "Unexpected browser conversation count",
-    );
-
-    const conversations = await first.query<{
-      previous_conversation_count: number;
-    }>(
-      `SELECT previous_conversation_count
-       FROM analytics.conversations
-       WHERE visitor_id = $1::uuid
-       ORDER BY previous_conversation_count`,
-      [visitorId],
-    );
-
-    assert.deepEqual(
-      conversations.rows.map((row) => row.previous_conversation_count),
-      duplicate ? [0] : [0, 1],
-      "Unexpected conversation snapshots",
+      "Unexpected conversation count",
     );
 
     const requests = await first.query<{ count: number }>(
@@ -130,12 +111,6 @@ async function checkConcurrentRequests(duplicate: boolean) {
         `DELETE FROM analytics.conversations
          WHERE conversation_id = ANY($1::uuid[])`,
         [conversationIds],
-      );
-
-      await first.query(
-        `DELETE FROM analytics.browser_visitors
-         WHERE visitor_id = $1::uuid`,
-        [visitorId],
       );
 
       await first.query("COMMIT");

@@ -68,7 +68,6 @@ function chat(overrides: Record<string, unknown> = {}) {
 
   const context: ChatContext = loadFunctions<ChatContext>(
     [
-      "getAnalyticsVisitorForConversation",
       "buildAnalyticsMetadata",
       "sendMessage",
       "handleSend",
@@ -82,7 +81,6 @@ function chat(overrides: Record<string, unknown> = {}) {
       ia: null,
       isGlobalIA: false,
       analyticsConversationId: null,
-      analyticsVisitorPromise: null,
       chatShell: { style: {}, scrollHeight: 100 },
       window: { innerHeight: 800 },
       setTimeout,
@@ -454,6 +452,11 @@ test("analytics use a distinct request ID and a stable conversation ID", async (
   assert.equal(first.conversationId, second.conversationId);
   assert.equal(first.placement, "home");
   assert.equal(second.placement, "home");
+  assert.deepEqual(Object.keys(first).sort(), [
+    "conversationId",
+    "placement",
+    "requestId",
+  ]);
 });
 
 test("UUID generation failure does not prevent sending a message", async () => {
@@ -484,4 +487,61 @@ test("UUID generation failure does not prevent sending a message", async () => {
   assert.equal("analytics" in captured.requests[0], false);
   assert.deepEqual(captured.rendered, ["Réponse"]);
   assert.equal(context.isWaiting, false);
+});
+
+test("the chat script stores nothing on the visitor's device", () => {
+  for (const api of ["localStorage", "sessionStorage", "indexedDB", "document.cookie"]) {
+    assert.equal(source.includes(api), false, `${api} must not be used`);
+  }
+});
+
+test("form submission is handled without reaching Webflow's form handler", async () => {
+  type Listener = (event: unknown) => Promise<void> | void;
+
+  function element() {
+    const listeners = new Map<string, Listener>();
+
+    return {
+      listeners,
+      addEventListener(type: string, listener: Listener) {
+        listeners.set(type, listener);
+      },
+    };
+  }
+
+  const sent: unknown[] = [];
+
+  const context = loadFunctions<
+    vm.Context & {
+      bindInput: (textarea: unknown, button: unknown, form: unknown) => void;
+    }
+  >(["bindInput"], {
+    introTextarea: null,
+    async handleSend(textarea: unknown) {
+      sent.push(textarea);
+    },
+    autoResizeTextarea() {},
+    updateCaretState() {},
+    updateTypewriterState() {},
+  });
+
+  const textarea = element();
+  const button = element();
+  const form = element();
+
+  context.bindInput(textarea, button, form);
+
+  const calls: string[] = [];
+
+  await form.listeners.get("submit")?.({
+    preventDefault() {
+      calls.push("preventDefault");
+    },
+    stopPropagation() {
+      calls.push("stopPropagation");
+    },
+  });
+
+  assert.deepEqual(calls, ["preventDefault", "stopPropagation"]);
+  assert.deepEqual(sent, [textarea]);
 });

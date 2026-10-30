@@ -12,14 +12,12 @@ config({ path: ".env.local", quiet: true });
 config({ path: ".env", quiet: true });
 
 async function main() {
-  const visitorId = randomUUID();
   const conversationId = randomUUID();
-  const unknownConversationId = randomUUID();
+  const otherConversationId = randomUUID();
 
   const input = {
     requestId: randomUUID(),
     conversationId,
-    visitorId,
     placement: "home" as const,
   };
 
@@ -29,7 +27,6 @@ async function main() {
     assert.deepEqual(first, {
       requestCreated: true,
       conversationCreated: true,
-      previousConversationCount: 0,
     });
 
     const duplicate = await recordChatRequest(input);
@@ -37,21 +34,28 @@ async function main() {
     assert.deepEqual(duplicate, {
       requestCreated: false,
       conversationCreated: false,
-      previousConversationCount: 0,
     });
 
-    const unknown = await recordChatRequest({
+    const other = await recordChatRequest({
       requestId: randomUUID(),
-      conversationId: unknownConversationId,
-      visitorId: null,
+      conversationId: otherConversationId,
       placement: "global",
     });
 
-    assert.deepEqual(unknown, {
+    assert.deepEqual(other, {
       requestCreated: true,
       conversationCreated: true,
-      previousConversationCount: null,
     });
+
+    await assert.rejects(
+      () =>
+        recordChatRequest({
+          requestId: randomUUID(),
+          conversationId: otherConversationId,
+          placement: "home",
+        }),
+      { message: "Conversation context does not match" },
+    );
 
     await assert.rejects(
       () =>
@@ -107,7 +111,7 @@ async function main() {
   } finally {
     try {
       const pool = getAnalyticsPool();
-      const conversationIds = [conversationId, unknownConversationId];
+      const conversationIds = [conversationId, otherConversationId];
 
       await pool.query(
         `DELETE FROM analytics.chat_requests
@@ -119,12 +123,6 @@ async function main() {
         `DELETE FROM analytics.conversations
          WHERE conversation_id = ANY($1::uuid[])`,
         [conversationIds],
-      );
-
-      await pool.query(
-        `DELETE FROM analytics.browser_visitors
-         WHERE visitor_id = $1::uuid`,
-        [visitorId],
       );
     } finally {
       await closeAnalyticsPool();

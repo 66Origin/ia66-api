@@ -42,7 +42,6 @@ function initIAChat(rootSelector) {
   let ticking = false;
   let history = [];
   let analyticsConversationId = null;
-  let analyticsVisitorPromise = null;
   const MAX_HISTORY = 20;
   const SCROLL_THRESHOLD = 10;
   function isMobile() {
@@ -293,16 +292,7 @@ function initIAChat(rootSelector) {
     autoResizeTextarea(textarea);
   }
 
-  async function getAnalyticsVisitorForConversation() {
-    if (!analyticsVisitorPromise) {
-      analyticsVisitorPromise = Promise.resolve()
-        .then(() => window.OAnalyticsVisitor?.prepare?.(API_BASE) ?? null)
-        .catch(() => null);
-    }
-
-    return analyticsVisitorPromise;
-  }
-
+  // Analytics identifiers live in memory only: nothing is stored on the device.
   async function buildAnalyticsMetadata() {
     try {
       if (ia?.getAttribute("data-o-analytics") !== "true") {
@@ -315,18 +305,10 @@ function initIAChat(rootSelector) {
         analyticsConversationId = window.crypto.randomUUID();
       }
 
-      const visitor = await getAnalyticsVisitorForConversation();
-
-      // Keep the current conversation's identity unchanged after expiration.
-      if (visitor && visitor.expiresAt <= Date.now()) {
-        return null;
-      }
-
       return {
         requestId,
         conversationId: analyticsConversationId,
         placement: isGlobalIA ? "global" : "home",
-        ...(visitor ? { visitorToken: visitor.visitorToken } : {}),
       };
     } catch {
       // Analytics must not prevent sending a chat message.
@@ -972,7 +954,9 @@ function initIAChat(rootSelector) {
     if (!textarea || !button || !form) return;
 
     form.addEventListener("submit", async (e) => {
+      // Keep Webflow's form handler from receiving the question.
       e.preventDefault();
+      e.stopPropagation();
       await handleSend(textarea);
     });
 
@@ -1041,7 +1025,6 @@ function initIAChat(rootSelector) {
     messagesContainer.innerHTML = "";
     history = [];
     analyticsConversationId = null;
-    analyticsVisitorPromise = null;
 
     iaStarted = false;
     isWaiting = false;

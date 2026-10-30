@@ -13,7 +13,6 @@ test("chat tracking stays optional and contains recording errors", async (t) => 
   const invalidInput = {
     requestId: "invalid-request-id",
     conversationId: "invalid-conversation-id",
-    visitorId: null,
     placement: "home" as const,
   };
 

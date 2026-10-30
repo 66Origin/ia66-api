@@ -91,6 +91,19 @@ export function verifyAdminSessionToken(
   return safeEqual(parts[2], sign(`${parts[0]}.${parts[1]}`, secret));
 }
 
+/** Reads the session cookie from a route handler request. */
+export function hasAdminSession(request: Request): boolean {
+  const cookies = request.headers.get("cookie") ?? "";
+  const prefix = `${ADMIN_SESSION_COOKIE}=`;
+  const value = cookies
+    .split(";")
+    .map((part) => part.trim())
+    .find((part) => part.startsWith(prefix))
+    ?.slice(prefix.length);
+
+  return verifyAdminSessionToken(value);
+}
+
 /** Only relative paths inside /admin are accepted as redirect targets. */
 export function safeAdminRedirect(target: unknown): string {
   if (

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { requireRagExport } from "../src/lib/admin";
+import { requireAdmin } from "../src/lib/admin";
 
+// The two former RAG secrets are listed only to prove they are ignored.
 const AUTH_ENV_KEYS = [
   "ADMIN_TOKEN",
   "RAG_ADMIN_TOKEN",
@@ -41,72 +42,62 @@ function useAuthEnvironment(values: AuthEnvironment): () => void {
 function requestWithToken(token?: string): Request {
   return new Request("http://localhost/api/v1/rag/export", {
     method: "POST",
-    headers: token
-      ? {
-          Authorization: `Bearer ${token}`,
-        }
-      : undefined,
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
   });
 }
 
-test("refuse l’export lorsqu’aucune authentification n’est configurée", () => {
-  const restoreEnvironment = useAuthEnvironment({});
-
-  try {
-    assert.deepEqual(requireRagExport(requestWithToken()), {
-      ok: false,
-      status: 503,
-      error: "RAG export authentication is not configured",
-    });
-  } finally {
-    restoreEnvironment();
-  }
-});
-
-test("accepte le mot de passe de l’interface", () => {
-  const restoreEnvironment = useAuthEnvironment({
-    RAG_EXPORT_PASSWORD: "interface-password",
-  });
-
-  try {
-    assert.deepEqual(
-      requireRagExport(requestWithToken("interface-password")),
-      { ok: true },
-    );
-  } finally {
-    restoreEnvironment();
-  }
-});
-
-test("accepte toujours le token administrateur RAG", () => {
-  const restoreEnvironment = useAuthEnvironment({
+test("refuse tout lorsque ADMIN_TOKEN n’est pas configuré", () => {
+  const restore = useAuthEnvironment({
     RAG_ADMIN_TOKEN: "rag-admin-token",
     RAG_EXPORT_PASSWORD: "interface-password",
   });
 
   try {
-    assert.deepEqual(
-      requireRagExport(requestWithToken("rag-admin-token")),
-      { ok: true },
-    );
+    for (const token of [undefined, "rag-admin-token", "interface-password"]) {
+      assert.deepEqual(requireAdmin(requestWithToken(token)), {
+        ok: false,
+        status: 503,
+        error: "Admin token is not configured",
+      });
+    }
   } finally {
-    restoreEnvironment();
+    restore();
   }
 });
 
-test("refuse un token incorrect", () => {
-  const restoreEnvironment = useAuthEnvironment({
+test("accepte ADMIN_TOKEN", () => {
+  const restore = useAuthEnvironment({ ADMIN_TOKEN: "admin-token" });
+
+  try {
+    assert.deepEqual(requireAdmin(requestWithToken("admin-token")), {
+      ok: true,
+    });
+  } finally {
+    restore();
+  }
+});
+
+test("n’accepte plus les anciens secrets RAG", () => {
+  const restore = useAuthEnvironment({
+    ADMIN_TOKEN: "admin-token",
     RAG_ADMIN_TOKEN: "rag-admin-token",
     RAG_EXPORT_PASSWORD: "interface-password",
   });
 
   try {
-    assert.deepEqual(requireRagExport(requestWithToken("incorrect-token")), {
-      ok: false,
-      status: 401,
-      error: "Unauthorized",
-    });
+    for (const token of [
+      undefined,
+      "rag-admin-token",
+      "interface-password",
+      "incorrect-token",
+    ]) {
+      assert.deepEqual(requireAdmin(requestWithToken(token)), {
+        ok: false,
+        status: 401,
+        error: "Unauthorized",
+      });
+    }
   } finally {
-    restoreEnvironment();
+    restore();
   }
 });

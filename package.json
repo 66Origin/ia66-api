@@ -16,7 +16,8 @@
     "test:chat": "tsx scripts/test-chat.js",
     "analytics:check": "node --import tsx scripts/analytics/check-connection.ts",
     "analytics:check-concurrency": "node --import tsx scripts/analytics/check-concurrency.ts",
-    "analytics:check-recording": "node --import tsx scripts/analytics/check-recording.ts"
+    "analytics:check-recording": "node --import tsx scripts/analytics/check-recording.ts",
+    "analytics:check-retention": "node --import tsx scripts/analytics/check-retention.ts"
   },
   "dependencies": {
     "@google/genai": "^1.33.0",

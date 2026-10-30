@@ -1,4 +1,14 @@
-document.addEventListener("DOMContentLoaded", () => {
+// Runs now if the page is already parsed (script loaded late or
+// dynamically), otherwise once the DOM is ready.
+function onMenuReady(callback) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", callback, { once: true });
+  } else {
+    callback();
+  }
+}
+
+onMenuReady(() => {
   const modal =
     document.getElementById("modal") || document.querySelector(".menu");
   if (!modal) return;

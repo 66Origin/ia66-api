@@ -13,9 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "66 Origin - Générateur RAG",
-  description:
-    "Interface interne de génération des documents Markdown de 66origin.com.",
+  title: "66 Origin - Administration de O",
+  description: "Outils internes de l'assistant O de 66origin.com.",
   robots: {
     index: false,
     follow: false,

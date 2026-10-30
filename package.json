@@ -18,7 +18,8 @@
     "analytics:check-concurrency": "node --import tsx scripts/analytics/check-concurrency.ts",
     "analytics:check-recording": "node --import tsx scripts/analytics/check-recording.ts",
     "analytics:check-retention": "node --import tsx scripts/analytics/check-retention.ts",
-    "analytics:check-unanswered": "node --import tsx scripts/analytics/check-unanswered.ts"
+    "analytics:check-unanswered": "node --import tsx scripts/analytics/check-unanswered.ts",
+    "analytics:check-reader": "node --import tsx scripts/analytics/check-reader-permissions.ts"
   },
   "dependencies": {
     "@google/genai": "^1.33.0",

@@ -46,7 +46,13 @@ const PERIOD_REQUESTS = `
   )
 `;
 
-function periodParameters(period: DashboardPeriod) {
+type PeriodParameters = [
+  kind: DashboardPeriod["kind"],
+  count: number | null,
+  monthStart: string | null,
+];
+
+function periodParameters(period: DashboardPeriod): PeriodParameters {
   switch (period.kind) {
     case "days":
       return [period.kind, period.days, null];
@@ -68,6 +74,22 @@ export type DashboardSummary = {
   conversations1: number;
   conversations2To3: number;
   conversations4Plus: number;
+};
+
+type SummaryRow = {
+  conversations: number;
+  requests: number;
+  failed: number;
+  classified: number;
+  unclassifiable: number;
+  classification_failed: number;
+  median_generation_ms: number | string | null;
+};
+
+type BucketRow = {
+  one: number;
+  two_to_three: number;
+  four_plus: number;
 };
 
 export type CountRow = { key: string; count: number };
@@ -92,7 +114,7 @@ export async function getDashboardData(
 
   const [summary, buckets, subjects, intents, subjectByIntent, subjectByPlacement] =
     await Promise.all([
-      pool.query(
+      pool.query<SummaryRow>(
         `${PERIOD_REQUESTS}
          SELECT
            count(DISTINCT conversation_id)::integer AS conversations,
@@ -113,7 +135,7 @@ export async function getDashboardData(
          FROM period_requests`,
         parameters,
       ),
-      pool.query(
+      pool.query<BucketRow>(
         `${PERIOD_REQUESTS}
          SELECT
            count(*) FILTER (WHERE requests = 1)::integer AS one,

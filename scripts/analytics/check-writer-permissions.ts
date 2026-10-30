@@ -110,6 +110,39 @@ async function main() {
       ),
     );
 
+    // Retention runs inside the database: the writer has no access to it.
+    const retention = await pool.query<{
+      stats_access: boolean;
+      retention_execute: boolean;
+    }>(`
+      SELECT
+        has_table_privilege(
+          'analytics.monthly_conversation_stats',
+          'SELECT,INSERT,UPDATE,DELETE'
+        )
+        OR has_table_privilege(
+          'analytics.monthly_request_stats',
+          'SELECT,INSERT,UPDATE,DELETE'
+        ) AS stats_access,
+        has_function_privilege(
+          'analytics.refresh_monthly_stats(interval)',
+          'EXECUTE'
+        )
+        OR has_function_privilege(
+          'analytics.purge_expired(interval)',
+          'EXECUTE'
+        )
+        OR has_function_privilege(
+          'analytics.run_retention()',
+          'EXECUTE'
+        ) AS retention_execute
+    `);
+
+    assert.deepEqual(retention.rows[0], {
+      stats_access: false,
+      retention_execute: false,
+    });
+
     console.log("Analytics writer permissions: OK");
   } finally {
     await closeAnalyticsPool();

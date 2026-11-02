@@ -1381,7 +1381,17 @@ function initIAChat(rootSelector) {
   checkIfUserIsNearBottom();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+// Runs now if the page is already parsed (script loaded late or
+// dynamically), otherwise once the DOM is ready.
+function onIAReady(callback) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", callback, { once: true });
+  } else {
+    callback();
+  }
+}
+
+onIAReady(() => {
   initIAChat(".ia-context-global");
   initIAChat(".ia-context-home");
 });

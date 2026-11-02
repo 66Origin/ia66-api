@@ -1,4 +1,14 @@
-document.addEventListener("DOMContentLoaded", () => {
+// Runs now if the page is already parsed (script loaded late or
+// dynamically), otherwise once the DOM is ready.
+function onVideosReady(callback) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", callback, { once: true });
+  } else {
+    callback();
+  }
+}
+
+onVideosReady(() => {
   const video = document.querySelector(".home-background-video .bg-video");
   if (!video) return;
 

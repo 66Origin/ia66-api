@@ -23,7 +23,15 @@
   document.getElementById("consent-text").textContent = t.text;
   document.getElementById("btn-accept").textContent = t.accept;
   document.getElementById("btn-refuse").textContent = t.refuse;
-  document.getElementById("analytics-info-link").href = t.infoHref;
+
+  // The link set in Webflow (the privacy policy) wins; Google's page is
+  // only a fallback while the link is empty.
+  const infoLink = document.getElementById("analytics-info-link");
+  const webflowHref = (infoLink.getAttribute("href") || "").trim();
+
+  if (!webflowHref || webflowHref === "#") {
+    infoLink.href = t.infoHref;
+  }
 
   const getCookie = () => {
     const match = document.cookie
@@ -36,6 +44,28 @@
     const exp = new Date();
     exp.setMonth(exp.getMonth() + 6);
     document.cookie = `cookie_consent=${status}; expires=${exp.toUTCString()}; path=/; SameSite=Lax`;
+  };
+
+  // Google Analytics sets its cookies on the parent domain (.66origin.com),
+  // so each possible domain is cleared.
+  const deleteAnalyticsCookies = () => {
+    const names = document.cookie
+      .split("; ")
+      .map((r) => r.split("=")[0])
+      .filter((name) => name === "_ga" || name.startsWith("_ga_"));
+
+    const parts = window.location.hostname.split(".");
+    const domains = [""];
+
+    for (let i = 0; i < parts.length - 1; i += 1) {
+      domains.push(`; domain=.${parts.slice(i).join(".")}`);
+    }
+
+    for (const name of names) {
+      for (const domain of domains) {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${domain}`;
+      }
+    }
   };
 
   const pushGTM = (status) => {
@@ -69,6 +99,11 @@
   const applyConsent = (status) => {
     setCookie(status);
     pushGTM(status);
+
+    if (status === "denied") {
+      deleteAnalyticsCookies();
+    }
+
     hideBanner();
   };
 
@@ -83,6 +118,22 @@
   document
     .getElementById("consent-banner-close")
     .addEventListener("click", () => hideBanner());
+
+  // "Manage cookies" links: any element with the data-cookie-settings
+  // attribute in Webflow reopens the banner, wherever it is on the page.
+  document.addEventListener("click", (event) => {
+    const trigger =
+      event.target && event.target.closest
+        ? event.target.closest("[data-cookie-settings]")
+        : null;
+
+    if (!trigger) {
+      return;
+    }
+
+    event.preventDefault();
+    showBanner();
+  });
 
   const saved = getCookie();
 

@@ -13,6 +13,12 @@ function element(attributes: Record<string, string> = {}) {
     textContent: "",
     href: attributes.href ?? "",
     getAttribute: (name: string) => attributes[name] ?? null,
+    setAttribute: (name: string, value: string) => {
+      attributes[name] = value;
+    },
+    removeAttribute: (name: string) => {
+      delete attributes[name];
+    },
     addEventListener(type: string, listener: Listener) {
       (listeners[type] ??= []).push(listener);
     },
@@ -31,6 +37,7 @@ function run({
   cookies = {} as Record<string, string>,
   infoHref = "",
   hostname = "www.66origin.com",
+  pathname = "/",
 } = {}) {
   const jar = new Map(Object.entries(cookies));
   const writes: string[] = [];
@@ -67,7 +74,7 @@ function run({
 
   const context = vm.createContext({
     document,
-    window: { location: { pathname: "/", hostname }, dataLayer },
+    window: { location: { pathname, hostname }, dataLayer },
     requestAnimationFrame: (callback: () => void) => callback(),
     setTimeout: () => 0,
   });
@@ -102,10 +109,18 @@ test("the Webflow link to the privacy policy is kept", () => {
   );
 });
 
-test("Google's page is used while the Webflow link is empty", () => {
+test("an empty Webflow link goes to the privacy policy in French", () => {
   const { elements } = run({ infoHref: "#" });
+  const link = elements["analytics-info-link"];
 
-  assert.match(elements["analytics-info-link"].href, /support\.google\.com/);
+  assert.equal(link.href, "/politique-de-confidentialite#cookies");
+  assert.equal(link.getAttribute("aria-label"), "En savoir plus sur les cookies");
+});
+
+test("an empty Webflow link goes to the privacy policy in English", () => {
+  const { elements } = run({ infoHref: "#", pathname: "/en/about" });
+
+  assert.equal(elements["analytics-info-link"].href, "/en/privacy-policy#cookies");
 });
 
 test("a manage-cookies link reopens the banner after a choice", () => {

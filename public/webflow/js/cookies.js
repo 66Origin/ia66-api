@@ -6,15 +6,15 @@
       text: "Nous utilisons des cookies pour mesurer l'audience de ce site (Google Analytics).",
       accept: "Accepter",
       refuse: "Refuser",
-      infoHref:
-        "https://support.google.com/analytics/answer/6004245?sjid=5624211428556571422-EU&hl=fr#info_for_visitors",
+      infoHref: "/politique-de-confidentialite#cookies",
+      infoLabel: "En savoir plus sur les cookies",
     },
     en: {
       text: "We use cookies to measure audience on this site (Google Analytics).",
       accept: "Accept",
       refuse: "Reject",
-      infoHref:
-        "https://support.google.com/analytics/answer/6004245?sjid=5624211428556571422-EU#info_for_visitors",
+      infoHref: "/en/privacy-policy#cookies",
+      infoLabel: "Learn more about cookies",
     },
   };
 
@@ -24,13 +24,15 @@
   document.getElementById("btn-accept").textContent = t.accept;
   document.getElementById("btn-refuse").textContent = t.refuse;
 
-  // The link set in Webflow (the privacy policy) wins; Google's page is
-  // only a fallback while the link is empty.
+  // With href="#" in Webflow, the link goes to the privacy policy in the
+  // page's language. Any other href set in Webflow is kept.
   const infoLink = document.getElementById("analytics-info-link");
   const webflowHref = (infoLink.getAttribute("href") || "").trim();
 
   if (!webflowHref || webflowHref === "#") {
     infoLink.href = t.infoHref;
+    infoLink.removeAttribute("target");
+    infoLink.setAttribute("aria-label", t.infoLabel);
   }
 
   const getCookie = () => {

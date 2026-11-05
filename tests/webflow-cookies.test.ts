@@ -117,10 +117,12 @@ test("an empty Webflow link goes to the privacy policy in French", () => {
   assert.equal(link.getAttribute("aria-label"), "En savoir plus sur les cookies");
 });
 
-test("an empty Webflow link goes to the privacy policy in English", () => {
+test("English pages use the French privacy policy for now", () => {
   const { elements } = run({ infoHref: "#", pathname: "/en/about" });
+  const link = elements["analytics-info-link"];
 
-  assert.equal(elements["analytics-info-link"].href, "/en/privacy-policy#cookies");
+  assert.equal(link.href, "/politique-de-confidentialite#cookies");
+  assert.equal(link.getAttribute("aria-label"), "Learn more about cookies");
 });
 
 test("a manage-cookies link reopens the banner after a choice", () => {

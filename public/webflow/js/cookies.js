@@ -13,7 +13,8 @@
       text: "We use cookies to measure audience on this site (Google Analytics).",
       accept: "Accept",
       refuse: "Reject",
-      infoHref: "/en/privacy-policy#cookies",
+      // No English privacy policy yet: the French one is used.
+      infoHref: "/politique-de-confidentialite#cookies",
       infoLabel: "Learn more about cookies",
     },
   };

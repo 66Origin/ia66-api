@@ -86,6 +86,23 @@ const scenarios: Scenario[] = [
     ],
     expected: classified("projects_references", "explore_references"),
   },
+  {
+    name: "Réponse courte à une question de O",
+    message: "Le second",
+    history: [
+      {
+        role: "user",
+        text: "Je voudrais en savoir plus sur votre agence.",
+      },
+      {
+        role: "assistant",
+        text:
+          "Avec plaisir. Souhaitez-vous découvrir nos réalisations " +
+          "ou être mis en relation avec l'équipe ?",
+      },
+    ],
+    expected: classified("agency_team", "get_contact"),
+  },
 ];
 
 async function main() {

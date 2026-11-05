@@ -57,7 +57,7 @@ async function main() {
         has_schema_privilege('analytics', 'USAGE') AS schema_usage,
         has_schema_privilege('analytics', 'CREATE') AS schema_create,
         has_function_privilege(
-          'analytics.record_chat_request(uuid,uuid,uuid,text)',
+          'analytics.record_chat_request(uuid,uuid,text)',
           'EXECUTE'
         ) AS function_execute
     `);
@@ -89,7 +89,6 @@ async function main() {
       JOIN pg_namespace AS n ON n.oid = c.relnamespace
       WHERE n.nspname = 'analytics'
         AND c.relname IN (
-          'browser_visitors',
           'conversations',
           'chat_requests'
         )
@@ -98,7 +97,7 @@ async function main() {
 
     assert.deepEqual(
       tables.rows,
-      ["browser_visitors", "chat_requests", "conversations"].map(
+      ["chat_requests", "conversations"].map(
         (tableName) => ({
           table_name: tableName,
           can_select: true,
@@ -110,6 +109,68 @@ async function main() {
         }),
       ),
     );
+
+    // Retention runs inside the database: the writer has no access to it.
+    const retention = await pool.query<{
+      stats_access: boolean;
+      retention_execute: boolean;
+    }>(`
+      SELECT
+        has_table_privilege(
+          'analytics.monthly_conversation_stats',
+          'SELECT,INSERT,UPDATE,DELETE'
+        )
+        OR has_table_privilege(
+          'analytics.monthly_request_stats',
+          'SELECT,INSERT,UPDATE,DELETE'
+        ) AS stats_access,
+        has_function_privilege(
+          'analytics.refresh_monthly_stats(interval)',
+          'EXECUTE'
+        )
+        OR has_function_privilege(
+          'analytics.purge_expired(interval,interval)',
+          'EXECUTE'
+        )
+        OR has_function_privilege(
+          'analytics.run_retention()',
+          'EXECUTE'
+        ) AS retention_execute
+    `);
+
+    assert.deepEqual(retention.rows[0], {
+      stats_access: false,
+      retention_execute: false,
+    });
+
+    // Unanswered questions: write-only for the API.
+    const unanswered = await pool.query<{
+      can_insert: boolean;
+      can_select: boolean;
+      can_update: boolean;
+      can_delete: boolean;
+    }>(`
+      SELECT
+        has_any_column_privilege(
+          'analytics.unanswered_questions', 'INSERT'
+        ) AS can_insert,
+        has_any_column_privilege(
+          'analytics.unanswered_questions', 'SELECT'
+        ) AS can_select,
+        has_any_column_privilege(
+          'analytics.unanswered_questions', 'UPDATE'
+        ) AS can_update,
+        has_table_privilege(
+          'analytics.unanswered_questions', 'DELETE'
+        ) AS can_delete
+    `);
+
+    assert.deepEqual(unanswered.rows[0], {
+      can_insert: true,
+      can_select: false,
+      can_update: false,
+      can_delete: false,
+    });
 
     console.log("Analytics writer permissions: OK");
   } finally {

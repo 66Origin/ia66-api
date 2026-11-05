@@ -192,3 +192,40 @@ test("contains database errors and logs only a generic message", async () => {
     }
   });
 });
+
+test("keeps an unclassifiable question when unanswered recording is enabled", async () => {
+  const previous = process.env.O_ANALYTICS_UNANSWERED_ENABLED;
+  process.env.O_ANALYTICS_UNANSWERED_ENABLED = "true";
+
+  try {
+    await withFlags("true", "true", async () => {
+      for (const [outcome, expected] of [
+        [
+          { status: "unclassifiable", subject: null, intent: null },
+          [{ requestId: tracking.requestId, question: input.message, reason: "unclassifiable" }],
+        ],
+        [classified, []],
+        [failed, []],
+      ] as const) {
+        const fake = createDependencies(outcome as ClassificationOutcome);
+        const unanswered: unknown[] = [];
+
+        await classifyTrackedChat(tracking, input, {
+          ...fake.dependencies,
+          recordUnanswered: async (value) => {
+            unanswered.push(value);
+            return { created: true };
+          },
+        });
+
+        assert.deepEqual(unanswered, expected);
+      }
+    });
+  } finally {
+    if (previous === undefined) {
+      delete process.env.O_ANALYTICS_UNANSWERED_ENABLED;
+    } else {
+      process.env.O_ANALYTICS_UNANSWERED_ENABLED = previous;
+    }
+  }
+});

@@ -5,15 +5,22 @@ const metadataSchema = z
     requestId: z.uuid(),
     conversationId: z.uuid(),
     placement: z.enum(["home", "global"]),
-    visitorToken: z.string().max(200).optional().catch(undefined),
+    // Browser recognition was removed. A cached ia.js may still send a
+    // token for a while: accept it so the request is counted, then drop it.
+    visitorToken: z.unknown().optional(),
   })
-  .strict();
+  .strict()
+  .transform(({ requestId, conversationId, placement }) => ({
+    requestId,
+    conversationId,
+    placement,
+  }));
 
 const envelopeSchema = z.object({
   analytics: metadataSchema,
 });
 
-export type ChatAnalyticsMetadata = z.infer<typeof metadataSchema>;
+export type ChatAnalyticsMetadata = z.output<typeof metadataSchema>;
 
 export function parseChatAnalyticsMetadata(
   body: unknown,

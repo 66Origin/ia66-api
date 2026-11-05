@@ -9,15 +9,21 @@ import {
   recordClassification,
   type RecordClassificationInput,
 } from "./record-classification";
+import {
+  keepUnansweredQuestion,
+  recordUnansweredQuestion,
+} from "./record-unanswered-question";
 
 type ClassificationDependencies = {
   classify: (input: ChatRequest) => Promise<ClassificationOutcome>;
   record: (input: RecordClassificationInput) => Promise<{ created: boolean }>;
+  recordUnanswered?: typeof recordUnansweredQuestion;
 };
 
 const defaultDependencies: ClassificationDependencies = {
   classify: classifyChatRequest,
   record: recordClassification,
+  recordUnanswered: recordUnansweredQuestion,
 };
 
 export function isChatClassificationEnabled(): boolean {
@@ -56,5 +62,14 @@ export async function classifyTrackedChat(
   } catch {
     // Keep messages, history and raw errors out of analytics logs.
     console.error("[analytics] Could not record classification.");
+  }
+
+  if (outcome.status === "unclassifiable") {
+    await keepUnansweredQuestion(
+      tracking.requestId,
+      input.message,
+      "unclassifiable",
+      dependencies.recordUnanswered ?? recordUnansweredQuestion,
+    );
   }
 }

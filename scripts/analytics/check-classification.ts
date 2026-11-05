@@ -77,7 +77,6 @@ async function main() {
            FROM analytics.record_chat_request(
              $1::uuid,
              $2::uuid,
-             NULL::uuid,
              'home'::text
            )`,
           [requestId, conversationId],

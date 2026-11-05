@@ -14,7 +14,7 @@ File Search Store.
 4. génération des Markdown, de `manifest.json` et de `last-run.json` ;
 5. création d'un ZIP ;
 6. chargement du ZIP en mémoire puis suppression du dossier temporaire ;
-7. retour du fichier à ChatGPT ou au client HTTP.
+7. retour de l'archive à l'interface ou au client HTTP.
 
 Le snapshot contenu dans le dépôt n'est jamais modifié par la route. Après
 validation humaine, l'archive téléchargée doit remplacer `rag/generated` puis
@@ -23,8 +23,6 @@ validation humaine, l'archive téléchargée doit remplacer `rag/generated` puis
 ## Configuration
 
 ```dotenv
-RAG_ADMIN_TOKEN=secret-reserve-aux-administrateurs-et-integrations
-RAG_EXPORT_PASSWORD=mot-de-passe-de-l-interface-interne
 UPSTASH_REDIS_REST_URL=...
 UPSTASH_REDIS_REST_TOKEN=...
 RAG_SOURCE_URL=https://www.66origin.com
@@ -33,10 +31,12 @@ RAG_CRAWL_CONCURRENCY=4
 
 ```
 
-`RAG_EXPORT_PASSWORD` protège l’interface utilisée par les collaborateurs.
+L’interface `/admin/rag-export` utilise la session d’administration
+(`ADMIN_PASSWORD`, voir `docs/analytics-admin.md`) : aucun mot de passe
+supplémentaire n’est demandé.
 
-`RAG_ADMIN_TOKEN`, ou `ADMIN_TOKEN` en solution de repli, reste utilisable par
-les administrateurs et les intégrations techniques.
+Les appels techniques (`curl`) utilisent `ADMIN_TOKEN` en en-tête, comme les
+autres routes d’administration.
 
 Les variables Upstash Redis permettent de verrouiller temporairement
 l’export afin d’empêcher deux générations simultanées.
@@ -55,11 +55,11 @@ npm install
 npm run dev
 ````
 
-Réponse compatible avec une Action GPT :
+Réponse JSON :
 
 ```bash
 curl -X POST http://localhost:3000/api/v1/rag/export \
-  -H "Authorization: Bearer $RAG_ADMIN_TOKEN"
+  -H "Authorization: Bearer $ADMIN_TOKEN"
 ```
 
 Téléchargement direct :
@@ -67,13 +67,13 @@ Téléchargement direct :
 ```bash
 curl -fSL -X POST \
   "http://localhost:3000/api/v1/rag/export?format=raw" \
-  -H "Authorization: Bearer $RAG_ADMIN_TOKEN" \
+  -H "Authorization: Bearer $ADMIN_TOKEN" \
   -o 66origin-rag.zip
 ```
 
-## Réponse destinée à ChatGPT
+## Réponse JSON
 
-La réponse JSON contient le rapport et `openaiFileResponse` :
+La réponse contient le rapport et l’archive encodée en Base64 :
 
 ```json
 {
@@ -83,13 +83,11 @@ La réponse JSON contient le rapport et `openaiFileResponse` :
     "archiveSizeBytes": 160000,
     "report": {}
   },
-  "openaiFileResponse": [
-    {
-      "name": "66origin-rag-rag_....zip",
-      "mime_type": "application/zip",
-      "content": "base64..."
-    }
-  ]
+  "archive": {
+    "name": "66origin-rag-rag_....zip",
+    "mimeType": "application/zip",
+    "content": "base64..."
+  }
 }
 ```
 

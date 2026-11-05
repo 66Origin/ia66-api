@@ -42,99 +42,58 @@ async function main() {
 
       assert.equal(identity.rows[0]?.current_user, "o_analytics_writer");
 
-      const visitorId = randomUUID();
       const firstConversationId = randomUUID();
       const secondConversationId = randomUUID();
-      const unknownConversationId = randomUUID();
       const firstRequestId = randomUUID();
-      const expiresAt = new Date(Date.now() + 300_000).toISOString();
-
-      // Same upsert as the runtime, on this transaction's connection.
-      const registerVisitor = () =>
-        client.query(
-          `INSERT INTO analytics.browser_visitors AS existing (
-             visitor_id,
-             recognition_expires_at
-           )
-           SELECT $1::uuid, $2::timestamptz
-           WHERE $2::timestamptz > clock_timestamp()
-           ON CONFLICT (visitor_id) DO UPDATE
-             SET last_seen_at = clock_timestamp()
-             WHERE existing.recognition_expires_at =
-                   EXCLUDED.recognition_expires_at
-               AND existing.recognition_expires_at > clock_timestamp()
-           RETURNING visitor_id`,
-          [visitorId, expiresAt],
-        );
-
-      assert.equal((await registerVisitor()).rowCount, 1);
-      assert.equal((await registerVisitor()).rowCount, 1);
 
       const recordRequest = async (
         requestId: string,
         conversationId: string,
-        recognizedVisitorId: string | null,
       ) => {
         const result = await client.query(
           `SELECT *
            FROM analytics.record_chat_request(
              $1::uuid,
              $2::uuid,
-             $3::uuid,
-             $4::text
+             $3::text
            )`,
-          [requestId, conversationId, recognizedVisitorId, "home"],
+          [requestId, conversationId, "home"],
         );
 
         return result.rows[0];
       };
 
       assert.deepEqual(
-        await recordRequest(firstRequestId, firstConversationId, visitorId),
+        await recordRequest(firstRequestId, firstConversationId),
         {
           request_created: true,
           conversation_created: true,
-          previous_conversation_count: 0,
         },
       );
 
       assert.deepEqual(
-        await recordRequest(firstRequestId, firstConversationId, visitorId),
+        await recordRequest(firstRequestId, firstConversationId),
         {
           request_created: false,
           conversation_created: false,
-          previous_conversation_count: 0,
         },
       );
 
       assert.deepEqual(
-        await recordRequest(randomUUID(), secondConversationId, visitorId),
+        await recordRequest(randomUUID(), firstConversationId),
         {
           request_created: true,
-          conversation_created: true,
-          previous_conversation_count: 1,
+          conversation_created: false,
         },
       );
 
       assert.deepEqual(
-        await recordRequest(randomUUID(), unknownConversationId, null),
+        await recordRequest(randomUUID(), secondConversationId),
         {
           request_created: true,
           conversation_created: true,
-          previous_conversation_count: null,
         },
       );
-
-      const visitor = await client.query(
-        `SELECT conversation_count
-         FROM analytics.browser_visitors
-         WHERE visitor_id = $1::uuid`,
-        [visitorId],
-      );
-
-      assert.deepEqual(visitor.rows[0], {
-        conversation_count: 2,
-      });
 
       const completeRequest = () =>
         client.query(
@@ -169,24 +128,12 @@ async function main() {
       // WHERE false prevents deletion even if permissions are misconfigured.
       await expectPermissionDenied(
         client,
-        "DELETE FROM analytics.browser_visitors WHERE false",
-      );
-
-      await expectPermissionDenied(
-        client,
         "DELETE FROM analytics.conversations WHERE false",
       );
 
       await expectPermissionDenied(
         client,
         "DELETE FROM analytics.chat_requests WHERE false",
-      );
-
-      await expectPermissionDenied(
-        client,
-        `UPDATE analytics.browser_visitors
-         SET recognition_expires_at = recognition_expires_at
-         WHERE false`,
       );
 
       await expectPermissionDenied(
@@ -213,7 +160,7 @@ async function main() {
     await closeAnalyticsPool();
   }
 
-  console.log("Analytics writer recording and counting: OK");
+  console.log("Analytics writer recording: OK");
   console.log("Analytics writer completion: OK");
   console.log("Analytics writer forbidden operations: OK");
   console.log("Analytics writer transaction rollback: OK");

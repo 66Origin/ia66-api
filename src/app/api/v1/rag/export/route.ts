@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
-import { requireRagExport } from "@/lib/admin";
+import { requireAdmin } from "@/lib/admin";
+import { hasAdminSession } from "@/lib/admin-session";
 import { ragExportService } from "@/lib/rag/export-service";
 import { redis } from "@/lib/redis";
 
@@ -15,7 +16,11 @@ const EXPORT_LOCK_KEY = "rag:export:lock";
 const EXPORT_LOCK_DURATION_SECONDS = 75;
 
 export async function POST(req: Request) {
-  const authorization = requireRagExport(req);
+  // People use their administration session; technical calls (curl) send
+  // ADMIN_TOKEN, like the other administration routes.
+  const authorization = hasAdminSession(req)
+    ? ({ ok: true } as const)
+    : requireAdmin(req);
 
   if (!authorization.ok) {
     return NextResponse.json(
@@ -76,13 +81,11 @@ export async function POST(req: Request) {
         archiveSizeBytes: result.archive.byteLength,
         report: result.report,
       },
-      openaiFileResponse: [
-        {
-          name: result.filename,
-          mime_type: "application/zip",
-          content: result.archive.toString("base64"),
-        },
-      ],
+      archive: {
+        name: result.filename,
+        mimeType: "application/zip",
+        content: result.archive.toString("base64"),
+      },
     });
   } catch (error) {
     console.error("RAG export failed", error);

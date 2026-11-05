@@ -55,25 +55,25 @@ test("malformed request bodies return no analytics metadata", () => {
   }
 });
 
-test("a visitor token is accepted without accepting a raw visitor ID", () => {
-  const analytics = {
-    ...metadata,
-    visitorToken: "token-to-verify-on-the-server",
-  };
-
+test("a legacy visitor token is ignored without rejecting the request", () => {
+  // A cached ia.js may still send a token after browser recognition removal.
   assert.deepEqual(
     parseChatAnalyticsMetadata({
       message: "Bonjour",
-      analytics,
+      analytics: {
+        ...metadata,
+        visitorToken: "legacy-token",
+      },
     }),
-    analytics,
+    metadata,
   );
 
   assert.equal(
     parseChatAnalyticsMetadata({
       message: "Bonjour",
       analytics: {
-        ...analytics,
+        ...metadata,
+        visitorToken: "legacy-token",
         visitorId: metadata.requestId,
       },
     }),

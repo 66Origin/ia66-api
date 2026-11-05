@@ -286,12 +286,9 @@ Deux formats de réponse sont disponibles :
 - réponse JSON contenant le rapport et l’archive encodée en Base64 ;
 - téléchargement direct du ZIP avec `?format=raw`.
 
-L’interface interne utilise `RAG_EXPORT_PASSWORD`.
+L’interface interne `/admin/rag-export` utilise la session d’administration.
 
-Les clients techniques peuvent également utiliser :
-
-- `RAG_ADMIN_TOKEN` ;
-- `ADMIN_TOKEN` comme solution de repli.
+Les appels techniques (`curl`) utilisent `ADMIN_TOKEN` en en-tête.
 
 Un verrou Redis empêche deux générations simultanées.
 

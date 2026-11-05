@@ -1,0 +1,216 @@
+"use client";
+
+import { useState, type SubmitEvent } from "react";
+import adminStyles from "@/components/admin/admin.module.css";
+import styles from "./page.module.css";
+
+type GenerationReport = {
+  startedAt: string;
+  completedAt: string;
+  source: string;
+  discovered: number;
+  created: number;
+  updated: number;
+  unchanged: number;
+  missing: number;
+  failed: number;
+  failures: Array<{
+    url: string;
+    error: string;
+  }>;
+};
+
+type ExportResponse = {
+  export: {
+    id: string;
+    status: "completed" | "completed_with_errors";
+    archiveSizeBytes: number;
+    report: GenerationReport;
+  };
+  archive: {
+    name: string;
+    mimeType: string;
+    content: string;
+  };
+};
+
+type Archive = {
+  name: string;
+  blob: Blob;
+};
+
+function base64ToBlob(content: string, mimeType: string): Blob {
+  const binary = window.atob(content);
+  const bytes = new Uint8Array(binary.length);
+
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+
+  return new Blob([bytes], { type: mimeType });
+}
+
+function downloadArchive(archive: Archive) {
+  const url = URL.createObjectURL(archive.blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = archive.name;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+export function RagExportForm() {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [report, setReport] = useState<GenerationReport | null>(null);
+  const [archive, setArchive] = useState<Archive | null>(null);
+
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setIsGenerating(true);
+    setError(null);
+    setReport(null);
+    setArchive(null);
+
+    try {
+      // The administration session cookie authenticates the request.
+      const response = await fetch("/api/v1/rag/export", {
+        method: "POST",
+      });
+
+      const payload = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error(
+            "La session a expiré. Rechargez la page pour vous reconnecter.",
+          );
+        }
+
+        if (response.status === 409) {
+          throw new Error(
+            "Une génération est déjà en cours. Réessaie dans quelques instants.",
+          );
+        }
+
+        throw new Error(
+          payload.detail ||
+            payload.error ||
+            "La génération des fichiers a échoué.",
+        );
+      }
+
+      const result = payload as ExportResponse;
+      const exportedFile = result.archive;
+
+      if (!exportedFile) {
+        throw new Error("L’archive générée est introuvable.");
+      }
+
+      const generatedArchive = {
+        name: exportedFile.name,
+        blob: base64ToBlob(
+          exportedFile.content,
+          exportedFile.mimeType || "application/zip",
+        ),
+      };
+
+      setReport(result.export.report);
+      setArchive(generatedArchive);
+
+      downloadArchive(generatedArchive);
+    } catch (caughtError) {
+      setError(
+        caughtError instanceof Error
+          ? caughtError.message
+          : "Une erreur inattendue est survenue.",
+      );
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
+  return (
+    <>
+      <section className={adminStyles.panel}>
+        <h2>Nouvel export</h2>
+
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <button type="submit" disabled={isGenerating}>
+            {isGenerating
+              ? "Génération en cours…"
+              : "Générer les fichiers Markdown"}
+          </button>
+        </form>
+
+        <div className={styles.status} aria-live="polite">
+          {isGenerating && (
+            <p>
+              Le site est en cours d’analyse. Cette opération peut prendre
+              quelques secondes.
+            </p>
+          )}
+
+          {error && <p className={adminStyles.error}>{error}</p>}
+        </div>
+      </section>
+
+      {report && (
+        <section className={adminStyles.panel}>
+          <div className={styles.resultHeader}>
+            <div>
+              <p className={styles.success}>Export terminé</p>
+              <h2>{archive?.name}</h2>
+            </div>
+
+            {archive && (
+              <button
+                className={styles.download}
+                type="button"
+                onClick={() => downloadArchive(archive)}
+              >
+                Télécharger à nouveau
+              </button>
+            )}
+          </div>
+
+          <dl className={adminStyles.kpis}>
+            {[
+              ["Détectées", report.discovered],
+              ["Créées", report.created],
+              ["Modifiées", report.updated],
+              ["Inchangées", report.unchanged],
+              ["Manquantes", report.missing],
+              ["En erreur", report.failed],
+            ].map(([label, value]) => (
+              <div className={adminStyles.kpi} key={label}>
+                <dt className={adminStyles.kpiLabel}>{label}</dt>
+                <dd className={adminStyles.kpiValue}>{value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          {report.failures.length > 0 && (
+            <div className={styles.failures}>
+              <h3>Pages en erreur</h3>
+
+              <ul>
+                {report.failures.map((failure) => (
+                  <li key={failure.url}>
+                    <strong>{failure.url}</strong>
+                    <span>{failure.error}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+    </>
+  );
+}
